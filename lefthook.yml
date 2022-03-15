@@ -1,0 +1,12 @@
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+
+pre-commit:
+  commands:
+    lint:
+      glob: "app/**/*"
+      run: yarn lint {staged_files}
+commit-msg:
+  commands:
+    commit-lint:
+      run: yarn commitlint --edit $1
