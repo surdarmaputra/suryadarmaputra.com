@@ -39,7 +39,7 @@ module.exports = {
       },
     ],
     'no-trailing-spaces': 'error',
-    'quotes': ['error', 'single', { avoidEscape: true }],
+    quotes: ['error', 'single', { avoidEscape: true }],
     'react/jsx-curly-brace-presence': [
       'error',
       {
