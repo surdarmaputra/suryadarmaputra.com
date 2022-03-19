@@ -30,3 +30,5 @@ export default function App() {
     </html>
   );
 }
+
+console.log('test');

@@ -3,11 +3,8 @@
 
 pre-commit:
   commands:
-    format:
-      glob: '!(api|public)/**/*'
-      run: yarn format:fix {staged_files}
     lint:
-      glob: 'a!(api|public)/**/*'
+      glob: 'app/**/*'
       run: yarn lint:fix {staged_files}
 commit-msg:
   commands:
