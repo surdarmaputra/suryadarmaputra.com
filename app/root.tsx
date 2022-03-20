@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { MetaFunction } from 'remix';
 import {
   Links,
@@ -31,6 +32,21 @@ export const meta: MetaFunction = () => {
 };
 
 export default function App() {
+  const headScript = useRef(null);
+
+  useEffect(() => {
+    if (headScript.current) {
+      // @ts-ignore
+      headScript.current.innerHTML = `
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      `;
+    }
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -38,8 +54,9 @@ export default function App() {
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <Meta />
         <Links />
+        <script ref={headScript}></script>
       </head>
-      <body className="container mx-auto">
+      <body className="container mx-auto text-slate-800 dark:bg-slate-900 dark:text-slate-300">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
