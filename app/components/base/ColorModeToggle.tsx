@@ -15,7 +15,7 @@ export default function ColorModeToggle({
   const toggleClassName = useMemo(
     () =>
       isDark
-        ? 'bg-sky-600 shadow shadow-sky-600 translate-x-full'
+        ? 'bg-slate-300 shadow shadow-slate-300 translate-x-full'
         : 'bg-amber-500 shadow shadow-amber-500 left-0',
     [isDark],
   );
