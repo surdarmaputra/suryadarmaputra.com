@@ -28,7 +28,11 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-  return { title: 'New Remix App' };
+  return {
+    title: 'Surya Darma Putra',
+    description:
+      'Surya Darma Putra is a software engineer based in Bali, Indonesia. Experienced in web development and product engineering.',
+  };
 };
 
 export default function App() {
