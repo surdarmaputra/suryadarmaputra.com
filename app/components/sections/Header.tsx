@@ -33,10 +33,10 @@ export default function Header() {
         width="40"
       />
       <nav className="flex items-center">
-        <a className="mr-3 hover:underline px-2 py-1" href="/">
+        <a className="mr-8 animated-link py-1" href="/">
           Blog
         </a>
-        <a className="mr-3 hover:underline px-4 py-1" href="/about">
+        <a className="mr-8 animated-link py-1" href="/about">
           About
         </a>
         <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />

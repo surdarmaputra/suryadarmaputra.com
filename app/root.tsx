@@ -56,7 +56,13 @@ export default function App() {
         <Links />
         <script ref={headScript}></script>
       </head>
-      <body className="container mx-auto text-slate-800 dark:bg-slate-900 dark:text-slate-300">
+      <body
+        className="
+          px-6
+          container mx-auto
+          dark:bg-slate-900 text-slate-800 dark:text-slate-300
+        "
+      >
         <Outlet />
         <ScrollRestoration />
         <Scripts />

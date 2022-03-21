@@ -22,7 +22,7 @@ export default function Index() {
   return (
     <DefaultLayout>
       <BrandHero />
-      <div className="grid grid-cols-2 gap-10">
+      <div className="flex flex-wrap md:-m-8">
         {posts.map(({ id, ...postData }) => (
           <PostSummary key={id} {...postData} />
         ))}
