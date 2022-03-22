@@ -7,9 +7,16 @@ const post = {
   date: new Date(),
   excerpt:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a tincidunt sapien. Sed vehicula vel sapien vel viverra. Praesent congue quis ex vel rutrum. Nulla facilisi. Curabitur molestie vestibulum nisl lacinia tempus. Donec in ipsum ut urna scelerisque viverra.',
-  href: '#',
+  href: '/blog/1',
   minutesToRead: 5,
-  tags: ['javascript'],
+  tags: [
+    'javascript',
+    'engineering',
+    'book',
+    'learning',
+    'css',
+    'web-development',
+  ],
 };
 
 const posts = [
