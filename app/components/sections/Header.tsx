@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation } from 'remix';
+import { Link, NavLink, useLocation } from 'remix';
 
 import ColorModeToggle from '~/components/base/ColorModeToggle';
 
@@ -42,9 +42,9 @@ export default function Header() {
             Home
           </Link>
         )}
-        <Link className="mr-8 animated-link pt-2 md:pt-1 pb-1" to="/about">
+        <NavLink className="mr-8 animated-link pt-2 md:pt-1 pb-1" to="/about">
           About
-        </Link>
+        </NavLink>
         <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />
       </nav>
     </header>
