@@ -1,5 +1,6 @@
 import { LoaderFunction, useLoaderData } from 'remix';
 
+import BlocksRenderer from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
 import type { FullPost } from '~/services/post';
@@ -23,6 +24,8 @@ export default function SinglePost() {
         {post.title}
       </h2>
       <article>
+        <BlocksRenderer blocks={post.blocks} />
+
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed
           vehicula elit. Nam congue purus in elit efficitur posuere. Phasellus
