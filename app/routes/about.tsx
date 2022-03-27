@@ -31,7 +31,7 @@ const experiences = [
     start: '2017-02-01',
     end: '2018-07-01',
     descriptions: [
-      'Artcak provided mobile and web development services for clients in various industries, including but not limited to tour & travel, internet provider and state-owned enterprises',
+      'Artcak provided mobile and web development services for clients in various sectors, including but not limited to tour & travel, internet provider and state-owned enterprises',
     ],
   },
   {
@@ -75,14 +75,14 @@ export default function About() {
             I'm a web developer based in Bali, Indonesia.
           </h2>
           <p className="text-slate-500 dark:text-slate-400">
-            I’ve been working as a web developer in various industries,
-            including education, tour & travel, e-commerce, financial services
-            and logistics.
+            I’ve been working as a web developer in various sectors, including
+            education, tour & travel, e-commerce, financial services and
+            logistics.
           </p>
         </div>
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="overflow-hidden h-40 w-40 mb-20 md:mb-0 md:h-full md:w-4/5 rounded-full md:rounded-none md:rounded-tl-[8rem] md:rounded-br-[4rem] shadow-2xl">
-            <img alt="My portrait" className="" src="/me.jpeg" />
+          <div className="overflow-hidden h-40 w-40 mb-20 md:mb-0 md:h-80 md:w-72 rounded-full md:rounded-none md:rounded-tl-[8rem] md:rounded-br-[4rem] shadow-2xl">
+            <img alt="My portrait" src="/me.jpeg" />
           </div>
         </div>
       </section>

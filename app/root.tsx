@@ -62,7 +62,7 @@ export default function App() {
       </head>
       <body
         className="
-          relative container mx-auto px-6 min-h-screen
+          relative container mx-auto px-6 min-h-screen lg:max-w-4xl
           dark:bg-slate-900 text-slate-700 dark:text-slate-400
         "
       >

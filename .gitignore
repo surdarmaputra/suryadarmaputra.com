@@ -2,9 +2,13 @@ node_modules
 
 .cache
 .env
-.vercel
 .output
+.vercel
 
-/build/
-/public/build
 /api/index.js
+/app/styles
+/build/
+/posts
+/public/build
+
+yarn-error.log

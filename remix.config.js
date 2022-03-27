@@ -7,6 +7,15 @@ module.exports = {
   // server. This does not understand the vercel lambda module format,
   // so we default back to the standard build output.
   server: process.env.NODE_ENV === 'development' ? undefined : './server.js',
+  serverDependenciesToBundle: [
+    'aggregate-error',
+    'clean-stack',
+    'notion-client',
+    'notion-utils',
+    'p-map',
+    'p-queue',
+    'p-timeout',
+  ],
   ignoredRouteFiles: ['.*'],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
