@@ -1,31 +1,24 @@
+import { LoaderFunction, useLoaderData } from 'remix';
+
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
+import type { FullPost } from '~/services/post';
+import { getPost } from '~/services/post';
 
-const post = {
-  title: 'Melakukan Update Dependensi NPM',
-  date: new Date(),
-  excerpt:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a tincidunt sapien. Sed vehicula vel sapien vel viverra. Praesent congue quis ex vel rutrum. Nulla facilisi. Curabitur molestie vestibulum nisl lacinia tempus. Donec in ipsum ut urna scelerisque viverra.',
-  href: '/blog/1',
-  minutesToRead: 5,
-  tags: [
-    'javascript',
-    'engineering',
-    'book',
-    'learning',
-    'css',
-    'web-development',
-  ],
+interface LoaderData {
+  post: FullPost;
+}
+
+export const loader: LoaderFunction = async ({ params }) => {
+  const post = await getPost(params.slug);
+  return { post };
 };
 
 export default function SinglePost() {
+  const { post } = useLoaderData<LoaderData>();
   return (
     <>
-      <PostMetaData
-        className="mt-20"
-        date={post.date}
-        minutesToRead={post.minutesToRead}
-      />
+      <PostMetaData className="mt-20" date={post.date} />
       <h2 className="mt-4 mb-16 text-5xl text-slate-900 dark:text-slate-300 font-bold leading-tight">
         {post.title}
       </h2>
@@ -111,7 +104,11 @@ export default function SinglePost() {
           quis elementum justo.
         </p>
       </article>
-      <Tags className="mt-14 md:mt-20 mb-20" tags={post.tags} />
+      <Tags
+        category={post.category}
+        className="mt-14 md:mt-20 mb-20"
+        tags={post.tags}
+      />
     </>
   );
 }

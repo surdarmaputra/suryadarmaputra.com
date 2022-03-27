@@ -1,15 +1,48 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+import type { BlockWithChildren } from '~/libs/notion';
+
 const postsPath = path.join(__dirname, '../posts');
 
 export interface Post {
+  category?: string;
   date: Date;
   excerpt: string;
   href: string;
   tags?: Array<string>;
   title: string;
   slug: string;
+}
+
+export interface FullPost extends Post {
+  blocks: BlockWithChildren[];
+}
+
+function formatPost(
+  fileName: string,
+  fileContent: Buffer,
+  isFullPost: boolean = false,
+): Post | FullPost {
+  const { blocks, excerpt, properties, title } = JSON.parse(
+    fileContent.toString(),
+  );
+  const date = properties.custom_created_at
+    ? new Date(properties.custom_created_at)
+    : new Date(properties.created_at);
+  const slug = fileName.replace(/\.json$/, '');
+  const href = `/blog/${slug}`;
+
+  return {
+    category: properties.category,
+    date,
+    excerpt,
+    href,
+    slug,
+    tags: properties.tags,
+    title,
+    ...(isFullPost ? { blocks } : {}),
+  };
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -23,26 +56,32 @@ export async function getPosts(): Promise<Post[]> {
 
   const posts = await Promise.all(
     files.map(async (fileName) => {
-      const file = await fs.readFile(path.join(postsPath, fileName));
-      const { excerpt, properties, title } = JSON.parse(file.toString());
-      const date = properties.custom_created_at
-        ? new Date(properties.custom_created_at)
-        : new Date(properties.created_at);
-      const slug = fileName.replace(/\.json$/, '');
-      const href = `/blog/${slug}`;
-
-      return {
-        date,
-        excerpt,
-        href,
-        slug,
-        tags: properties.tags,
-        title,
-      };
+      const fileContent = await fs.readFile(path.join(postsPath, fileName));
+      return formatPost(fileName, fileContent);
     }),
   );
 
   return posts.sort(
     (first, second) => second.date.getTime() - first.date.getTime(),
   );
+}
+
+export async function getPost(
+  slug: string | undefined,
+): Promise<FullPost | null> {
+  if (!slug) return null;
+
+  const fileName = `${slug}.json`;
+  let fileContent: Buffer | null;
+  try {
+    fileContent = await fs.readFile(path.join(postsPath, fileName));
+  } catch (error) {
+    fileContent = null;
+  }
+
+  const post = fileContent
+    ? (formatPost(fileName, fileContent, true) as FullPost)
+    : null;
+
+  return post;
 }

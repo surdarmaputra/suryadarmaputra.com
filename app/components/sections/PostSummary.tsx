@@ -2,6 +2,7 @@ import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
 
 interface PostSummaryProps {
+  category?: string;
   date: Date;
   excerpt: string;
   href: string;
@@ -10,6 +11,7 @@ interface PostSummaryProps {
 }
 
 export default function PostSummary({
+  category,
   date,
   excerpt,
   href,
@@ -28,7 +30,7 @@ export default function PostSummary({
         <p className="block mb-4 text-slate-600 dark:text-slate-400 font-light text-sm leading-6">
           {excerpt}
         </p>
-        <Tags tags={tags} />
+        <Tags category={category} tags={tags} />
       </a>
     </div>
   );
