@@ -1,26 +1,23 @@
 import type {
   BlockWithChildren,
-  ParagraphBlock,
+  QuoteBlock,
   RichTextBlock,
 } from '~/libs/notion';
 
 import RichText from './RichText';
 
-interface ParagraphProps {
-  block: ParagraphBlock;
+interface QuoteProps {
+  block: QuoteBlock;
   blockChildren: BlockWithChildren[];
 }
 
-export default function Paragraph({ block, blockChildren }: ParagraphProps) {
-  const richTexts = block.paragraph.rich_text;
-
-  if (!richTexts?.length) return null;
-
+export default function Quote({ block, blockChildren }: QuoteProps) {
+  const richTexts = block.quote.rich_text;
   return (
-    <p>
+    <blockquote>
       {richTexts.map((richTextBlock, index) => (
         <RichText block={richTextBlock as RichTextBlock} key={index} />
       ))}
-    </p>
+    </blockquote>
   );
 }

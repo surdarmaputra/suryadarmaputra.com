@@ -7,7 +7,11 @@ import path from 'path';
 dotenv.config();
 
 /* eslint-disable import/first */
-import type { BlockWithChildren } from '../app/libs/notion';
+import type {
+  BlockWithChildren,
+  BulletedListBlock,
+  NumberedListBlock,
+} from '../app/libs/notion';
 import { getBlockChildren, getPagesFromDatabase } from '../app/libs/notion';
 /* eslint-enable import/first */
 
@@ -16,6 +20,10 @@ interface PageData {
   excerpt: string | null;
   properties: Record<string, any>;
   blocks: BlockWithChildren[] | [];
+}
+
+interface ListBlock {
+  block: BulletedListBlock | NumberedListBlock;
 }
 
 const postsDirectory = path.resolve(__dirname, '../posts');
@@ -86,6 +94,54 @@ function getTitle(page) {
   );
 }
 
+const groupTypeMap: Record<string, string> = {
+  numbered_list_item: 'numbered_list',
+  bulleted_list_item: 'bulleted_list',
+};
+
+function regroupListItems(blocks: BlockWithChildren[]): BlockWithChildren[] {
+  const newBlocks = [];
+  let group: ListBlock | null = null;
+
+  blocks.forEach((item, index) => {
+    if (index === blocks.length - 1 && group) {
+      newBlocks.push(group);
+      return;
+    }
+
+    if (!('type' in item.block) || !(item.block.type in groupTypeMap)) {
+      if (group) {
+        newBlocks.push(group);
+      }
+      newBlocks.push(item);
+      group = null;
+      return;
+    }
+
+    const { block } = item;
+    const groupType = groupTypeMap[block.type];
+
+    if (!group || (group && group.block.type !== groupType)) {
+      group = {
+        block: {
+          id: `${block.id}-${groupType}`,
+          type: groupType,
+          [groupType]: {
+            [block.type]: [item],
+          },
+        },
+      };
+      return;
+    }
+
+    if (group) {
+      group.block[group.block.type][block.type].push(item);
+    }
+  });
+
+  return newBlocks;
+}
+
 export async function run(): Promise<void> {
   const rawPages = await getPagesFromDatabase(process.env.NOTION_DATABASE_ID, {
     filter: {
@@ -102,7 +158,7 @@ export async function run(): Promise<void> {
   for (let page of rawPages) {
     const title = getTitle(page);
     const properties = getProperties(page);
-    const blocks = await getBlockChildren(page.id);
+    const blocks = regroupListItems(await getBlockChildren(page.id));
     const excerpt = getExcerpt(blocks);
     const pageData: PageData = {
       title,

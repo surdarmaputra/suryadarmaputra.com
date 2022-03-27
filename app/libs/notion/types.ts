@@ -76,3 +76,20 @@ export type RichTextBlock = {
   plain_text: string;
   href: string | null;
 };
+
+// custom block type to wrap list item
+export type BulletedListBlock = {
+  type: 'bulleted_list';
+  id: string;
+  bulleted_list: {
+    bulleted_list_item: Array<BlockWithChildren>;
+  };
+};
+
+export type NumberedListBlock = {
+  type: 'numbered_list';
+  id: string;
+  numbered_list: {
+    numbered_list_item: Array<BlockWithChildren>;
+  };
+};
