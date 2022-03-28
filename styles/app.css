@@ -62,6 +62,10 @@ article {
     @apply text-base font-bold mb-2;
   }
 
+  img {
+    height: inherit;
+  }
+
   ol {
     @apply list-decimal pl-6 mb-6;
   }

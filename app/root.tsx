@@ -67,8 +67,6 @@ export default function App() {
         "
       >
         <div className="hidden dark:block -z-10 absolute rounded-full w-1/2 h-1/3 md:w-96 md:h-96 bg-sky-700 blur-3xl opacity-10 left-0 md:-left-6 top-14"></div>
-        <div className="hidden dark:block -z-10 absolute rounded-full w-1/2 h-1/3 md:w-96 md:h-96 bg-emerald-400 blur-3xl opacity-5 right-0 md:-right-6 top-1/3"></div>
-        <div className="hidden dark:block -z-10 absolute rounded-full w-1/2 h-1/3 md:w-96 md:h-96 bg-amber-100 blur-3xl opacity-5 left-0 md:-left-6 bottom-14"></div>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -3,6 +3,7 @@ import type { BlockWithChildren } from '~/libs/notion';
 
 import Code from './Code';
 import Heading from './Heading';
+import Image from './Image';
 import List from './List';
 import Paragraph from './Paragraph';
 import Quote from './Quote';
@@ -16,6 +17,7 @@ const componentMap = {
   quote: Quote,
   bulleted_list: List,
   numbered_list: List,
+  image: Image,
 };
 
 interface BlocksRendererProps {

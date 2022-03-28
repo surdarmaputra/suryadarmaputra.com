@@ -1,8 +1,10 @@
 // @ts-nocheck
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
+import { Image } from 'image-js';
 import { identity, kebabCase } from 'lodash';
 import path from 'path';
+import superagent from 'superagent';
 
 dotenv.config();
 
@@ -27,6 +29,7 @@ interface ListBlock {
 }
 
 const postsDirectory = path.resolve(__dirname, '../posts');
+const imagesDirectory = path.resolve(__dirname, '../public/images/posts');
 
 function joinStrings(strings: string[]): string {
   return strings.filter(Boolean).join(' ').trim();
@@ -142,6 +145,33 @@ function regroupListItems(blocks: BlockWithChildren[]): BlockWithChildren[] {
   return newBlocks;
 }
 
+async function fetchImage(url: string, filename: string): void {
+  const { body: imageData } = await superagent.get(url);
+  const outputFile = `${imagesDirectory}/${filename}.png`;
+  const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
+  const placeholderRaw = await Image.load(imageData);
+  const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
+
+  await fs.writeFile(outputFile, imageData);
+  await fs.writeFile(placeholderFile, placeholderData);
+}
+
+async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
+  for (const { block, children } of blocks) {
+    if (block.type !== 'image') continue;
+
+    const url = block.image?.file?.url || null;
+    if (!url) continue;
+
+    const fileName = block.id;
+    await fetchImage(url, fileName);
+
+    if (children?.length) {
+      await fetchImages(children);
+    }
+  }
+}
+
 export async function run(): Promise<void> {
   const rawPages = await getPagesFromDatabase(process.env.NOTION_DATABASE_ID, {
     filter: {
@@ -155,10 +185,14 @@ export async function run(): Promise<void> {
   await fs.rm(postsDirectory, { force: true, recursive: true });
   await fs.mkdir(postsDirectory, { recursive: true });
 
+  await fs.rm(imagesDirectory, { force: true, recursive: true });
+  await fs.mkdir(imagesDirectory, { recursive: true });
+
   for (let page of rawPages) {
     const title = getTitle(page);
     const properties = getProperties(page);
-    const blocks = regroupListItems(await getBlockChildren(page.id));
+    const originalBlocks = await getBlockChildren(page.id);
+    const blocks = regroupListItems(originalBlocks);
     const excerpt = getExcerpt(blocks);
     const pageData: PageData = {
       title,
@@ -168,6 +202,7 @@ export async function run(): Promise<void> {
     };
     const slug = kebabCase(title);
     const filePath = path.join(postsDirectory, `${slug}.json`);
+    await fetchImages(originalBlocks);
     await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
   }
 }
