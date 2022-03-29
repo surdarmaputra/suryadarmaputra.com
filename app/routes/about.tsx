@@ -81,7 +81,7 @@ export default function About() {
           </p>
         </div>
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="overflow-hidden h-40 w-40 mb-20 md:mb-0 md:h-80 md:w-72 rounded-full md:rounded-none md:rounded-tl-[8rem] md:rounded-br-[4rem] shadow-2xl">
+          <div className="overflow-hidden h-40 w-40 mb-20 md:mb-0 md:h-80 md:w-72 rounded-full md:rounded-none md:rounded-tl-[8rem] md:rounded-tr-[0.5rem] md:rounded-bl-[0.5rem] md:rounded-br-[2rem] shadow-2xl">
             <img alt="My portrait" src="/me.jpeg" />
           </div>
         </div>
