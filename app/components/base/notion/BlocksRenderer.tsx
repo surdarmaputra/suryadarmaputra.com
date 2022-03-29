@@ -27,10 +27,17 @@ interface BlocksRendererProps {
 export default function BlocksRenderer({ blocks }: BlocksRendererProps) {
   return (
     <>
-      {blocks.map(({ block, children }) => {
+      {blocks.map(({ block, children }, index) => {
         const Component = componentMap[block.type];
+        const previousBlockType =
+          index > 0 ? blocks[index - 1].block.type : null;
         return Component ? (
-          <Component block={block} blockChildren={children} key={block.id} />
+          <Component
+            block={block}
+            blockChildren={children}
+            key={block.id}
+            previousBlockType={previousBlockType}
+          />
         ) : null;
       })}
     </>

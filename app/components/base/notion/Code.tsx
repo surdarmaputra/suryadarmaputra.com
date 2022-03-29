@@ -1,10 +1,12 @@
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
 import type {
   BlockWithChildren,
   CodeBlock,
   RichTextBlock,
 } from '~/libs/notion';
-
-import RichText from './RichText';
+import { concatPlainTexts } from '~/libs/notion';
 
 interface CodeProps {
   block: CodeBlock;
@@ -12,14 +14,16 @@ interface CodeProps {
 }
 
 export default function Code({ block, blockChildren }: CodeProps) {
-  const richTexts = block.code.rich_text;
+  const { language, rich_text: richTexts } = block.code;
+  const codeText = concatPlainTexts(richTexts as RichTextBlock[]);
+
   return (
-    <pre>
-      <code>
-        {richTexts.map((richTextBlock, index) => (
-          <RichText block={richTextBlock as RichTextBlock} key={index} />
-        ))}
-      </code>
-    </pre>
+    <SyntaxHighlighter
+      customStyle={{ marginBottom: 16 }}
+      language={language}
+      style={coldarkDark}
+    >
+      {codeText}
+    </SyntaxHighlighter>
   );
 }

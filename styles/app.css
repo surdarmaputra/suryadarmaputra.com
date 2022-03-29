@@ -19,7 +19,7 @@ article {
   }
 
   blockquote {
-    @apply text-gray-400 text-xl leading-loose font-light dark:text-gray-500 py-4 px-6 md:px-10;
+    @apply text-gray-400 text-xl leading-loose font-light dark:text-gray-500 py-4 md:px-10 mt-10 mb-3;
 
     &::before {
       content: '"';
@@ -39,27 +39,27 @@ article {
   h4,
   h5,
   h6 {
-    @apply font-semibold text-slate-800 dark:text-slate-300 mt-10;
+    @apply font-bold text-slate-800 dark:text-slate-300 mt-16;
   }
 
   h2 {
-    @apply text-2xl mb-3;
+    @apply text-2xl;
   }
 
   h3 {
-    @apply text-xl mb-3;
+    @apply text-xl;
   }
 
   h4 {
-    @apply text-lg mb-3;
+    @apply text-lg;
   }
 
   h5 {
-    @apply text-base mb-2;
+    @apply text-base;
   }
 
   h6 {
-    @apply text-base font-bold mb-2;
+    @apply text-base font-bold;
   }
 
   img {
@@ -67,15 +67,15 @@ article {
   }
 
   ol {
-    @apply list-decimal pl-6 mb-6;
+    @apply list-decimal pl-6;
   }
 
   p {
-    @apply mb-4;
+    @apply mt-10 mb-3;
   }
 
   pre {
-    @apply bg-slate-900 dark:bg-black px-4 py-3 mb-4 rounded-md shadow-xl overflow-x-auto;
+    @apply bg-slate-900 dark:bg-black px-4 py-3 mb-4 rounded-md shadow-lg dark:border-2 dark:border-slate-800 overflow-x-auto;
 
     code {
       @apply p-0 m-0 bg-transparent dark:bg-transparent text-slate-300;
@@ -83,7 +83,7 @@ article {
   }
 
   ul {
-    @apply list-disc pl-6 mb-6;
+    @apply list-disc pl-6;
   }
 }
 

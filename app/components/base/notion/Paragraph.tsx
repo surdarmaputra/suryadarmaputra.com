@@ -9,15 +9,27 @@ import RichText from './RichText';
 interface ParagraphProps {
   block: ParagraphBlock;
   blockChildren: BlockWithChildren[];
+  previousBlockType: string | null;
 }
 
-export default function Paragraph({ block, blockChildren }: ParagraphProps) {
+const headingBlockTypes = ['heading_1', 'heading_2', 'heading_3'];
+
+export default function Paragraph({
+  block,
+  blockChildren,
+  previousBlockType = null,
+}: ParagraphProps) {
   const richTexts = block.paragraph.rich_text;
 
   if (!richTexts?.length) return null;
 
+  const className =
+    previousBlockType && headingBlockTypes.includes(previousBlockType)
+      ? 'mt-3'
+      : '';
+
   return (
-    <p>
+    <p className={className}>
       {richTexts.map((richTextBlock, index) => (
         <RichText block={richTextBlock as RichTextBlock} key={index} />
       ))}

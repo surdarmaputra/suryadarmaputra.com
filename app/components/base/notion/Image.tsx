@@ -33,7 +33,7 @@ export default function Image({ block, blockChildren }: ImageProps) {
   );
 
   return (
-    <div className="flex flex-col items-center my-6">
+    <div className="flex flex-col items-center mt-10">
       <LazyLoad placeholder={placeholder}>
         <TransformWrapper>
           <TransformComponent>
