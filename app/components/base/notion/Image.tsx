@@ -1,6 +1,9 @@
+import { useMemo, useRef, useState } from 'react';
 import LazyLoad from 'react-lazyload';
+import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
+import CloseIcon from '~/components/icons/CloseIcon';
 import type {
   BlockWithChildren,
   ImageBlock,
@@ -19,6 +22,12 @@ function getAltText(caption: RichTextBlock[]): string {
 }
 
 export default function Image({ block, blockChildren }: ImageProps) {
+  const [zoomEnabled, setZoomEnabled] = useState(false);
+  const handlers = useRef<{
+    centerView?: ReactZoomPanPinchHandlers['centerView'];
+    resetTransform?: ReactZoomPanPinchHandlers['resetTransform'];
+  }>({});
+
   const captionRichTexts = block.image.caption;
   const url = `/images/posts/${block.id}.png`;
   const placeholderUrl = `/images/posts/${block.id}-placeholder.png`;
@@ -32,18 +41,60 @@ export default function Image({ block, blockChildren }: ImageProps) {
     <img alt={altText} className="blur-xl h-64 md:h-96" src={placeholderUrl} />
   );
 
+  const className = useMemo(
+    () => (zoomEnabled ? 'fixed top-0 left-0 right-0 bottom-0 mt-0' : 'mt-10'),
+    [zoomEnabled],
+  );
+
+  const handleWrapperClick = () => {
+    if (!zoomEnabled) {
+      setZoomEnabled(true);
+    }
+  };
+
+  const handleZoomClose = () => {
+    if (handlers.current.resetTransform) handlers.current.resetTransform();
+    setZoomEnabled(false);
+  };
+
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div
+      className={`flex flex-col items-center justify-center z-40 transition ${className}`}
+      onClick={handleWrapperClick}
+    >
+      {zoomEnabled ? (
+        <>
+          <div className="absolute h-full w-full bg-white dark:bg-slate-900 opacity-95"></div>
+        </>
+      ) : null}
       <LazyLoad placeholder={placeholder}>
-        <TransformWrapper>
-          <TransformComponent>
-            <img alt={altText} src={url} />
-          </TransformComponent>
+        <TransformWrapper centerOnInit={true} disabled={!zoomEnabled}>
+          {({ resetTransform }) => {
+            handlers.current.resetTransform = resetTransform;
+            return (
+              <TransformComponent>
+                <img alt={altText} className="z-50" src={url} />
+              </TransformComponent>
+            );
+          }}
         </TransformWrapper>
       </LazyLoad>
-      <span className="text-center text-slate-400 dark:text-slate-600 font-light text-sm p-4">
-        {caption}
-      </span>
+      {zoomEnabled ? (
+        <div className="flex justify-center mt-4">
+          <button
+            className="text-slate-400 dark:text-slate-500 z-50 w-28 flex items-center justify-center"
+            onClick={handleZoomClose}
+            type="button"
+          >
+            <CloseIcon className="mr-2" /> Close
+          </button>
+        </div>
+      ) : null}
+      {!zoomEnabled ? (
+        <span className="text-center text-slate-400 dark:text-slate-600 font-light text-sm p-4">
+          {caption}
+        </span>
+      ) : null}
     </div>
   );
 }
