@@ -13,6 +13,8 @@ interface CodeProps {
   blockChildren: BlockWithChildren[];
 }
 
+const shellLanguages = ['shell', 'bash'];
+
 export default function Code({ block, blockChildren }: CodeProps) {
   const { language, rich_text: richTexts } = block.code;
   const codeText = concatPlainTexts(richTexts as RichTextBlock[]);
@@ -21,6 +23,7 @@ export default function Code({ block, blockChildren }: CodeProps) {
     <SyntaxHighlighter
       customStyle={{ marginBottom: 16 }}
       language={language}
+      showLineNumbers={!shellLanguages.includes(language)}
       style={coldarkDark}
     >
       {codeText}
