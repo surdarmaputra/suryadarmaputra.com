@@ -64,6 +64,7 @@ export default function App() {
         className="
           relative container mx-auto px-6 min-h-screen lg:max-w-4xl
           dark:bg-slate-900 text-slate-700 dark:text-slate-400
+          selection:bg-amber-500 selection:text-slate-900
         "
       >
         <div className="hidden dark:block -z-10 absolute rounded-full w-1/2 h-1/3 md:w-96 md:h-96 bg-sky-700 blur-3xl opacity-10 left-0 md:-left-6 top-14"></div>
