@@ -174,12 +174,12 @@ async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
 
 export async function run(): Promise<void> {
   const rawPages = await getPagesFromDatabase(process.env.NOTION_DATABASE_ID, {
-    filter: {
-      property: 'publish',
-      checkbox: {
-        equals: true,
-      },
-    },
+    // filter: {
+    //   property: 'publish',
+    //   checkbox: {
+    //     equals: true,
+    //   },
+    // },
   });
 
   await fs.rm(postsDirectory, { force: true, recursive: true });

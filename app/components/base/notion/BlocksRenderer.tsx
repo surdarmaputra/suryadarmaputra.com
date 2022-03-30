@@ -2,6 +2,7 @@
 import type { BlockWithChildren } from '~/libs/notion';
 
 import Code from './Code';
+import { Embed } from './Embed';
 import Heading from './Heading';
 import Image from './Image';
 import List from './List';
@@ -18,6 +19,7 @@ const componentMap = {
   bulleted_list: List,
   numbered_list: List,
   image: Image,
+  embed: Embed,
 };
 
 interface BlocksRendererProps {
