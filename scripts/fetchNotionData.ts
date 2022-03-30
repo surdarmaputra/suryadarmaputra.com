@@ -14,7 +14,11 @@ import type {
   BulletedListBlock,
   NumberedListBlock,
 } from '../app/libs/notion';
-import { getBlockChildren, getPagesFromDatabase } from '../app/libs/notion';
+import {
+  calculateReadingTime,
+  getBlockChildren,
+  getPagesFromDatabase,
+} from '../app/libs/notion';
 /* eslint-enable import/first */
 
 interface PageData {
@@ -192,18 +196,22 @@ export async function run(): Promise<void> {
     const title = getTitle(page);
     const properties = getProperties(page);
     const originalBlocks = await getBlockChildren(page.id);
+    const readingTime = calculateReadingTime(originalBlocks);
     const blocks = regroupListItems(originalBlocks);
     const excerpt = getExcerpt(blocks);
     const pageData: PageData = {
       title,
       excerpt,
       properties,
+      readingTime,
       blocks,
     };
     const slug = kebabCase(title);
     const filePath = path.join(postsDirectory, `${slug}.json`);
     await fetchImages(originalBlocks);
     await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
+    // eslint-disable-next-line no-console
+    console.log('Generated: ', filePath);
   }
 }
 

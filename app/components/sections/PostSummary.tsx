@@ -6,6 +6,7 @@ interface PostSummaryProps {
   date: Date;
   excerpt: string;
   href: string;
+  readingTime?: string;
   tags?: Array<string>;
   title: string;
 }
@@ -15,13 +16,14 @@ export default function PostSummary({
   date,
   excerpt,
   href,
+  readingTime,
   tags,
   title,
 }: PostSummaryProps) {
   return (
     <div className="md:p-8 md:w-1/2 p-0 pb-16">
       <a className="block" href={href}>
-        <PostMetaData date={date} />
+        <PostMetaData date={date} readingTime={readingTime} />
         <div className="mt-2 mb-4">
           <h2 className="inline text-2xl text-slate-900 dark:text-slate-200 font-semibold animated-underline">
             {title}

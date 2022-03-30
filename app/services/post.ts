@@ -10,9 +10,10 @@ export interface Post {
   date: Date;
   excerpt: string;
   href: string;
+  readingTime?: string;
+  slug: string;
   tags?: Array<string>;
   title: string;
-  slug: string;
 }
 
 export interface FullPost extends Post {
@@ -24,7 +25,7 @@ function formatPost(
   fileContent: Buffer,
   isFullPost: boolean = false,
 ): Post | FullPost {
-  const { blocks, excerpt, properties, title } = JSON.parse(
+  const { blocks, excerpt, properties, readingTime, title } = JSON.parse(
     fileContent.toString(),
   );
   const date = properties.custom_created_at
@@ -38,6 +39,7 @@ function formatPost(
     date,
     excerpt,
     href,
+    readingTime,
     slug,
     tags: properties.tags,
     title,

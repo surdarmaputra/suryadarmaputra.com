@@ -19,7 +19,11 @@ export default function SinglePost() {
   const { post } = useLoaderData<LoaderData>();
   return (
     <>
-      <PostMetaData className="mt-24" date={post.date} />
+      <PostMetaData
+        className="mt-24"
+        date={post.date}
+        readingTime={post.readingTime}
+      />
       <h2 className="mt-4 mb-24 text-5xl text-slate-900 dark:text-slate-300 font-extrabold leading-tight">
         {post.title}
       </h2>
