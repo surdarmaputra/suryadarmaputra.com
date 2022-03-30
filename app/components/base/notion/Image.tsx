@@ -4,24 +4,19 @@ import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 import CloseIcon from '~/components/icons/CloseIcon';
-import type {
-  BlockWithChildren,
-  ImageBlock,
-  RichTextBlock,
-} from '~/libs/notion';
+import type { ImageBlock, RichTextBlock } from '~/libs/notion';
 
-import RichText from './RichText';
+import { RichText } from './RichText';
 
 interface ImageProps {
   block: ImageBlock;
-  blockChildren: BlockWithChildren[];
 }
 
 function getAltText(caption: RichTextBlock[]): string {
   return caption.reduce((finalText, text) => finalText + text.plain_text, '');
 }
 
-export default function Image({ block, blockChildren }: ImageProps) {
+export function Image({ block }: ImageProps) {
   const [zoomEnabled, setZoomEnabled] = useState(false);
   const handlers = useRef<{
     centerView?: ReactZoomPanPinchHandlers['centerView'];

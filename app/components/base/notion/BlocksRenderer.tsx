@@ -1,13 +1,13 @@
 // @ts-nocheck
 import type { BlockWithChildren } from '~/libs/notion';
 
-import Code from './Code';
+import { Code } from './Code';
 import { Embed } from './Embed';
-import Heading from './Heading';
-import Image from './Image';
-import List from './List';
-import Paragraph from './Paragraph';
-import Quote from './Quote';
+import { Heading } from './Heading';
+import { Image } from './Image';
+import { List } from './List';
+import { Paragraph } from './Paragraph';
+import { Quote } from './Quote';
 
 const componentMap = {
   paragraph: Paragraph,
@@ -26,7 +26,7 @@ interface BlocksRendererProps {
   blocks: BlockWithChildren[];
 }
 
-export default function BlocksRenderer({ blocks }: BlocksRendererProps) {
+export function BlocksRenderer({ blocks }: BlocksRendererProps) {
   return (
     <>
       {blocks.map(({ block, children }, index) => {

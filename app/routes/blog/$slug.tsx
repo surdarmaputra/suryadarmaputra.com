@@ -1,6 +1,6 @@
 import { LoaderFunction, useLoaderData } from 'remix';
 
-import BlocksRenderer from '~/components/base/notion/BlocksRenderer';
+import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
 import type { FullPost } from '~/services/post';

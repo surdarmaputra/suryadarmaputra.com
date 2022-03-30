@@ -45,7 +45,7 @@ function TextWithAnnotations({
   return <span className={className}>{children}</span>;
 }
 
-export default function RichText({ block }: ParagraphProps) {
+export function RichText({ block }: ParagraphProps) {
   const { annotations, plain_text: plainText, href } = block;
 
   if (!plainText) return null;

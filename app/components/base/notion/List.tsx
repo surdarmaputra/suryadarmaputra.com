@@ -9,7 +9,7 @@ import type {
   RichTextBlock,
 } from '~/libs/notion';
 
-import RichText from './RichText';
+import { RichText } from './RichText';
 
 interface ListProps {
   block: BulletedListBlock | NumberedListBlock;
@@ -55,7 +55,7 @@ function ListItem({ block, blockChildren }: ListItemProps) {
   );
 }
 
-export default function List({ block, blockChildren }: ListProps) {
+export function List({ block, blockChildren }: ListProps) {
   const ListTag = listTagMap[block.type];
   const items = getListBlockContent(block) || [];
 

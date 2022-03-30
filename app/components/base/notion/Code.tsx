@@ -1,21 +1,16 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-import type {
-  BlockWithChildren,
-  CodeBlock,
-  RichTextBlock,
-} from '~/libs/notion';
+import type { CodeBlock, RichTextBlock } from '~/libs/notion';
 import { concatPlainTexts } from '~/libs/notion';
 
 interface CodeProps {
   block: CodeBlock;
-  blockChildren: BlockWithChildren[];
 }
 
 const shellLanguages = ['shell', 'bash'];
 
-export default function Code({ block, blockChildren }: CodeProps) {
+export function Code({ block }: CodeProps) {
   const { language, rich_text: richTexts } = block.code;
   const codeText = concatPlainTexts(richTexts as RichTextBlock[]);
 

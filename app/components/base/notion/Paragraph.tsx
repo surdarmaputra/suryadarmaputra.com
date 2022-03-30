@@ -4,7 +4,7 @@ import type {
   RichTextBlock,
 } from '~/libs/notion';
 
-import RichText from './RichText';
+import { RichText } from './RichText';
 
 interface ParagraphProps {
   block: ParagraphBlock;
@@ -14,7 +14,7 @@ interface ParagraphProps {
 
 const headingBlockTypes = ['heading_1', 'heading_2', 'heading_3'];
 
-export default function Paragraph({
+export function Paragraph({
   block,
   blockChildren,
   previousBlockType = null,

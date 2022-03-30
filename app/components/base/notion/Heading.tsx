@@ -1,18 +1,16 @@
 import React from 'react';
 
 import type {
-  BlockWithChildren,
   Heading1Block,
   Heading2Block,
   Heading3Block,
   RichTextBlock,
 } from '~/libs/notion';
 
-import RichText from './RichText';
+import { RichText } from './RichText';
 
 interface HeadingProps {
   block: Heading1Block | Heading2Block | Heading3Block;
-  blockChildren: BlockWithChildren[];
 }
 
 function getBlockContent(block: HeadingProps['block']) {
@@ -26,7 +24,7 @@ function getBlockContent(block: HeadingProps['block']) {
   }
 }
 
-export default function Heading({ block, blockChildren }: HeadingProps) {
+export function Heading({ block }: HeadingProps) {
   const level = block.type.replace('heading_', '');
   const headingTag = `h${level}`;
   const richTexts = getBlockContent(block).rich_text || [];

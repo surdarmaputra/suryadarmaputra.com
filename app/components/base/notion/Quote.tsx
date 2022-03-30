@@ -4,14 +4,14 @@ import type {
   RichTextBlock,
 } from '~/libs/notion';
 
-import RichText from './RichText';
+import { RichText } from './RichText';
 
 interface QuoteProps {
   block: QuoteBlock;
   blockChildren: BlockWithChildren[];
 }
 
-export default function Quote({ block, blockChildren }: QuoteProps) {
+export function Quote({ block, blockChildren }: QuoteProps) {
   const richTexts = block.quote.rich_text;
   return (
     <blockquote>
