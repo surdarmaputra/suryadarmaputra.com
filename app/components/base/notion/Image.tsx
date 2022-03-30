@@ -37,7 +37,10 @@ export function Image({ block }: ImageProps) {
   );
 
   const className = useMemo(
-    () => (zoomEnabled ? 'fixed top-0 left-0 right-0 bottom-0 mt-0' : 'mt-10'),
+    () =>
+      zoomEnabled
+        ? 'fixed top-0 left-0 right-0 bottom-0 mt-0'
+        : 'mt-10 cursor-zoom-in',
     [zoomEnabled],
   );
 
