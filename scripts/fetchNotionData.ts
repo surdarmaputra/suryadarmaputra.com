@@ -111,38 +111,48 @@ function regroupListItems(blocks: BlockWithChildren[]): BlockWithChildren[] {
   let group: ListBlock | null = null;
 
   blocks.forEach((item, index) => {
-    if (index === blocks.length - 1 && group) {
-      newBlocks.push(group);
-      return;
+    // process children
+    if (item.children?.length) {
+      item.children = regroupListItems(item.children);
     }
 
+    // push item to newBlocks if has no type or not a list type
     if (!('type' in item.block) || !(item.block.type in groupTypeMap)) {
       if (group) {
         newBlocks.push(group);
+        group = null;
       }
       newBlocks.push(item);
-      group = null;
       return;
     }
 
     const { block } = item;
     const groupType = groupTypeMap[block.type];
 
-    if (!group || (group && group.block.type !== groupType)) {
+    // push item to group if group type matched with the existing group
+    if (group && group.block.type === groupType) {
+      group.children.push(item);
+    }
+
+    // push existing group if new item is a different type of list
+    if (group && group.block.type !== groupType) {
+      newBlocks.push(group);
+    }
+
+    // create new group if no group exists or type is different from the existing group
+    if (!group || group.block.type !== groupType) {
       group = {
         block: {
           id: `${block.id}-${groupType}`,
           type: groupType,
-          [groupType]: {
-            [block.type]: [item],
-          },
         },
+        children: [item],
       };
-      return;
     }
 
-    if (group) {
-      group.block[group.block.type][block.type].push(item);
+    // push group to newBlocks if it is the last item
+    if (group && index === blocks.length - 1) {
+      newBlocks.push(group);
     }
   });
 
@@ -210,6 +220,9 @@ export async function run(): Promise<void> {
     const filePath = path.join(postsDirectory, `${slug}.json`);
     await fetchImages(originalBlocks);
     await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
+    if (slug === 'this-is-sample-article-for-all-of-notion-block-types') {
+      // console.log(blocks);
+    }
     // eslint-disable-next-line no-console
     console.log('Generated: ', filePath);
   }

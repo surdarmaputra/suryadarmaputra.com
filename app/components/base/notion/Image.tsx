@@ -4,11 +4,15 @@ import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 import CloseIcon from '~/components/icons/CloseIcon';
-import type { ImageBlock, RichTextBlock } from '~/libs/notion';
+import type {
+  BlockComponentProps,
+  ImageBlock,
+  RichTextBlock,
+} from '~/libs/notion';
 
 import { RichText } from './RichText';
 
-interface ImageProps {
+interface ImageProps extends BlockComponentProps {
   block: ImageBlock;
 }
 

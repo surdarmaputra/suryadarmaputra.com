@@ -1,23 +1,25 @@
 import type {
-  BlockWithChildren,
+  BlockComponentProps,
   QuoteBlock,
   RichTextBlock,
 } from '~/libs/notion';
 
 import { RichText } from './RichText';
 
-interface QuoteProps {
+interface QuoteProps extends BlockComponentProps {
   block: QuoteBlock;
-  blockChildren: BlockWithChildren[];
 }
 
-export function Quote({ block, blockChildren }: QuoteProps) {
-  const richTexts = block.quote.rich_text;
+export function Quote({ block, children }: QuoteProps) {
+  const parentRichTexts = block.quote.rich_text;
+  const richTexts = [...parentRichTexts];
+
   return (
     <blockquote>
       {richTexts.map((richTextBlock, index) => (
         <RichText block={richTextBlock as RichTextBlock} key={index} />
       ))}
+      {children}
     </blockquote>
   );
 }

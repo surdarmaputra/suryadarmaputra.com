@@ -93,3 +93,13 @@ export type NumberedListBlock = {
     numbered_list_item: Array<BlockWithChildren>;
   };
 };
+
+export interface BlocksRendererProps {
+  blocks: BlockWithChildren[];
+}
+
+export interface BlockComponentProps {
+  block: any;
+  previousBlockType?: string | null;
+  children?: React.ReactNode;
+}

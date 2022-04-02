@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type {
-  BlockWithChildren,
+  BlockComponentProps,
   BulletedListBlock,
   BulletedListItemBlock,
   NumberedListBlock,
@@ -11,29 +11,19 @@ import type {
 
 import { RichText } from './RichText';
 
-interface ListProps {
+interface ListProps extends BlockComponentProps {
   block: BulletedListBlock | NumberedListBlock;
-  blockChildren: BlockWithChildren[];
 }
 
 interface ListItemProps {
   block: BulletedListItemBlock | NumberedListItemBlock;
-  blockChildren: BlockWithChildren[] | null;
+  children?: React.ReactNode;
 }
 
 const listTagMap = {
   bulleted_list: 'ul',
   numbered_list: 'ol',
 };
-
-function getListBlockContent(block: ListProps['block']): BlockWithChildren[] {
-  switch (block.type) {
-    case 'bulleted_list':
-      return block.bulleted_list.bulleted_list_item;
-    case 'numbered_list':
-      return block.numbered_list.numbered_list_item;
-  }
-}
 
 function getListItemRichText(block: ListItemProps['block']) {
   switch (block.type) {
@@ -44,30 +34,20 @@ function getListItemRichText(block: ListItemProps['block']) {
   }
 }
 
-function ListItem({ block, blockChildren }: ListItemProps) {
+export function ListItem({ block, children }: ListItemProps) {
   const richTexts = getListItemRichText(block);
   return (
     <li>
       {richTexts.map((richTextBlock, index) => (
         <RichText block={richTextBlock as RichTextBlock} key={index} />
       ))}
+      {children}
     </li>
   );
 }
 
-export function List({ block, blockChildren }: ListProps) {
+export function List({ block, children }: ListProps) {
   const ListTag = listTagMap[block.type];
-  const items = getListBlockContent(block) || [];
 
-  return React.createElement(
-    ListTag,
-    null,
-    items.map(({ block: listItemBlock, children: listItemChildren }, index) => (
-      <ListItem
-        block={listItemBlock as BulletedListItemBlock | NumberedListItemBlock}
-        blockChildren={listItemChildren}
-        key={index}
-      />
-    )),
-  );
+  return React.createElement(ListTag, null, children);
 }

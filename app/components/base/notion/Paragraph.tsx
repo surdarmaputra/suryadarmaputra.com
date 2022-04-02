@@ -1,23 +1,21 @@
 import type {
-  BlockWithChildren,
+  BlockComponentProps,
   ParagraphBlock,
   RichTextBlock,
 } from '~/libs/notion';
 
 import { RichText } from './RichText';
 
-interface ParagraphProps {
+interface ParagraphProps extends BlockComponentProps {
   block: ParagraphBlock;
-  blockChildren: BlockWithChildren[];
-  previousBlockType: string | null;
 }
 
 const headingBlockTypes = ['heading_1', 'heading_2', 'heading_3'];
 
 export function Paragraph({
   block,
-  blockChildren,
   previousBlockType = null,
+  children,
 }: ParagraphProps) {
   const richTexts = block.paragraph.rich_text;
 
@@ -33,6 +31,7 @@ export function Paragraph({
       {richTexts.map((richTextBlock, index) => (
         <RichText block={richTextBlock as RichTextBlock} key={index} />
       ))}
+      {children}
     </p>
   );
 }

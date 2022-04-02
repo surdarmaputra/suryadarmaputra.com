@@ -1,6 +1,7 @@
 import React from 'react';
 
 import type {
+  BlockComponentProps,
   Heading1Block,
   Heading2Block,
   Heading3Block,
@@ -9,7 +10,7 @@ import type {
 
 import { RichText } from './RichText';
 
-interface HeadingProps {
+interface HeadingProps extends BlockComponentProps {
   block: Heading1Block | Heading2Block | Heading3Block;
 }
 

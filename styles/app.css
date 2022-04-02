@@ -28,6 +28,23 @@ article {
     &::after {
       content: '"';
     }
+
+    blockquote,
+    p {
+      @apply my-0;
+    }
+
+    blockquote {
+      @apply py-0;
+
+      &::before {
+        content: '';
+      }
+
+      &::after {
+        content: '';
+      }
+    }
   }
 
   code {

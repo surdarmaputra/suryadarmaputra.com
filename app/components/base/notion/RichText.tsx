@@ -1,6 +1,6 @@
-import { RichTextBlock } from '~/libs/notion';
+import { BlockComponentProps, RichTextBlock } from '~/libs/notion';
 
-interface ParagraphProps {
+interface ParagraphProps extends BlockComponentProps {
   block: RichTextBlock;
 }
 

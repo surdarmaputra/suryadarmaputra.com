@@ -2,7 +2,7 @@ import Codepen from 'react-codepen-embed';
 import { GithubGist } from 'react-gistlab';
 import { Tweet } from 'react-twitter-widgets';
 
-import { EmbedBlock } from '~/libs/notion';
+import { BlockComponentProps, EmbedBlock } from '~/libs/notion';
 
 enum EmbedType {
   codepen,
@@ -10,7 +10,7 @@ enum EmbedType {
   twitter,
 }
 
-interface EmbedProps {
+interface EmbedProps extends BlockComponentProps {
   block: EmbedBlock;
 }
 
