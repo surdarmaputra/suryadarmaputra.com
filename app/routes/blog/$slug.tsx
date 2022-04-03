@@ -3,20 +3,34 @@ import { LoaderFunction, useLoaderData } from 'remix';
 import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
-import type { FullPost } from '~/services/post';
-import { getPost } from '~/services/post';
+import { PostSwitcher } from '~/components/sections/PostSwitcher';
+import type { FullPost, Post } from '~/services/post';
+import { getPost, getPosts } from '~/services/post';
 
 interface LoaderData {
   post: FullPost;
+  previousPost: Post | null;
+  nextPost: Post | null;
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
+  const posts = await getPosts();
   const post = await getPost(params.slug);
-  return { post };
+  const currentPostIndex = posts.findIndex((item) => item.slug === params.slug);
+  const previousPost =
+    currentPostIndex > 0 ? posts[currentPostIndex - 1] : null;
+  const nextPost =
+    currentPostIndex < posts.length - 1 ? posts[currentPostIndex + 1] : null;
+
+  return {
+    post,
+    previousPost,
+    nextPost,
+  };
 };
 
 export default function SinglePost() {
-  const { post } = useLoaderData<LoaderData>();
+  const { post, previousPost, nextPost } = useLoaderData<LoaderData>();
   return (
     <>
       <PostMetaData
@@ -34,6 +48,11 @@ export default function SinglePost() {
         category={post.category}
         className="mt-14 md:mt-20 mb-20"
         tags={post.tags}
+      />
+      <PostSwitcher
+        className="mb-20"
+        nextPost={nextPost}
+        previousPost={previousPost}
       />
     </>
   );
