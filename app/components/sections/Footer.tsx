@@ -24,3 +24,5 @@ export function Footer() {
     </footer>
   );
 }
+
+console.log('test linteer');
