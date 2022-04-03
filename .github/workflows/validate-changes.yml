@@ -39,4 +39,6 @@ jobs:
           FILES: ${{ steps.get-changed-files.outputs.added_modified }}
         run: |
           FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "src/(.*)\.(ts|tsx)$" || true)"
+          echo $FILES
+          echo $FILTERED_FILES
           yarn lint $FILTERED_FILES
