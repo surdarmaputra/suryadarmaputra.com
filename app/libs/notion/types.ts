@@ -1,7 +1,7 @@
 import type { GetBlockResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export interface BlockWithChildren {
-  block: GetBlockResponse;
+  block: GetBlockResponse | BulletedListBlock | NumberedListBlock;
   children: BlockWithChildren[] | null;
 }
 

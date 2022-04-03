@@ -4,8 +4,8 @@ import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
 import { PostSwitcher } from '~/components/sections/PostSwitcher';
-import type { FullPost, Post } from '~/services/post';
-import { getPost, getPosts } from '~/services/post';
+import type { FullPost, Post } from '~/services/post.server';
+import { getPost, getPosts } from '~/services/post.server';
 
 interface LoaderData {
   post: FullPost;

@@ -4,8 +4,8 @@ import { LoaderFunction, useLoaderData } from 'remix';
 import { DefaultLayout } from '~/components/layouts/DefaultLayout';
 import { BrandHero } from '~/components/sections/BrandHero';
 import { PostSummary } from '~/components/sections/PostSummary';
-import type { Post } from '~/services/post';
-import { getPosts } from '~/services/post';
+import type { Post } from '~/services/post.server';
+import { getPosts } from '~/services/post.server';
 
 interface LoaderData {
   posts: Post[];

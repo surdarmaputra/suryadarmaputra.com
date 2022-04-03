@@ -17,7 +17,7 @@ export const notion = new Client({
 
 export async function getPagesFromDatabase(
   databaseId?: string,
-  parameters?: QueryDatabaseParameters,
+  parameters?: Partial<QueryDatabaseParameters>,
 ): Promise<GetPageResponse[]> {
   if (!databaseId) return [];
 

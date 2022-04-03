@@ -1,6 +1,6 @@
 import type { LoaderFunction } from 'remix';
 
-import { getPosts } from '~/services/post';
+import { getPosts } from '~/services/post.server';
 
 function escapeCdata(s: string): string {
   return s.replace(/\]\]>/g, ']]]]><![CDATA[>');
@@ -33,7 +33,6 @@ export const loader: LoaderFunction = async ({ request }) => {
       <link>${domain}</link>
       <description>Blog posts written by Surya Darma Putra</description>
       <language>en-us</language>
-      <generator>Surya Darma Putra</generator>
       <ttl>40</ttl>
       ${posts
         .map(({ date, excerpt, slug, title, updatedAt }) =>
