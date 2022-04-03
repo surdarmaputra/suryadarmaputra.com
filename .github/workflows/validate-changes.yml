@@ -1,0 +1,42 @@
+name: Validate changes
+
+on: pull_request
+
+jobs:
+  install-dependencies:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-
+      - name: Install dependencies
+        run: yarn install --ignore-optional --frozen-lockfile
+  lint:
+    name: Lint
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-
+      - uses: jitterbit/get-changed-files@v1
+        id: get-changed-files
+        continue-on-error: true
+        with:
+          format: space-delimited
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: yarn install --ignore-optional --frozen-lockfile
+      - name: Lint
+        env:
+          FILES: ${{ steps.get-changed-files.outputs.added_modified }}
+        run: |
+          FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "src/(.*)\.(ts|tsx)$" || true)"
+          yarn lint $FILTERED_FILES
