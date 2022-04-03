@@ -3,7 +3,7 @@ import LazyLoad from 'react-lazyload';
 import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
-import CloseIcon from '~/components/icons/CloseIcon';
+import { CloseIcon } from '~/components/base/Icon';
 import type {
   BlockComponentProps,
   ImageBlock,
