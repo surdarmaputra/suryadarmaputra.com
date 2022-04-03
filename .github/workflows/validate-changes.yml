@@ -40,5 +40,7 @@ jobs:
         run: |
           FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "src/(.*)\.(ts|tsx)$" || true)"
           echo $FILES
+          echo --------------
           echo $FILTERED_FILES
+          echo --------------
           yarn lint $FILTERED_FILES
