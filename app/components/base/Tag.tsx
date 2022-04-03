@@ -20,15 +20,17 @@ export function Tag({
 }
 
 interface TagsProps {
-  tags?: string[];
+  category?: string;
   className?: string;
+  tags?: string[];
 }
 
-export function Tags({ className = '', tags = [] }: TagsProps) {
+export function Tags({ category, className = '', tags = [] }: TagsProps) {
   if (!Array.isArray(tags) || !tags.length) return null;
 
   return (
     <div className={`flex flex-wrap ${className}`}>
+      {category && <Tag>{category}</Tag>}
       {tags?.map((tag) => (
         <Tag key={tag as React.Key}>{tag}</Tag>
       ))}

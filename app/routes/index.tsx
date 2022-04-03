@@ -1,39 +1,36 @@
+import { LoaderFunction, useLoaderData } from 'remix';
+
 import DefaultLayout from '~/components/layouts/DefaultLayout';
 import BrandHero from '~/components/sections/BrandHero';
 import PostSummary from '~/components/sections/PostSummary';
+import type { Post } from '~/services/post';
+import { getPosts } from '~/services/post';
 
-const post = {
-  title: 'The Books I Read in 2020',
-  date: new Date(),
-  excerpt:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a tincidunt sapien. Sed vehicula vel sapien vel viverra. Praesent congue quis ex vel rutrum. Nulla facilisi. Curabitur molestie vestibulum nisl lacinia tempus. Donec in ipsum ut urna scelerisque viverra.',
-  href: '/blog/1',
-  minutesToRead: 5,
-  tags: [
-    'javascript',
-    'engineering',
-    'book',
-    'learning',
-    'css',
-    'web-development',
-  ],
+interface LoaderData {
+  posts: Post[];
+}
+
+export const loader: LoaderFunction = async () => {
+  const posts = await getPosts();
+  return { posts };
 };
 
-const posts = [
-  { ...post, id: 1 },
-  { ...post, title: 'Mengenal Makefile', id: 2 },
-  { ...post, title: 'Melakukan Update Dependensi NPM', id: 3 },
-];
-
 export default function Index() {
+  const { posts } = useLoaderData<LoaderData>();
   return (
     <DefaultLayout>
       <BrandHero />
-      <div className="flex flex-wrap md:-m-8">
-        {posts.map(({ id, ...postData }) => (
-          <PostSummary key={id} {...postData} />
-        ))}
-      </div>
+      {posts?.length ? (
+        <div className="flex flex-wrap md:-m-8">
+          {posts.map(({ slug, ...postData }) => (
+            <PostSummary key={slug} {...postData} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-4xl font-bold text-slate-200 dark:text-slate-700 pt-16 pb-48">
+          Content is coming soon!
+        </div>
+      )}
     </DefaultLayout>
   );
 }

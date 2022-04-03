@@ -1,117 +1,59 @@
+import { LoaderFunction, useLoaderData } from 'remix';
+
+import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
+import { PostSwitcher } from '~/components/sections/PostSwitcher';
+import type { FullPost, Post } from '~/services/post';
+import { getPost, getPosts } from '~/services/post';
 
-const post = {
-  title: 'Melakukan Update Dependensi NPM',
-  date: new Date(),
-  excerpt:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a tincidunt sapien. Sed vehicula vel sapien vel viverra. Praesent congue quis ex vel rutrum. Nulla facilisi. Curabitur molestie vestibulum nisl lacinia tempus. Donec in ipsum ut urna scelerisque viverra.',
-  href: '/blog/1',
-  minutesToRead: 5,
-  tags: [
-    'javascript',
-    'engineering',
-    'book',
-    'learning',
-    'css',
-    'web-development',
-  ],
+interface LoaderData {
+  post: FullPost;
+  previousPost: Post | null;
+  nextPost: Post | null;
+}
+
+export const loader: LoaderFunction = async ({ params }) => {
+  const posts = await getPosts();
+  const post = await getPost(params.slug);
+  const currentPostIndex = posts.findIndex((item) => item.slug === params.slug);
+  const previousPost =
+    currentPostIndex > 0 ? posts[currentPostIndex - 1] : null;
+  const nextPost =
+    currentPostIndex < posts.length - 1 ? posts[currentPostIndex + 1] : null;
+
+  return {
+    post,
+    previousPost,
+    nextPost,
+  };
 };
 
 export default function SinglePost() {
+  const { post, previousPost, nextPost } = useLoaderData<LoaderData>();
   return (
     <>
       <PostMetaData
-        className="mt-20"
+        className="mt-24"
         date={post.date}
-        minutesToRead={post.minutesToRead}
+        readingTime={post.readingTime}
       />
-      <h2 className="mt-4 mb-16 text-5xl text-slate-900 dark:text-slate-300 font-bold leading-tight">
+      <h2 className="mt-4 mb-24 text-5xl text-slate-900 dark:text-slate-300 font-extrabold leading-tight">
         {post.title}
       </h2>
       <article>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed
-          vehicula elit. Nam congue purus in elit efficitur posuere. Phasellus
-          ac turpis quis mauris bibendum accumsan. Phasellus vel laoreet diam.
-          Donec ac sollicitudin eros, et venenatis dui. Pellentesque eget lacus
-          sem. Nunc a tortor et elit accumsan aliquet. Phasellus ullamcorper
-          rhoncus hendrerit. <a href="/#">This is a link</a>
-        </p>
-        <h2>1. Install npm-check-updates</h2>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros. In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-          <a href="/#">
-            Vivamus lectus nunc, interdum id pretium et, malesuada vel leo
-          </a>
-        </p>
-        <h2>1. Install npm-check-updates</h2>
-        <h3>1. Install npm-check-updates</h3>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros.{' '}
-          <code>npm instal -g npm-check-updates</code> In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-        </p>
-        <h3>1. Install npm-check-updates</h3>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros. In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-        </p>
-        <h4>1. Install npm-check-updates</h4>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros. In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-        </p>
-        <pre>
-          <code>
-            <span>.PHONY</span>
-            <span>:</span>
-            <span> [rule1] [rule2] ...</span>
-          </code>
-        </pre>
-        <h5>1. Install npm-check-updates</h5>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros. In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-        </p>
-        <h6>1. Install npm-check-updates</h6>
-        <p>
-          Vivamus lectus nunc, interdum id pretium et, malesuada vel leo. Morbi
-          sit amet consequat ante, et varius felis. Cras et placerat justo.
-          Etiam posuere enim non placerat facilisis. Morbi lectus ex, venenatis
-          sed hendrerit quis, tincidunt at eros. In hac habitasse platea
-          dictumst. Integer auctor neque eget erat lacinia finibus. Nulla nec
-          imperdiet tortor, nec vulputate purus. Curabitur in accumsan sapien,
-          quis elementum justo.
-        </p>
+        <BlocksRenderer blocks={post.blocks} />
       </article>
-      <Tags className="mt-14 md:mt-20 mb-20" tags={post.tags} />
+      <Tags
+        category={post.category}
+        className="mt-14 md:mt-20 mb-20"
+        tags={post.tags}
+      />
+      <PostSwitcher
+        className="mb-20"
+        nextPost={nextPost}
+        previousPost={previousPost}
+      />
     </>
   );
 }

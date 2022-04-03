@@ -4,27 +4,32 @@ import { useMemo } from 'react';
 interface PostMetaDataProps {
   className?: string;
   date?: Date;
-  minutesToRead?: number;
+  readingTime?: string;
 }
 
 export function PostMetaData({
   className = '',
   date,
-  minutesToRead,
+  readingTime,
 }: PostMetaDataProps) {
   const formattedDate = useMemo(
     () => (date ? dayjs(date).format('MMM D, YYYY') : null),
     [date],
   );
 
-  if (!formattedDate && !minutesToRead) {
+  if (!formattedDate && !readingTime) {
     return null;
   }
 
+  const items = [formattedDate, readingTime].filter(Boolean);
+
   return (
     <small className={`block text-slate-400 dark:text-slate-500 ${className}`}>
-      <span className="mr-4 inline-block">{formattedDate}</span>
-      <span>{minutesToRead} mins read</span>
+      {items.map((item, index) => (
+        <span className="mr-4 inline-block" key={index}>
+          {item}
+        </span>
+      ))}
     </small>
   );
 }

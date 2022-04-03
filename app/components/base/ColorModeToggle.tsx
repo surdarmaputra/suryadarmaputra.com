@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
-import MoonIcon from '~/components/icons/MoonIcon';
-import SunIcon from '~/components/icons/SunIcon';
+import { MoonIcon, SunIcon } from '~/components/base/Icon';
 
 interface ColorModeToggleProps {
   isDark: boolean;
