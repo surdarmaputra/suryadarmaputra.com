@@ -38,9 +38,5 @@ jobs:
         env:
           FILES: ${{ steps.get-changed-files.outputs.added_modified }}
         run: |
-          FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "src/(.*)\.(ts|tsx)$" || true)"
-          echo $FILES
-          echo --------------
-          echo $FILTERED_FILES
-          echo --------------
+          FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "(.*)\.(ts|tsx)$" || true)"
           yarn lint $FILTERED_FILES
