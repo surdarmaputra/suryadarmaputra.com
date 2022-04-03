@@ -1,3 +1,4 @@
+import type { MetaFunction } from 'remix';
 import { LoaderFunction, useLoaderData } from 'remix';
 
 import { DefaultLayout } from '~/components/layouts/DefaultLayout';
@@ -13,6 +14,15 @@ interface LoaderData {
 export const loader: LoaderFunction = async () => {
   const posts = await getPosts();
   return { posts };
+};
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Surya Darma Putra - Software engineer based in Bali, Indonesia',
+    description:
+      "👋 Hello, I'm Surya, a software engineer. I do web development using JavaScript, React and Vue ecosystems.",
+    keywords: ['software engineer', 'javascript', 'react', 'vue'].join(', '),
+  };
 };
 
 export default function Index() {

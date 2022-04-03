@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { MetaFunction } from 'remix';
 
 import { DefaultLayout } from '~/components/layouts/DefaultLayout';
 
@@ -64,6 +65,15 @@ function formatWorkDuration(start: string, end: string | null): string {
   return `${formattedStart} - ${formattedEnd} (${duration})`;
 }
 
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Surya Darma Putra - About me',
+    description:
+      "👋 Hello, I'm Surya, a software engineer based in Bali, Indonesia. I do web development using JavaScript, React and Vue ecosystems.",
+    keywords: ['software engineer', 'javascript', 'react', 'vue'].join(', '),
+  };
+};
+
 export default function About() {
   return (
     <DefaultLayout>
@@ -72,12 +82,12 @@ export default function About() {
           <h2 className="mb-6 text-black dark:text-slate-100">
             Hi, you can call me{' '}
             <span className="text-orange-500 dark:text-amber-500">Surya</span>.
-            I'm a web developer based in Bali, Indonesia.
+            I'm a software engineer based in Bali, Indonesia.
           </h2>
           <p className="text-slate-500 dark:text-slate-400">
-            I’ve been working as a web developer in various sectors, including
-            education, tour & travel, e-commerce, financial services and
-            logistics.
+            I do web development using JavaScript, React and Vue ecosystems, and
+            help people to build product in various sectors including
+            e-commerce, financial services, logistics and more.
           </p>
         </div>
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
