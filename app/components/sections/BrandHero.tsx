@@ -1,4 +1,4 @@
-export default function BrandHero() {
+export function BrandHero() {
   return (
     <section className="text-center mt-20 mb-28 md:mb-32">
       <h1 className="text-5xl font-bold tracking-tighter mb-3 text-black dark:text-slate-100 leading-tight">

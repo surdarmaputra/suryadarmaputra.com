@@ -6,7 +6,7 @@ const links = [
   { label: 'GitHub', href: 'https://github.com/surdarmaputra' },
 ];
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="text-center mt-18 md:mt-20 py-8">
       <span className="block text-slate-600 dark:text-slate-500 font-light text-sm mb-0.5">

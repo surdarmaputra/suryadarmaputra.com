@@ -11,7 +11,7 @@ interface PostSummaryProps {
   title: string;
 }
 
-export default function PostSummary({
+export function PostSummary({
   category,
   date,
   excerpt,
