@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Footer from '~/components/sections/Footer';
-import Header from '~/components/sections/Header';
+import { Footer } from '~/components/sections/Footer';
+import { Header } from '~/components/sections/Header';
 
 interface DefaultLayoutProps {
   children?: React.ReactNode;
 }
 
-export default function DefaultLayout({ children }: DefaultLayoutProps) {
+export function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <>
       <Header />

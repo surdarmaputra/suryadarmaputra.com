@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation } from 'remix';
 
-import ColorModeToggle from '~/components/base/ColorModeToggle';
+import { ColorModeToggle } from '~/components/base/ColorModeToggle';
 
-export default function Header() {
+export function Header() {
   const [isDark, setIsDark] = useState(false);
   const location = useLocation();
 

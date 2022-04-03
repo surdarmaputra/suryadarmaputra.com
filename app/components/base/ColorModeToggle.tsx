@@ -7,10 +7,7 @@ interface ColorModeToggleProps {
   onChange: (isDark: boolean) => void;
 }
 
-export default function ColorModeToggle({
-  isDark,
-  onChange,
-}: ColorModeToggleProps) {
+export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps) {
   const toggleClassName = useMemo(
     () =>
       isDark
