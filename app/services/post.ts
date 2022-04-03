@@ -14,7 +14,7 @@ export interface Post {
   slug: string;
   tags?: Array<string>;
   title: string;
-  updatedAt: string;
+  updatedAt: Date;
 }
 
 export interface FullPost extends Post {
@@ -32,6 +32,7 @@ function formatPost(
   const date = properties.custom_created_at
     ? new Date(properties.custom_created_at)
     : new Date(properties.created_at);
+  const updatedAt = new Date(properties.updated_at);
   const slug = fileName.replace(/\.json$/, '');
   const href = `/blog/${slug}`;
 
@@ -44,7 +45,7 @@ function formatPost(
     slug,
     tags: properties.tags,
     title,
-    updatedAt: properties.updated_at,
+    updatedAt,
     ...(isFullPost ? { blocks } : {}),
   };
 }
