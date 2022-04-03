@@ -14,6 +14,7 @@ export interface Post {
   slug: string;
   tags?: Array<string>;
   title: string;
+  updatedAt: string;
 }
 
 export interface FullPost extends Post {
@@ -43,6 +44,7 @@ function formatPost(
     slug,
     tags: properties.tags,
     title,
+    updatedAt: properties.updated_at,
     ...(isFullPost ? { blocks } : {}),
   };
 }
