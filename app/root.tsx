@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import type { MetaFunction } from 'remix';
 import {
   Links,
   LiveReload,
@@ -26,14 +25,6 @@ export function links() {
     },
   ];
 }
-
-export const meta: MetaFunction = () => {
-  return {
-    title: 'Surya Darma Putra',
-    description:
-      'Surya Darma Putra is a software engineer based in Bali, Indonesia. Experienced in web development and product engineering.',
-  };
-};
 
 export default function App() {
   const headScript = useRef(null);

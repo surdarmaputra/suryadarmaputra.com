@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from 'remix';
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 
 import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/components/base/PostMetaData';
@@ -26,6 +26,15 @@ export const loader: LoaderFunction = async ({ params }) => {
     post,
     previousPost,
     nextPost,
+  };
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  const { post } = data;
+  return {
+    title: `${post.title} - Surya Darma Putra`,
+    description: post.excerpt,
+    keywords: [post.category, ...post.tags].join(', '),
   };
 };
 
