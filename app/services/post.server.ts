@@ -3,7 +3,7 @@ import path from 'path';
 
 import type { BlockWithChildren } from '~/libs/notion';
 
-const postsPath = path.join(__dirname, '../posts');
+const postsPath = path.join(process.cwd(), 'posts');
 
 export interface Post {
   category?: string;
