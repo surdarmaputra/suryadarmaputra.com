@@ -51,7 +51,7 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  const files = await fs.readdir(postsPath);
+  const files = await fs.readdir(process.cwd());
   return {
     cwd: process.cwd(),
     postsPath,
