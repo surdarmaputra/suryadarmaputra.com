@@ -3,7 +3,7 @@ import path from 'path';
 
 import type { BlockWithChildren } from '~/libs/notion';
 
-const postsPath = path.join(process.cwd(), 'posts');
+const postsPath = path.join(__dirname, '../posts');
 
 export interface Post {
   category?: string;
@@ -52,6 +52,7 @@ function formatPost(
 
 export async function getDir(): Promise<Record<string, string>> {
   const files = await fs.readdir(process.cwd());
+  const ddd = await fs.readdir(path.join(__dirname, '..'));
   const children = await Promise.all(
     files.map(async (file) => {
       let items: string[];
@@ -65,6 +66,8 @@ export async function getDir(): Promise<Record<string, string>> {
   );
   return {
     cwd: process.cwd(),
+    dirName: __dirname,
+    ddd: JSON.stringify(ddd),
     postsPath,
     files: JSON.stringify(files),
     children: JSON.stringify(children),
