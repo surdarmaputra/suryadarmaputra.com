@@ -52,10 +52,22 @@ function formatPost(
 
 export async function getDir(): Promise<Record<string, string>> {
   const files = await fs.readdir(process.cwd());
+  const children = await Promise.all(
+    files.map(async (file) => {
+      let items: string[];
+      try {
+        items = await fs.readdir(file);
+      } catch (err) {
+        items = [];
+      }
+      return items;
+    }),
+  );
   return {
     cwd: process.cwd(),
     postsPath,
     files: JSON.stringify(files),
+    children: JSON.stringify(children),
   };
 }
 
