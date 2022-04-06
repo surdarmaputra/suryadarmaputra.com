@@ -50,6 +50,15 @@ function formatPost(
   };
 }
 
+export async function getDir(): Promise<Record<string, string>> {
+  const files = await fs.readdir(postsPath);
+  return {
+    cwd: process.cwd(),
+    postsPath,
+    files: JSON.stringify(files),
+  };
+}
+
 export async function getPosts(): Promise<Post[]> {
   let files: string[];
 
