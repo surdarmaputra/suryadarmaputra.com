@@ -12,6 +12,6 @@ async function getDir() {
 }
 
 export default async function (request, response) {
-  const dir = getDir();
+  const dir = await getDir();
   response.status(200).json(dir);
 }
