@@ -83,9 +83,16 @@ export async function run(): Promise<void> {
       blocks,
     };
     const slug = title ? kebabCase(title) : null;
-    const filePath = path.join(postsDirectory, `${slug}.json`);
+    // const filePath = path.join(postsDirectory, `${slug}.json`);
+    const filePath = path.join(postsDirectory, `${slug}.js`);
     await fetchImages(originalBlocks);
-    await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
+    // await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
+    await fs.writeFile(
+      filePath,
+      `
+      module.exports = ${JSON.stringify(pageData, null, 2)}
+    `,
+    );
     // eslint-disable-next-line no-console
     console.log('Generated: ', filePath);
   }
