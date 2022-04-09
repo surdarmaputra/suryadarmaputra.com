@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation } from 'remix';
 import { ColorModeToggle } from '~/components/base/ColorModeToggle';
 
 export function Header() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const location = useLocation();
 
   const logoPath = useMemo(
@@ -23,7 +23,10 @@ export function Header() {
   };
 
   useEffect(() => {
-    setIsDark(global.localStorage?.theme === 'dark');
+    const isCurrentlyDark = !global.localStorage.theme
+      ? true
+      : global.localStorage.theme === 'dark';
+    setIsDark(isCurrentlyDark);
   }, [setIsDark]);
 
   return (
