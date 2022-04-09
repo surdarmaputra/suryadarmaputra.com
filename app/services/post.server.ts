@@ -51,7 +51,7 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  const files = await fs.readdir(process.cwd());
+  const files = await fs.readdir(path.join(__dirname));
   const ddd = await fs.readdir(path.join(__dirname, '..'));
   const ddd2 = await fs.readdir(path.join(__dirname, '../..'));
   const children = await Promise.all(
