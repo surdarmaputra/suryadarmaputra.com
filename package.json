@@ -17,7 +17,7 @@
     "postinstall": "remix setup node",
     "prepare:output": "npm run prepare:api && npm run prepare:posts && npm run prepare:static",
     "prepare:api": "mkdir -p .output/server/pages/api && cp -r api/* .output/server/pages/api",
-    "prepare:posts": "mkdir -p .output/server/pages/posts && cp -r posts .output/server/pages",
+    "prepare:posts": "mkdir -p .output/server && cp -r posts .output/server",
     "prepare:static": "mkdir -p .output/static && cp -r public/* .output/static",
     "sync": "ts-node scripts/syncWithNotion.ts"
   },
