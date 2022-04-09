@@ -35,7 +35,6 @@ function formatPost(
   const updatedAt = new Date(properties.updated_at);
   const slug = fileName.replace(/\.json$/, '');
   const href = `/blog/${slug}`;
-
   return {
     category: properties.category,
     date,
