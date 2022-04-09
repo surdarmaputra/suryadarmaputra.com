@@ -15,7 +15,6 @@
     "lint": "eslint --ext .ts,.tsx --max-warnings=0",
     "lint:fix": "eslint --ext .ts,.tsx --max-warnings=0 --fix",
     "postinstall": "remix setup node",
-    "prepare:posts": "cp -r posts api",
     "sync": "ts-node scripts/syncWithNotion.ts"
   },
   "dependencies": {

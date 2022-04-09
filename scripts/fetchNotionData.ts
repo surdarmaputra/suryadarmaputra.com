@@ -28,7 +28,7 @@ interface PageData {
   title: string | null;
 }
 
-const postsDirectory = path.resolve(__dirname, '../posts');
+const postsDirectory = path.resolve(__dirname, '../api/posts');
 const imagesDirectory = path.resolve(__dirname, '../public/images/posts');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
