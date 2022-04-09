@@ -9,6 +9,7 @@ node_modules
 /api/posts
 /app/styles
 /build/
+/netlify
 /posts
 /public/build
 /public/images/posts

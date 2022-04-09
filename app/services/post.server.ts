@@ -3,7 +3,7 @@ import path from 'path';
 
 import type { BlockWithChildren } from '~/libs/notion';
 
-const postsPath = path.join(__dirname, '../posts');
+const postsPath = './posts';
 
 export interface Post {
   category?: string;
@@ -23,13 +23,12 @@ export interface FullPost extends Post {
 
 function formatPost(
   fileName: string,
-  fileContent: any,
+  fileContent: Buffer,
   isFullPost: boolean = false,
 ): Post | FullPost {
-  // const { blocks, excerpt, properties, readingTime, title } = JSON.parse(
-  //   fileContent.toString(),
-  // );
-  const { blocks, excerpt, properties, readingTime, title } = fileContent;
+  const { blocks, excerpt, properties, readingTime, title } = JSON.parse(
+    fileContent.toString(),
+  );
   const date = properties.custom_created_at
     ? new Date(properties.custom_created_at)
     : new Date(properties.created_at);
@@ -52,21 +51,21 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  const cwd = process.cwd();
-  const pagesDir = path.join(__dirname, '..');
-  const pagesDirContent = await fs.readdir(pagesDir);
-  const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
-  const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
+  // const cwd = process.cwd();
+  // const pagesDir = path.join(__dirname, '..');
+  // const pagesDirContent = await fs.readdir(pagesDir);
+  // const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
+  // const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
 
-  return {
-    cwd,
-    dirName: __dirname,
-    pagesDir,
-    pagesDirContent: JSON.stringify(pagesDirContent),
-    outputDirContent: JSON.stringify(outputDirContent),
-    serverDirContent: JSON.stringify(serverDirContent),
-  };
-  // return {};
+  // return {
+  //   cwd,
+  //   dirName: __dirname,
+  //   pagesDir,
+  //   pagesDirContent: JSON.stringify(pagesDirContent),
+  //   outputDirContent: JSON.stringify(outputDirContent),
+  //   serverDirContent: JSON.stringify(serverDirContent),
+  // };
+  return {};
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -80,8 +79,7 @@ export async function getPosts(): Promise<Post[]> {
 
   const posts = await Promise.all(
     files.map(async (fileName) => {
-      // const fileContent = await fs.readFile(path.join(postsPath, fileName));
-      const fileContent = require(path.join(postsPath, fileName));
+      const fileContent = await fs.readFile(path.join(postsPath, fileName));
       return formatPost(fileName, fileContent);
     }),
   );

@@ -8,7 +8,7 @@
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css --postcss",
     "commit": "cz",
-    "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+    "dev": "concurrently \"npm run dev:css\" \"netlify dev\"",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css --postcss",
     "format:fix": "prettier --write",
     "generate": "ts-node scripts/fetchNotionData.ts",
