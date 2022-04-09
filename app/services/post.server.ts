@@ -51,28 +51,11 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  const files = await fs.readdir(path.join(__dirname));
-  const ddd = await fs.readdir(path.join(__dirname, '..'));
-  const ddd2 = await fs.readdir(path.join(__dirname, '../..'));
-  const children = await Promise.all(
-    files.map(async (file) => {
-      let items: string[];
-      try {
-        items = await fs.readdir(file);
-      } catch (err) {
-        items = [];
-      }
-      return items;
-    }),
-  );
+  const dirNameContent = await fs.readdir(path.join(__dirname));
+
   return {
-    cwd: process.cwd(),
     dirName: __dirname,
-    ddd: JSON.stringify(ddd),
-    ddd2: JSON.stringify(ddd2),
-    postsPath,
-    files: JSON.stringify(files),
-    children: JSON.stringify(children),
+    dirNameContent: JSON.stringify(dirNameContent),
   };
 }
 
