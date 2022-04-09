@@ -3,7 +3,7 @@ import path from 'path';
 
 import type { BlockWithChildren } from '~/libs/notion';
 
-const postsPath = path.join(__dirname, '../posts');
+const postsPath = './posts';
 
 export interface Post {
   category?: string;
@@ -14,6 +14,7 @@ export interface Post {
   slug: string;
   tags?: Array<string>;
   title: string;
+  updatedAt: Date;
 }
 
 export interface FullPost extends Post {
@@ -31,6 +32,7 @@ function formatPost(
   const date = properties.custom_created_at
     ? new Date(properties.custom_created_at)
     : new Date(properties.created_at);
+  const updatedAt = new Date(properties.updated_at);
   const slug = fileName.replace(/\.json$/, '');
   const href = `/blog/${slug}`;
 
@@ -43,8 +45,27 @@ function formatPost(
     slug,
     tags: properties.tags,
     title,
+    updatedAt,
     ...(isFullPost ? { blocks } : {}),
   };
+}
+
+export async function getDir(): Promise<Record<string, string>> {
+  // const cwd = process.cwd();
+  // const pagesDir = path.join(__dirname, '..');
+  // const pagesDirContent = await fs.readdir(pagesDir);
+  // const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
+  // const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
+
+  // return {
+  //   cwd,
+  //   dirName: __dirname,
+  //   pagesDir,
+  //   pagesDirContent: JSON.stringify(pagesDirContent),
+  //   outputDirContent: JSON.stringify(outputDirContent),
+  //   serverDirContent: JSON.stringify(serverDirContent),
+  // };
+  return {};
 }
 
 export async function getPosts(): Promise<Post[]> {

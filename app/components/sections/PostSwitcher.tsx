@@ -1,7 +1,7 @@
 import { Link } from 'remix';
 
 import { ArrowLeft, ArrowRight } from '~/components/base/Icon';
-import type { Post } from '~/services/post';
+import type { Post } from '~/services/post.server';
 
 interface PostSwitcherProps {
   className?: string;

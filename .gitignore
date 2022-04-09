@@ -8,6 +8,7 @@ node_modules
 /api/index.js
 /app/styles
 /build/
+/netlify
 /posts
 /public/build
 /public/images/posts
