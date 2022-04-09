@@ -84,7 +84,7 @@ export async function run(): Promise<void> {
     };
     const slug = title ? kebabCase(title) : null;
     // const filePath = path.join(postsDirectory, `${slug}.json`);
-    const filePath = path.join(postsDirectory, `${slug}.js`);
+    const filePath = path.join(postsDirectory, `_${slug}.js`);
     await fetchImages(originalBlocks);
     // await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
     await fs.writeFile(
