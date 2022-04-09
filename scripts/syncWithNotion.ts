@@ -123,10 +123,10 @@ function checkMissingOrOutdatedContent(
 }
 
 async function triggerDeployment() {
-  const url = process.env.VERCEL_HOOK_URL;
+  const url = process.env.NETLIFY_HOOK_URL;
 
   if (!url) {
-    return 'No VERCEL_HOOK_URL found. Skipping deployment.';
+    return 'No NETLIFY_HOOK_URL found. Skipping deployment.';
   }
 
   const { body } = await superagent.post(url);
