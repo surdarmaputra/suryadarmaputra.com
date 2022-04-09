@@ -52,10 +52,15 @@ function formatPost(
 
 export async function getDir(): Promise<Record<string, string>> {
   const dirNameContent = await fs.readdir(path.join(__dirname));
+  const indexContent = await fs.readFile(
+    path.join(__dirname, 'index.js'),
+    'utf-8',
+  );
 
   return {
     dirName: __dirname,
     dirNameContent: JSON.stringify(dirNameContent),
+    indexContent,
   };
 }
 
