@@ -1,0 +1,2484 @@
+{
+  "title": "Melakukan Update Dependensi NPM",
+  "excerpt": "Sekitar bulan November tahun 2017, Github merilis sebuah fitur yang dinamakan  Security Alert . Fitur ini berfungsi untuk memeriksa repositori proyek terhadap kemungkinan celah keamanan pada dependensi yang digunakan. Jika potensi celah keamanan terdeteks...",
+  "properties": {
+    "tags": [
+      "tools",
+      "javascript"
+    ],
+    "updated_at": "2022-03-29T13:28:00.000Z",
+    "custom_created_at": "2018-08-23",
+    "language": "id",
+    "created_at": "2021-09-26T07:27:00.000Z",
+    "category": "software-engineering",
+    "publish": true
+  },
+  "readingTime": "2 mins read",
+  "blocks": [
+    {
+      "block": {
+        "object": "block",
+        "id": "c013c337-89d8-4ed3-98c4-463948adef9a",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2022-03-29T13:28:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Sekitar bulan November tahun 2017, Github merilis sebuah fitur yang dinamakan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Sekitar bulan November tahun 2017, Github merilis sebuah fitur yang dinamakan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "Security Alert",
+                "link": {
+                  "url": "https://blog.github.com/2017-11-16-introducing-security-alerts-on-github/"
+                }
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Security Alert",
+              "href": "https://blog.github.com/2017-11-16-introducing-security-alerts-on-github/"
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Fitur ini berfungsi untuk memeriksa repositori proyek terhadap kemungkinan celah keamanan pada dependensi yang digunakan. Jika potensi celah keamanan terdeteksi, maka Github akan memberikan notifikasi seperti berikut.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Fitur ini berfungsi untuk memeriksa repositori proyek terhadap kemungkinan celah keamanan pada dependensi yang digunakan. Jika potensi celah keamanan terdeteksi, maka Github akan memberikan notifikasi seperti berikut.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "5d3a7d6e-d968-42ed-8ccd-1298c799078e",
+        "created_time": "2021-10-20T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "\"Notifikasi fitur Security Alert pada Github untuk repositori proyek yang memiliki potensi celah keamanan pada dependensinya.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "\"Notifikasi fitur Security Alert pada Github untuk repositori proyek yang memiliki potensi celah keamanan pada dependensinya.",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d45ec0df-8ac9-454a-9365-e8e38a4a3840/ncu0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=12f7a2cfde3c59d229a100c52d258716ee7a2fa8868169385b94190682424262&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "dc1751e0-4551-45bb-9a0f-2ab2c96aec11",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "6544d8c2-a714-445f-afc6-34b604b14b8e",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Lalu, apa yang harus dilakukan jika salah satu atau beberapa repositori kita mendapat notifikasi tersebut? Tidak usah panik, kita cukup melakukan pembaruan terhadap dependensi proyek bersangkutan.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Lalu, apa yang harus dilakukan jika salah satu atau beberapa repositori kita mendapat notifikasi tersebut? Tidak usah panik, kita cukup melakukan pembaruan terhadap dependensi proyek bersangkutan.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "f67ba567-88ad-49da-b6e1-f29b22749807",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Berikut ini adalah contoh langkah-langkah melakukan pembaruan dependensi untuk proyek berbasis Javascript yang menggunakan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Berikut ini adalah contoh langkah-langkah melakukan pembaruan dependensi untuk proyek berbasis Javascript yang menggunakan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm",
+                "link": {
+                  "url": "https://www.npmjs.com/"
+                }
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "npm",
+              "href": "https://www.npmjs.com/"
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " sebagai ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " sebagai ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package manager",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": true,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "package manager",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Semua langkah-langkah ini dijalankan pada terminal atau ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Semua langkah-langkah ini dijalankan pada terminal atau ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "command line",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": true,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "command line",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ".",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ".",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "8112df91-94bc-42db-be45-88f85451e166",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:37:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "1. Install npm-check-updates",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "1. Install npm-check-updates",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "a06d9c68-3677-4c06-bb3c-db46b43afc9a",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:37:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "npm-check-updates",
+                "link": {
+                  "url": "https://www.npmjs.com/package/npm-check-updates"
+                }
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "npm-check-updates",
+              "href": "https://www.npmjs.com/package/npm-check-updates"
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " atau ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " atau ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "ncu",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "ncu",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " adalah alat kakas yang bisa digunakan untuk memeriksa ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " adalah alat kakas yang bisa digunakan untuk memeriksa ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "update",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": true,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "update",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " terbaru dari dependensi yang tercantum pada file ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " terbaru dari dependensi yang tercantum pada file ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ".",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ".",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "71d4499f-dce9-43fa-a282-2a8e9b737f39",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:38:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Install dengan menjalankan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Install dengan menjalankan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm instal -g npm-check-updates",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "npm instal -g npm-check-updates",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Disarankan untuk menginstall secara global (",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Disarankan untuk menginstall secara global (",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "-g",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "-g",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "), sehingga bisa langsung digunakan untuk semua proyek berbasis npm yang kita miliki.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "), sehingga bisa langsung digunakan untuk semua proyek berbasis npm yang kita miliki.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "f75eb2a7-336c-4e10-9de5-8592126138c5",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:38:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "2. Lakukan proses audit",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "2. Lakukan proses audit",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "fff81ba6-28d2-41ef-9ed9-87007f43112e",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:38:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Masuk ke dalam direktori proyek yang ingin diperbarui, lalu jalankan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Masuk ke dalam direktori proyek yang ingin diperbarui, lalu jalankan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "ncu",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "ncu",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Selanjutya akan tampil daftar dependensi yang memiliki ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Selanjutya akan tampil daftar dependensi yang memiliki ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "update",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": true,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "update",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " terbaru dari pembuatnya. Pembaruan itulah yang bisa jadi merupakan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " terbaru dari pembuatnya. Pembaruan itulah yang bisa jadi merupakan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "patch",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": true,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "patch",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " atau perbaikan atas celah keamanan di versi sebelumnya.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " atau perbaikan atas celah keamanan di versi sebelumnya.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "5cb5ddbd-460e-4590-b222-0a279c06ce44",
+        "created_time": "2021-10-20T07:38:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Melakukan audit dependensi dengan menjalankan perintah ncu.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Melakukan audit dependensi dengan menjalankan perintah ncu.",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e02d9159-21ca-4b4d-8a8e-b22463caff0b/ncu1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=faf197b7e14cb2b2cded872d7814409fe4bd5e75c0355e2fd61f15f7db2f1e1f&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "4e3a8b5e-6383-45dd-a908-ccb6b4cb2897",
+        "created_time": "2021-10-20T07:38:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "65f26479-2d1c-4d05-8a0e-69929f1d9e66",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "3. Perbarui package.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "3. Perbarui package.json",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "989ac898-ab4c-4253-8889-0b35cc8eb339",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Jalankan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Jalankan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "ncu -u",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "ncu -u",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " untuk melakukan audit sekaligus memperbarui file ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " untuk melakukan audit sekaligus memperbarui file ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Jika kita sudah cukup percaya diri bisa langsung menjalankan perintah ini tanpa melakukan langkah nomor 2.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Jika kita sudah cukup percaya diri bisa langsung menjalankan perintah ini tanpa melakukan langkah nomor 2.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "ad18ae7c-1182-4c2f-9a53-5aaa8a8197e5",
+        "created_time": "2021-10-20T07:39:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Melakukan audit sekaligus memperbarui package.json dengan perintah ncu -u.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Melakukan audit sekaligus memperbarui package.json dengan perintah ncu -u.",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5b89db14-21bf-4484-b3e8-6e1140942b40/ncu2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=c4cc0b4a7661398ba0af266ed745600ac37ea7e002741669a99c659f0064184d&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "de3d2896-2947-4571-9a29-4c2d299e3087",
+        "created_time": "2021-10-20T07:39:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "d0c3df9c-39f3-466d-8051-678e419f79d4",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:39:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "4. Perbarui package-lock.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "4. Perbarui package-lock.json",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "2cc7885b-46f5-4d95-85fe-eebdeeedff53",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:40:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "File ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "File ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package-lock.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package-lock.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " penting untuk optimasi penggunaan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " penting untuk optimasi penggunaan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "npm",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ", selengkapnya bisa dibaca pada ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ", selengkapnya bisa dibaca pada ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "tautan ini",
+                "link": {
+                  "url": "https://docs.npmjs.com/files/package-lock.json"
+                }
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "tautan ini",
+              "href": "https://docs.npmjs.com/files/package-lock.json"
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Untuk memperbarui file ini bisa dilakukan dengan menjalankan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Untuk memperbarui file ini bisa dilakukan dengan menjalankan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm update",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "npm update",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " maupun melakukan penghapusan direktori ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " maupun melakukan penghapusan direktori ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "node_modules",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "node_modules",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " kemudian menjalankan ulang ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " kemudian menjalankan ulang ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm install",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "npm install",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ".",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ".",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "305f9e4f-fe6e-4a6c-9dac-19a2e17a1c6b",
+        "created_time": "2021-10-20T07:40:00.000Z",
+        "last_edited_time": "2021-10-20T07:40:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Menghapus direktori node_modules lalu menjalankan npm i (npm install)",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Menghapus direktori node_modules lalu menjalankan npm i (npm install)",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5befac56-3898-4311-b776-d1f9ca71caa0/ncu3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=080c562f3ddbdad06c4eab7e0fd9506a344ec518c67db7b64eaba7edf2fa0639&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "cab1552c-ef5b-4e00-9d7f-f5da39617421",
+        "created_time": "2021-10-20T07:40:00.000Z",
+        "last_edited_time": "2021-10-20T07:40:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "d5306256-e2fb-4bf3-83a0-73a03b6f17ed",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:40:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "5. Periksa perubahan repositori",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "5. Periksa perubahan repositori",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "98fe4a6d-b3c9-4315-a745-202be3def4ea",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Jalankan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Jalankan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "git status",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "git status",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " dan pastikan file ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " dan pastikan file ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " dan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " dan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package-lock.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package-lock.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " sudah berubah karena diperbarui.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " sudah berubah karena diperbarui.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "5695c02e-6d62-4287-a5cd-7f113d8b5049",
+        "created_time": "2021-10-20T07:41:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Memeriksa perubahan dengan perintah git status",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Memeriksa perubahan dengan perintah git status",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d02da6fd-35a3-4ce6-878a-1b45498b943b/ncu4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=cf65b113db9277b93d4996422642f16d95d9c0235bea1f426c33e3df57e27e9f&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "f9c56617-d3f3-465a-921d-8e90753e56b5",
+        "created_time": "2021-10-20T07:41:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "09d2f9bf-433d-4bf4-87e8-0069728b971e",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "6. Jalankan automated test bila tersedia",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "6. Jalankan automated test bila tersedia",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "a61b7bc8-96ab-4f47-aefb-8acd4257c148",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Jika proyek kita memiliki unit test, atau test lainnya, maka akan lebih baik jika test tersebut dijalankan untuk memastikan perubahan dependensi tidak menimbulkan kekacauan. Jika terjadi kekacauan, maka langkah tambahan yang perlu kita lakukan adalah memperbarui kode program agar sesuai dengan dependensi terbaru.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Jika proyek kita memiliki unit test, atau test lainnya, maka akan lebih baik jika test tersebut dijalankan untuk memastikan perubahan dependensi tidak menimbulkan kekacauan. Jika terjadi kekacauan, maka langkah tambahan yang perlu kita lakukan adalah memperbarui kode program agar sesuai dengan dependensi terbaru.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "4f09e27d-7e44-41b1-8d83-e4353444854b",
+        "created_time": "2021-10-20T07:41:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Menjalankan automated test.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Menjalankan automated test.",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3c304cf6-3a8b-48cf-95ee-f8b1379f3dac/ncu5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=c4f04f625e25e8f01c53a3306a8326e6feda767eb0b8e08cf91a5408f3dd08c7&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.532Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "a239a466-7464-489d-8c57-1f0568341cb0",
+        "created_time": "2021-10-20T07:41:00.000Z",
+        "last_edited_time": "2021-10-20T07:41:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "217f940c-0e9e-4fdb-93d1-68c813810fc5",
+        "created_time": "2021-10-20T07:41:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Hasil test menunjukkan tidak ada masalah terhadap fungsionalitas akibat pembaruan dependensi",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Hasil test menunjukkan tidak ada masalah terhadap fungsionalitas akibat pembaruan dependensi",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/46247bb5-3dc9-48b5-b7f2-e4fef964d3c3/ncu6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=2d8752fe50afe2df94a025d1b384fcf5fc0ba6c26161a3ef87839124bae284d8&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.532Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "251eee3d-6178-4140-9554-ae59bf936a50",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "9786c396-2ca3-401c-bcaa-2c5e5639c037",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "7. Update repositori Github",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "7. Update repositori Github",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "bd41ec18-c25f-4965-8edb-79096d0a4f08",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Lakukan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Lakukan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "commit",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "commit",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " dan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " dan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "push",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "push",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " ke Github jika semua langkah-langkah di atas berhasil.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " ke Github jika semua langkah-langkah di atas berhasil.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "eb8936ae-0f17-43ca-9760-7fdc18328e29",
+        "created_time": "2021-10-20T07:42:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Melakukan commit dan push ke Github",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Melakukan commit dan push ke Github",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cc5fc110-df36-4fde-9e9f-bca08677e5d2/ncu7.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=9e01360f3053717fa37805718912e2fdac935eb1604cf08540b9d90e03118837&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.531Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "7e7907e9-9adc-4bcc-932b-81b7e1b3284a",
+        "created_time": "2021-10-20T07:42:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "7469b4c6-f566-4932-8e8a-01004bb87b85",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:42:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Tambahan",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Tambahan",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "5499a906-f592-44ee-99ac-9432e08961e0",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:43:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Untuk melakukan audit kita juga bisa menggunakan perintah ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Untuk melakukan audit kita juga bisa menggunakan perintah ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "npm outdated",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "npm outdated",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": ". Perintah ini bisa digunakan langsung tanpa menginstall alat kakas tambahan. Namun, perintah ini hanya menampilkan daftar dependensi yang sudah usang dan kita harus mengubah isi file ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": ". Perintah ini bisa digunakan langsung tanpa menginstall alat kakas tambahan. Namun, perintah ini hanya menampilkan daftar dependensi yang sudah usang dan kita harus mengubah isi file ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "package.json",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "package.json",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " secara manual.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " secara manual.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "2b130641-517b-474d-8ccc-3f61fc9d2fe5",
+        "created_time": "2021-09-26T07:35:00.000Z",
+        "last_edited_time": "2021-10-20T07:43:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Sedangkan dengan ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Sedangkan dengan ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "ncu",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": true,
+                "color": "default"
+              },
+              "plain_text": "ncu",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " kita bisa melakukan audit sekaligus memperbarui file tersebut.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " kita bisa melakukan audit sekaligus memperbarui file tersebut.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "f1afbc4e-e0a2-409a-bf89-5c990ffd7488",
+        "created_time": "2021-10-20T07:43:00.000Z",
+        "last_edited_time": "2021-10-20T07:43:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "type": "image",
+        "image": {
+          "caption": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Melakukan audit dengan perintah npm outdated",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Melakukan audit dengan perintah npm outdated",
+              "href": null
+            }
+          ],
+          "type": "file",
+          "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0f1a8a2b-4447-468b-8d09-757bfb2d4a3d/npm-outdated.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220409%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220409T162741Z&X-Amz-Expires=3600&X-Amz-Signature=4d4674fd2e62bd33a93db44c7d0bced657ece4f4df1c5b7a34fd802ae26f2793&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2022-04-09T17:27:41.532Z"
+          }
+        }
+      },
+      "children": null
+    }
+  ]
+}
