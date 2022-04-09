@@ -15,7 +15,7 @@
     "lint": "eslint --ext .ts,.tsx --max-warnings=0",
     "lint:fix": "eslint --ext .ts,.tsx --max-warnings=0 --fix",
     "postinstall": "remix setup node",
-    "prepare": "npm run prepare:api && npm run prepare:posts && npm run prepare:static",
+    "prepare:output": "npm run prepare:api && npm run prepare:posts && npm run prepare:static",
     "prepare:api": "mkdir -p .output/server/pages/api && cp -r api/* .output/server/pages/api",
     "prepare:posts": "mkdir -p .output/server/pages/posts && cp -r posts .output/server/pages",
     "prepare:static": "mkdir -p .output/static && cp -r public/* .output/static",
