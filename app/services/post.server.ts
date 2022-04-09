@@ -51,13 +51,19 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  const apiDir = path.join(__dirname, '..');
-  const apiDirContent = await fs.readdir(apiDir);
+  const cwd = process.cwd();
+  const pagesDir = path.join(__dirname, '..');
+  const pagesDirContent = await fs.readdir(pagesDir);
+  const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
+  const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
 
   return {
+    cwd,
     dirName: __dirname,
-    apiDir,
-    apiDirContent: JSON.stringify(apiDirContent),
+    pagesDir,
+    pagesDirContent: JSON.stringify(pagesDirContent),
+    outputDirContent: JSON.stringify(outputDirContent),
+    serverDirContent: JSON.stringify(serverDirContent),
   };
 }
 
