@@ -2,6 +2,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+import { getPosts } from '../app/services/post.server';
+
 async function getDir() {
   const dirNameContent = await fs.readdir(path.join(__dirname));
 
@@ -13,5 +15,9 @@ async function getDir() {
 
 export default async function (request, response) {
   const dir = await getDir();
-  response.status(200).json(dir);
+  const posts = await getPosts();
+  response.status(200).json({
+    dir,
+    posts,
+  });
 }
