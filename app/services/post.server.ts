@@ -52,21 +52,21 @@ function formatPost(
 }
 
 export async function getDir(): Promise<Record<string, string>> {
-  // const cwd = process.cwd();
-  // const pagesDir = path.join(__dirname, '..');
-  // const pagesDirContent = await fs.readdir(pagesDir);
-  // const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
-  // const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
+  const cwd = process.cwd();
+  const pagesDir = path.join(__dirname, '..');
+  const pagesDirContent = await fs.readdir(pagesDir);
+  const outputDirContent = await fs.readdir(path.join(cwd, 'output'));
+  const serverDirContent = await fs.readdir(path.join(cwd, 'output', 'server'));
 
-  // return {
-  //   cwd,
-  //   dirName: __dirname,
-  //   pagesDir,
-  //   pagesDirContent: JSON.stringify(pagesDirContent),
-  //   outputDirContent: JSON.stringify(outputDirContent),
-  //   serverDirContent: JSON.stringify(serverDirContent),
-  // };
-  return {};
+  return {
+    cwd,
+    dirName: __dirname,
+    pagesDir,
+    pagesDirContent: JSON.stringify(pagesDirContent),
+    outputDirContent: JSON.stringify(outputDirContent),
+    serverDirContent: JSON.stringify(serverDirContent),
+  };
+  // return {};
 }
 
 export async function getPosts(): Promise<Post[]> {
