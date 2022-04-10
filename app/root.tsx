@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import {
   Links,
   LiveReload,
@@ -8,6 +7,8 @@ import {
   ScrollRestoration,
 } from 'remix';
 
+import ColorModeScript from './components/base/ColorModeScript';
+import PiwikScript from './components/base/PiwikScript';
 import styles from './styles/app.css';
 
 export function links() {
@@ -27,21 +28,6 @@ export function links() {
 }
 
 export default function App() {
-  const headScript = useRef(null);
-
-  useEffect(() => {
-    if (headScript.current) {
-      // @ts-ignore
-      headScript.current.innerHTML = `
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark')
-        } else {
-          document.documentElement.classList.remove('dark')
-        }
-      `;
-    }
-  }, []);
-
   return (
     <html className="dark" lang="en">
       <head>
@@ -49,7 +35,6 @@ export default function App() {
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <Meta />
         <Links />
-        <script ref={headScript}></script>
       </head>
       <body
         className="
@@ -58,6 +43,8 @@ export default function App() {
           selection:bg-amber-500 selection:text-slate-900
         "
       >
+        <PiwikScript />
+        <ColorModeScript />
         <div className="hidden dark:block -z-10 absolute rounded-full w-1/2 h-1/3 md:w-96 md:h-96 bg-sky-700 blur-3xl opacity-10 left-0 md:-left-6 top-14"></div>
         <Outlet />
         <ScrollRestoration />

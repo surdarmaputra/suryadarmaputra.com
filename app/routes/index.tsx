@@ -5,17 +5,15 @@ import { DefaultLayout } from '~/components/layouts/DefaultLayout';
 import { BrandHero } from '~/components/sections/BrandHero';
 import { PostSummary } from '~/components/sections/PostSummary';
 import type { Post } from '~/services/post.server';
-import { getDir, getPosts } from '~/services/post.server';
+import { getPosts } from '~/services/post.server';
 
 interface LoaderData {
   posts: Post[];
-  dir: Record<string, string>;
 }
 
 export const loader: LoaderFunction = async () => {
   const posts = await getPosts();
-  const dir = await getDir();
-  return { posts, dir };
+  return { posts };
 };
 
 export const meta: MetaFunction = () => {
@@ -28,7 +26,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const { posts, dir } = useLoaderData<LoaderData>();
+  const { posts } = useLoaderData<LoaderData>();
   return (
     <DefaultLayout>
       <BrandHero />
@@ -43,12 +41,6 @@ export default function Index() {
           Content is coming soon!
         </div>
       )}
-      {Object.keys(dir).map((key) => (
-        <div className="flex" key={key}>
-          <div>{key}: </div>
-          <div>{dir[key]}</div>
-        </div>
-      ))}
     </DefaultLayout>
   );
 }
