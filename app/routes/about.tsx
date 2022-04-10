@@ -21,8 +21,8 @@ const experiences = [
     start: '2018-07-01',
     end: '2021-06-01',
     descriptions: [
-      'My team provided various financial products for our buyers, sellers and (online-to-offline) O2O partners, improving their buying power or supporting their business growth.',
-      'We also worked on several web dashboards to make managing loan applications easier for internal team and partners.',
+      'Apart from being an online marketplace, Bukalapak also provides various financial products for buyers, sellers and O2O (online-to-offline) partners, increasing their purchasing power or supporting their business growth.',
+      'I am responsible for the development of many webview pages related to financial products as well as several web dashboards for our internal team and partners.',
     ],
   },
   {
@@ -32,7 +32,8 @@ const experiences = [
     start: '2017-02-01',
     end: '2018-07-01',
     descriptions: [
-      'Artcak provided mobile and web development services for clients in various sectors, including but not limited to tour & travel, internet provider and state-owned enterprises',
+      'Artcak provided mobile and web development services for clients in various sectors, including but not limited to tours & travel, internet providers and state-owned companies.',
+      'I am responsible for the development of REST API and web dashboard.',
     ],
   },
   {
