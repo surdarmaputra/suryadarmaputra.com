@@ -1,7 +1,8 @@
 {
-  "name": "remix-app-template",
+  "name": "suryadarmaputra.com",
+  "version": "0.0.0",
   "private": true,
-  "description": "",
+  "description": "Surya Darma Putra's personal site",
   "license": "",
   "sideEffects": false,
   "scripts": {
