@@ -199,3 +199,13 @@ export function regroupListItems(
 
   return newBlocks;
 }
+
+export function getFileExtensionFromUrl(url: string = '') {
+  if (url?.includes('.gif')) {
+    return 'gif';
+  }
+
+  if (url?.includes('.png')) {
+    return 'png';
+  }
+}

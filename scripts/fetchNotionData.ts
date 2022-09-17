@@ -8,11 +8,12 @@ import superagent from 'superagent';
 dotenv.config();
 
 /* eslint-disable import/first */
-import type { BlockWithChildren } from '../app/libs/notion';
 import {
+  BlockWithChildren,
   calculateReadingTime,
   getBlockChildren,
   getExcerpt,
+  getFileExtensionFromUrl,
   getProperties,
   getTitle,
   regroupListItems,
@@ -33,7 +34,8 @@ const imagesDirectory = path.resolve(__dirname, '../public/images/posts');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
   const { body: imageData } = await superagent.get(url);
-  const outputFile = `${imagesDirectory}/${filename}.png`;
+  const extension = getFileExtensionFromUrl(url);
+  const outputFile = `${imagesDirectory}/${filename}.${extension}`;
   const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
   const placeholderRaw = await Image.load(imageData);
   const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
@@ -44,7 +46,13 @@ async function fetchImage(url: string, filename: string): Promise<void> {
 
 async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
   for (const { block, children } of blocks) {
-    if ('type' in block && block.type !== 'image') continue;
+    if ('type' in block && block.type !== 'image') {
+      if (children?.length) {
+        await fetchImages(children);
+      } else {
+        continue;
+      }
+    }
 
     // @ts-ignore
     const url = block.image?.file?.url || null;

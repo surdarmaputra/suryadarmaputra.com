@@ -4,8 +4,9 @@ import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 import { CloseIcon } from '~/components/base/Icon';
-import type {
+import {
   BlockComponentProps,
+  getFileExtensionFromUrl,
   ImageBlock,
   RichTextBlock,
 } from '~/libs/notion';
@@ -28,7 +29,11 @@ export function Image({ block }: ImageProps) {
   }>({});
 
   const captionRichTexts = block.image.caption;
-  const url = `/images/posts/${block.id}.png`;
+  const extension =
+    'type' in block.image && block.image.type === 'file'
+      ? getFileExtensionFromUrl(block.image.file.url)
+      : '';
+  const url = `/images/posts/${block.id}.${extension}`;
   const placeholderUrl = `/images/posts/${block.id}-placeholder.png`;
   const altText = getAltText(captionRichTexts as RichTextBlock[]);
 
