@@ -37,7 +37,7 @@ export default function Index() {
           ))}
         </div>
       ) : (
-        <div className="text-center text-4xl font-bold text-slate-200 dark:text-slate-700 pt-16 pb-48">
+        <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!
         </div>
       )}

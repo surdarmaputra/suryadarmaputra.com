@@ -30,22 +30,22 @@ export function Header() {
   }, [setIsDark]);
 
   return (
-    <header className="mb-12 py-4 flex items-center justify-between">
+    <header className="mb-12 flex items-center justify-between py-4">
       <Link to="/">
         <img
           alt="Site logo"
-          className="border-2 border-slate-100 dark:border-slate-700 rounded-md"
+          className="rounded-md border-2 border-slate-100 dark:border-slate-700"
           src={logoPath}
           width="40"
         />
       </Link>
       <nav className="flex items-center">
         {location.pathname !== '/' && (
-          <Link className="mr-8 animated-link pt-2 md:pt-1 pb-1" to="/">
+          <Link className="animated-link mr-8 pt-2 pb-1 md:pt-1" to="/">
             Home
           </Link>
         )}
-        <NavLink className="mr-8 animated-link pt-2 md:pt-1 pb-1" to="/about">
+        <NavLink className="animated-link mr-8 pt-2 pb-1 md:pt-1" to="/about">
           About
         </NavLink>
         <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />

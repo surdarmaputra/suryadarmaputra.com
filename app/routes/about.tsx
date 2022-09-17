@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import { MetaFunction } from 'remix';
 
+import { ArrowRight } from '~/components/base/Icon';
 import { DefaultLayout } from '~/components/layouts/DefaultLayout';
+import { links } from '~/components/sections/Footer';
 
 const experiences = [
   {
@@ -11,7 +13,7 @@ const experiences = [
     start: '2021-06-01',
     end: null,
     descriptions: [
-      'In Kargo Technologies we are solving problems in trucking industry. Our mission is to re-imagine logistic in Indonesia through technology.',
+      'Working in this growing company provides an opportunity for me to become a researcher and product engineer. I did research on deployment strategies, testing tools, library management, and design system. Also contributed to the development of our SaaS products.',
     ],
   },
   {
@@ -21,8 +23,8 @@ const experiences = [
     start: '2018-07-01',
     end: '2021-06-01',
     descriptions: [
-      'Apart from being an online marketplace, Bukalapak also provides various financial products for buyers, sellers and O2O (online-to-offline) partners, increasing their purchasing power or supporting their business growth.',
-      'I am responsible for the development of many webview pages related to financial products as well as several web dashboards for our internal team and partners.',
+      'Apart from being an online marketplace, Bukalapak also provides financial products for our users to increase their purchasing power or support their business growth.',
+      'I was responsible for the development webview pages and web dashboards related to financial products. Here I learned to use various tech stack, workflow and got my first experience building products in tech startup.',
     ],
   },
   {
@@ -32,8 +34,7 @@ const experiences = [
     start: '2017-02-01',
     end: '2018-07-01',
     descriptions: [
-      'Artcak provided mobile and web development services for clients in various sectors, including but not limited to tours & travel, internet providers and state-owned companies.',
-      'I am responsible for the development of REST API and web dashboard.',
+      'Artcak provides mobile and web development services for clients in various sectors, including but not limited to tours & travel, internet providers and state-owned companies. I was responsible for the development of REST API and web dashboard.',
     ],
   },
   {
@@ -43,10 +44,12 @@ const experiences = [
     start: '2015-11-01',
     end: '2017-02-01',
     descriptions: [
-      "Here's the starting point of my professional software development journey. During my college days, I worked on freelance projects from friends or lecturers.",
+      "Here's the starting point of my professional software development journey. In college, I worked on freelance projects from friends or lecturers.",
     ],
   },
 ];
+
+const socialLinks = links.filter(({ href }) => href !== '/');
 
 function formatWorkDuration(start: string, end: string | null): string {
   const formattedStart = dayjs(start).format('MMM YYYY');
@@ -78,39 +81,56 @@ export const meta: MetaFunction = () => {
 export default function About() {
   return (
     <DefaultLayout>
-      <section className="flex flex-wrap-reverse mt-28 mb-24 md:mb-36 items-center text-2xl font-light">
+      <section className="mt-28 mb-24 flex flex-wrap-reverse items-center text-2xl font-light md:mb-36">
+        <div className="absolute left-0 top-96 -z-10 h-72 w-72 rounded-full bg-blue-500 opacity-10 blur-3xl dark:bg-blue-700"></div>
+        <div className="absolute right-0 top-24 -z-10 h-72 w-72 rounded-full bg-amber-500 opacity-10 blur-3xl dark:bg-amber-800"></div>
+
         <div className="w-full md:w-1/2">
-          <h2 className="mb-6 text-black dark:text-slate-100">
+          <h2 className="mb-6 leading-relaxed text-black dark:text-slate-100">
             Hi, you can call me{' '}
             <span className="text-orange-500 dark:text-amber-500">Surya</span>.
             I'm a software engineer based in Bali, Indonesia.
           </h2>
-          <p className="text-slate-500 dark:text-slate-400">
-            I do web development using JavaScript, React and Vue ecosystems, and
-            help people to build product in various sectors including
-            e-commerce, financial services, logistics and more.
+          <p className="mb-10 leading-relaxed text-slate-500 dark:text-slate-400">
+            I do web development using the JavaScript ecosystem and have built
+            products across a wide range of sectors including tours & travel,
+            financial services, logistics and more.
           </p>
+          <ul className="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-10">
+            {socialLinks.map(({ href, label }) => (
+              <li key={href}>
+                <a
+                  className="animated-underline inline-flex items-center text-base"
+                  href={href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Visit my {label} <ArrowRight className="ml-2" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="overflow-hidden h-40 w-40 mb-20 md:mb-0 md:h-80 md:w-72 rounded-full md:rounded-none md:rounded-tl-[8rem] md:rounded-tr-[0.5rem] md:rounded-bl-[0.5rem] md:rounded-br-[2rem] shadow-2xl">
+        <div className="flex w-full justify-center md:w-1/2 md:justify-end">
+          <div className="mb-20 h-40 w-40 overflow-hidden rounded-full shadow-2xl md:mb-0 md:h-80 md:w-72 md:rounded-none md:rounded-tl-[8rem] md:rounded-tr-[1rem] md:rounded-bl-[1rem] md:rounded-br-[6rem]">
             <img alt="My portrait" src="/me.jpeg" />
           </div>
         </div>
       </section>
 
-      <section className="mb-12 md:mb-20 text-xl font-light">
-        <h2 className="text-2xl font-normal tracking-wide text-black dark:text-slate-100 mb-6">
+      <section className="mb-12 text-xl font-light md:mb-20">
+        <h2 className="mb-6 text-2xl font-normal tracking-wide text-black dark:text-slate-100">
           Experiences
         </h2>
         {experiences.map(
           ({ company, link, role, start, end, descriptions }, index) => (
-            <div className="pb-8 pl-6 relative" key={company}>
-              <div className="absolute left-0 top-3 animate-ping inline-flex w-1.5 h-1.5 rounded-full bg-amber-500" />
-              <div className="absolute left-0 top-3 inline-flex w-1.5 h-1.5 rounded-full bg-amber-500" />
+            <div className="relative pb-8 pl-6" key={company}>
+              <div className="absolute left-0 top-3 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
+              <div className="absolute left-0 top-3 inline-flex h-2 w-2 rounded-full bg-amber-500" />
               {index < experiences.length - 1 && (
-                <div className="absolute left-0.5 top-4 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800 -z-10" />
+                <div className="absolute left-0.5 top-4 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 text-lg font-normal text-slate-700 dark:text-slate-300 pb-1">
+              <h3 className="mb-0 pb-1 text-lg font-normal text-slate-700 dark:text-slate-300">
                 {role}
                 {company && (
                   <>
@@ -126,12 +146,12 @@ export default function About() {
                   </>
                 )}
               </h3>
-              <small className="block text-xs text-slate-500 mb-4">
+              <small className="mb-4 block text-sm text-slate-500">
                 {formatWorkDuration(start, end)}
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-sm leading-loose"
+                  className="mb-4 text-base leading-loose"
                   key={descriptionIndex}
                 >
                   {description}
