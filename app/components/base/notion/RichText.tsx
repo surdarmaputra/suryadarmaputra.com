@@ -32,7 +32,7 @@ function TextWithAnnotations({
 
   if (href) {
     return (
-      <a className={className} href={href}>
+      <a className={className} href={href} rel="noreferrer" target="_blank">
         {annotations.code ? <code>{children}</code> : children}
       </a>
     );
@@ -51,7 +51,11 @@ export function RichText({ block }: ParagraphProps) {
   if (!plainText) return null;
 
   if (href) {
-    return <a href={href}>{plainText}</a>;
+    return (
+      <a href={href} rel="noreferrer" target="_blank">
+        {plainText}
+      </a>
+    );
   }
 
   if (hasAnnotation(annotations)) {

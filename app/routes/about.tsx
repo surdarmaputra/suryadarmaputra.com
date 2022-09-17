@@ -115,7 +115,12 @@ export default function About() {
                 {company && (
                   <>
                     <span> at </span>
-                    <a className="animated-underline pb-0.5" href={link}>
+                    <a
+                      className="animated-underline pb-0.5"
+                      href={link}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       {company}
                     </a>
                   </>
