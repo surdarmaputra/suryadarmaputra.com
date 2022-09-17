@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -8,6 +9,8 @@ import type {
   RichTextBlock,
 } from '~/libs/notion';
 import { concatPlainTexts } from '~/libs/notion';
+
+import { ChevronDown } from '../Icon';
 
 interface CodeProps extends BlockComponentProps {
   block: CodeBlock;
@@ -19,6 +22,7 @@ const expandableHeightThreshold = 400;
 export function Code({ block }: CodeProps) {
   const codeRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   const { language, rich_text: richTexts } = block.code;
   const codeText = concatPlainTexts(richTexts as RichTextBlock[]);
@@ -32,26 +36,44 @@ export function Code({ block }: CodeProps) {
     }
   }, [block]);
 
+  useEffect(() => {
+    let timeout;
+    if (copied) {
+      timeout = setTimeout(() => {
+        setCopied(!copied);
+      }, 3000);
+    } else {
+      clearTimeout(timeout);
+    }
+  }, [copied]);
+
   return (
     <div
-      className={`relative mb-4 overflow-y-hidden transition ${
+      className={`relative my-4 overflow-y-hidden transition ${
         expanded ? 'h-fit' : 'h-96'
       }`}
       ref={codeRef}
     >
+      <CopyToClipboard onCopy={() => setCopied(true)} text={codeText}>
+        <button className="absolute right-0 top-0 rounded-bl bg-slate-100 px-3 py-1 text-xs dark:bg-slate-800 dark:text-slate-400">
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </CopyToClipboard>
+
       {!expanded && (
         <>
           <div className="absolute bottom-0 h-32 w-full bg-gradient-to-b from-transparent to-white dark:to-slate-900"></div>
           <button
-            className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded bg-slate-800 px-4 py-1 text-sm text-slate-300  shadow-lg transition hover:bg-slate-700"
+            className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center rounded-full bg-slate-800 px-6 py-1 text-sm text-slate-300 shadow-lg transition hover:bg-slate-700"
             onClick={() => setExpanded(true)}
           >
-            Expand
+            Expand <ChevronDown className="ml-2 h-4 w-4" />
           </button>
         </>
       )}
+
       <SyntaxHighlighter
-        // customStyle={{ marginBottom: 16 }}
+        customStyle={{ margin: 0 }}
         language={language}
         showLineNumbers={!shellLanguages.includes(language)}
         style={coldarkDark}

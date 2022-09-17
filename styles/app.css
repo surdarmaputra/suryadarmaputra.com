@@ -10,7 +10,7 @@ article {
       linear-gradient(to right, #f59e0b, #db2777);
     background-size: 100% 0.1em, 0 0.1em;
     background-position: 100% 100%, 0 100%;
-    @apply text-orange-500 dark:text-amber-500 bg-no-repeat transition-all break-all;
+    @apply break-all bg-no-repeat text-orange-500 transition-all dark:text-amber-500;
 
     &:hover,
     &:focus {
@@ -19,7 +19,7 @@ article {
   }
 
   blockquote {
-    @apply text-gray-400 text-xl leading-loose font-light dark:text-gray-500 py-4 md:px-10 mt-10 mb-3;
+    @apply mt-10 mb-3 py-4 text-xl font-light leading-loose text-gray-400 dark:text-gray-500 md:px-10;
 
     &::before {
       content: '"';
@@ -48,7 +48,7 @@ article {
   }
 
   code {
-    @apply bg-slate-100 dark:bg-slate-800 text-slate-500 px-1 mx-0.5 rounded-md;
+    @apply mx-0.5 rounded-md bg-slate-100 px-1 text-slate-500 dark:bg-slate-800;
   }
 
   h2,
@@ -56,7 +56,7 @@ article {
   h4,
   h5,
   h6 {
-    @apply font-bold text-slate-800 dark:text-slate-300 mt-16;
+    @apply mt-16 font-bold text-slate-800 dark:text-slate-300;
   }
 
   h2 {
@@ -92,11 +92,10 @@ article {
   }
 
   pre {
-    @apply bg-slate-900 dark:bg-black px-4 py-3 mb-4 rounded-md shadow-lg dark:border-2 dark:border-slate-800 overflow-x-auto;
-    @apply mt-4 !important;
+    @apply mb-4 overflow-x-auto rounded-md bg-slate-900 px-4 py-3 shadow-lg dark:border-2 dark:border-slate-800 dark:bg-black;
 
     code {
-      @apply p-0 m-0 bg-transparent dark:bg-transparent text-slate-300;
+      @apply m-0 bg-transparent p-0 text-slate-300 dark:bg-transparent;
     }
   }
 
