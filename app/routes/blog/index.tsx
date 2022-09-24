@@ -1,7 +1,7 @@
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 
 import HeroSection from '~/components/base/HeroSection';
-import { PostSummary } from '~/components/sections/PostSummary';
+import { PostList } from '~/components/sections/PostList';
 import { getPosts, Post } from '~/services/post.server';
 
 interface LoaderData {
@@ -31,11 +31,7 @@ export default function Index() {
         title="Blog"
       />
       {posts?.length ? (
-        <div className="flex flex-wrap md:-m-8">
-          {posts.map(({ slug, ...postData }) => (
-            <PostSummary key={slug} {...postData} />
-          ))}
-        </div>
+        <PostList posts={posts} />
       ) : (
         <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!

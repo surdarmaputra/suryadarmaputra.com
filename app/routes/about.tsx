@@ -24,7 +24,7 @@ const experiences = [
     end: '2021-06-01',
     descriptions: [
       'Apart from being an online marketplace, Bukalapak also provides financial products for our users to increase their purchasing power or support their business growth.',
-      'I was responsible for the development webview pages and web dashboards related to financial products. Here I learned to use various tech stack, workflow and got my first experience building products in tech startup.',
+      'I was responsible for the development of webview pages and web dashboards related to financial products. Here I learned to use various tech stacks, workflows and got my first experience building products in tech startup.',
     ],
   },
   {
@@ -82,8 +82,8 @@ export default function About() {
   return (
     <DefaultLayout>
       <section className="mt-28 mb-24 flex flex-wrap-reverse items-center text-2xl font-light md:mb-36">
-        <div className="absolute left-0 top-96 -z-10 h-72 w-72 rounded-full bg-blue-500 opacity-10 blur-3xl dark:bg-blue-700"></div>
-        <div className="absolute right-0 top-24 -z-10 h-72 w-72 rounded-full bg-amber-500 opacity-10 blur-3xl dark:bg-amber-800"></div>
+        <div className="absolute left-0 top-96 -z-10 h-72 w-72 rounded-full bg-blue-500 opacity-5 blur-3xl dark:bg-blue-700"></div>
+        <div className="absolute right-0 top-24 -z-10 h-72 w-72 rounded-full bg-amber-500 opacity-5 blur-3xl dark:bg-amber-800"></div>
 
         <div className="w-full md:w-1/2">
           <h2 className="mb-6 leading-relaxed text-black dark:text-slate-100">

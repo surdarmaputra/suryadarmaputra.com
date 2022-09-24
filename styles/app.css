@@ -114,7 +114,7 @@ article {
 
 .animated-link {
   background: linear-gradient(to right, transparent, transparent),
-    linear-gradient(to right, #f59e0b, #db2777);
+    linear-gradient(to right, #f59e0b, #db2777, #0ea5e9);
   background-size: 100% 0.1em, 0 0.1em;
   background-position: 100% 100%, 0 100%;
   @apply bg-no-repeat transition-all;
@@ -127,6 +127,7 @@ article {
 .animated-underline:hover,
 .animated-underline:focus,
 .animated-link:hover,
-.animated-link:focus {
+.animated-link:focus,
+.group:hover .animated-link {
   background-size: 0 0.1em, 100% 0.1em;
 }

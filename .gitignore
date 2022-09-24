@@ -9,9 +9,11 @@ node_modules
 /api/index.js
 /app/styles
 /build/
+/extras
 /netlify
 /posts
 /public/build
 /public/images/posts
+/public/images/projects
 
 yarn-error.log

@@ -10,7 +10,7 @@ dotenv.config();
 
 /* eslint-disable import/first */
 import { getProperties, getTitle } from '../app/libs/notion';
-import { fetchPosts } from './utils';
+import { fetchPosts, fetchProjects } from './utils';
 /* eslint-enable import/first */
 
 interface FeedItem {
@@ -40,9 +40,10 @@ function normalizeUrl(urlString: string) {
   return new URL(urlString).href;
 }
 
-const baseUrl = normalizeUrl(process.env.BASE_URL || '');
+const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:3000');
 const blogUrl = `${baseUrl}blog/`;
 const feedUrl = `${blogUrl}feed`;
+const extrasUrl = `${baseUrl}extras.json`;
 
 async function fetchRSS(): Promise<RSSFeed> {
   console.log(`Fetching RSS feed from ${feedUrl}`);
@@ -56,6 +57,14 @@ async function fetchRSS(): Promise<RSSFeed> {
   );
 
   return xmlJson as RSSFeed;
+}
+
+async function fetchExtras(): Promise<Record<string, any>> {
+  console.log(`Fetching extras data feed from ${extrasUrl}`);
+
+  const { body: json } = await superagent.get(extrasUrl);
+
+  return json;
 }
 
 function checkMissingOrOutdatedContent(
@@ -103,14 +112,78 @@ function checkMissingOrOutdatedContent(
     },
     {},
   );
-  const hasMissingOrOutdatedContent = notionItems.some(
-    ({ slug, updatedAt }) => {
-      const isMissing = !pagesUpdatedAtFromFeed[slug];
+  const hasMissingOrOutdatedPosts = notionItems.some(({ slug, updatedAt }) => {
+    const isMissing = !pagesUpdatedAtFromFeed[slug];
+    const isOutdated = !isMissing && pagesUpdatedAtFromFeed[slug] !== updatedAt;
+
+    console.log({
+      slug,
+      isMissing,
+      isOutdated,
+    });
+    return isMissing || isOutdated;
+  });
+  console.log('--------------------------------');
+
+  return hasMissingOrOutdatedPosts;
+}
+
+function checkMissingOrOutdatedExtras(
+  extras: Record<string, any>,
+  notionProjects: GetPageResponse[],
+): boolean {
+  const existingProjects =
+    extras.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
+      id,
+      title,
+      updatedAt,
+    })) || [];
+  const incomingProjects = notionProjects.map((item) => {
+    const properties = getProperties(item);
+    const title = getTitle(item);
+    return {
+      id: item.id,
+      title,
+      updatedAt: properties.updated_at,
+    };
+  });
+
+  console.log('Existing projects:');
+  console.log(existingProjects);
+  console.log(`${existingProjects.length} items`);
+  console.log('--------------------------------');
+  console.log('Incoming projects:');
+  console.log(incomingProjects);
+  console.log(`${incomingProjects.length} items`);
+  console.log('--------------------------------');
+
+  if (existingProjects.length !== incomingProjects.length) {
+    return true;
+  }
+
+  console.log('Checking differences:');
+  const existingProjectsUpdatedAt: Record<string, string> =
+    existingProjects.reduce(
+      (
+        finalMap: Record<string, any>,
+        { id, updatedAt }: Record<string, any>,
+      ) => {
+        return {
+          ...finalMap,
+          [id]: updatedAt,
+        };
+      },
+      {},
+    );
+  const hasMissingOrOutdatedExtras = incomingProjects.some(
+    ({ id, title, updatedAt }) => {
+      const isMissing = !existingProjectsUpdatedAt[id];
       const isOutdated =
-        !isMissing && pagesUpdatedAtFromFeed[slug] !== updatedAt;
+        !isMissing && existingProjectsUpdatedAt[id] !== updatedAt;
 
       console.log({
-        slug,
+        id,
+        title,
         isMissing,
         isOutdated,
       });
@@ -119,7 +192,7 @@ function checkMissingOrOutdatedContent(
   );
   console.log('--------------------------------');
 
-  return hasMissingOrOutdatedContent;
+  return hasMissingOrOutdatedExtras;
 }
 
 async function triggerDeployment() {
@@ -135,17 +208,29 @@ async function triggerDeployment() {
 
 async function run() {
   const feed = await fetchRSS();
+  const extras = await fetchExtras();
+
   const notionPosts = await fetchPosts();
-  const hasMissingOrOutdatedContent = checkMissingOrOutdatedContent(
+  const notionProjects = await fetchProjects();
+
+  const hasMissingOrOutdatedPosts = checkMissingOrOutdatedContent(
     feed,
     notionPosts,
   );
+  const hasMissingOrOutdatedExtras = checkMissingOrOutdatedExtras(
+    extras,
+    notionProjects,
+  );
+  const hasMissingOrOutdatedData =
+    hasMissingOrOutdatedPosts || hasMissingOrOutdatedExtras;
 
-  console.log('Has missing or outdated content: ', hasMissingOrOutdatedContent);
+  console.log('Has missing or outdated content: ', hasMissingOrOutdatedPosts);
+  console.log('Has missing or outdated extras: ', hasMissingOrOutdatedExtras);
+  console.log('Has missing or outdated data: ', hasMissingOrOutdatedData);
 
   let deploymentResult;
 
-  if (hasMissingOrOutdatedContent) {
+  if (hasMissingOrOutdatedData) {
     deploymentResult = await triggerDeployment();
   } else {
     deploymentResult = 'IGNORED';
