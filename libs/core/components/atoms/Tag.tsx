@@ -8,8 +8,8 @@ export default function Tag({
   return (
     <span
       className={`
-        px-2 py-0.5 mr-2 mb-2 rounded-md
-        bg-slate-100 dark:bg-slate-800 text-slate-500 text-xs
+        mb-2 mr-2 rounded-md bg-slate-100 px-2
+        py-0.5 text-xs text-slate-500 dark:bg-slate-800
         ${className}
       `}
       {...props}

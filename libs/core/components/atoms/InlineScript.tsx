@@ -4,7 +4,9 @@ interface InlineScriptProps {
   body?: string;
 }
 
-export default function InlineScript({ body }: InlineScriptProps): ReactElement | null {
+export default function InlineScript({
+  body,
+}: InlineScriptProps): ReactElement | null {
   const content = body || '';
   if (!content) return null;
 

@@ -17,7 +17,7 @@ export function PostList({ className, posts, showTitle }: PostListProps) {
   return (
     <div className={`relative flex flex-wrap md:-mx-8 ${className}`}>
       {showTitle && (
-        <h2 className="absolute -top-12 -left-4 -z-10 mb-6 text-6xl font-bold text-slate-200 opacity-30 dark:text-slate-700 md:-top-4 md:left-2 md:text-7xl">
+        <h2 className="absolute -left-4 -top-12 -z-10 mb-6 text-6xl font-bold text-slate-200 opacity-30 dark:text-slate-700 md:-top-4 md:left-2 md:text-7xl">
           Blog.
         </h2>
       )}
@@ -29,7 +29,7 @@ export function PostList({ className, posts, showTitle }: PostListProps) {
           <div className="group p-0 pb-16 md:w-1/2 md:p-8" key={index}>
             <a className="block" href={href}>
               <PostMetaData date={date} readingTime={readingTime} />
-              <div className="mt-2 mb-4">
+              <div className="mb-4 mt-2">
                 {showTitle ? (
                   <h3 className={itemTitleClassName}>{title}</h3>
                 ) : (

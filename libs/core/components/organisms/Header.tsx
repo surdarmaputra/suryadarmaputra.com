@@ -46,11 +46,11 @@ export function Header() {
       </Link>
       <nav className="flex items-center">
         {pathname !== '/' && (
-          <Link className="animated-link mr-8 pt-2 pb-1 md:pt-1" href="/">
+          <Link className="animated-link mr-8 pb-1 pt-2 md:pt-1" href="/">
             Home
           </Link>
         )}
-        <Link className="animated-link mr-8 pt-2 pb-1 md:pt-1" href="/about">
+        <Link className="animated-link mr-8 pb-1 pt-2 md:pt-1" href="/about">
           About
         </Link>
         <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />

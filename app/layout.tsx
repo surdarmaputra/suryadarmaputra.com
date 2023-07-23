@@ -21,15 +21,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`
+      <body
+        className={`
         ${inter.className}
         container relative mx-auto min-h-screen px-6 text-slate-700
         selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900
         dark:text-slate-400 lg:max-w-5xl
-      `}>
-        <SingleColumnPageLayout>
-          {children}
-        </SingleColumnPageLayout>
+      `}
+      >
+        <SingleColumnPageLayout>{children}</SingleColumnPageLayout>
       </body>
     </html>
   );

@@ -1,6 +1,8 @@
 import { HTMLAttributes, ReactElement } from 'react';
 
-export function ArrowLeft({ className }: HTMLAttributes<SVGAElement>): ReactElement {
+export function ArrowLeft({
+  className,
+}: HTMLAttributes<SVGAElement>): ReactElement {
   return (
     <svg
       className={`h-6 w-6 ${className}`}

@@ -8,7 +8,10 @@ interface ColorModeToggleProps {
   onChange: (isDark: boolean) => void;
 }
 
-export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps): ReactElement {
+export function ColorModeToggle({
+  isDark,
+  onChange,
+}: ColorModeToggleProps): ReactElement {
   const toggleClassName = isDark
     ? 'bg-slate-300 shadow shadow-slate-300 translate-x-full'
     : 'bg-amber-500 shadow shadow-amber-500 left-0';

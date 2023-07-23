@@ -19,7 +19,7 @@ export default function Home() {
       />
       <PostList posts={posts} showTitle />
       {!posts?.length && !projects?.length ? (
-        <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
+        <div className="pb-48 pt-16 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!
         </div>
       ) : null}
