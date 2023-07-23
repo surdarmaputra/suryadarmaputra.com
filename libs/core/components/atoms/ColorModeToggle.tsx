@@ -1,20 +1,17 @@
-import { useMemo } from 'react';
+import { ReactElement } from 'react';
 
-import { MoonIcon, SunIcon } from '~/components/base/Icon';
+import MoonIcon from './Icon/MoonIcon';
+import SunIcon from './Icon/SunIcon';
 
 interface ColorModeToggleProps {
   isDark: boolean;
   onChange: (isDark: boolean) => void;
 }
 
-export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps) {
-  const toggleClassName = useMemo(
-    () =>
-      isDark
-        ? 'bg-slate-300 shadow shadow-slate-300 translate-x-full'
-        : 'bg-amber-500 shadow shadow-amber-500 left-0',
-    [isDark],
-  );
+export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps): ReactElement {
+  const toggleClassName = isDark
+    ? 'bg-slate-300 shadow shadow-slate-300 translate-x-full'
+    : 'bg-amber-500 shadow shadow-amber-500 left-0';
 
   const handleClick = () => {
     onChange(!isDark);

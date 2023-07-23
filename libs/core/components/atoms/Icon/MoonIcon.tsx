@@ -5,7 +5,7 @@ export default function MoonIcon({
 }: HTMLAttributes<SVGAElement>): ReactElement {
   return (
     <svg
-    className={`h-5 w-5" ${className}`}
+      className={`w-5" h-5 ${className}`}
       fill="none"
       stroke="currentColor"
       strokeWidth={2}
