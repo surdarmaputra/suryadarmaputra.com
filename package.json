@@ -7,7 +7,7 @@
     "build": "next build",
     "dev": "next dev",
     "format:fix": "prettier --write",
-    "lint:fix": "next lint --fix",
+    "lint:fix": "eslint --ext .ts,.tsx --max-warnings=0 --fix",
     "lint": "next lint",
     "start": "next start"
   },
