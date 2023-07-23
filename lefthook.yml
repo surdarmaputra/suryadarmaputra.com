@@ -1,0 +1,11 @@
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+
+pre-commit:
+  commands:
+    format:
+      glob: '*.{js,ts,tsx,yml}'
+      run: yarn format:fix {staged_files}
+    lint:
+      glob: '*.{js,ts,tsx}'
+      run: yarn lint:fix {staged_files}
