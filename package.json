@@ -4,23 +4,53 @@
   "private": true,
   "description": "Surya Darma Putra's personal site",
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "format:fix": "prettier --write",
+    "lint:fix": "next lint --fix",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.8",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "image-js": "^0.35.4",
+    "lodash": "^4.17.21",
     "next": "13.4.10",
     "postcss": "8.4.26",
     "react": "18.2.0",
+    "react-codepen-embed": "^1.1.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
+    "react-gistlab": "^1.0.8",
+    "react-lazyload": "^3.2.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-twitter-widgets": "^1.11.0",
+    "react-zoom-pan-pinch": "^3.1.0",
+    "reading-time": "^1.5.0",
+    "superagent": "^8.0.9",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "xml2js": "^0.6.0"
+  },
+  "devDependencies": {
+    "@arkweid/lefthook": "^0.7.7",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@types/lodash": "^4.14.195",
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-lazyload": "^3.2.0",
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/superagent": "^4.1.18",
+    "@types/xml2js": "^0.4.11",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "standard-version": "^9.5.0"
   }
 }
