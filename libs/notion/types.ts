@@ -1,4 +1,7 @@
-import type { GetBlockResponse, GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
+import type {
+  GetBlockResponse,
+  GetPageResponse,
+} from '@notionhq/client/build/src/api-endpoints';
 
 export { GetBlockResponse, GetPageResponse };
 
