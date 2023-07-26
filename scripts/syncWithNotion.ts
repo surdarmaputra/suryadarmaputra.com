@@ -72,7 +72,7 @@ function checkMissingOrOutdatedContent(
   notionPosts: GetPageResponse[],
 ): boolean {
   const feedItems =
-    feed.rss?.channel[0]?.item.map((item) => {
+    feed.rss?.channel[0]?.item?.map((item) => {
       const link = item.link[0];
       return {
         slug: link.replace(blogUrl, ''),
@@ -80,14 +80,14 @@ function checkMissingOrOutdatedContent(
       };
     }) || [];
 
-  const notionItems = notionPosts.map((item) => {
+  const notionItems = notionPosts?.map((item) => {
     const properties = getProperties(item);
     const title = getTitle(item);
     return {
       slug: kebabCase(title || ''),
       updatedAt: new Date(properties.updated_at).toUTCString(),
     };
-  });
+  }) || [];
 
   console.log('Pages from feed:');
   console.log(feedItems);
@@ -133,12 +133,12 @@ function checkMissingOrOutdatedExtras(
   notionProjects: GetPageResponse[],
 ): boolean {
   const existingProjects =
-    extras.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
+    extras?.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
       id,
       title,
       updatedAt,
     })) || [];
-  const incomingProjects = notionProjects.map((item) => {
+  const incomingProjects = notionProjects?.map((item) => {
     const properties = getProperties(item);
     const title = getTitle(item);
     return {
