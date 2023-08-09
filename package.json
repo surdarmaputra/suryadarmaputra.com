@@ -7,9 +7,12 @@
     "build": "next build",
     "dev": "next dev",
     "format:fix": "prettier --write",
+    "generate:posts": "ts-node scripts/fetchPosts.ts",
+    "generate:projects": "ts-node scripts/fetchProjects.ts",
     "lint:fix": "eslint --ext .ts,.tsx --max-warnings=0 --fix",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "sync": "ts-node scripts/syncWithNotion.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.8",
@@ -17,6 +20,7 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "canvas": "^2.11.2",
     "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
@@ -48,9 +52,13 @@
     "@types/react-syntax-highlighter": "^15.5.7",
     "@types/superagent": "^4.1.18",
     "@types/xml2js": "^0.4.11",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "dotenv": "^16.3.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.1"
   }
 }
