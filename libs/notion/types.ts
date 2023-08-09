@@ -1,6 +1,10 @@
 import type {
+  DatabaseObjectResponse,
   GetBlockResponse,
   GetPageResponse,
+  PageObjectResponse,
+  PartialDatabaseObjectResponse,
+  PartialPageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 
 export { GetBlockResponse, GetPageResponse };
@@ -11,6 +15,11 @@ export interface BlockWithChildren {
 }
 
 type ExtractedBlockType<Type> = Extract<GetBlockResponse, { type: Type }>;
+
+export type QueryDatabaseResponseResult = PageObjectResponse
+  | PartialPageObjectResponse
+  | PartialDatabaseObjectResponse
+  | DatabaseObjectResponse;
 
 export type AudioBlock = ExtractedBlockType<'audio'>;
 export type BookmarkBlock = ExtractedBlockType<'bookmark'>;

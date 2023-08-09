@@ -15,6 +15,10 @@
 
 # production
 /build
+/data
+/public/images/posts
+/public/images/projects
+
 
 # misc
 .DS_Store
