@@ -10,10 +10,10 @@ dotenv.config();
 /* eslint-disable import/first */
 import {
   getFileExtensionFromUrl,
-  getPagesFromDatabase,
   getProperties,
   getTitle,
 } from '../libs/notion';
+import { fetchProjects } from './notionRequests';
 /* eslint-enable import/first */
 
 interface ProjectData {
@@ -56,15 +56,15 @@ async function fetchImages(project: ProjectData): Promise<void> {
   }
 }
 
-export async function run(): Promise<void> {
-  const rawProjects = await getPagesFromDatabase(process.env.NOTION_PROJECTS_DATABASE_ID, {
-    filter: {
-      property: 'publish',
-      checkbox: {
-        equals: true,
-      },
-    },
-  });
+/**
+ * Regenerate project list in a JSON file alongside images for each projects
+ * Step:
+ *  - cleanup existing JSON file and images
+ *  - fetch projects from Notion database
+ *  - regenerate a JSON file and images based on Notion data
+ */
+async function run(): Promise<void> {
+  const rawProjects = await fetchProjects();
 
   await fs.rm(projectDataFile, { force: true, recursive: true });
   await fs.mkdir(extrasDirectory, { recursive: true });

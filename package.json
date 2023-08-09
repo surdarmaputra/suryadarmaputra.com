@@ -11,7 +11,8 @@
     "generate:projects": "ts-node scripts/fetchProjects.ts",
     "lint:fix": "eslint --ext .ts,.tsx --max-warnings=0 --fix",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "sync": "ts-node scripts/syncWithNotion.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.8",

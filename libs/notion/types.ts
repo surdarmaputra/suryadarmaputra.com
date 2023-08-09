@@ -16,7 +16,8 @@ export interface BlockWithChildren {
 
 type ExtractedBlockType<Type> = Extract<GetBlockResponse, { type: Type }>;
 
-export type QueryDatabaseResponseResult = PageObjectResponse
+export type QueryDatabaseResponseResult =
+  | PageObjectResponse
   | PartialPageObjectResponse
   | PartialDatabaseObjectResponse
   | DatabaseObjectResponse;

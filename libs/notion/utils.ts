@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type {
-  GetBlockResponse,
-} from '@notionhq/client/build/src/api-endpoints';
+import type { GetBlockResponse } from '@notionhq/client/build/src/api-endpoints';
 import { identity } from 'lodash';
 import readingTime from 'reading-time';
 
-import type { BlockWithChildren, QueryDatabaseResponseResult, RichTextBlock } from './types';
+import type {
+  BlockWithChildren,
+  QueryDatabaseResponseResult,
+  RichTextBlock,
+} from './types';
 
 const blocksWithText = [
   'bulleted_list_item',
@@ -96,7 +98,9 @@ const propertyFormatters = {
   category: formatSelect,
 };
 
-export function getProperties(page: QueryDatabaseResponseResult): Record<string, unknown> {
+export function getProperties(
+  page: QueryDatabaseResponseResult,
+): Record<string, unknown> {
   // @ts-ignore
   const { properties } = page;
 

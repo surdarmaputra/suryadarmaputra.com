@@ -15,11 +15,11 @@ import {
   getBlockChildren,
   getExcerpt,
   getFileExtensionFromUrl,
-  getPagesFromDatabase,
   getProperties,
   getTitle,
   regroupListItems,
 } from '../libs/notion';
+import { fetchPosts } from './notionRequests';
 /* eslint-enable import/first */
 
 interface PageData {
@@ -68,15 +68,15 @@ async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
   }
 }
 
-export async function run(): Promise<void> {
-  const rawPages = await getPagesFromDatabase(process.env.NOTION_POSTS_DATABASE_ID, {
-    filter: {
-      property: 'publish',
-      checkbox: {
-        equals: true,
-      },
-    },
-  });
+/**
+ * Regenerate post list in JSON files alongside images for each posts
+ * Step:
+ *  - cleanup existing JSON files and images
+ *  - fetch posts from Notion database
+ *  - regenerate JSON files and images based on Notion data
+ */
+async function run(): Promise<void> {
+  const rawPages = await fetchPosts();
 
   await fs.rm(postsDirectory, { force: true, recursive: true });
   await fs.mkdir(postsDirectory, { recursive: true });
