@@ -88,15 +88,16 @@ function checkMissingOrOutdatedContent(
       };
     }) || [];
 
-  const notionItems = notionPosts?.map((item) => {
-    const properties = getProperties(item);
-    const title = getTitle(item);
-    return {
-      slug: kebabCase(title || ''),
-      // @ts-ignore
-      updatedAt: new Date(properties.updated_at).toUTCString(),
-    };
-  }) || [];
+  const notionItems =
+    notionPosts?.map((item) => {
+      const properties = getProperties(item);
+      const title = getTitle(item);
+      return {
+        slug: kebabCase(title || ''),
+        // @ts-ignore
+        updatedAt: new Date(properties.updated_at).toUTCString(),
+      };
+    }) || [];
 
   console.log('Pages from feed:');
   console.log(feedItems);
@@ -143,20 +144,23 @@ function checkMissingOrOutdatedExtras(
 ): boolean {
   const existingProjects =
     // @ts-ignore
-    extras?.projects?.map(({ id, title, updatedAt }: Record<string, unknown>) => ({
-      id,
-      title,
-      updatedAt,
-    })) || [];
-  const incomingProjects = notionProjects?.map((item) => {
-    const properties = getProperties(item);
-    const title = getTitle(item);
-    return {
-      id: item.id,
-      title,
-      updatedAt: properties.updated_at,
-    };
-  }) || [];
+    extras?.projects?.map(
+      ({ id, title, updatedAt }: Record<string, unknown>) => ({
+        id,
+        title,
+        updatedAt,
+      }),
+    ) || [];
+  const incomingProjects =
+    notionProjects?.map((item) => {
+      const properties = getProperties(item);
+      const title = getTitle(item);
+      return {
+        id: item.id,
+        title,
+        updatedAt: properties.updated_at,
+      };
+    }) || [];
 
   console.log('Existing projects:');
   console.log(existingProjects);
