@@ -1,8 +1,6 @@
 name: rebuild
 
 on:
-  schedule:
-    - cron: '0 22 * * *'
   workflow_dispatch:
     ref:
       - main
