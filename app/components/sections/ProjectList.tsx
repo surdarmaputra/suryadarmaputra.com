@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 
 import { Project } from '~/services/project.server';
@@ -18,13 +19,17 @@ export function ProjectList({
   projects,
   showTitle,
 }: ProjectListProps) {
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClientReady(true);
+  }, []);
+
   if (!projects?.length) return null;
 
   const itemTitleClassName =
     'animated-link inline text-md font-semibold text-slate-900 dark:text-slate-200';
   const displayedProjects = featuredOnly ? projects.slice(0, 3) : projects;
-
-  return <div>test</div>;
 
   return (
     <div className={`relative flex flex-wrap md:-mx-8 ${className}`}>
@@ -46,7 +51,7 @@ export function ProjectList({
             target="_blank"
           >
             <div className="h-40 overflow-hidden rounded-md border border-slate-200">
-              {thumbnailUrl && thumbnailPlaceholderUrl ? (
+              {thumbnailUrl && thumbnailPlaceholderUrl && isClientReady ? (
                 <LazyLoad
                   placeholder={
                     <img

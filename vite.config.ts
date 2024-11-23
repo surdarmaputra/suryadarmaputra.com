@@ -23,7 +23,9 @@ export default defineConfig({
   ],
   ssr: {
     optimizeDeps: {
-      include: ['lodash'],
+      include: [
+        'lodash',
+      ],
     },
   },
 });
