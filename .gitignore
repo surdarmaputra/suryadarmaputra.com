@@ -1,19 +1,5 @@
 node_modules
 
-.cache
+/.cache
+/build
 .env
-.netlify
-.output
-.vercel
-
-/api/index.js
-/app/styles
-/build/
-/extras
-/netlify
-/posts
-/public/build
-/public/images/posts
-/public/images/projects
-
-yarn-error.log
