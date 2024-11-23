@@ -1,0 +1,27 @@
+import { ReactNode } from 'react';
+
+export interface HeroSectionProps
+  extends Omit<React.HTMLProps<HTMLElement>, 'title'> {
+  title?: ReactNode;
+  description?: ReactNode;
+}
+
+export default function HeroSection({
+  children,
+  description,
+  title,
+}: HeroSectionProps) {
+  return (
+    <section className="mb-28 mt-20 text-center md:mb-32">
+      <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tighter text-black dark:text-slate-100">
+        {title}
+      </h1>
+
+      <p className="mx-auto mb-6 w-5/6 font-light text-slate-500 md:w-2/3">
+        {description}
+      </p>
+
+      {children}
+    </section>
+  );
+}
