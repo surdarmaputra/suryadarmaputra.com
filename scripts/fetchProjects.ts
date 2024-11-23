@@ -17,6 +17,7 @@ import { fetchProjects } from './utils';
 
 interface ProjectData {
   id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   properties: Record<string, any>;
   title: string | null;
 }
@@ -44,6 +45,7 @@ async function fetchImages(project: ProjectData): Promise<void> {
 
   if (!Array.isArray(properties.thumbnail)) return;
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   let index = 0;
   for (const thumbnail of properties.thumbnail) {

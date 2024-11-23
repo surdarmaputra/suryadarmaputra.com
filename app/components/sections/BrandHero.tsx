@@ -20,7 +20,7 @@ export function BrandHero() {
       title={
         <>
           <span className="block md:inline">👋 Hello,</span>{' '}
-          <span>I'm Surya</span>
+          <span>I&apos;m Surya</span>
         </>
       }
     />

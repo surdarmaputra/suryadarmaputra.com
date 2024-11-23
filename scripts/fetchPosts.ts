@@ -24,6 +24,7 @@ import { fetchPosts } from './utils';
 interface PageData {
   blocks: BlockWithChildren[] | [];
   excerpt: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   properties: Record<string, any>;
   readingTime: string;
   title: string | null;
@@ -54,6 +55,7 @@ async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const url = block.image?.file?.url || null;
     if (!url) continue;
@@ -76,7 +78,7 @@ export async function run(): Promise<void> {
   await fs.rm(imagesDirectory, { force: true, recursive: true });
   await fs.mkdir(imagesDirectory, { recursive: true });
 
-  for (let page of rawPages) {
+  for (const page of rawPages) {
     const title = getTitle(page);
     const properties = getProperties(page);
     const originalBlocks = await getBlockChildren(page.id);

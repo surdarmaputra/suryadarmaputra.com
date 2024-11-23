@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type {
   GetBlockResponse,
   GetPageResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { identity } from 'lodash';
+import identity from 'lodash/identity';
 import readingTime from 'reading-time';
 
 import type { BlockWithChildren, RichTextBlock } from './types';
@@ -96,6 +97,7 @@ const propertyFormatters = {
   category: formatSelect,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getProperties(page: GetPageResponse): Record<string, any> {
   // @ts-ignore
   const { properties } = page;

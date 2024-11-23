@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, useMemo, useRef, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -42,7 +42,7 @@ export function Image({ block }: ImageProps) {
   ));
 
   const placeholder = (
-    <img alt={altText} className="blur-xl h-64 md:h-96" src={placeholderUrl} />
+    <img alt={altText} className="h-64 blur-xl md:h-96" src={placeholderUrl} />
   );
 
   const className = useMemo(
@@ -59,6 +59,12 @@ export function Image({ block }: ImageProps) {
     }
   };
 
+  const handleWrapperKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === 'Space') {
+      handleWrapperClick();
+    }
+  };
+
   const handleZoomClose = () => {
     if (handlers.current.resetTransform) handlers.current.resetTransform();
     setZoomEnabled(false);
@@ -66,12 +72,15 @@ export function Image({ block }: ImageProps) {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center z-40 transition ${className}`}
+      className={`z-40 flex flex-col items-center justify-center transition ${className}`}
       onClick={handleWrapperClick}
+      onKeyUp={handleWrapperKeyUp}
+      role="button"
+      tabIndex={0}
     >
       {zoomEnabled ? (
         <>
-          <div className="absolute h-full w-full bg-white dark:bg-slate-900 opacity-95"></div>
+          <div className="absolute h-full w-full bg-white opacity-95 dark:bg-slate-900"></div>
         </>
       ) : null}
       <LazyLoad placeholder={placeholder}>
@@ -87,9 +96,9 @@ export function Image({ block }: ImageProps) {
         </TransformWrapper>
       </LazyLoad>
       {zoomEnabled ? (
-        <div className="flex justify-center mt-4">
+        <div className="mt-4 flex justify-center">
           <button
-            className="text-slate-400 dark:text-slate-500 z-50 w-28 flex items-center justify-center"
+            className="z-50 flex w-28 items-center justify-center text-slate-400 dark:text-slate-500"
             onClick={handleZoomClose}
             type="button"
           >
@@ -98,7 +107,7 @@ export function Image({ block }: ImageProps) {
         </div>
       ) : null}
       {!zoomEnabled ? (
-        <span className="text-center text-slate-400 dark:text-slate-600 font-light text-sm p-4">
+        <span className="p-4 text-center text-sm font-light text-slate-400 dark:text-slate-600">
           {caption}
         </span>
       ) : null}

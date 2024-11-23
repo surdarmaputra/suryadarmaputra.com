@@ -43,7 +43,7 @@ export async function getBlockChildren(
       block_id: blockId,
     });
     const blocks = [];
-    for (let block of results) {
+    for (const block of results) {
       let children = null;
       if (hasChildren(block)) {
         children = await getBlockChildren(block.id);

@@ -1,13 +1,15 @@
-# Welcome to Remix!
+[suryadarmaputra.com](https://suryadarmaputra.com)
 
-- 📖 [Remix docs](https://remix.run/docs)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7533c657-0503-4acf-8ad7-47bedd8ec26a/deploy-status)](https://app.netlify.com/sites/suryadarmaputra/deploys)
+
+Surya's personal site built with [Remix](https://remix.run)
 
 ## Development
 
 Run the dev server:
 
-```shellscript
-npm run dev
+```sh
+bun run dev
 ```
 
 ## Deployment
@@ -15,13 +17,13 @@ npm run dev
 First, build your app for production:
 
 ```sh
-npm run build
+bun run build
 ```
 
 Then run the app in production mode:
 
 ```sh
-npm start
+bun run start
 ```
 
 Now you'll need to pick a host to deploy it to.
@@ -30,10 +32,48 @@ Now you'll need to pick a host to deploy it to.
 
 If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
 
-Make sure to deploy the output of `npm run build`
+Make sure to deploy the output of `bun run build`
 
 - `build/server`
 - `build/client`
+
+### Deploy to Netlify
+
+1. Install the [Netlify CLI](https://www.netlify.com/products/dev/):
+
+```sh
+bun add --global netlify-cli
+```
+
+If you have previously installed the Netlify CLI, you should update it to the latest version:
+
+```sh
+bun add --global netlify-cli@latest
+```
+
+2. Sign up and log in to Netlify:
+
+```sh
+netlify login
+```
+
+3. Create a new site:
+
+```sh
+netlify init
+```
+
+4. Deploy a preview
+
+```sh
+netlify deploy
+```
+
+5. Deploy production
+
+```sh
+netlify deploy --prod
+```
 
 ## Styling
 

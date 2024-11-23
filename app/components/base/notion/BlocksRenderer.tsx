@@ -34,6 +34,7 @@ export function BlocksRenderer({ blocks }: BlocksRendererProps) {
         const mapKey = block.type as keyof typeof componentMap;
         const Component = componentMap[mapKey];
         const previousBlockType =
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           index > 0 ? blocks[index - 1].block?.type : null;
 

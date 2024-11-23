@@ -21,18 +21,15 @@ export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps) {
   };
 
   return (
-    <div
-      className="relative flex bg-slate-200 dark:bg-slate-700 rounded-full items-center w-14 h-7 justify-between px-1 cursor-pointer"
+    <button
+      className="relative flex h-7 w-14 cursor-pointer items-center justify-between rounded-full bg-slate-200 px-1 dark:bg-slate-700"
       onClick={handleClick}
     >
       <MoonIcon />
       <SunIcon />
       <div
-        className={`
-          w-7 h-7 rounded-full absolute transition-transform
-          ${toggleClassName}
-        `}
+        className={`absolute h-7 w-7 rounded-full transition-transform ${toggleClassName} `}
       />
-    </div>
+    </button>
   );
 }

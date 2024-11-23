@@ -1,4 +1,4 @@
-import './tailwind.css';
+import './styles/global.css';
 
 import type { LinksFunction } from '@remix-run/node';
 import {
@@ -8,6 +8,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+
+import ColorModeScript from './components/base/ColorModeScript';
+import PiwikScript from './components/base/PiwikScript';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -31,8 +34,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="container relative mx-auto min-h-screen px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400 lg:max-w-5xl">
         {children}
+        <PiwikScript />
+        <ColorModeScript />
         <ScrollRestoration />
         <Scripts />
       </body>

@@ -59,6 +59,7 @@ async function fetchRSS(): Promise<RSSFeed> {
   return xmlJson as RSSFeed;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function fetchExtras(): Promise<Record<string, any>> {
   console.log(`Fetching extras data feed from ${extrasUrl}`);
 
@@ -80,14 +81,15 @@ function checkMissingOrOutdatedContent(
       };
     }) || [];
 
-  const notionItems = notionPosts?.map((item) => {
-    const properties = getProperties(item);
-    const title = getTitle(item);
-    return {
-      slug: kebabCase(title || ''),
-      updatedAt: new Date(properties.updated_at).toUTCString(),
-    };
-  }) || [];
+  const notionItems =
+    notionPosts?.map((item) => {
+      const properties = getProperties(item);
+      const title = getTitle(item);
+      return {
+        slug: kebabCase(title || ''),
+        updatedAt: new Date(properties.updated_at).toUTCString(),
+      };
+    }) || [];
 
   console.log('Pages from feed:');
   console.log(feedItems);
@@ -129,10 +131,12 @@ function checkMissingOrOutdatedContent(
 }
 
 function checkMissingOrOutdatedExtras(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extras: Record<string, any>,
   notionProjects: GetPageResponse[],
 ): boolean {
   const existingProjects =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extras?.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
       id,
       title,
@@ -165,7 +169,9 @@ function checkMissingOrOutdatedExtras(
   const existingProjectsUpdatedAt: Record<string, string> =
     existingProjects.reduce(
       (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         finalMap: Record<string, any>,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         { id, updatedAt }: Record<string, any>,
       ) => {
         return {
