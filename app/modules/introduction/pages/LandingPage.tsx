@@ -10,13 +10,10 @@ export interface LandingPageProps {
   posts: Post[];
 }
 
-export default function LandingPage({
-  posts,
-  projects,
-}: LandingPageProps) {
+export default function LandingPage({ posts, projects }: LandingPageProps) {
   return (
     <DefaultLayout>
-      <div className="absolute right-0 top-24 z-10 h-72 w-72 rounded-full bg-amber-500 opacity-15 blur-3xl dark:bg-amber-800"></div>
+      <div className="absolute right-0 top-24 z-10 h-72 w-72 rounded-full bg-amber-500 opacity-10 blur-3xl dark:bg-amber-800"></div>
 
       <BrandHero />
       <ProjectList
