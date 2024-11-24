@@ -1,4 +1,4 @@
-import { KeyboardEvent, useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -22,7 +22,8 @@ function getAltText(caption: RichTextBlock[]): string {
 }
 
 export function Image({ block }: ImageProps) {
-  const [zoomEnabled, setZoomEnabled] = useState(false);
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
+  const [zoomEnabled, setZoomEnabled] = useState<boolean>(false);
   const handlers = useRef<{
     centerView?: ReactZoomPanPinchHandlers['centerView'];
     resetTransform?: ReactZoomPanPinchHandlers['resetTransform'];
@@ -70,6 +71,10 @@ export function Image({ block }: ImageProps) {
     setZoomEnabled(false);
   };
 
+  useEffect(() => {
+    setIsClientReady(true);
+  }, []);
+
   return (
     <div
       className={`z-40 flex flex-col items-center justify-center transition ${className}`}
@@ -83,18 +88,22 @@ export function Image({ block }: ImageProps) {
           <div className="absolute h-full w-full bg-white opacity-95 dark:bg-slate-900"></div>
         </>
       ) : null}
-      <LazyLoad placeholder={placeholder}>
-        <TransformWrapper centerOnInit={true} disabled={!zoomEnabled}>
-          {({ resetTransform }) => {
-            handlers.current.resetTransform = resetTransform;
-            return (
-              <TransformComponent>
-                <img alt={altText} className="z-50" src={url} />
-              </TransformComponent>
-            );
-          }}
-        </TransformWrapper>
-      </LazyLoad>
+      {isClientReady ? (
+        <LazyLoad placeholder={placeholder}>
+          <TransformWrapper centerOnInit={true} disabled={!zoomEnabled}>
+            {({ resetTransform }) => {
+              handlers.current.resetTransform = resetTransform;
+              return (
+                <TransformComponent>
+                  <img alt={altText} className="z-50" src={url} />
+                </TransformComponent>
+              );
+            }}
+          </TransformWrapper>
+        </LazyLoad>
+      ) : (
+        placeholder
+      )}
       {zoomEnabled ? (
         <div className="mt-4 flex justify-center">
           <button

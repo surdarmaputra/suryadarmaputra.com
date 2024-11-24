@@ -8,10 +8,11 @@ import superagent from 'superagent';
 dotenv.config();
 
 /* eslint-disable import/first */
+import { getBlockChildren } from '~/libs/notion/index.server';
+import { calculateReadingTime } from '~/libs/notion/utils.server';
+
 import {
   BlockWithChildren,
-  calculateReadingTime,
-  getBlockChildren,
   getExcerpt,
   getFileExtensionFromUrl,
   getProperties,

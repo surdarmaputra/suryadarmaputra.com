@@ -2,33 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-}
-
 article {
   @apply leading-loose;
 
   a {
     background: linear-gradient(to right, transparent, transparent),
       linear-gradient(to right, #f59e0b, #db2777);
-    background-size: 100% 0.1em, 0 0.1em;
-    background-position: 100% 100%, 0 100%;
+    background-size:
+      100% 0.1em,
+      0 0.1em;
+    background-position:
+      100% 100%,
+      0 100%;
     @apply break-all bg-no-repeat text-orange-500 transition-all dark:text-amber-500;
 
     &:hover,
     &:focus {
-      background-size: 0 0.1em, 100% 0.1em;
+      background-size:
+        0 0.1em,
+        100% 0.1em;
     }
   }
 
   blockquote {
-    @apply mt-10 mb-3 py-4 text-xl font-light leading-loose text-gray-400 dark:text-gray-500 md:px-10;
+    @apply mb-3 mt-10 py-4 text-xl font-light leading-loose text-gray-400 dark:text-gray-500 md:px-10;
 
     &::before {
       content: '"';
@@ -97,7 +94,7 @@ article {
   }
 
   p {
-    @apply mt-10 mb-3;
+    @apply mb-3 mt-10;
   }
 
   pre {
@@ -116,16 +113,24 @@ article {
 .animated-underline {
   background: linear-gradient(to right, #94a3b8, transparent),
     linear-gradient(to right, #f59e0b, #db2777, #0ea5e9);
-  background-size: 100% 0.1em, 0 0.1em;
-  background-position: 100% 100%, 0 100%;
+  background-size:
+    100% 0.1em,
+    0 0.1em;
+  background-position:
+    100% 100%,
+    0 100%;
   @apply bg-no-repeat transition-all;
 }
 
 .animated-link {
   background: linear-gradient(to right, transparent, transparent),
     linear-gradient(to right, #f59e0b, #db2777, #0ea5e9);
-  background-size: 100% 0.1em, 0 0.1em;
-  background-position: 100% 100%, 0 100%;
+  background-size:
+    100% 0.1em,
+    0 0.1em;
+  background-position:
+    100% 100%,
+    0 100%;
   @apply bg-no-repeat transition-all;
 
   &.active {
@@ -138,5 +143,7 @@ article {
 .animated-link:hover,
 .animated-link:focus,
 .group:hover .animated-link {
-  background-size: 0 0.1em, 100% 0.1em;
+  background-size:
+    0 0.1em,
+    100% 0.1em;
 }
