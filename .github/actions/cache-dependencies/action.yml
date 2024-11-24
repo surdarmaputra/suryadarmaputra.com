@@ -1,0 +1,16 @@
+name: Cache dependencies
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/cache@v4
+      with:
+        path: '**/node_modules'
+        key: bun-${{ hashFiles('**/bun.lockb') }}
+        restore-keys: bun-
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.1.36
+    - name: Install dependencies
+      shell: bash
+      run: bun install --frozen-lockfile
