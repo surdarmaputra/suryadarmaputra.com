@@ -27,7 +27,9 @@ const projectDataFile = path.join(extrasDirectory, 'projects.json');
 const imagesDirectory = path.resolve(__dirname, '../public/images/projects');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
-  const modifiedUrl = url.startsWith('https:') ? url.replace(/^(https:\/\/[^/]+)/, '$1:443') : url;
+  const modifiedUrl = url.startsWith('https:')
+    ? url.replace(/^(https:\/\/[^/]+)/, '$1:443')
+    : url;
 
   // eslint-disable-next-line no-console
   console.log({ url: modifiedUrl });
