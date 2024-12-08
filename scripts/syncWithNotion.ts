@@ -3,7 +3,7 @@
 import { GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
 import dotenv from 'dotenv';
 import { kebabCase } from 'lodash';
-import superagent from 'superagent';
+import { request } from 'undici';
 import { parseString } from 'xml2js';
 
 dotenv.config();
@@ -48,7 +48,8 @@ const extrasUrl = `${baseUrl}extras.json`;
 async function fetchRSS(): Promise<RSSFeed> {
   console.log(`Fetching RSS feed from ${feedUrl}`);
 
-  const { body: xmlString } = await superagent.get(feedUrl);
+  const { body } = await request(feedUrl);
+  const xmlString = await body.text();
   const xmlJson = await new Promise((resolve, reject) =>
     parseString(xmlString, (error, result) => {
       if (error) reject(error);
@@ -63,9 +64,11 @@ async function fetchRSS(): Promise<RSSFeed> {
 async function fetchExtras(): Promise<Record<string, any>> {
   console.log(`Fetching extras data feed from ${extrasUrl}`);
 
-  const { body: json } = await superagent.get(extrasUrl);
+  const { body } = await request(extrasUrl);
+  const json = await body.json();
 
-  return json;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return json as Record<string, any>;
 }
 
 function checkMissingOrOutdatedContent(
@@ -208,8 +211,9 @@ async function triggerDeployment() {
     return 'No NETLIFY_HOOK_URL found. Skipping deployment.';
   }
 
-  const { body } = await superagent.post(url);
-  return body;
+  const { body } = await request(url, { method: 'POST' });
+  const result = await body.json();
+  return result;
 }
 
 async function run() {
