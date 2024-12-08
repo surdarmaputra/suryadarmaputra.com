@@ -35,6 +35,8 @@ const postsDirectory = path.resolve(__dirname, '../posts');
 const imagesDirectory = path.resolve(__dirname, '../public/images/posts');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
+  // eslint-disable-next-line no-console
+  console.log({ url });
   const { body: imageData } = await superagent.get(url);
   const extension = getFileExtensionFromUrl(url);
   const outputFile = `${imagesDirectory}/${filename}.${extension}`;
