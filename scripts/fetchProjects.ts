@@ -2,11 +2,12 @@ import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import { Image } from 'image-js';
 import path from 'path';
-import superagent from 'superagent';
 
 dotenv.config();
 
 /* eslint-disable import/first */
+import { request } from 'undici';
+
 import {
   getFileExtensionFromUrl,
   getProperties,
@@ -27,20 +28,17 @@ const projectDataFile = path.join(extrasDirectory, 'projects.json');
 const imagesDirectory = path.resolve(__dirname, '../public/images/projects');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
-  const modifiedUrl = url.startsWith('https:')
-    ? url.replace(/^(https:\/\/[^/]+)/, '$1:443')
-    : url;
+  const { body } = await request(url);
+  const imageData = await body.arrayBuffer();
+  const imageBuffer = Buffer.from(imageData);
 
-  // eslint-disable-next-line no-console
-  console.log({ url: modifiedUrl });
-  const { body: imageData } = await superagent.get(modifiedUrl);
   const extension = getFileExtensionFromUrl(url);
   const outputFile = `${imagesDirectory}/${filename}.${extension}`;
   const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
-  const placeholderRaw = await Image.load(imageData);
+  const placeholderRaw = await Image.load(imageBuffer);
   const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
 
-  await fs.writeFile(outputFile, imageData);
+  await fs.writeFile(outputFile, imageBuffer);
   await fs.writeFile(placeholderFile, placeholderData);
 }
 
