@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "build:netlify": "NETLIFY_DEPLOYMENT=true react-router build",
     "commit": "cz",
     "dev": "react-router dev",
     "format:fix": "prettier --write",
