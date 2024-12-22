@@ -16,12 +16,12 @@ interface HeadingProps extends BlockComponentProps {
 
 function getBlockContent(block: HeadingProps['block']) {
   switch (block.type) {
-    case 'heading_1':
-      return block.heading_1 as Heading1Block['heading_1'];
-    case 'heading_2':
-      return block.heading_2 as Heading2Block['heading_2'];
-    case 'heading_3':
-      return block.heading_3 as Heading3Block['heading_3'];
+  case 'heading_1':
+    return block.heading_1 as Heading1Block['heading_1'];
+  case 'heading_2':
+    return block.heading_2 as Heading2Block['heading_2'];
+  case 'heading_3':
+    return block.heading_3 as Heading3Block['heading_3'];
   }
 }
 

@@ -1,43 +1,34 @@
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
+import type { MetaFunction } from 'react-router';
+import { useLoaderData } from 'react-router';
 
-import HeroSection from '~/components/base/HeroSection';
-import { DefaultLayout } from '~/components/layouts/DefaultLayout';
-import { ProjectList } from '~/components/sections/ProjectList';
-import { getProjects, Project } from '~/services/project.server';
-
-interface LoaderData {
-  projects: Project[];
-}
-
-export const loader: LoaderFunction = async () => {
-  const projects = await getProjects();
-  return { projects };
-};
+import ProjectListPage from '~/modules/project/pages/ProjectListPage';
+import { getProjects } from '~/services/project.server';
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Projects - Surya Darma Putra',
-    description: 'Projects by Surya Darma Putra',
-    keywords: ['software engineer', 'javascript', 'react', 'vue'].join(', '),
-  };
+  return [
+    {
+      title: 'Projects - Surya Darma Putra',
+    },
+    {
+      name: 'description',
+      content: 'Projects by Surya Darma Putra',
+    },
+    {
+      name: 'keywords',
+      content: ['software engineer', 'javascript', 'react', 'vue'].join(', '),
+    },
+  ];
 };
 
-export default function Projects() {
-  const { projects } = useLoaderData<LoaderData>();
+export async function loader() {
+  const projects = await getProjects();
+  return {
+    projects,
+  };
+}
 
-  return (
-    <DefaultLayout>
-      <HeroSection
-        description="Playground, websites, open sources and more."
-        title="Projects"
-      />
-      {projects?.length ? (
-        <ProjectList projects={projects} />
-      ) : (
-        <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
-          Content is coming soon!
-        </div>
-      )}
-    </DefaultLayout>
-  );
+export default function Projects() {
+  const { projects } = useLoaderData<typeof loader>();
+
+  return <ProjectListPage projects={projects} />;
 }

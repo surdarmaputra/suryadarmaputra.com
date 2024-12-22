@@ -21,6 +21,7 @@ export async function getProjects(): Promise<Project[]> {
   const fileContent: Buffer = await fs.readFile(projectsFile);
   const projects = JSON.parse(fileContent.toString());
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return projects.map((project: Record<string, any>) => {
     const { category, link, tags } = project.properties;
     const date = new Date(project.properties.created_at);
@@ -35,6 +36,7 @@ export async function getProjects(): Promise<Project[]> {
       ? `/images/projects/${project.id}-0-placeholder.png`
       : null;
     const summary = project.properties.summary
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((item: Record<string, any>) => item.plain_text)
       .join(' ');
 

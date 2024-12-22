@@ -50,7 +50,7 @@ export function Embed({ block }: EmbedProps) {
   }
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="mt-4 flex justify-center">
       <div
         className={type === EmbedType.twitter ? 'w-full md:w-4/5' : 'w-full'}
       >

@@ -11,6 +11,7 @@ interface TextWithAnnotationsProps {
 }
 
 function hasAnnotation(annotations: RichTextBlock['annotations']): boolean {
+  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
   const { color, ...otherAnnotations } = annotations;
   return Object.keys(otherAnnotations).some((key) => {
     const annotationKey = key as keyof RichTextBlock['annotations'];

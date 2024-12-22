@@ -1,4 +1,4 @@
-import { Link } from 'remix';
+import { Link } from 'react-router';
 
 import { ArrowLeft, ArrowRight } from '~/components/base/Icon';
 import type { Post } from '~/services/post.server';
@@ -51,7 +51,7 @@ export function PostSwitcher({
 }: PostSwitcherProps) {
   return (
     <section
-      className={`flex flex-col md:flex-row justify-between ${className}`}
+      className={`flex flex-col justify-between md:flex-row ${className}`}
     >
       <PostLink post={previousPost} />
       <PostLink next post={nextPost} />

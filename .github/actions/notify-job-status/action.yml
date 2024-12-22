@@ -1,0 +1,28 @@
+name: Notify job status
+
+inputs:
+  title:
+    description: 'Job title'
+    required: true
+  webhookUrl:
+    description: 'Discord Webhook URL for sending the notifications.'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Notify job failed
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with:
+        severity: error
+        details: 'Job FAILED for ${{ inputs.title }}'
+        webhookUrl: ${{ inputs.webhookUrl }}
+
+    - name: Notify job cancelled
+      uses: rjstone/discord-webhook-notify@v1
+      if: cancelled()
+      with:
+        severity: warn
+        details: 'Job CANCELLED for ${{ inputs.title }}'
+        webhookUrl: ${{ inputs.webhookUrl }}
