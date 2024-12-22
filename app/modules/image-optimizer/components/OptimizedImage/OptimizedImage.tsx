@@ -48,7 +48,7 @@ const generateSrcSet = (url?: string, format?: ImageFormat, width?: number): str
     // If no width prop, generate variations for Tailwind breakpoints
     for (const breakpoint of TAILWIND_BREAKPOINTS) {
       for (const density of DENSITY_FACTORS) {
-        const effectiveWidth = breakpoint * density * DENSITY_REDUCTION_MULTIPLIER;
+        const effectiveWidth = Math.round(breakpoint * density * DENSITY_REDUCTION_MULTIPLIER);
         srcSetEntries.push(`${generateOptimizedUrl(url, format, effectiveWidth)} ${effectiveWidth}w`);
       }
     }
@@ -65,7 +65,7 @@ const generateSizes = (width?: number): string => {
 
   // If no width prop, use Tailwind breakpoints for responsive sizing
   const sizesByBreakpoint = TAILWIND_BREAKPOINTS.map(
-    (breakpoint) => `(max-width: ${breakpoint}px) ${breakpoint * DENSITY_REDUCTION_MULTIPLIER}px`,
+    (breakpoint) => `(max-width: ${breakpoint}px) ${Math.round(breakpoint * DENSITY_REDUCTION_MULTIPLIER)}px`,
   );
   return [
     ...sizesByBreakpoint,
