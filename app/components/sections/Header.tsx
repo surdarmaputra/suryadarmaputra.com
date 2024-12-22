@@ -1,5 +1,5 @@
-import { Link, NavLink, useLocation } from 'react-router';
 import { useEffect, useMemo, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/components/base/ColorModeToggle';
 
