@@ -22,9 +22,14 @@ export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps) {
 
   return (
     <button
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       className="relative flex h-7 w-14 cursor-pointer items-center justify-between rounded-full bg-slate-200 px-1 dark:bg-slate-700"
       onClick={handleClick}
+      type='button'
     >
+      <span className="sr-only">
+        {isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      </span>
       <MoonIcon />
       <SunIcon />
       <div

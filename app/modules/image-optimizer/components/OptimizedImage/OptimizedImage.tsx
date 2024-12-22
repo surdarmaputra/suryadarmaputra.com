@@ -1,12 +1,10 @@
 import { forwardRef, useEffect,useState } from 'react';
 
-interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string;
-  width?: number;
-  alt: string;
-}
-
+const DENSITY_FACTORS = [1, 2] as const;
+const DENSITY_REDUCTION_MULTIPLIER = 0.8;
 const SUPPORTED_FORMATS = ['avif', 'webp', 'jpeg', 'png'] as const;
+const TAILWIND_BREAKPOINTS = [640, 768, 1024, 1280, 1536] as const;
+
 type ImageFormat = typeof SUPPORTED_FORMATS[number];
 
 const hasOriginUrl = (url: string): boolean => {
@@ -29,23 +27,83 @@ const detectBestFormat = (): ImageFormat => {
   return 'jpeg';
 };
 
+const generateOptimizedUrl = (url: string, format: ImageFormat, width: number): string => {
+  return `/api/optimize-image?url=${encodeURIComponent(url)}&width=${width}&format=${format}`;
+};
+
+const generateSrcSet = (url?: string, format?: ImageFormat, width?: number): string => {
+  if (!url || !format) {
+    return '';
+  }
+
+  const srcSetEntries = [];
+
+  if (width) {
+    // If width prop is provided, generate variations for different pixel densities
+    for (const density of DENSITY_FACTORS) {
+      const effectiveWidth = width * density;
+      srcSetEntries.push(`${generateOptimizedUrl(url, format, effectiveWidth)} ${effectiveWidth}w`);
+    }
+  } else {
+    // If no width prop, generate variations for Tailwind breakpoints
+    for (const breakpoint of TAILWIND_BREAKPOINTS) {
+      for (const density of DENSITY_FACTORS) {
+        const effectiveWidth = Math.round(breakpoint * density * DENSITY_REDUCTION_MULTIPLIER);
+        srcSetEntries.push(`${generateOptimizedUrl(url, format, effectiveWidth)} ${effectiveWidth}w`);
+      }
+    }
+  }
+
+  return srcSetEntries.join(', ');
+};
+
+const generateSizes = (width?: number): string => {
+  if (width) {
+    // If width prop is provided, return the fixed width in CSS pixels
+    return `${width}px`;
+  }
+
+  // If no width prop, use Tailwind breakpoints for responsive sizing
+  const sizesByBreakpoint = TAILWIND_BREAKPOINTS.map(
+    (breakpoint) => `(max-width: ${breakpoint}px) ${Math.round(breakpoint * DENSITY_REDUCTION_MULTIPLIER)}px`,
+  );
+  return [
+    ...sizesByBreakpoint,
+    '100vw',
+  ].join(', ');
+};
+
+interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string;
+  width?: number;
+  alt: string;
+}
+
 const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
-  ({ src, width = 800, alt, ...rest }, ref) => {
+  ({ src, width, alt, ...rest }, ref) => {
     if (!src) throw new Error("The 'src' prop is required for OptimizedImage.");
 
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+    const [format, setFormat] = useState<ImageFormat | undefined>(undefined);
+    const srcSet = generateSrcSet(imageUrl, format, width);
+    const sizes = generateSizes(width);
 
     useEffect(() => {
       const requestDomain = typeof window !== 'undefined' ? window.location.origin : '';
-      const format = detectBestFormat();
-      const fullSrc = hasOriginUrl(src) ? src : `${requestDomain}${src}`;
-      const optimizedUrl = `/api/optimize-image?url=${encodeURIComponent(fullSrc)}&width=${width}&format=${format}`;
-      setImageUrl(optimizedUrl);
-    }, [src, width]);
+      setFormat(detectBestFormat());
+      setImageUrl(hasOriginUrl(src) ? src : `${requestDomain}${src}`);
+    }, [src]);
 
     if (!imageUrl) return null;
 
-    return <img alt={alt} ref={ref} src={imageUrl} {...rest} />;
+    return <img
+      alt={alt}
+      ref={ref}
+      sizes={sizes}
+      src={generateOptimizedUrl(imageUrl, format as ImageFormat, width || 320)}
+      srcSet={srcSet}
+      {...rest}
+    />;
   },
 );
 

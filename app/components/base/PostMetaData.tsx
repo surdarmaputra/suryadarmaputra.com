@@ -24,7 +24,7 @@ export function PostMetaData({
   const items = [formattedDate, readingTime].filter(Boolean);
 
   return (
-    <small className={`block text-slate-400 dark:text-slate-500 ${className}`}>
+    <small className={`block text-slate-400 ${className}`}>
       {items.map((item, index) => (
         <span className="mr-4 inline-block" key={index}>
           {item}
