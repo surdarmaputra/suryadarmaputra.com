@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 
+import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 import { Project } from '~/services/project.server';
 
 import { ArrowRight, RocketIcon } from '../base/Icon';
@@ -61,7 +62,7 @@ export function ProjectList({
                     />
                   }
                 >
-                  <img
+                  <OptimizedImage
                     alt={`${title} thumbnail`}
                     className="w-full transition-transform duration-500 ease-in-out group-hover:scale-105"
                     src={thumbnailUrl}

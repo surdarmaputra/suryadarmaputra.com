@@ -10,6 +10,7 @@ import {
   ImageBlock,
   RichTextBlock,
 } from '~/libs/notion';
+import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 import { RichText } from './RichText';
 
@@ -95,7 +96,7 @@ export function Image({ block }: ImageProps) {
               handlers.current.resetTransform = resetTransform;
               return (
                 <TransformComponent>
-                  <img alt={altText} className="z-50" src={url} />
+                  <OptimizedImage alt={altText} className="z-50" src={url} />
                 </TransformComponent>
               );
             }}
