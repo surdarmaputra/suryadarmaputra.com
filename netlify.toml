@@ -1,12 +1,5 @@
 [build]
-  command = "bun run generate && bun run build && bun run netlify:prepare"
-  publish = "build/client"
-  functions = "netlify/functions"
+  command = "bun run generate && bun run build"
 
 [functions]
   included_files = ["extras/**", "posts/**"]
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
