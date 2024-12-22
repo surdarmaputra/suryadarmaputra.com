@@ -1,5 +1,5 @@
-import { LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { LoaderFunctionArgs, MetaFunction, redirect } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import PostDetailPage from '~/modules/blog/pages/PostDetailPage';
 import getPostDetailAndNavigationBySlug from '~/modules/blog/services/PostService/getPostDetailAndNavigationBySlug';

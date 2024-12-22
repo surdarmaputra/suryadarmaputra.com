@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/react';
+import type { MetaFunction } from 'react-router';
 
 import AboutPage from '~/modules/introduction/pages/AboutPage';
 

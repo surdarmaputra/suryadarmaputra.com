@@ -1,5 +1,5 @@
-import type { MetaFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import type { MetaFunction } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import ProjectListPage from '~/modules/project/pages/ProjectListPage';
 import { getProjects } from '~/services/project.server';

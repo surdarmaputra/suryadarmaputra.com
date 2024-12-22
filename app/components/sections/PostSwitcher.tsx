@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react';
+import { Link } from 'react-router';
 
 import { ArrowLeft, ArrowRight } from '~/components/base/Icon';
 import type { Post } from '~/services/post.server';

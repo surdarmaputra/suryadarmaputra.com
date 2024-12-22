@@ -1,4 +1,4 @@
-import { MetaFunction, useLoaderData } from '@remix-run/react';
+import { MetaFunction, useLoaderData } from 'react-router';
 
 import PostListPage from '~/modules/blog/pages/PostListPage';
 import { getPosts } from '~/services/post.server';

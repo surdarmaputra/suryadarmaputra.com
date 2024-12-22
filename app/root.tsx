@@ -1,13 +1,7 @@
 import './styles/global.css';
 
-import type { LinksFunction } from '@remix-run/node';
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from '@remix-run/react';
+import type { LinksFunction } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 
 import ColorModeScript from './components/base/ColorModeScript';
 import PiwikScript from './components/base/PiwikScript';
