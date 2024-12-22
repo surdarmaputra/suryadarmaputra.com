@@ -9,13 +9,13 @@ Surya's personal site built with [Remix](https://remix.run)
 - Install asdf
 - Run `asdf install`
 - Run `bun install`
-- Copy `.env.example` into `.env` and provide Notion token and database IDs
-- Run `bun run generate` to prepare content
 
 > If gyp error occurred when installing canvas, install canvas dependencies: 
 > - For MacOS: brew install pkg-config cairo libpng jpeg giflib
 > - For Linux: apt get install python3 make g++ pixman-dev cairo-dev pango-dev pkgconfig
 
+- Copy `.env.example` into `.env` and provide Notion token and database IDs
+- Copy `extras/projects.json.example` into `extras/projects.json`
 
 ## Development
 
@@ -23,6 +23,12 @@ Run the dev server:
 
 ```sh
 bun run dev
+```
+
+Generate content
+
+```sh
+bun run generage
 ```
 
 ## Deployment
