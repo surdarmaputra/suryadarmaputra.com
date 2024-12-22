@@ -52,6 +52,8 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.5.0",
     "@remix-run/dev": "^2.15.0",
+    "@remix-run/fs-routes": "^2.15.2",
+    "@remix-run/route-config": "^2.15.2",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@types/lodash": "^4.17.13",
     "@types/react": "^18.2.20",
