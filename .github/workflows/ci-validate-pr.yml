@@ -9,6 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache-dependencies
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Install dependencies'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
 
   lint:
     name: Lint
@@ -30,3 +35,8 @@ jobs:
         run: |
           FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "(.*)\.(ts|tsx)$" || true)"
           bun run lint $FILTERED_FILES
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Lint'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
