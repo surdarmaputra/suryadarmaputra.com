@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 
 import { Project } from '~/services/project.server';
@@ -18,6 +19,12 @@ export function ProjectList({
   projects,
   showTitle,
 }: ProjectListProps) {
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClientReady(true);
+  }, []);
+
   if (!projects?.length) return null;
 
   const itemTitleClassName =
@@ -27,7 +34,7 @@ export function ProjectList({
   return (
     <div className={`relative flex flex-wrap md:-mx-8 ${className}`}>
       {showTitle && (
-        <h2 className="absolute -top-12 -left-4 -z-10 mb-6 text-6xl font-bold text-slate-200 opacity-40 dark:text-slate-700 md:-top-12 md:left-2 md:text-7xl">
+        <h2 className="absolute -left-4 -top-12 -z-10 mb-6 text-6xl font-bold text-slate-200 opacity-40 dark:text-slate-700 md:-top-12 md:left-2 md:text-7xl">
           Projects.
         </h2>
       )}
@@ -44,7 +51,7 @@ export function ProjectList({
             target="_blank"
           >
             <div className="h-40 overflow-hidden rounded-md border border-slate-200">
-              {thumbnailUrl && thumbnailPlaceholderUrl ? (
+              {thumbnailUrl && thumbnailPlaceholderUrl && isClientReady ? (
                 <LazyLoad
                   placeholder={
                     <img
@@ -66,7 +73,7 @@ export function ProjectList({
                 </div>
               )}
             </div>
-            <div className="mt-4 mb-1">
+            <div className="mb-1 mt-4">
               {showTitle ? (
                 <h3 className={itemTitleClassName}>{title}</h3>
               ) : (

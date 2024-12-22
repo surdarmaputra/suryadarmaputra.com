@@ -1,0 +1,39 @@
+name: Notify deployment
+
+inputs:
+  title:
+    description: 'Job title'
+    required: true
+  webhookUrl:
+    description: 'Discord Webhook URL for sending the notifications.'
+    required: true
+  resultUrl:
+    Description: 'URL for the deployment'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Notify deployment success
+      uses: rjstone/discord-webhook-notify@v1
+      if: success()
+      with:
+        severity: info
+        details: 'Deployment SUCCESS for ${{ inputs.title }}. Visit ${{ inputs.resultUrl }}'
+        webhookUrl: ${{ inputs.webhookUrl }}
+
+    - name: Notify deployment failed
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with:
+        severity: error
+        details: 'Deployment FAILED for ${{ inputs.title }}'
+        webhookUrl: ${{ inputs.webhookUrl }}
+
+    - name: Notify deployment cancelled
+      uses: rjstone/discord-webhook-notify@v1
+      if: cancelled()
+      with:
+        severity: warn
+        details: 'Deployment CANCELLED for ${{ inputs.title }}'
+        webhookUrl: ${{ inputs.webhookUrl }}

@@ -1,17 +1,19 @@
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
-import { Image } from 'image-js';
 import { kebabCase } from 'lodash';
 import path from 'path';
-import superagent from 'superagent';
 
 dotenv.config();
 
 /* eslint-disable import/first */
+import { Image } from 'image-js';
+import { request } from 'undici';
+
+import { getBlockChildren } from '~/libs/notion/index.server';
+import { calculateReadingTime } from '~/libs/notion/utils.server';
+
 import {
   BlockWithChildren,
-  calculateReadingTime,
-  getBlockChildren,
   getExcerpt,
   getFileExtensionFromUrl,
   getProperties,
@@ -24,6 +26,7 @@ import { fetchPosts } from './utils';
 interface PageData {
   blocks: BlockWithChildren[] | [];
   excerpt: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   properties: Record<string, any>;
   readingTime: string;
   title: string | null;
@@ -33,14 +36,17 @@ const postsDirectory = path.resolve(__dirname, '../posts');
 const imagesDirectory = path.resolve(__dirname, '../public/images/posts');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
-  const { body: imageData } = await superagent.get(url);
+  const { body } = await request(url);
+  const imageData = await body.arrayBuffer();
+  const imageBuffer = Buffer.from(imageData);
+
   const extension = getFileExtensionFromUrl(url);
   const outputFile = `${imagesDirectory}/${filename}.${extension}`;
   const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
-  const placeholderRaw = await Image.load(imageData);
+  const placeholderRaw = await Image.load(imageBuffer);
   const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
 
-  await fs.writeFile(outputFile, imageData);
+  await fs.writeFile(outputFile, imageBuffer);
   await fs.writeFile(placeholderFile, placeholderData);
 }
 
@@ -54,6 +60,7 @@ async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const url = block.image?.file?.url || null;
     if (!url) continue;
@@ -76,7 +83,7 @@ export async function run(): Promise<void> {
   await fs.rm(imagesDirectory, { force: true, recursive: true });
   await fs.mkdir(imagesDirectory, { recursive: true });
 
-  for (let page of rawPages) {
+  for (const page of rawPages) {
     const title = getTitle(page);
     const properties = getProperties(page);
     const originalBlocks = await getBlockChildren(page.id);

@@ -1,0 +1,19 @@
+name: Notify deployment started
+
+inputs:
+  title:
+    description: 'Job title'
+    required: true
+  webhookUrl:
+    description: 'Discord Webhook URL for sending the notifications.'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Notify deployment started
+      uses: rjstone/discord-webhook-notify@v1
+      with:
+        severity: info
+        details: 'Deployment started for ${{ inputs.title }}'
+        webhookUrl: ${{ inputs.webhookUrl }}

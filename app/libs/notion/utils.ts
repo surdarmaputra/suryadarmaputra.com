@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type {
   GetBlockResponse,
   GetPageResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { identity } from 'lodash';
-import readingTime from 'reading-time';
+import identity from 'lodash/identity';
 
 import type { BlockWithChildren, RichTextBlock } from './types';
 
@@ -26,7 +26,7 @@ export function concatPlainTexts(blocks: RichTextBlock[]): string {
   return blocks.reduce((finalText, text) => finalText + text.plain_text, '');
 }
 
-function generateFullText(blocks: BlockWithChildren[]): string {
+export function generateFullText(blocks: BlockWithChildren[]): string {
   return blocks.reduce((accumulator, { block, children }) => {
     if (!('type' in block)) return accumulator;
 
@@ -45,12 +45,6 @@ function generateFullText(blocks: BlockWithChildren[]): string {
 
     return currentBlockText;
   }, '');
-}
-
-export function calculateReadingTime(blocks: BlockWithChildren[]): string {
-  const fullText = generateFullText(blocks);
-  const stats = readingTime(fullText);
-  return `${Math.round(stats.minutes)} mins read`;
 }
 
 export function getExcerpt(blocks: BlockWithChildren[]): string {
@@ -96,6 +90,7 @@ const propertyFormatters = {
   category: formatSelect,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getProperties(page: GetPageResponse): Record<string, any> {
   // @ts-ignore
   const { properties } = page;

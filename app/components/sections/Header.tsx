@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, NavLink, useLocation } from 'remix';
+import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/components/base/ColorModeToggle';
 
@@ -14,18 +14,18 @@ export function Header() {
 
   const toggleColorMode = (becomeDark: boolean) => {
     setIsDark(becomeDark);
-    global.localStorage.theme = becomeDark ? 'dark' : 'light';
+    window.localStorage.theme = becomeDark ? 'dark' : 'light';
     if (becomeDark) {
-      global.document.documentElement.classList.add('dark');
+      window.document.documentElement.classList.add('dark');
     } else {
-      global.document.documentElement.classList.remove('dark');
+      window.document.documentElement.classList.remove('dark');
     }
   };
 
   useEffect(() => {
-    const isCurrentlyDark = !global.localStorage.theme
+    const isCurrentlyDark = !window.localStorage.theme
       ? true
-      : global.localStorage.theme === 'dark';
+      : window.localStorage.theme === 'dark';
     setIsDark(isCurrentlyDark);
   }, [setIsDark]);
 
@@ -41,11 +41,11 @@ export function Header() {
       </Link>
       <nav className="flex items-center">
         {location.pathname !== '/' && (
-          <Link className="animated-link mr-8 pt-2 pb-1 md:pt-1" to="/">
+          <Link className="animated-link mr-8 pb-1 pt-2 md:pt-1" to="/">
             Home
           </Link>
         )}
-        <NavLink className="animated-link mr-8 pt-2 pb-1 md:pt-1" to="/about">
+        <NavLink className="animated-link mr-8 pb-1 pt-2 md:pt-1" to="/about">
           About
         </NavLink>
         <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />

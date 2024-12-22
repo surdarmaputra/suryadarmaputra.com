@@ -12,7 +12,7 @@ export default function HeroSection({
   title,
 }: HeroSectionProps) {
   return (
-    <section className="mt-20 mb-28 text-center md:mb-32">
+    <section className="mb-28 mt-20 text-center md:mb-32">
       <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tighter text-black dark:text-slate-100">
         {title}
       </h1>

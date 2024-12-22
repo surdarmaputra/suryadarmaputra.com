@@ -99,6 +99,7 @@ export interface BlocksRendererProps {
 }
 
 export interface BlockComponentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   block: any;
   previousBlockType?: string | null;
   children?: React.ReactNode;

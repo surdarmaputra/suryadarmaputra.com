@@ -2,11 +2,12 @@ import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import { Image } from 'image-js';
 import path from 'path';
-import superagent from 'superagent';
 
 dotenv.config();
 
 /* eslint-disable import/first */
+import { request } from 'undici';
+
 import {
   getFileExtensionFromUrl,
   getProperties,
@@ -17,6 +18,7 @@ import { fetchProjects } from './utils';
 
 interface ProjectData {
   id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   properties: Record<string, any>;
   title: string | null;
 }
@@ -26,14 +28,17 @@ const projectDataFile = path.join(extrasDirectory, 'projects.json');
 const imagesDirectory = path.resolve(__dirname, '../public/images/projects');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
-  const { body: imageData } = await superagent.get(url);
+  const { body } = await request(url);
+  const imageData = await body.arrayBuffer();
+  const imageBuffer = Buffer.from(imageData);
+
   const extension = getFileExtensionFromUrl(url);
   const outputFile = `${imagesDirectory}/${filename}.${extension}`;
   const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
-  const placeholderRaw = await Image.load(imageData);
+  const placeholderRaw = await Image.load(imageBuffer);
   const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
 
-  await fs.writeFile(outputFile, imageData);
+  await fs.writeFile(outputFile, imageBuffer);
   await fs.writeFile(placeholderFile, placeholderData);
 }
 
@@ -44,6 +49,7 @@ async function fetchImages(project: ProjectData): Promise<void> {
 
   if (!Array.isArray(properties.thumbnail)) return;
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   let index = 0;
   for (const thumbnail of properties.thumbnail) {

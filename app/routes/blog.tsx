@@ -1,4 +1,4 @@
-import { Outlet } from 'remix';
+import { Outlet } from 'react-router';
 
 import { DefaultLayout } from '~/components/layouts/DefaultLayout';
 

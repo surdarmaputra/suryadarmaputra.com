@@ -1,0 +1,42 @@
+name: 'CI: Validate PR'
+
+on: pull_request
+
+jobs:
+  install-dependencies:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Install dependencies'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
+
+  lint:
+    name: Lint
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          safe_output: false
+      - name: Lint
+        id: lint
+        if: steps.changed-files.outputs.all_changed_files
+        env:
+          FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          FILTERED_FILES="$(echo $FILES | tr " " "\n" | grep -E "(.*)\.(ts|tsx)$" || true)"
+          bun run lint $FILTERED_FILES
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Lint'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}

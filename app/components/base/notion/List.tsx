@@ -27,10 +27,10 @@ const listTagMap = {
 
 function getListItemRichText(block: ListItemProps['block']) {
   switch (block.type) {
-    case 'bulleted_list_item':
-      return block.bulleted_list_item.rich_text as RichTextBlock[];
-    case 'numbered_list_item':
-      return block.numbered_list_item.rich_text as RichTextBlock[];
+  case 'bulleted_list_item':
+    return block.bulleted_list_item.rich_text as RichTextBlock[];
+  case 'numbered_list_item':
+    return block.numbered_list_item.rich_text as RichTextBlock[];
   }
 }
 

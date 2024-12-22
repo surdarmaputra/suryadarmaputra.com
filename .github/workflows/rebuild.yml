@@ -10,15 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      NOTION_PROJECT_DATABASE_ID: ${{ secrets.NOTION_PROJECT_DATABASE_ID }}
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       BASE_URL: ${{ secrets.BASE_URL }}
       NETLIFY_HOOK_URL: ${{ secrets.NETLIFY_HOOK_URL }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn --frozen-lockfile
-      - run: yarn sync
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - run: bun run sync
