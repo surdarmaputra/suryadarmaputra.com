@@ -38,7 +38,9 @@ export function Header() {
     window.localStorage.theme = becomeDark ? 'dark' : 'light';
     if (becomeDark) {
       window.document.documentElement.classList.add('dark');
+      window.document.documentElement.classList.remove('light');
     } else {
+      window.document.documentElement.classList.add('light');
       window.document.documentElement.classList.remove('dark');
     }
   };
