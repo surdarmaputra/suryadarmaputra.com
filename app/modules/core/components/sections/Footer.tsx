@@ -1,4 +1,4 @@
-import { SmartLink } from '~/components/base/SmartLink';
+import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
 export const links = [
   { label: 'Home', href: '/' },

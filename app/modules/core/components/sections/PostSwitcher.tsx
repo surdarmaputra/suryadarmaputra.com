@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
-import { ArrowLeft, ArrowRight } from '~/components/base/Icon';
 import { Post } from '~/modules/blog/types';
+import { ArrowLeft, ArrowRight } from '~/modules/core/components/base/Icon';
 
 export interface PostSwitcherProps {
   className?: string;

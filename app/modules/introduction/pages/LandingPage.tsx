@@ -1,8 +1,8 @@
-import { DefaultLayout } from '~/components/layouts/DefaultLayout';
-import { BrandHero } from '~/components/sections/BrandHero';
-import { PostList } from '~/components/sections/PostList';
-import { ProjectList } from '~/components/sections/ProjectList';
 import { Post } from '~/modules/blog/types';
+import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
+import { BrandHero } from '~/modules/core/components/sections/BrandHero';
+import { PostList } from '~/modules/core/components/sections/PostList';
+import { ProjectList } from '~/modules/core/components/sections/ProjectList';
 import { Project } from '~/modules/project/types';
 
 export interface LandingPageProps {

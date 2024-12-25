@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { DefaultLayout } from '~/components/layouts/DefaultLayout';
+import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 
 export default function Blog() {
   return (

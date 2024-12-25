@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Footer } from '~/components/sections/Footer';
-import { Header } from '~/components/sections/Header';
+import { Footer } from '~/modules/core/components/sections/Footer';
+import { Header } from '~/modules/core/components/sections/Header';
 
 interface DefaultLayoutProps {
   children?: React.ReactNode;

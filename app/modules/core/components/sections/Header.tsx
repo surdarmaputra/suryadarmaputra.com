@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 
-import { ColorModeToggle } from '~/components/base/ColorModeToggle';
+import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
 
 export function Header() {
   const [isDark, setIsDark] = useState(true);

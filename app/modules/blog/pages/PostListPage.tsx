@@ -1,5 +1,5 @@
-import HeroSection from '~/components/base/HeroSection';
-import { PostList } from '~/components/sections/PostList';
+import HeroSection from '~/modules/core/components/base/HeroSection';
+import { PostList } from '~/modules/core/components/sections/PostList';
 
 import { Post } from '../types';
 
