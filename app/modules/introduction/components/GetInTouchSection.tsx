@@ -39,13 +39,13 @@ const GetInTouchSection = forwardRef<HTMLElement, GetInTouchSectionProps>((props
       <div className="flex gap-4 mx-auto">
         {SOCIAL_LINKS.map(({ id, Icon, href }) => (
           <a
-            className="group rounded-xl dark:bg-slate-900 hover:dark:bg-slate-800 hover:scale-105 transition p-5"
+            className="group rounded-xl bg-slate-50 hover:bg-slate-200 dark:bg-slate-900 hover:dark:bg-slate-800 hover:scale-105 transition p-5"
             href={href}
             key={id}
             rel="noreferrer"
             target='_blank'
           >
-            <Icon className="w-12 h-12 md:w-20 md:h-20 group-hover:scale-110 group-hover:text-slate-300 transition-transform" />
+            <Icon className="w-12 h-12 md:w-20 md:h-20 group-hover:scale-110 text-slate-400 group-hover:text-slate-500 group-hover:dark:text-slate-300 transition-transform" />
           </a>
         ))}
       </div>
