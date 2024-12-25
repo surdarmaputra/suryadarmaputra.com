@@ -1,7 +1,8 @@
-import HeroSection from '~/components/base/HeroSection';
-import { DefaultLayout } from '~/components/layouts/DefaultLayout';
-import { ProjectList } from '~/components/sections/ProjectList';
-import { Project } from '~/services/project.server';
+import HeroSection from '~/modules/core/components/base/HeroSection';
+import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
+import { ProjectList } from '~/modules/core/components/sections/ProjectList';
+
+import { Project } from '../types';
 
 export interface ProjectListPageProps {
   projects: Project[];

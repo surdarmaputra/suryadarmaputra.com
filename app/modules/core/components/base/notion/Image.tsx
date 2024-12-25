@@ -3,13 +3,13 @@ import LazyLoad from 'react-lazyload';
 import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
-import { CloseIcon } from '~/components/base/Icon';
 import {
   BlockComponentProps,
   getFileExtensionFromUrl,
   ImageBlock,
   RichTextBlock,
 } from '~/libs/notion';
+import { CloseIcon } from '~/modules/core/components/base/Icon';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 import { RichText } from './RichText';

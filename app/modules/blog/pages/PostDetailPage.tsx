@@ -1,8 +1,9 @@
-import { BlocksRenderer } from '~/components/base/notion/BlocksRenderer';
-import { PostMetaData } from '~/components/base/PostMetaData';
-import { Tags } from '~/components/base/Tag';
-import { PostSwitcher } from '~/components/sections/PostSwitcher';
-import { FullPost, Post } from '~/services/post.server';
+import { BlocksRenderer } from '~/modules/core/components/base/notion/BlocksRenderer';
+import { PostMetaData } from '~/modules/core/components/base/PostMetaData';
+import { Tags } from '~/modules/core/components/base/Tag';
+import { PostSwitcher } from '~/modules/core/components/sections/PostSwitcher';
+
+import { FullPost, Post } from '../types';
 
 export interface PostDetailPageProps {
   post: FullPost;

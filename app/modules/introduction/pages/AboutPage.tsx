@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-import { ArrowRight } from '~/components/base/Icon';
-import { DefaultLayout } from '~/components/layouts/DefaultLayout';
-import { links } from '~/components/sections/Footer';
+import { ArrowRight } from '~/modules/core/components/base/Icon';
+import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
+import { links } from '~/modules/core/components/sections/Footer';
 
 const experiences = [
   {

@@ -1,4 +1,4 @@
-import { getProjects } from '~/services/project.server';
+import { getProjects } from '~/modules/project/services/ProjectService/getProjects';
 
 export async function loader() {
   const projects = await getProjects();

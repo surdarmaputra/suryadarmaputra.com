@@ -1,4 +1,4 @@
-import { getPosts } from '~/services/post.server';
+import { getPosts } from './getPosts';
 
 function escapeCdata(s: string): string {
   return s.replace(/\]\]>/g, ']]]]><![CDATA[>');
@@ -18,7 +18,7 @@ export interface GetFeedXMLParams {
   blogPath: string;
 }
 
-export default async function getFeedXML({
+export async function getFeedXML({
   domain,
   blogPath,
 }: GetFeedXMLParams): Promise<string> {

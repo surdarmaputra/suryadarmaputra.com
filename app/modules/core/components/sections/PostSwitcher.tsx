@@ -1,15 +1,15 @@
 import { Link } from 'react-router';
 
-import { ArrowLeft, ArrowRight } from '~/components/base/Icon';
-import type { Post } from '~/services/post.server';
+import { Post } from '~/modules/blog/types';
+import { ArrowLeft, ArrowRight } from '~/modules/core/components/base/Icon';
 
-interface PostSwitcherProps {
+export interface PostSwitcherProps {
   className?: string;
   previousPost: Post | null;
   nextPost: Post | null;
 }
 
-interface PostLinkProps {
+export interface PostLinkProps {
   post: Post | null;
   next?: boolean;
 }

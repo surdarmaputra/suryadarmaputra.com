@@ -1,6 +1,8 @@
-import { FullPost, getPost, getPosts, Post } from '~/services/post.server';
+import { FullPost, Post } from '../../types';
+import { getPostBySlug } from './getPostBySlug';
+import { getPosts } from './getPosts';
 
-export default async function getPostDetailAndNavigationBySlug(
+export async function getPostDetailAndNavigationBySlug(
   slug: string,
 ): Promise<{
   post: FullPost | null;
@@ -8,7 +10,7 @@ export default async function getPostDetailAndNavigationBySlug(
   nextPost: Post | null;
 }> {
   const posts = await getPosts();
-  const post = await getPost(slug);
+  const post = await getPostBySlug(slug);
   const currentPostIndex = posts.findIndex((item) => item.slug === slug);
   const previousPost =
     currentPostIndex > 0 ? posts[currentPostIndex - 1] : null;
