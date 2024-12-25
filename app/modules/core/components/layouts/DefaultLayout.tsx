@@ -5,14 +5,15 @@ import { Header } from '~/modules/core/components/sections/Header';
 
 interface DefaultLayoutProps {
   children?: React.ReactNode;
+  isFooterLinksVisible?: boolean;
 }
 
-export function DefaultLayout({ children }: DefaultLayoutProps) {
+export function DefaultLayout({ children, isFooterLinksVisible }: DefaultLayoutProps) {
   return (
     <>
       <Header />
       {children}
-      <Footer />
+      <Footer isLinksVisible={isFooterLinksVisible} />
     </>
   );
 }

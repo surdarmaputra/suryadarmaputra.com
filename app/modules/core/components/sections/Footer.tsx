@@ -6,13 +6,19 @@ export const links = [
   { label: 'GitHub', href: 'https://github.com/surdarmaputra' },
 ];
 
-export function Footer() {
+export interface FooterProps {
+  isLinksVisible?: boolean;
+}
+
+export function Footer({
+  isLinksVisible = true,
+}: FooterProps) {
   return (
-    <footer className="mt-20 py-8 text-center md:mt-36">
+    <footer className="mt-10 py-8 text-center md:mt-36">
       <span className="mb-0.5 block text-sm font-light text-slate-600 dark:text-slate-400">
         Surya Darma Putra
       </span>
-      {links.map(({ label, href }) => (
+      {isLinksVisible && links.map(({ label, href }) => (
         <SmartLink
           className="animated-link mr-3 pb-1 text-xs font-extralight text-slate-500 dark:text-slate-400 last:mr-0"
           href={href}
