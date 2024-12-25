@@ -5,7 +5,7 @@ export function BrandHero() {
     <HeroSection
       description={
         <>
-          Indonesian software engineer building websites, mobile apps, and boosting team productivity.
+          Software engineer based in Indonesia, building websites, mobile apps, and developer tools.
 
           {/* <SmartLink
             className="animated-underline text-slate-800 dark:text-slate-400"
