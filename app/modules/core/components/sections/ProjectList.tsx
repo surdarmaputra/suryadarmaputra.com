@@ -37,13 +37,13 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
     const displayedProjects = featuredOnly ? projects.slice(0, 3) : projects;
 
     return (
-      <section className={className} ref={ref}>
+      <section className={className} id="works" ref={ref}>
         {showTitle && (
           <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
             <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-sky-900'>
               <SlRocket className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
             </div>
-            Projects
+            Works
           </h2>
         )}
         <div className="relative grid gap-10 md:gap-6 grid-cols-1 md:grid-cols-3">

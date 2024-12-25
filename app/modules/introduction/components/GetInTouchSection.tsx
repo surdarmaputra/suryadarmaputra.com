@@ -36,7 +36,7 @@ import { forwardRef } from 'react';
 
 const GetInTouchSection = forwardRef<HTMLElement, GetInTouchSectionProps>((props, ref) => {
   return (
-    <section className={`flex flex-col gap-10 ${props.className}`} ref={ref}>
+    <section className={`flex flex-col gap-10 ${props.className}`} id="connect" ref={ref}>
       <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-200 mx-auto">
         Let&apos;s Get In Touch
       </h2>
