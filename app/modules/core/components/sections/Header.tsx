@@ -4,11 +4,20 @@ import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
 
-const STICKY_CLASSES = [
+const STICKY_CLASSES_BASE = [
   'bg-white',
+  'dark:bg-slate-900',
+];
+
+const STICKY_CLASSES_DWEB = [
+  ...STICKY_CLASSES_BASE,
+  'top-0',
+];
+
+const STICKY_CLASSES_MWEB = [
+  ...STICKY_CLASSES_BASE,
   'border',
   'bottom-0',
-  'dark:bg-slate-900',
   'dark:border-slate-800',
   'mb-2',
   'ml-2',
@@ -18,7 +27,6 @@ const STICKY_CLASSES = [
 ];
 
 const NON_STICKY_CLASSES = [
-  'mb-12',
   'top-0',
 ];
 
@@ -38,18 +46,26 @@ export function Header() {
     window.localStorage.theme = becomeDark ? 'dark' : 'light';
     if (becomeDark) {
       window.document.documentElement.classList.add('dark');
+      window.document.documentElement.classList.remove('light');
     } else {
+      window.document.documentElement.classList.add('light');
       window.document.documentElement.classList.remove('dark');
     }
   };
 
   const updateStickyHeader = debounce(() => {
-    headerRef.current?.classList.add(...STICKY_CLASSES);
-    headerRef.current?.classList.remove(...NON_STICKY_CLASSES);
+    const isDweb = window.innerWidth > 768;
+    if (isDweb) {
+      headerRef.current?.classList.add(...STICKY_CLASSES_DWEB);
+    } else {
+      headerRef.current?.classList.add(...STICKY_CLASSES_MWEB);
+      headerRef.current?.classList.remove(...NON_STICKY_CLASSES);
+    }
   });
 
   const updateNonStickyHeader = debounce(() => {
-    headerRef.current?.classList.remove(...STICKY_CLASSES);
+    headerRef.current?.classList.remove(...STICKY_CLASSES_DWEB);
+    headerRef.current?.classList.remove(...STICKY_CLASSES_MWEB);
     headerRef.current?.classList.add(...NON_STICKY_CLASSES);
   });
 
