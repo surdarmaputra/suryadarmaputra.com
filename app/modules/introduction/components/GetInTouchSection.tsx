@@ -5,6 +5,7 @@ interface SocialLink {
   id: string;
   Icon: IconType;
   href: string;
+  label: string;
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
@@ -12,16 +13,19 @@ const SOCIAL_LINKS: SocialLink[] = [
     id: 'linkedin',
     Icon: SiLinkedin,
     href: 'https://www.linkedin.com/in/surdarmaputra',
+    label: "Visit Surya's LinkedIn",
   },
   {
     id: 'github',
     Icon: SiGithub,
     href: 'https://github.com/surdarmaputra',
+    label: "Visit Surya's GitHub",
   },
   {
     id: 'x',
     Icon: SiX,
     href: 'https://x.com/surdarmaputra',
+    label: "Visit Surya's X",
   },
 ];
 
@@ -37,8 +41,9 @@ const GetInTouchSection = forwardRef<HTMLElement, GetInTouchSectionProps>((props
         Let&apos;s Get In Touch
       </h2>
       <div className="flex gap-4 mx-auto">
-        {SOCIAL_LINKS.map(({ id, Icon, href }) => (
+        {SOCIAL_LINKS.map(({ id, Icon, href, label }) => (
           <a
+            aria-label={label}
             className="group rounded-xl bg-slate-50 hover:bg-slate-200 dark:bg-slate-900 hover:dark:bg-slate-800 hover:scale-105 transition p-5"
             href={href}
             key={id}
