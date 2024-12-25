@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs } from 'react-router';
 
-import getFeedXML from '~/modules/blog/services/PostService/getFeedXML';
+import { getFeedXML } from '~/modules/blog/services/PostService/getFeedXML';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const host =

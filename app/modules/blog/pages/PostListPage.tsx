@@ -1,6 +1,7 @@
 import HeroSection from '~/components/base/HeroSection';
 import { PostList } from '~/components/sections/PostList';
-import { Post } from '~/services/post.server';
+
+import { Post } from '../types';
 
 export interface PostListPageProps {
   posts: Post[];

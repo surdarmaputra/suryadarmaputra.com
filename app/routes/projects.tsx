@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { useLoaderData } from 'react-router';
 
 import ProjectListPage from '~/modules/project/pages/ProjectListPage';
-import { getProjects } from '~/services/project.server';
+import { getProjects } from '~/modules/project/services/ProjectService/getProjects';
 
 export const meta: MetaFunction = () => {
   return [

@@ -2,23 +2,11 @@ import fs from 'fs/promises';
 
 import { getFileExtensionFromUrl } from '~/libs/notion';
 
-const projectsFile = './extras/projects.json';
-
-export interface Project {
-  category?: string;
-  date: Date;
-  id: string;
-  link: string;
-  summary: string;
-  tags?: Array<string>;
-  thumbnailUrl?: string | null;
-  thumbnailPlaceholderUrl?: string | null;
-  title: string;
-  updatedAt: Date;
-}
+import { PROJECTS_FILE } from '../../constants';
+import { Project } from '../../types';
 
 export async function getProjects(): Promise<Project[]> {
-  const fileContent: Buffer = await fs.readFile(projectsFile);
+  const fileContent: Buffer = await fs.readFile(PROJECTS_FILE);
   const projects = JSON.parse(fileContent.toString());
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

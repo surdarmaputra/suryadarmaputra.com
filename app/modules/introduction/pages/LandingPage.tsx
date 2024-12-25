@@ -2,8 +2,8 @@ import { DefaultLayout } from '~/components/layouts/DefaultLayout';
 import { BrandHero } from '~/components/sections/BrandHero';
 import { PostList } from '~/components/sections/PostList';
 import { ProjectList } from '~/components/sections/ProjectList';
-import { Post } from '~/services/post.server';
-import { Project } from '~/services/project.server';
+import { Post } from '~/modules/blog/types';
+import { Project } from '~/modules/project/types';
 
 export interface LandingPageProps {
   projects: Project[];

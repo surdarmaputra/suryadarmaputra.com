@@ -1,8 +1,8 @@
 import { PostMetaData } from '~/components/base/PostMetaData';
 import { Tags } from '~/components/base/Tag';
-import { Post } from '~/services/post.server';
+import { Post } from '~/modules/blog/types';
 
-interface PostListProps {
+export interface PostListProps {
   className?: string;
   posts: Post[];
   showTitle?: boolean;

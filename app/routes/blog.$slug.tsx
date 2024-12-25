@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, MetaFunction, redirect , useLoaderData } from 'react-router';
 
 import PostDetailPage from '~/modules/blog/pages/PostDetailPage';
-import getPostDetailAndNavigationBySlug from '~/modules/blog/services/PostService/getPostDetailAndNavigationBySlug';
+import { getPostDetailAndNavigationBySlug } from '~/modules/blog/services/PostService/getPostDetailAndNavigationBySlug';
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const post = data?.post;

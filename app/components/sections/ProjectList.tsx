@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
-import { Project } from '~/services/project.server';
+import { Project } from '~/modules/project/types';
 
 import { ArrowRight, RocketIcon } from '../base/Icon';
 import { SmartLink } from '../base/SmartLink';
