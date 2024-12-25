@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { ArrowRight } from '~/modules/core/components/base/Icon';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 import { links } from '~/modules/core/components/sections/Footer';
+import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 const experiences = [
   {
@@ -76,15 +77,13 @@ export default function AboutPage() {
         <div className="absolute right-0 top-24 -z-10 h-72 w-72 rounded-full bg-amber-500 opacity-5 blur-3xl dark:bg-amber-800"></div>
 
         <div className="w-full md:w-1/2">
-          <h2 className="mb-6 leading-relaxed text-black dark:text-slate-100">
-            Hi, you can call me{' '}
-            <span className="text-orange-500 dark:text-amber-500">Surya</span>.
-            I&apos;m a software engineer based in Bali, Indonesia.
+          <h2 className="mb-6 leading-tighter text-black dark:text-slate-100">
+            Hi 👋🏽, you can call me{' '}
+            <span className="text-orange-500 dark:text-amber-500 font-bold">Surya</span>.
+            I&apos;m a software engineer based in Indonesia.
           </h2>
-          <p className="mb-10 leading-relaxed text-slate-500 dark:text-slate-400">
-            I do web development using the JavaScript ecosystem and have built
-            products across a wide range of sectors including tours & travel,
-            financial services, logistics and more.
+          <p className="mb-10 leading-tighter text-slate-500 dark:text-slate-400">
+            I build websites using
           </p>
           <ul className="flex flex-col space-y-6 sm:flex-row sm:space-x-10 sm:space-y-0">
             {socialLinks.map(({ href, label }) => (
@@ -102,8 +101,8 @@ export default function AboutPage() {
           </ul>
         </div>
         <div className="flex w-full justify-center md:w-1/2 md:justify-end">
-          <div className="mb-20 h-40 w-40 overflow-hidden rounded-full shadow-2xl md:mb-0 md:h-80 md:w-72 md:rounded-none md:rounded-bl-[1rem] md:rounded-br-[6rem] md:rounded-tl-[8rem] md:rounded-tr-[1rem]">
-            <img alt="My portrait" src="/me.jpeg" />
+          <div className="mb-20 h-60 w-60 overflow-hidden rounded-full shadow-2xl md:mb-0 md:h-96 md:w-96 md:rounded-2xl">
+            <OptimizedImage alt="Me" src="/me.jpeg" />
           </div>
         </div>
       </section>
@@ -118,7 +117,7 @@ export default function AboutPage() {
               <div className="absolute left-0 top-3 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
               <div className="absolute left-0 top-3 inline-flex h-2 w-2 rounded-full bg-amber-500" />
               {index < experiences.length - 1 && (
-                <div className="absolute left-0.5 top-4 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
+                <div className="absolute left-[3px] top-4 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
               <h3 className="mb-0 pb-1 text-lg font-normal text-slate-700 dark:text-slate-300">
                 {role}

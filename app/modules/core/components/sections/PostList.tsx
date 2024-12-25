@@ -20,7 +20,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
     'animated-link inline text-2xl font-bold text-slate-900 dark:text-slate-200';
 
   return (
-    <section className={className} ref={ref}>
+    <section className={className} id="blog" ref={ref}>
       {showTitle && (
         <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
           <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-sky-900'>

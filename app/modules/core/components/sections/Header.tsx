@@ -30,6 +30,34 @@ const NON_STICKY_CLASSES = [
   'top-0',
 ];
 
+interface Navigation {
+  id: string;
+  label: string;
+  landingHref: string;
+  href: string;
+}
+
+const NAVIGATIONS: Navigation[] = [
+  {
+    id: 'works',
+    label: 'Works',
+    landingHref: '#works',
+    href: '/works',
+  },
+  {
+    id: 'blog',
+    label: 'Blog',
+    landingHref: '#blog',
+    href: '/blog',
+  },
+  {
+    id: 'connect',
+    label: 'Connect',
+    landingHref: '#connect',
+    href: '',
+  },
+];
+
 export function Header() {
   const observedRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -69,6 +97,22 @@ export function Header() {
     headerRef.current?.classList.add(...NON_STICKY_CLASSES);
   });
 
+  const shouldShowNavigation = (landingHref: string, href: string) => {
+    if (location.pathname === '/') {
+      return Boolean(landingHref);
+    }
+    return Boolean(href);
+  };
+
+  const handleClickNavigationItem = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, headingId: string) => {
+    if (location.pathname !== '/') return;
+    event.preventDefault();
+    const element = document.querySelector(headingId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const isCurrentlyDark = !window.localStorage.theme
       ? true
@@ -105,7 +149,7 @@ export function Header() {
     <>
       <div className="h-0 w-0" ref={observedRef} />
       <header
-        className="flex items-center justify-between p-4 mb-12 fixed left-0 top-0 right-0 z-20"
+        className="md:container mx-auto md:left-1/2 md:-translate-x-1/2 flex items-center justify-between p-4 mb-12 fixed left-0 top-0 right-0 z-20"
         ref={headerRef}
       >
         <Link to="/">
@@ -117,14 +161,16 @@ export function Header() {
           />
         </Link>
         <nav className="flex items-center">
-          {location.pathname !== '/' && (
-            <Link className="animated-link mr-8 pb-1 pt-2 md:pt-1" to="/">
-              Home
-            </Link>
-          )}
-          <NavLink className="animated-link mr-8 pb-1 pt-2 md:pt-1" to="/about">
-            About
-          </NavLink>
+          {NAVIGATIONS.map(({ id, label, landingHref, href }) => shouldShowNavigation(landingHref, href) && (
+            <NavLink
+              className="animated-link mr-3 md:mr-8 pb-1 pt-2 md:pt-1 !font-light text-xs md:text-sm"
+              key={id}
+              onClick={(event) => handleClickNavigationItem(event, landingHref)}
+              to={location.pathname === '/' ? landingHref : href}
+            >
+              {label}
+            </NavLink>
+          ))}
           <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />
         </nav>
       </header>

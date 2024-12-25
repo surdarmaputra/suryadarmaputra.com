@@ -7,11 +7,11 @@ import { getProjects } from '~/modules/project/services/ProjectService/getProjec
 export const meta: MetaFunction = () => {
   return [
     {
-      title: 'Projects - Surya Darma Putra',
+      title: 'My Works - Surya Darma Putra',
     },
     {
       name: 'description',
-      content: 'Projects by Surya Darma Putra',
+      content: 'Works by Surya Darma Putra',
     },
     {
       name: 'keywords',
