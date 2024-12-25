@@ -52,7 +52,7 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
       <PostList className='mb-32 mt-28 pt-4' posts={posts} ref={postListRef} showTitle />
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
-      <GetInTouchSection className='mt-24 mb-20 pt-4' ref={getInTouchRef} />
+      <GetInTouchSection className='mt-20 mb-24 pt-4' ref={getInTouchRef} />
       <ScrollGuide className='rotate-180' onClick={handleClickScrollToGetInTouch} />
 
       {!posts?.length && !projects?.length ? (

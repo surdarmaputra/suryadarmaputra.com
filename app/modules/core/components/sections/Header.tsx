@@ -105,7 +105,7 @@ export function Header() {
     <>
       <div className="h-0 w-0" ref={observedRef} />
       <header
-        className="flex items-center justify-between p-4 mb-12 fixed left-0 top-0 right-0 z-20"
+        className="container mx-auto flex items-center justify-between p-4 mb-12 fixed left-0 top-0 right-0 z-20"
         ref={headerRef}
       >
         <Link to="/">
