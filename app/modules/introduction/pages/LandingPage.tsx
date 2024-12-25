@@ -41,7 +41,7 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       {Boolean(projects?.length) && <ScrollGuide onClick={handleClickScrollToProject} />}
       <ProjectList
-        className="mb-32 mt-32"
+        className="mb-32 mt-28 pt-4"
         featuredOnly
         projects={projects}
         ref={projectListRef}
@@ -49,10 +49,10 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
       />
 
       {Boolean(posts?.length) && <ScrollGuide onClick={handleClickScrollToPost} />}
-      <PostList className='mb-32 mt-32' posts={posts} ref={postListRef} showTitle />
+      <PostList className='mb-32 mt-28 pt-4' posts={posts} ref={postListRef} showTitle />
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
-      <GetInTouchSection className='mt-24 mb-24' ref={getInTouchRef} />
+      <GetInTouchSection className='mt-24 mb-20 pt-4' ref={getInTouchRef} />
       <ScrollGuide className='rotate-180' onClick={handleClickScrollToGetInTouch} />
 
       {!posts?.length && !projects?.length ? (
