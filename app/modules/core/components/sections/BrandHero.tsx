@@ -5,7 +5,7 @@ export function BrandHero() {
     <HeroSection
       description={
         <>
-          Software engineer from Indonesia, building{' '}
+          Call me <span className='font-semibold'>Surya</span> or <span className='font-semibold'>Brosur</span>. A software engineer from Indonesia, building{' '}
           <span className='font-semibold'>websites</span>,{' '}
           <span className='font-semibold'>mobile apps</span>,{' '}
           <span className='font-semibold'>tools</span>,{' '}and{' '}

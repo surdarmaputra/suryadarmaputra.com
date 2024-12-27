@@ -1,5 +1,6 @@
 export interface Project {
   category?: string;
+  company?: string;
   date: Date;
   id: string;
   link: string;

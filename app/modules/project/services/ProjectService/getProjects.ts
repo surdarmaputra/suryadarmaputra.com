@@ -27,9 +27,11 @@ export async function getProjects(): Promise<Project[]> {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((item: Record<string, any>) => item.plain_text)
       .join(' ');
+    const company = project.properties.company?.name;
 
     return {
       category,
+      company,
       date,
       id: project.id,
       link,
