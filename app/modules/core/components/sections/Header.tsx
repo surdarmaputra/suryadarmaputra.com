@@ -141,7 +141,7 @@ export function Header() {
         <div
           className='
             flex items-center justify-between py-4 px-6
-            after:bg-white after:dark:bg-slate-900 after:blur-lg after:w-full after:h-full after:absolute after:top-0 after:left-0 after:z-[-1]
+            after:bg-white after:dark:bg-slate-900 after:opacity-90 after:w-full after:h-full after:absolute after:top-0 after:left-0 after:z-[-1]
           '
           ref={headerContentRef}
         >
