@@ -11,7 +11,7 @@ export interface PostListProps {
 import { forwardRef } from 'react';
 import { SlPencil } from 'react-icons/sl';
 
-import { SmartLink } from '../base/SmartLink';
+import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
 export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) => {
   const { className, posts, showTitle } = props;

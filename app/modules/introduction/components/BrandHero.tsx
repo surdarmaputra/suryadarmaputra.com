@@ -1,4 +1,4 @@
-import HeroSection from '../base/HeroSection';
+import HeroSection from '~/modules/core/components/base/HeroSection';
 
 export function BrandHero() {
   return (

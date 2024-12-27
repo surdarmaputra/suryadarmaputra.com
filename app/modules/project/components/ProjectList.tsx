@@ -2,11 +2,10 @@ import { forwardRef,useEffect, useState } from 'react';
 import { SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 
+import { ArrowRight, RocketIcon } from '~/modules/core/components/base/Icon';
+import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 import { Project } from '~/modules/project/types';
-
-import { ArrowRight, RocketIcon } from '../base/Icon';
-import { SmartLink } from '../base/SmartLink';
 
 interface ProjectListProps {
   className?: string;

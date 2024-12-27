@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
+import { PostList } from '~/modules/blog/components/PostList';
 import { Post } from '~/modules/blog/types';
 import ScrollGuide from '~/modules/core/components/base/ScrollGuide';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
-import { BrandHero } from '~/modules/core/components/sections/BrandHero';
-import { PostList } from '~/modules/core/components/sections/PostList';
-import { ProjectList } from '~/modules/core/components/sections/ProjectList';
+import { ProjectList } from '~/modules/project/components/ProjectList';
 import { Project } from '~/modules/project/types';
 
+import { BrandHero } from '../components/BrandHero';
 import GetInTouchSection from '../components/GetInTouchSection';
 
 export interface LandingPageProps {
