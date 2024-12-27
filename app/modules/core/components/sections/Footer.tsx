@@ -15,8 +15,8 @@ export function Footer({
 }: FooterProps) {
   return (
     <footer className="mt-10 py-8 text-center md:mt-36">
-      <span className="mb-0.5 block text-sm font-light text-slate-600 dark:text-slate-400">
-        Surya Darma Putra
+      <span className="mb-0.5 block text-xs font-light text-slate-600 dark:text-slate-400">
+        Copyright &copy; 2024 Surya Darma Putra
       </span>
       {isLinksVisible && links.map(({ label, href }) => (
         <SmartLink

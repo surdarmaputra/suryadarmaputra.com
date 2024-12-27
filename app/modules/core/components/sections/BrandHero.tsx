@@ -5,7 +5,12 @@ export function BrandHero() {
     <HeroSection
       description={
         <>
-          Software engineer based in Indonesia, building websites, mobile apps, and developer tools.
+          Software engineer from Indonesia, building{' '}
+          <span className='font-semibold'>websites</span>,{' '}
+          <span className='font-semibold'>mobile apps</span>,{' '}
+          <span className='font-semibold'>tools</span>,{' '}and{' '}
+          <span className='font-semibold'>integrations</span>.
+          Passionate about applying <span className='font-semibold'>pragmatic</span> solutions to tackle business challenges.
 
           {/* <SmartLink
             className="animated-underline text-slate-800 dark:text-slate-400"

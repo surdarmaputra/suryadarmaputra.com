@@ -12,8 +12,8 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
   return (
     <DefaultLayout>
       <HeroSection
-        description="Playground, websites, open sources and more."
-        title="Projects"
+        description="Portfolio, playground, tools, open sources and more."
+        title="Works"
       />
       {projects?.length ? (
         <ProjectList projects={projects} />
