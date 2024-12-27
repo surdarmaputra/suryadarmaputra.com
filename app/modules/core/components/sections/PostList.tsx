@@ -11,6 +11,8 @@ export interface PostListProps {
 import { forwardRef } from 'react';
 import { SlPencil } from 'react-icons/sl';
 
+import { SmartLink } from '../base/SmartLink';
+
 export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) => {
   const { className, posts, showTitle } = props;
 
@@ -38,7 +40,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
             index,
           ) => (
             <div className="group" key={index}>
-              <a className="block" href={href}>
+              <SmartLink className="block" href={href}>
                 <PostMetaData date={date} readingTime={readingTime} />
                 <div className="mb-4 mt-2">
                   {showTitle ? (
@@ -51,7 +53,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
                   {excerpt}
                 </p>
                 <Tags category={category} tags={tags} />
-              </a>
+              </SmartLink>
             </div>
           ),
         )}
