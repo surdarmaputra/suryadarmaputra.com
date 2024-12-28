@@ -4,6 +4,7 @@ import type { LinksFunction } from 'react-router';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 
 import ColorModeScript from './modules/core/components/base/ColorModeScript';
+import PageProgressBar from './modules/core/components/base/PageProgressBar';
 import PiwikScript from './modules/core/components/base/PiwikScript';
 
 export const links: LinksFunction = () => [
@@ -47,6 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="container pt-16 pb-16 relative mx-auto min-h-screen break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400 lg:max-w-5xl">
+        <PageProgressBar />
         {children}
         <PiwikScript />
         <ColorModeScript />
