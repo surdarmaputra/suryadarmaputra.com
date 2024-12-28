@@ -7,6 +7,7 @@ import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 import { ProjectList } from '~/modules/project/components/ProjectList';
 import { Project } from '~/modules/project/types';
 
+import { AboutMeShortSection } from '../components/AboutMeShortSection';
 import { BrandHero } from '../components/BrandHero';
 import GetInTouchSection from '../components/GetInTouchSection';
 
@@ -16,9 +17,14 @@ export interface LandingPageProps {
 }
 
 export default function LandingPage({ posts, projects }: LandingPageProps) {
+  const aboutMeRef = useRef<HTMLDivElement>(null);
   const projectListRef = useRef<HTMLDivElement>(null);
   const postListRef = useRef<HTMLDivElement>(null);
   const getInTouchRef = useRef<HTMLDivElement>(null);
+
+  const handleClickScrollToAboutMe = () => {
+    aboutMeRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleClickScrollToProject = () => {
     projectListRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -38,6 +44,13 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
       <div className="absolute left-0 top-72 z-10 h-72 w-72 rounded-full bg-cyan-400 opacity-10 blur-3xl dark:bg-cyan-600"></div>
 
       <BrandHero />
+
+      <ScrollGuide onClick={handleClickScrollToAboutMe} />
+      <AboutMeShortSection
+        className='mb-32 mt-12 pt-20'
+        onClickExploreMyWork={handleClickScrollToProject}
+        ref={aboutMeRef}
+      />
 
       {Boolean(projects?.length) && <ScrollGuide onClick={handleClickScrollToProject} />}
       <ProjectList
