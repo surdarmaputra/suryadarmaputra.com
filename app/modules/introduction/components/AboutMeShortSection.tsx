@@ -80,7 +80,7 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
             variant='filled'
           >
             Explore My Work
-            <SlArrowDownCircle className='w-5 h-5' />
+            <SlArrowDownCircle className='w-4 h-4 animate-bounce' />
           </Button>
         </div>
       )}

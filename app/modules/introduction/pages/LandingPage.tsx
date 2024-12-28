@@ -68,7 +68,6 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
       <GetInTouchSection className='mt-4 mb-24 pt-20' ref={getInTouchRef} />
-      <ScrollGuide className='rotate-180' onClick={handleClickScrollToGetInTouch} />
 
       {!posts?.length && !projects?.length ? (
         <div className="pb-48 pt-16 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
