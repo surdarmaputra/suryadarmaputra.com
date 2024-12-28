@@ -25,7 +25,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
     <section className={className} id="blog" ref={ref}>
       {showTitle && (
         <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-sky-900'>
+          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
             <SlPencil className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
           </div>
           <div>

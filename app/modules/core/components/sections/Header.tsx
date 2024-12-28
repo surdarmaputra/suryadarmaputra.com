@@ -10,6 +10,7 @@ const STICKY_CLASSES_MWEB = [
   'mb-1',
   'ml-1',
   'mr-1',
+  '!p-3',
   'rounded-xl',
   'shadow-2xl',
 ];
@@ -22,6 +23,12 @@ interface Navigation {
 }
 
 const NAVIGATIONS: Navigation[] = [
+  {
+    id: 'about',
+    label: 'About',
+    landingHref: '#about',
+    href: '/about',
+  },
   {
     id: 'works',
     label: 'Works',
@@ -156,7 +163,7 @@ export function Header() {
           <nav className="flex items-center">
             {NAVIGATIONS.map(({ id, label, landingHref, href }) => shouldShowNavigation(landingHref, href) && (
               <NavLink
-                className="animated-link mr-3 md:mr-8 pb-1 pt-2 md:pt-1 !font-medium text-sm"
+                className="animated-link mr-3 md:mr-8 py-1 !font-medium text-sm"
                 key={id}
                 onClick={(event) => handleClickNavigationItem(event, landingHref)}
                 to={location.pathname === '/' ? landingHref : href}

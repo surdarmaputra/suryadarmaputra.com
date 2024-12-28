@@ -14,12 +14,12 @@ export type ButtonVariant = typeof BUTTON_VARIANT[keyof typeof BUTTON_VARIANT];
 
 export const BUTTON_COLOR_CLASSNAMES: Record<ButtonVariant, Record<ButtonColor, string>> = {
   filled: {
-    primary: 'bg-amber-500 text-slate-900',
-    secondary: 'bg-slate-500 text-slate-900',
+    primary: ' bg-amber-500 text-slate-900',
+    secondary: 'bg-slate-500 text-slate-900 dark:bg-slate-400',
   },
   outlined: {
     primary: 'border border-amber-500 text-slate-900',
-    secondary: 'border border-slate-500 text-slate-900',
+    secondary: 'border border-slate-500 text-slate-900 dark:border-slate-400 dark:text-slate-400',
   },
   text: {
     primary: 'text-amber-500',
