@@ -21,7 +21,7 @@ export default function PageProgressBar() {
     }
     setTimeout(() => {
       setWidthIndex(0);
-    }, 1000);
+    }, 500);
   }
 
   useEffect(() => {
