@@ -47,14 +47,14 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <ScrollGuide onClick={handleClickScrollToAboutMe} />
       <AboutMeShortSection
-        className='mb-32 mt-12 pt-20'
+        className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28'
         onClickExploreMyWork={handleClickScrollToProject}
         ref={aboutMeRef}
       />
 
       {Boolean(projects?.length) && <ScrollGuide onClick={handleClickScrollToProject} />}
       <ProjectList
-        className="mb-32 mt-12 pt-20"
+        className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
         featuredOnly
         projects={projects}
         ref={projectListRef}
@@ -62,7 +62,7 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
       />
 
       {Boolean(posts?.length) && <ScrollGuide onClick={handleClickScrollToPost} />}
-      <PostList className='mb-32 mt-12 pt-20' posts={posts} ref={postListRef} showTitle />
+      <PostList className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28' posts={posts} ref={postListRef} showTitle />
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
       <GetInTouchSection className='mt-4 mb-24 pt-20' ref={getInTouchRef} />

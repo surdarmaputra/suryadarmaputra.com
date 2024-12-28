@@ -4,15 +4,26 @@ import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
 
-const STICKY_CLASSES_MWEB = [
+const STICKY_CLASSES_BASE = [
+  'after:bg-white',
+  'after:dark:bg-slate-900',
   'border',
   'dark:border-slate-800',
+  'rounded-xl',
+  'shadow-2xl',
+];
+
+const STICKY_CLASSES_DWEB = [
+  ...STICKY_CLASSES_BASE,
+  'mt-1',
+];
+
+const STICKY_CLASSES_MWEB = [
+  ...STICKY_CLASSES_BASE,
   'mb-1',
   'ml-1',
   'mr-1',
   '!p-3',
-  'rounded-xl',
-  'shadow-2xl',
 ];
 
 interface Navigation {
@@ -77,6 +88,7 @@ export function Header() {
     const isDweb = window.innerWidth > 768;
     if (isDweb) {
       headerRef.current?.classList.add('top-0');
+      headerContentRef.current?.classList.add(...STICKY_CLASSES_DWEB);
     } else {
       headerRef.current?.classList.add('bottom-0');
       headerRef.current?.classList.remove('top-0');
@@ -87,6 +99,7 @@ export function Header() {
   const updateNonStickyHeader = debounce(() => {
     headerRef.current?.classList.remove('bottom-0');
     headerRef.current?.classList.add('top-0');
+    headerContentRef.current?.classList.remove(...STICKY_CLASSES_DWEB);
     headerContentRef.current?.classList.remove(...STICKY_CLASSES_MWEB);
   });
 
@@ -142,17 +155,17 @@ export function Header() {
     <>
       <div className="h-0 w-0" ref={observedRef} />
       <header
-        className="container mx-auto lg:max-w-5xl md:left-1/2 md:-translate-x-1/2 fixed left-0 right-0 z-20"
+        className="container mx-auto lg:max-w-5xl md:left-1/2 md:-translate-x-1/2 fixed left-0 right-0 top-0 z-20"
         ref={headerRef}
       >
         <div
           className='
-            flex items-center justify-between py-4 px-6
-            after:bg-white after:dark:bg-slate-900 after:opacity-90 after:w-full after:h-full after:absolute after:top-0 after:left-0 after:z-[-1]
+            flex items-center justify-between py-3 px-4
+            after:opacity-90 after:w-full after:h-full after:absolute after:top-0 after:left-0 after:z-[-1]
           '
           ref={headerContentRef}
         >
-          <Link to="/">
+          <Link onClick={(event) => handleClickNavigationItem(event, 'body')} to="/">
             <img
               alt="Site logo"
               className="rounded-md border-2 border-slate-100 dark:border-slate-700"
