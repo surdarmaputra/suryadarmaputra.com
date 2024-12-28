@@ -40,8 +40,10 @@ const experiences = [
     descriptions: [
       <div key={0}>
         Working at a <span className='font-semibold'>fast-growing</span> logistic company has offered valuable learning opportunities.
+      </div>,
+      <div key={1}>
         I <span className="font-semibold">initiated</span> frontend unit testing, <span className="font-semibold">published</span> NPM packages,{' '}
-        <span className="font-semibold">improved</span> CI/CD, built <span className="font-semibold">growth-focused</span> features,{' '}
+        <span className="font-semibold">improved</span> CI/CD, built <span className="font-semibold">growth-focused</span> features in web and mobile apps,{' '}
         <span className="font-semibold">optimized</span> funnels,{' '}
         conducted A/B testing, and <span className="font-semibold">integrated AI</span> to enhance operations.
       </div>,

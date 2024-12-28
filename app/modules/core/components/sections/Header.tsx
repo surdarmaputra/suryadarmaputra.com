@@ -23,7 +23,8 @@ const STICKY_CLASSES_MWEB = [
   'mb-1',
   'ml-1',
   'mr-1',
-  '!p-3',
+  '!px-2',
+  '!py-1.5',
 ];
 
 interface Navigation {
@@ -170,7 +171,7 @@ export function Header() {
               alt="Site logo"
               className="rounded-md border-2 border-slate-100 dark:border-slate-700"
               src={logoPath}
-              width="40"
+              width="36"
             />
           </Link>
           <nav className="flex items-center">

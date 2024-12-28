@@ -33,9 +33,13 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
         <div>
           <div className='flex gap-4 items-center mb-4 font-light text-sm leading-6'>
             <p>
-              Hi, you can call me <span className='font-semibold'>Surya</span> or <span className='font-semibold'>Brosur</span>,{' '}
-              a software engineer <span className='font-semibold'>specializing in web development</span>{' '}
-              with expertise in <span className='font-semibold'>TypeScript</span> and <span className='font-semibold'>React.js</span>.
+              Hi, I&apos;m <span className='font-semibold'>Surya</span>,{' '}
+              a software engineer with expertise in <span className='font-semibold'>TypeScript</span> and <span className='font-semibold'>React.js</span>.{' '}
+              Currently working at{' '}
+              <SmartLink className='animated-underline' href="https://www.gotocompany.com/en/products/goto-financial">
+                GoTo Financial - Merchant Lending
+              </SmartLink>{' '}
+              team as a <span className='font-semibold'>Frontend Lead</span>.
             </p>
             <div className="shrink-0 w-2/5 md:hidden">
               <OptimizedImage alt="me" className='rounded-full' src="/images/me.png" />
@@ -43,23 +47,14 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
           </div>
 
           <p className='font-light mb-4 text-sm leading-6'>
-            I’m currently working at{' '}
-            <SmartLink className='animated-underline' href="https://www.gotocompany.com/en/products/goto-financial">
-              GoTo Financial - Merchant Lending
-            </SmartLink>{' '}
-            team as a <span className='font-semibold'>Frontend Lead</span>.
+            Beyond web apps, I develop mobile apps, developer tools, set up infrastructure and CI/CD, and integrate APIs like Notion or ChatGPT.
+            Any challenge software engineering can solve, I’m on it.
           </p>
 
           <p className='font-light mb-4 text-sm leading-6'>
-            Beyond web apps, I develop mobile apps, set up infrastructure and CI/CD, create developer tools, and integrate APIs like Notion or ChatGPT.
-            If it’s a challenge software engineering can solve, I’m on it.
-          </p>
-
-          <p className='font-light mb-4 text-sm leading-6'>
-            I believe in <span className='font-semibold'>pragmatic</span> problem-solving—finding the best solutions without being tied to specific tools or languages.
-            My mission is to help businesses <span className='font-semibold'>grow</span>,{' '}
-            operate <span className='font-semibold'>efficiently</span>,{' '}
-            and achieve <span className='font-semibold'>profitability</span>.
+            I believe in <span className='font-semibold'>pragmatic</span> problem-solving, not being tied to specific tools or languages.
+            My mission is to help businesses <span className='font-semibold'>grow</span> and{' '}
+            operate <span className='font-semibold'>efficiently</span>.
           </p>
         </div>
         <div className="shrink-0 w-1/3 hidden md:block">

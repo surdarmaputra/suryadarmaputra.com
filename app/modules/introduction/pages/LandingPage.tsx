@@ -47,7 +47,7 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <ScrollGuide onClick={handleClickScrollToAboutMe} />
       <AboutMeShortSection
-        className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28'
+        className='mb-32 mt-24 pt-6 md:mt-4 md:pt-28'
         isActionsVisible
         isTitleVisible
         onClickExploreMyWork={handleClickScrollToProject}
