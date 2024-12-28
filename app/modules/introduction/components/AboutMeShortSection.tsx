@@ -7,18 +7,27 @@ import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 export interface AboutMeShortSectionProps extends HTMLAttributes<HTMLDivElement> {
+  isActionsVisible?: boolean;
+  isTitleVisible?: boolean;
   onClickExploreMyWork?: () => void;
 }
 
-export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectionProps>(({ className, onClickExploreMyWork }, ref) => {
+export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectionProps>(({
+  className,
+  isActionsVisible,
+  isTitleVisible,
+  onClickExploreMyWork,
+}, ref) => {
   return (
     <section className={className} id="about" ref={ref}>
-      <h2 className="inline-flex items-center gap-4 mb-8 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-        <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
-          <SlMagnifier className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
-        </div>
-        Who am I?
-      </h2>
+      {isTitleVisible && (
+        <h2 className="inline-flex items-center gap-4 mb-8 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
+          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
+            <SlMagnifier className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
+          </div>
+          Who am I?
+        </h2>
+      )}
 
       <div className="flex gap-16">
         <div>
@@ -38,7 +47,7 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
             <SmartLink className='animated-underline' href="https://www.gotocompany.com/en/products/goto-financial">
               GoTo Financial - Merchant Lending
             </SmartLink>{' '}
-            team as a <span className='font-semibold'>Front End Lead</span>.
+            team as a <span className='font-semibold'>Frontend Lead</span>.
           </p>
 
           <p className='font-light mb-4 text-sm leading-6'>
@@ -58,26 +67,28 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
         </div>
       </div>
 
-      <div className="inline-flex flex-col gap-3 mt-2">
-        <Link to="/about">
+      {isActionsVisible && (
+        <div className="inline-flex flex-col gap-3 mt-2">
+          <Link to="/about">
+            <Button
+              aria-label='More About Me'
+              color='secondary'
+              variant='outlined'
+            >
+            More About Me...
+            </Button>
+          </Link>
           <Button
-            aria-label='More About Me'
-            color='secondary'
-            variant='outlined'
+            aria-label="Explore My Work"
+            color='primary'
+            onClick={onClickExploreMyWork}
+            variant='filled'
           >
-          More About Me...
+            Explore My Work
+            <SlArrowDownCircle className='w-5 h-5' />
           </Button>
-        </Link>
-        <Button
-          aria-label="Explore My Works"
-          color='primary'
-          onClick={onClickExploreMyWork}
-          variant='filled'
-        >
-          Explore My Works
-          <SlArrowDownCircle className='w-5 h-5' />
-        </Button>
-      </div>
+        </div>
+      )}
     </section>
   );
 });

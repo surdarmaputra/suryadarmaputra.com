@@ -41,10 +41,10 @@ const NAVIGATIONS: Navigation[] = [
     href: '/about',
   },
   {
-    id: 'works',
-    label: 'Works',
-    landingHref: '#works',
-    href: '/works',
+    id: 'work',
+    label: 'Work',
+    landingHref: '#work',
+    href: '/work',
   },
   {
     id: 'blog',

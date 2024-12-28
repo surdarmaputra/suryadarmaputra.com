@@ -13,7 +13,7 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
     <DefaultLayout>
       <HeroSection
         description="Portfolio, playground, tools, open sources and more."
-        title="Works"
+        title="Work"
       />
       {projects?.length ? (
         <ProjectList projects={projects} />
