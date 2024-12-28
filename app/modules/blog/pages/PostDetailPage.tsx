@@ -1,8 +1,8 @@
 import { BlocksRenderer } from '~/modules/core/components/base/notion/BlocksRenderer';
 import { PostMetaData } from '~/modules/core/components/base/PostMetaData';
 import { Tags } from '~/modules/core/components/base/Tag';
-import { PostSwitcher } from '~/modules/core/components/sections/PostSwitcher';
 
+import { PostSwitcher } from '../components/PostSwitcher';
 import { FullPost, Post } from '../types';
 
 export interface PostDetailPageProps {

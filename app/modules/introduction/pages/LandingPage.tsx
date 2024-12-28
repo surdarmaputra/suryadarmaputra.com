@@ -1,13 +1,14 @@
 import { useRef } from 'react';
 
+import { PostList } from '~/modules/blog/components/PostList';
 import { Post } from '~/modules/blog/types';
 import ScrollGuide from '~/modules/core/components/base/ScrollGuide';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
-import { BrandHero } from '~/modules/core/components/sections/BrandHero';
-import { PostList } from '~/modules/core/components/sections/PostList';
-import { ProjectList } from '~/modules/core/components/sections/ProjectList';
+import { ProjectList } from '~/modules/project/components/ProjectList';
 import { Project } from '~/modules/project/types';
 
+import { AboutMeShortSection } from '../components/AboutMeShortSection';
+import { BrandHero } from '../components/BrandHero';
 import GetInTouchSection from '../components/GetInTouchSection';
 
 export interface LandingPageProps {
@@ -16,9 +17,14 @@ export interface LandingPageProps {
 }
 
 export default function LandingPage({ posts, projects }: LandingPageProps) {
+  const aboutMeRef = useRef<HTMLDivElement>(null);
   const projectListRef = useRef<HTMLDivElement>(null);
   const postListRef = useRef<HTMLDivElement>(null);
   const getInTouchRef = useRef<HTMLDivElement>(null);
+
+  const handleClickScrollToAboutMe = () => {
+    aboutMeRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleClickScrollToProject = () => {
     projectListRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -39,17 +45,26 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <BrandHero />
 
+      <ScrollGuide onClick={handleClickScrollToAboutMe} />
+      <AboutMeShortSection
+        className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28'
+        isActionsVisible
+        isTitleVisible
+        onClickExploreMyWork={handleClickScrollToProject}
+        ref={aboutMeRef}
+      />
+
       {Boolean(projects?.length) && <ScrollGuide onClick={handleClickScrollToProject} />}
       <ProjectList
-        className="mb-32 mt-12 pt-20"
+        className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
         featuredOnly
+        isTitleVisible
         projects={projects}
         ref={projectListRef}
-        showTitle
       />
 
       {Boolean(posts?.length) && <ScrollGuide onClick={handleClickScrollToPost} />}
-      <PostList className='mb-32 mt-12 pt-20' posts={posts} ref={postListRef} showTitle />
+      <PostList className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28' isTitleVisible posts={posts} ref={postListRef} />
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
       <GetInTouchSection className='mt-4 mb-24 pt-20' ref={getInTouchRef} />

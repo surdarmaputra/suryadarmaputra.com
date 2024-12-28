@@ -2,28 +2,27 @@ import { forwardRef,useEffect, useState } from 'react';
 import { SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 
+import { ArrowRight, RocketIcon } from '~/modules/core/components/base/Icon';
+import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 import { Project } from '~/modules/project/types';
 
-import { ArrowRight, RocketIcon } from '../base/Icon';
-import { SmartLink } from '../base/SmartLink';
-
 interface ProjectListProps {
   className?: string;
   featuredOnly?: boolean;
   projects: Project[];
-  showTitle?: boolean;
+  isTitleVisible?: boolean;
 }
 
 interface ProjectListProps {
   className?: string;
   featuredOnly?: boolean;
   projects: Project[];
-  showTitle?: boolean;
+  isTitleVisible?: boolean;
 }
 
 export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
-  ({ className, featuredOnly, projects, showTitle }, ref) => {
+  ({ className, featuredOnly, projects, isTitleVisible }, ref) => {
     const [isClientReady, setIsClientReady] = useState<boolean>(false);
 
     useEffect(() => {
@@ -37,13 +36,13 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
     const displayedProjects = featuredOnly ? projects.slice(0, 3) : projects;
 
     return (
-      <section className={className} id="works" ref={ref}>
-        {showTitle && (
+      <section className={className} id="work" ref={ref}>
+        {isTitleVisible && (
           <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-            <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-sky-900'>
+            <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
               <SlRocket className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
             </div>
-            Works
+            Work
           </h2>
         )}
         <div className="relative grid gap-10 md:gap-6 grid-cols-1 md:grid-cols-3">
@@ -83,7 +82,7 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                   )}
                 </div>
                 <div className="mb-1 mt-4">
-                  {showTitle ? (
+                  {isTitleVisible ? (
                     <h3 className={itemTitleClassName}>{title}</h3>
                   ) : (
                     <h2 className={itemTitleClassName}>{title}</h2>

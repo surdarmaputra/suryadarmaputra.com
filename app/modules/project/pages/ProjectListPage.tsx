@@ -1,7 +1,7 @@
 import HeroSection from '~/modules/core/components/base/HeroSection';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
-import { ProjectList } from '~/modules/core/components/sections/ProjectList';
 
+import {ProjectList} from '../components/ProjectList';
 import { Project } from '../types';
 
 export interface ProjectListPageProps {
@@ -13,7 +13,7 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
     <DefaultLayout>
       <HeroSection
         description="Portfolio, playground, tools, open sources and more."
-        title="Works"
+        title="Work"
       />
       {projects?.length ? (
         <ProjectList projects={projects} />

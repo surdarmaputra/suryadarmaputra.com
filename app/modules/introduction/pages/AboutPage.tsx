@@ -1,19 +1,50 @@
 import dayjs from 'dayjs';
+import { useRef } from 'react';
+import { SlBriefcase } from 'react-icons/sl';
 
-import { ArrowRight } from '~/modules/core/components/base/Icon';
+import HeroSection from '~/modules/core/components/base/HeroSection';
+import ScrollGuide from '~/modules/core/components/base/ScrollGuide';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
-import { links } from '~/modules/core/components/sections/Footer';
-import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
+
+import { AboutMeShortSection } from '../components/AboutMeShortSection';
+import GetInTouchSection from '../components/GetInTouchSection';
 
 const experiences = [
   {
-    company: 'Kargo Technologies',
-    link: 'https://kargo.tech/',
-    role: 'Frontend Engineer',
-    start: '2021-06-01',
+    company: 'GoTo Financial',
+    link: 'https://www.gotocompany.com/en/products/goto-financial',
+    role: 'Frontend Lead',
+    start: '2024-07-01',
     end: null,
     descriptions: [
-      'Working in this growing company provides an opportunity for me to become a researcher and product engineer. I did research on deployment strategies, testing tools, library management, and design system. Also contributed to the development of our SaaS products.',
+      <div key={0}>
+        At GoTo Financial, I <span className='font-semibold'>lead</span> the Merchant Lending team,{' '}
+        delivering financing solutions to <span className='font-semibold'>empower</span> our merchant ecosystem and support their business <span className='font-semibold'>growth</span>.
+        I&apos;ve gained experience managing <span className='font-semibold'>high-usage</span> products,{' '}
+        collaborating with <span className='font-semibold'>global teams</span> to integrate multiple subsystems,{' '}
+        and focusing on <span className='font-semibold'>cost efficiency</span> and <span className='font-semibold'>profitability</span>.
+      </div>,
+      <div key={1}>
+        My first project involved rebranding our flagship product with a new service and user experience.{' '}
+        We successfully delivered it <span className='font-semibold'>on time</span> with <span className='font-semibold'>zero downtime</span>,{' '}
+        <span className='font-semibold'>improved testing coverage</span> by over 50%, and developed a <span className='font-semibold'>standardized UI</span> library with design tokens.
+      </div>,
+    ],
+  },
+  {
+    company: 'Kargo Technologies',
+    link: 'https://kargo.tech/',
+    role: 'Senior Frontend Engineer',
+    start: '2021-06-01',
+    end: '2024-07-01',
+    descriptions: [
+      <div key={0}>
+        Working at a <span className='font-semibold'>fast-growing</span> logistic company has offered valuable learning opportunities.
+        I <span className="font-semibold">initiated</span> frontend unit testing, <span className="font-semibold">published</span> NPM packages,{' '}
+        <span className="font-semibold">improved</span> CI/CD, built <span className="font-semibold">growth-focused</span> features,{' '}
+        <span className="font-semibold">optimized</span> funnels,{' '}
+        conducted A/B testing, and <span className="font-semibold">integrated AI</span> to enhance operations.
+      </div>,
     ],
   },
   {
@@ -23,8 +54,15 @@ const experiences = [
     start: '2018-07-01',
     end: '2021-06-01',
     descriptions: [
-      'Apart from being an online marketplace, Bukalapak also provides financial products for our users to increase their purchasing power or support their business growth.',
-      'I was responsible for the development of webview pages and web dashboards related to financial products. Here I learned to use various tech stacks, workflows and got my first experience building products in tech startup.',
+      <div key={0}>
+        Bukalapak, beyond being an online marketplace, also offers financial products to empower users by increasing their purchasing power and supporting business growth.
+      </div>,
+      <div key={1}>
+        I developed <span className='font-semibold'>webview</span> pages and <span className='font-semibold'>dashboards</span> for financial products,{' '}
+        doing <span className='font-semibold'>cloud migration</span> to GCP, {' '}
+        gaining hands-on experience with <span className='font-semibold'>diverse tech stacks and workflows</span>.{' '}
+        This role marked my first venture into building products in a tech startup environment.
+      </div>,
     ],
   },
   {
@@ -34,7 +72,12 @@ const experiences = [
     start: '2017-02-01',
     end: '2018-07-01',
     descriptions: [
-      'Artcak provides mobile and web development services for clients in various sectors, including but not limited to tours & travel, internet providers and state-owned companies. I was responsible for the development of REST API and web dashboard.',
+      <div key={0}>
+        Artcak offers mobile and web development services across various industries, including tours and travel, internet providers, and state-owned enterprises.{' '}
+        My responsibilities included developing <span className='font-semibold'>REST APIs</span> and <span className='font-semibold'>web dashboards</span>,{' '}
+        creating <span className='font-semibold'>project starters</span>, implementing <span className='font-semibold'>API testing</span>,{' '}
+        and <span className='font-semibold'>integrating Docker</span> into our workflow.
+      </div>,
     ],
   },
   {
@@ -44,12 +87,12 @@ const experiences = [
     start: '2015-11-01',
     end: '2017-02-01',
     descriptions: [
-      "Here's the starting point of my professional software development journey. In college, I worked on freelance projects from friends or lecturers.",
+      <div key={0}>
+        This marked <span className='font-semibold'>the beginning</span> of my professional software development journey. During college, I took on <span className='font-semibold'>freelance projects</span> referred by friends and lecturers.
+      </div>,
     ],
   },
 ];
-
-const socialLinks = links.filter(({ href }) => href !== '/');
 
 function formatWorkDuration(start: string, end: string | null): string {
   const formattedStart = dayjs(start).format('MMM YYYY');
@@ -70,56 +113,45 @@ function formatWorkDuration(start: string, end: string | null): string {
 }
 
 export default function AboutPage() {
+  const experienceRef = useRef<HTMLDivElement>(null);
+  const getInTouchRef = useRef<HTMLDivElement>(null);
+
+  const handleClickScrollToExperience = () => {
+    experienceRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleClickScrollToGetInTouch = () => {
+    getInTouchRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <DefaultLayout>
-      <section className="mb-24 mt-28 flex flex-wrap-reverse items-center text-2xl font-light md:mb-36">
-        <div className="absolute left-0 top-96 -z-10 h-72 w-72 rounded-full bg-blue-500 opacity-5 blur-3xl dark:bg-blue-700"></div>
-        <div className="absolute right-0 top-24 -z-10 h-72 w-72 rounded-full bg-amber-500 opacity-5 blur-3xl dark:bg-amber-800"></div>
+    <DefaultLayout isFooterLinksVisible={false}>
+      <HeroSection
+        description="Who is Surya and what he does"
+        title="About"
+      />
 
-        <div className="w-full md:w-1/2">
-          <h2 className="mb-6 leading-tighter text-black dark:text-slate-100">
-            Hi 👋🏽, you can call me{' '}
-            <span className="text-orange-500 dark:text-amber-500 font-bold">Surya</span>.
-            I&apos;m a software engineer based in Indonesia.
-          </h2>
-          <p className="mb-10 leading-tighter text-slate-500 dark:text-slate-400">
-            I build websites using
-          </p>
-          <ul className="flex flex-col space-y-6 sm:flex-row sm:space-x-10 sm:space-y-0">
-            {socialLinks.map(({ href, label }) => (
-              <li key={href}>
-                <a
-                  className="animated-underline inline-flex items-center text-base"
-                  href={href}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Visit my {label} <ArrowRight className="ml-2" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="flex w-full justify-center md:w-1/2 md:justify-end">
-          <div className="mb-20 h-60 w-60 overflow-hidden rounded-full shadow-2xl md:mb-0 md:h-96 md:w-96 md:rounded-2xl">
-            <OptimizedImage alt="Me" src="/me.jpeg" />
+      <AboutMeShortSection className='mb-20' />
+
+      <ScrollGuide onClick={handleClickScrollToExperience} />
+      <section className="mt-4 pt-16 mb-12 text-xl font-light md:mb-20" ref={experienceRef}>
+        <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
+          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
+            <SlBriefcase className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
           </div>
-        </div>
-      </section>
-
-      <section className="mb-12 text-xl font-light md:mb-20">
-        <h2 className="mb-6 text-2xl font-normal tracking-wide text-black dark:text-slate-100">
-          Experiences
+          <div>
+            Experience
+          </div>
         </h2>
         {experiences.map(
           ({ company, link, role, start, end, descriptions }, index) => (
             <div className="relative pb-8 pl-6" key={company}>
-              <div className="absolute left-0 top-3 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
-              <div className="absolute left-0 top-3 inline-flex h-2 w-2 rounded-full bg-amber-500" />
+              <div className="absolute left-0 top-2 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
+              <div className="absolute left-0 top-2 inline-flex h-2 w-2 rounded-full bg-amber-500" />
               {index < experiences.length - 1 && (
-                <div className="absolute left-[3px] top-4 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
+                <div className="absolute left-[3px] top-2 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 pb-1 text-lg font-normal text-slate-700 dark:text-slate-300">
+              <h3 className="mb-0 pb-1 text-sm font-bold leading-6 text-slate-700 dark:text-slate-300">
                 {role}
                 {company && (
                   <>
@@ -135,12 +167,12 @@ export default function AboutPage() {
                   </>
                 )}
               </h3>
-              <small className="mb-4 block text-sm text-slate-500">
+              <small className="mb-4 block text-xs font-light leading-6 text-slate-500">
                 {formatWorkDuration(start, end)}
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-base leading-loose"
+                  className="mb-4 text-sm font-light leading-6"
                   key={descriptionIndex}
                 >
                   {description}
@@ -150,6 +182,9 @@ export default function AboutPage() {
           ),
         )}
       </section>
+
+      <ScrollGuide onClick={handleClickScrollToGetInTouch} />
+      <GetInTouchSection className='py-16' ref={getInTouchRef} />
     </DefaultLayout>
   );
 }

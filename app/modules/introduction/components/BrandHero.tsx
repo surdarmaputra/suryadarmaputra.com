@@ -1,11 +1,11 @@
-import HeroSection from '../base/HeroSection';
+import HeroSection from '~/modules/core/components/base/HeroSection';
 
 export function BrandHero() {
   return (
     <HeroSection
       description={
         <>
-          Software engineer from Indonesia, building{' '}
+          A software engineer from Indonesia, building{' '}
           <span className='font-semibold'>websites</span>,{' '}
           <span className='font-semibold'>mobile apps</span>,{' '}
           <span className='font-semibold'>tools</span>,{' '}and{' '}

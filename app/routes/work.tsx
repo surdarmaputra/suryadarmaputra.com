@@ -7,11 +7,11 @@ import { getProjects } from '~/modules/project/services/ProjectService/getProjec
 export const meta: MetaFunction = () => {
   return [
     {
-      title: 'My Works - Surya Darma Putra',
+      title: 'My Work - Surya Darma Putra',
     },
     {
       name: 'description',
-      content: 'Works by Surya Darma Putra',
+      content: 'Work by Surya Darma Putra',
     },
     {
       name: 'keywords',
@@ -27,7 +27,7 @@ export async function loader() {
   };
 }
 
-export default function Projects() {
+export default function Work() {
   const { projects } = useLoaderData<typeof loader>();
 
   return <ProjectListPage projects={projects} />;
