@@ -1,9 +1,18 @@
-import InlineScript from './InlineScript';
+import { useEffect, useState } from 'react';
 
 export default function PiwikScript() {
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClientReady(true);
+  }, []);
+
+  if (!isClientReady) return null;
+
   return (
-    <InlineScript
-      body={`
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
         (function (window, document, dataLayerName, id) {
           (window[dataLayerName] = window[dataLayerName] || []),
             window[dataLayerName].push({
@@ -51,8 +60,9 @@ export default function PiwikScript() {
                     });
               })(i[c]);
           })(window, 'ppms', ['tm', 'cm']);
-        })(window, document, 'dataLayer', 'bc43969d-f1f5-4f60-84c2-8e684f025f50');        
-      `}
+        })(window, document, 'dataLayer', 'bc43969d-f1f5-4f60-84c2-8e684f025f50');    
+      `,
+      }}
     />
   );
 }

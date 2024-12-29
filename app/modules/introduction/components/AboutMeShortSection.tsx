@@ -2,7 +2,7 @@ import { forwardRef, HTMLAttributes } from 'react';
 import { SlArrowDownCircle, SlMagnifier } from 'react-icons/sl';
 import { Link } from 'react-router';
 
-import Button from '~/modules/core/components/base/Button/Button';
+import Button, { getButtonClassName } from '~/modules/core/components/base/Button/Button';
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
@@ -64,14 +64,14 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
 
       {isActionsVisible && (
         <div className="inline-flex flex-col gap-3 mt-2">
-          <Link to="/about">
-            <Button
-              aria-label='More About Me'
-              color='secondary'
-              variant='outlined'
-            >
-            More About Me...
-            </Button>
+          <Link
+            aria-label='More About Me'
+            className={getButtonClassName({
+              color: 'secondary',
+              variant: 'outlined',
+            })}
+            to="/about">
+              More About Me...
           </Link>
           <Button
             aria-label="Explore My Work"
@@ -82,6 +82,7 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
             Explore My Work
             <SlArrowDownCircle className='w-4 h-4 animate-bounce' />
           </Button>
+
         </div>
       )}
     </section>
