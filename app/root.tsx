@@ -16,6 +16,27 @@ export const links: LinksFunction = () => [
   },
   {
     rel: 'preload',
+    as: 'font',
+    href: 'https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDD4Z1xlFd2JQEk.woff2',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    as: 'font',
+    href: 'https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    as: 'font',
+    href: 'https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
     as: 'style',
     href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap',
     crossOrigin: 'anonymous',
@@ -35,6 +56,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <Meta />
         <Links />
+        <style>{`
+          .font-semibold{font-weight:600;}
+          .font-extrabold{font-weight:800;}
+          .tracking-tight{letter-spacing:-.025em;}
+        `}
+        </style>
       </head>
       <body className="container pt-16 pb-16 relative mx-auto min-h-screen break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400 lg:max-w-5xl">
         <PageProgressBar />
