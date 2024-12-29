@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useNavigation } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
@@ -10,7 +10,7 @@ const STEP_WIDTHS = [
   'w-full',
 ];
 
-export default function PageProgressBar() {
+const PageProgressBar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>((_, ref) => {
   const {state} = useNavigation();
   const simulator = useRef<NodeJS.Timeout | null>(null);
   const [widthIndex, setWidthIndex] = useState<number>(0);
@@ -47,6 +47,11 @@ export default function PageProgressBar() {
         'fixed top-0 left-0 z-50 h-1 bg-gradient-to-r from-amber-500 via-pink-600 to-sky-500 transition-all',
         STEP_WIDTHS[widthIndex],
       )}
+      ref={ref}
     />
   );
-}
+});
+
+PageProgressBar.displayName = 'PageProgressBar';
+
+export default PageProgressBar;
