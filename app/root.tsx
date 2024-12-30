@@ -56,9 +56,94 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <style>{`
-          .font-semibold{font-weight:600;}
-          .font-extrabold{font-weight:800;}
-          .tracking-tight{letter-spacing:-.025em;}
+          .break-words {
+            overflow-wrap: break-word;
+          }
+          .container {
+            width: 100%;
+          }
+          .flex {
+            display: flex;
+          }
+          .font-extrabold {
+            font-weight: 800;
+          }
+          .font-semibold {
+            font-weight: 600;
+          }
+          .items-center {
+            align-items: center;
+          }
+          .mb-1 {
+            margin-bottom: 0.25rem;
+          }
+          .mb-32 {
+            margin-bottom: 8rem;
+          }
+          .min-h-screen {
+            min-height: 100vh;
+          }
+          .mt-14 {
+            margin-top: 3.5rem;
+          }
+          .mt-4 {
+            margin-top: 1rem;
+          }
+          .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .pb-16 {
+            padding-bottom: 4rem;
+          }
+          .pt-16 {
+            padding-top: 4rem;
+          }
+          .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+          }
+          .relative {
+            position: relative;
+          }
+          .text-slate-700 {
+            --tw-text-opacity: 1;
+            color: rgb(51, 65, 85 / var(--tw-text-opacity, 1));
+          }
+          .tracking-tight {
+            letter-spacing: -0.025em;
+          }
+          .w-full {
+            width: 100%;
+          }
+          @media (min-width: 640px) {
+            .container {
+              max-width: 640px;
+            }
+          }
+          @media (min-width: 768px) {
+            .container {
+              max-width: 768px;
+            }
+          }
+          @media (min-width: 1024px) {
+            .container {
+              max-width: 1024px;
+            }
+            .lg:max-w-5xl {
+              max-width: 64rem;
+            }
+          }
+          @media (min-width: 1280px) {
+            .container {
+              max-width: 1280px;
+            }
+          }
+          @media (min-width: 1536px) {
+            .container {
+              max-width: 1536px;
+            }
+          }
         `}
         </style>
       </head>
