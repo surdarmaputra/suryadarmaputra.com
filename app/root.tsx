@@ -23,13 +23,6 @@ export const links: LinksFunction = () => [
   {
     rel: 'preload',
     as: 'font',
-    href: 'https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    as: 'font',
     href: 'https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2',
     type: 'font/woff2',
     crossOrigin: 'anonymous',

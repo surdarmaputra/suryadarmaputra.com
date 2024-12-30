@@ -180,7 +180,7 @@ export function Header() {
           <nav className="flex items-center">
             {NAVIGATIONS.map(({ id, label, landingHref, href }) => shouldShowNavigation(landingHref, href) && (
               <NavLink
-                className="animated-link mr-3 md:mr-8 py-1 !font-medium text-sm"
+                className="animated-link mr-3 md:mr-8 py-1 !font-semibold text-sm"
                 key={id}
                 onClick={(event) => handleClickNavigationItem(event, landingHref)}
                 to={location.pathname === '/' ? landingHref : href}
