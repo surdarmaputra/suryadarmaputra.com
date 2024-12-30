@@ -8,6 +8,8 @@ export default {
       fontFamily: {
         sans: [
           'Poppins',
+          'Roboto',
+          'Segoe UI',
           'Arial',
           'system-ui',
           'sans-serif',
