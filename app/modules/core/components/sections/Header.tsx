@@ -65,7 +65,6 @@ const NAVIGATIONS: Navigation[] = [
 
 export function Header() {
   const observedRef = useRef<HTMLDivElement>(null);
-  const pageProgressBarRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const headerContentRef = useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = useState<boolean>(true);
@@ -91,13 +90,9 @@ export function Header() {
   const updateStickyHeader = debounce(() => {
     const isDweb = window.innerWidth > 768;
     if (isDweb) {
-      pageProgressBarRef.current?.classList.remove('bottom-0');
-      pageProgressBarRef.current?.classList.add('top-0');
       headerRef.current?.classList.add('top-0');
       headerContentRef.current?.classList.add(...STICKY_CLASSES_DWEB);
     } else {
-      pageProgressBarRef.current?.classList.remove('top-0');
-      pageProgressBarRef.current?.classList.add('bottom-0');
       headerRef.current?.classList.add('bottom-0');
       headerRef.current?.classList.remove('top-0');
       headerContentRef.current?.classList.add(...STICKY_CLASSES_MWEB);
@@ -105,8 +100,6 @@ export function Header() {
   });
 
   const updateNonStickyHeader = debounce(() => {
-    pageProgressBarRef.current?.classList.remove('bottom-0');
-    pageProgressBarRef.current?.classList.add('top-0');
     headerRef.current?.classList.remove('bottom-0');
     headerRef.current?.classList.add('top-0');
     headerContentRef.current?.classList.remove(...STICKY_CLASSES_DWEB);
@@ -164,7 +157,7 @@ export function Header() {
   return (
     <>
       <div className="h-0 w-0" ref={observedRef} />
-      <PageProgressBar ref={pageProgressBarRef} />
+      <PageProgressBar />
       <header
         className="container mx-auto lg:max-w-5xl md:left-1/2 md:-translate-x-1/2 fixed left-0 right-0 top-0 z-20"
         ref={headerRef}
