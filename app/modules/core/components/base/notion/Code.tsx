@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { SlArrowDown } from 'react-icons/sl';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -9,8 +10,6 @@ import type {
   RichTextBlock,
 } from '~/libs/notion';
 import { concatPlainTexts } from '~/libs/notion';
-
-import { ChevronDown } from '../Icon';
 
 interface CodeProps extends BlockComponentProps {
   block: CodeBlock;
@@ -67,7 +66,7 @@ export function Code({ block }: CodeProps) {
             className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center rounded-full bg-slate-800 px-6 py-1 text-sm text-slate-300 shadow-lg transition hover:bg-slate-700"
             onClick={() => setExpanded(true)}
           >
-            Expand <ChevronDown className="ml-2 h-4 w-4" />
+            Expand <SlArrowDown className="ml-2 h-3 w-3" />
           </button>
         </>
       )}

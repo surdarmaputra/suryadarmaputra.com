@@ -1,4 +1,5 @@
 import { KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { SlClose } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 import type { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -9,7 +10,6 @@ import {
   ImageBlock,
   RichTextBlock,
 } from '~/libs/notion';
-import { CloseIcon } from '~/modules/core/components/base/Icon';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 import { RichText } from './RichText';
@@ -112,7 +112,7 @@ export function Image({ block }: ImageProps) {
             onClick={handleZoomClose}
             type="button"
           >
-            <CloseIcon className="mr-2" /> Close
+            <SlClose className="mr-2" /> Close
           </button>
         </div>
       ) : null}

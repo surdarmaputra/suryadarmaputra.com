@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
+import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 import PageProgressBar from '../base/PageProgressBar';
 
@@ -170,11 +171,11 @@ export function Header() {
           ref={headerContentRef}
         >
           <Link onClick={(event) => handleClickNavigationItem(event, 'body')} to="/">
-            <img
+            <OptimizedImage
               alt="Site logo"
               className="rounded-md border-2 border-slate-100 dark:border-slate-700"
               src={logoPath}
-              width="36"
+              width={36 }
             />
           </Link>
           <nav className="flex items-center">

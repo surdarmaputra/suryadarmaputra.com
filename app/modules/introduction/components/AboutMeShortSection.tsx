@@ -42,7 +42,11 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
               team as a <span className='font-semibold'>Frontend Lead</span>.
             </p>
             <div className="shrink-0 w-2/5 md:hidden">
-              <OptimizedImage alt="me" className='rounded-full' src="/images/me.png" />
+              <OptimizedImage
+                alt="me"
+                className='rounded-full'
+                src="/images/me.png"
+                width={150} />
             </div>
           </div>
 
@@ -58,7 +62,12 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
           </p>
         </div>
         <div className="shrink-0 w-1/3 hidden md:block">
-          <OptimizedImage alt="me" className='-mt-24 rounded-full' src="/images/me.png" />
+          <OptimizedImage
+            alt="me"
+            className='-mt-24 rounded-full'
+            src="/images/me.png"
+            width={240}
+          />
         </div>
       </div>
 

@@ -102,6 +102,7 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
       sizes={sizes}
       src={generateOptimizedUrl(imageUrl, format as ImageFormat, width || 320)}
       srcSet={srcSet}
+      width={width}
       {...rest}
     />;
   },

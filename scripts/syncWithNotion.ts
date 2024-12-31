@@ -40,7 +40,7 @@ function normalizeUrl(urlString: string) {
   return new URL(urlString).href;
 }
 
-const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:3000');
+const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:5173');
 const blogUrl = `${baseUrl}blog/`;
 const feedUrl = `${blogUrl}feed`;
 const extrasUrl = `${baseUrl}extras.json`;

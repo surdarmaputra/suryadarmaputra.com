@@ -1,8 +1,7 @@
 import { forwardRef,useEffect, useState } from 'react';
-import { SlRocket } from 'react-icons/sl';
+import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 
-import { ArrowRight, RocketIcon } from '~/modules/core/components/base/Icon';
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 import { Project } from '~/modules/project/types';
@@ -77,7 +76,7 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                     </LazyLoad>
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out group-hover:scale-105 dark:bg-slate-200">
-                      <RocketIcon className="h-20 w-20 text-slate-300" />
+                      <SlRocket className="h-10 w-10 text-slate-300" />
                     </div>
                   )}
                 </div>
@@ -100,7 +99,7 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                 className="animated-link mb-10 flex items-center text-base font-light md:mb-32 md:text-2xl"
                 href="/projects"
               >
-              More projects <ArrowRight className="ml-2 mt-1 md:h-8 md:w-10" />
+              More projects <SlArrowRightCircle className="ml-2 mt-1 md:h-8 md:w-10" />
               </SmartLink>
             </div>
           )}

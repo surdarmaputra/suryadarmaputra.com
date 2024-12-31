@@ -125,6 +125,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
             .container {
               max-width: 768px;
             }
+            .md:mt-4{
+              margin-top:1rem;
+            }
+            .md:pt-28{
+              padding-top:7rem;
+            }
           }
           @media (min-width: 1024px) {
             .container {
