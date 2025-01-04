@@ -107,8 +107,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             position: relative;
           }
           .text-slate-700 {
-            --tw-text-opacity: 1;
-            color: rgb(51, 65, 85 / var(--tw-text-opacity, 1));
+            color: #334155);
           }
           .tracking-tight {
             letter-spacing: -0.025em;
@@ -138,16 +137,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             }
             .lg:max-w-5xl {
               max-width: 64rem;
-            }
-          }
-          @media (min-width: 1280px) {
-            .container {
-              max-width: 1280px;
-            }
-          }
-          @media (min-width: 1536px) {
-            .container {
-              max-width: 1536px;
             }
           }
         `}
