@@ -41,7 +41,7 @@ export const AboutMeShortSection = forwardRef<
 
         <div className="flex gap-16">
           <div>
-            <div className="mb-4 flex items-center gap-4 text-xs font-light leading-6 md:text-sm">
+            <div className="mb-4 flex items-center gap-4 text-sm font-light leading-6 md:text-base">
               <p>
                 Hi, I&apos;m <span className="font-semibold">Surya</span>, a
                 software engineer with expertise in{' '}
@@ -66,13 +66,13 @@ export const AboutMeShortSection = forwardRef<
               </div>
             </div>
 
-            <p className="mb-4 text-xs font-light leading-6 md:text-sm">
+            <p className="mb-4 text-sm font-light leading-6 md:text-base">
               Beyond web apps, I develop mobile apps, developer tools, set up
               infrastructure and CI/CD, and integrate APIs like Notion or
               ChatGPT. Any challenge software engineering can solve, I’m on it.
             </p>
 
-            <p className="mb-4 text-xs font-light leading-6 md:text-sm">
+            <p className="mb-4 text-sm font-light leading-6 md:text-base">
               I believe in <span className="font-semibold">pragmatic</span>{' '}
               problem-solving, not being tied to specific tools or languages. My
               mission is to help businesses{' '}

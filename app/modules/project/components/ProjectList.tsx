@@ -92,7 +92,7 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                     <h2 className={itemTitleClassName}>{title}</h2>
                   )}
                 </div>
-                <p className="block text-xs font-light leading-normal text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300 md:text-sm md:leading-relaxed">
+                <p className="block text-sm font-light leading-normal text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300 md:text-base md:leading-relaxed">
                   {summary}
                 </p>
               </a>

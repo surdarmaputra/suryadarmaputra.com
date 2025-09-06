@@ -17,7 +17,7 @@ export default function HeroSection({
         {title}
       </h1>
 
-      <p className="mx-auto w-full text-left text-xs font-light leading-normal tracking-tight text-slate-600 dark:text-slate-400 md:mt-2 md:w-3/5 md:text-center md:text-sm">
+      <p className="mx-auto mt-2 w-full text-left text-sm font-light leading-normal tracking-tight text-slate-600 dark:text-slate-400 md:w-3/5 md:text-center md:text-base">
         {description}
       </p>
 

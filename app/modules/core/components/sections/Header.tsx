@@ -182,7 +182,7 @@ export function Header() {
               ({ id, label, landingHref, href }) =>
                 shouldShowNavigation(landingHref, href) && (
                   <NavLink
-                    className="animated-link mr-3 py-1 text-xs !font-light text-slate-500 dark:text-slate-400 md:mr-8"
+                    className="animated-link mr-3 py-1 text-sm !font-light text-slate-500 dark:text-slate-400 md:mr-8"
                     key={id}
                     onClick={(event) =>
                       handleClickNavigationItem(event, landingHref)

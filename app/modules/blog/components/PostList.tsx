@@ -20,7 +20,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>(
     if (!posts?.length) return null;
 
     const itemTitleClassName =
-      'animated-link inline text-xs md:text-sm font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
+      'animated-link inline text-sm md:text-base font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
 
     return (
       <section
@@ -36,7 +36,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>(
             <div>Blog</div>
           </h2>
         )}
-        <div className="mx-auto flex flex-col gap-3 md:w-max">
+        <div className="mx-auto flex flex-col gap-4 md:w-max">
           {posts.map(({ date, href, readingTime, title }, index) => (
             <div className="group" key={index}>
               <SmartLink className="block" href={href}>

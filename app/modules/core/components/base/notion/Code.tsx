@@ -54,7 +54,7 @@ export function Code({ block }: CodeProps) {
       ref={codeRef}
     >
       <CopyToClipboard onCopy={() => setCopied(true)} text={codeText}>
-        <button className="absolute right-0 top-0 rounded-bl bg-slate-100 px-3 py-1 text-xs dark:bg-slate-800 dark:text-slate-400">
+        <button className="absolute right-0 top-0 rounded-bl bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800 dark:text-slate-400">
           {copied ? 'Copied' : 'Copy'}
         </button>
       </CopyToClipboard>

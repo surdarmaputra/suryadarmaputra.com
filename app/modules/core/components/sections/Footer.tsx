@@ -20,13 +20,13 @@ export function Footer({ isLinksVisible = true }: FooterProps) {
         isLinksVisible ? 'h-48 md:h-40' : 'h-44 md:h-32',
       )}
     >
-      <span className="mb-0.5 block text-xs font-light text-slate-600 dark:text-slate-400">
+      <span className="mb-0.5 block text-sm font-light text-slate-600 dark:text-slate-400">
         Copyright &copy; 2024 Surya Darma Putra
       </span>
       {isLinksVisible &&
         links.map(({ label, href }) => (
           <SmartLink
-            className="animated-link mr-3 pb-1 text-xs font-extralight text-slate-500 last:mr-0 dark:text-slate-400"
+            className="animated-link mr-3 pb-1 text-sm font-extralight text-slate-500 last:mr-0 dark:text-slate-400"
             href={href}
             key={href}
           >

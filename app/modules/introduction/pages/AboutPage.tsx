@@ -162,7 +162,7 @@ export default function AboutPage() {
               {index < experiences.length - 1 && (
                 <div className="absolute left-[3px] top-2 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 pb-1 text-xs font-bold leading-6 text-slate-700 dark:text-slate-300 md:text-sm">
+              <h3 className="mb-0 pb-1 text-sm font-bold leading-6 text-slate-700 dark:text-slate-300 md:text-base">
                 {role}
                 {company && (
                   <>
@@ -178,12 +178,12 @@ export default function AboutPage() {
                   </>
                 )}
               </h3>
-              <small className="mb-4 block text-xs font-light leading-6 text-slate-500">
+              <small className="mb-4 block text-sm font-light leading-6 text-slate-500">
                 {formatWorkDuration(start, end)}
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-xs font-light leading-6 md:text-sm"
+                  className="mb-4 text-sm font-light leading-6 md:text-base"
                   key={descriptionIndex}
                 >
                   {description}
