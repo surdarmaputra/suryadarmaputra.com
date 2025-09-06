@@ -7,7 +7,7 @@ export default function ScrollGuide({ className, onClick }: ScrollGuideProps) {
   return (
     <button
       aria-label="Scroll down"
-      className={`flex w-full flex-col items-center justify-center ${className}`}
+      className={`flex w-full flex-col items-center justify-center h-12 lg:h-24 pb-8 ${className}`}
       onClick={onClick}
       type="button"
     >
@@ -27,7 +27,7 @@ export default function ScrollGuide({ className, onClick }: ScrollGuideProps) {
           />
         </svg>
       </div>
-      <div className="arrow -mt-6 animate-scroll-guide-fade-2">
+      <div className="arrow -mt-3 lg:-mt-6 animate-scroll-guide-fade-2">
         <svg
           className="h-4 w-4 text-slate-300 dark:text-slate-700 lg:h-8 lg:w-8"
           fill="none"
@@ -43,7 +43,7 @@ export default function ScrollGuide({ className, onClick }: ScrollGuideProps) {
           />
         </svg>
       </div>
-      <div className="arrow -mt-6 animate-scroll-guide-fade-3">
+      <div className="arrow -mt-3 lg:-mt-6 animate-scroll-guide-fade-3">
         <svg
           className="h-4 w-4 text-slate-400 dark:text-slate-600 lg:h-8 lg:w-8"
           fill="none"

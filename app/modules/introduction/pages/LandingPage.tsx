@@ -2,9 +2,8 @@ import { useRef } from 'react';
 
 import { PostList } from '~/modules/blog/components/PostList';
 import { Post } from '~/modules/blog/types';
-import ScrollGuide from '~/modules/core/components/base/ScrollGuide';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
-import { ProjectList } from '~/modules/project/components/ProjectList';
+import { ProjectCarousel } from '~/modules/project/components/ProjectCarousel';
 import { Project } from '~/modules/project/types';
 
 import { BrandHero } from '../components/BrandHero';
@@ -20,18 +19,6 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
   const postListRef = useRef<HTMLDivElement>(null);
   const getInTouchRef = useRef<HTMLDivElement>(null);
 
-  const handleClickScrollToProject = () => {
-    projectListRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleClickScrollToPost = () => {
-    postListRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleClickScrollToGetInTouch = () => {
-    getInTouchRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <DefaultLayout isFooterLinksVisible={false}>
       <div className="absolute right-0 top-24 z-10 h-72 w-72 rounded-full bg-red-400 opacity-10 blur-3xl dark:bg-cyan-50"></div>
@@ -39,22 +26,12 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <BrandHero />
 
-      <ScrollGuide className="mt-8" onClick={handleClickScrollToProject} />
-
-      {Boolean(projects?.length) && (
-        <ScrollGuide onClick={handleClickScrollToProject} />
-      )}
-      <ProjectList
-        className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
-        featuredOnly
-        isTitleVisible
+      <ProjectCarousel
+        className='-mx-6'
         projects={projects}
         ref={projectListRef}
       />
 
-      {Boolean(posts?.length) && (
-        <ScrollGuide onClick={handleClickScrollToPost} />
-      )}
       <PostList
         className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
         isTitleVisible
@@ -62,7 +39,6 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
         ref={postListRef}
       />
 
-      <ScrollGuide onClick={handleClickScrollToGetInTouch} />
       <GetInTouchSection className="mb-24 mt-4 pt-20" ref={getInTouchRef} />
 
       {!posts?.length && !projects?.length ? (
