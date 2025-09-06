@@ -1,7 +1,8 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import useEmblaCarousel from 'embla-carousel-react';
-import { forwardRef, ReactNode, useCallback, useEffect, useState } from 'react';
+import debounce from 'lodash/debounce';
+import { forwardRef, ReactNode, useCallback, useEffect } from 'react';
 import { SlArrowLeftCircle, SlArrowRightCircle } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 
@@ -22,7 +23,6 @@ interface PropType {
 export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
   (props, ref) => {
     const { slides, options, className, itemClassName } = props;
-    const [isPlaying, setIsPlaying] = useState(false);
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
       AutoScroll({
@@ -30,6 +30,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
         playOnInit: options?.autoPlay,
         speed: 0.5,
         stopOnMouseEnter: true,
+        stopOnInteraction: true,
         direction: options?.playDirection,
       }),
     ]);
@@ -67,24 +68,17 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
       playOrStop();
     }, [emblaApi]);
 
+    const debouncedToggleAutoplay = debounce(toggleAutoplay, 2000);
+
+    const handleSettle = useCallback(() => {
+      debouncedToggleAutoplay();
+    }, [debouncedToggleAutoplay]);
+
     useEffect(() => {
       const autoScroll = emblaApi?.plugins()?.autoScroll;
       if (!autoScroll) return;
-
-      setIsPlaying(autoScroll.isPlaying());
-      emblaApi
-        .on('autoScroll:play', () => setIsPlaying(true))
-        .on('autoScroll:stop', () => setIsPlaying(false))
-        .on('reInit', () => setIsPlaying(autoScroll.isPlaying()));
-    }, [emblaApi]);
-
-    useEffect(() => {
-      if (!isPlaying) {
-        setTimeout(() => {
-          toggleAutoplay();
-        }, 1000);
-      }
-    }, [isPlaying, toggleAutoplay]);
+      emblaApi.on('settle', handleSettle);
+    }, [emblaApi, handleSettle]);
 
     return (
       <div
