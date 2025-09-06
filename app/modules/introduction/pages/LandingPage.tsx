@@ -20,7 +20,10 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <BrandHero className="py-8" />
 
-      <ProjectCarousel className="-mx-6 py-7 lg:py-16" projects={projects} />
+      <ProjectCarousel
+        className="z-10 -mx-6 py-7 lg:py-16"
+        projects={projects}
+      />
 
       <PostList className="py-12 lg:py-16" isTitleVisible posts={posts} />
 
