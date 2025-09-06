@@ -1,4 +1,4 @@
-import { forwardRef,useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 import { twMerge } from 'tailwind-merge';
@@ -36,16 +36,20 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
     const displayedProjects = featuredOnly ? projects.slice(0, 3) : projects;
 
     return (
-      <section className={twMerge('container mx-auto lg:max-w-5xl', className)} id="work" ref={ref}>
+      <section
+        className={twMerge('container mx-auto lg:max-w-5xl', className)}
+        id="work"
+        ref={ref}
+      >
         {isTitleVisible && (
-          <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-            <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
-              <SlRocket className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
+          <h2 className="mb-10 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
+            <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
+              <SlRocket className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
             </div>
             Work
           </h2>
         )}
-        <div className="relative grid gap-10 md:gap-4 grid-cols-1 md:grid-cols-3">
+        <div className="relative grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-4">
           {displayedProjects.map(
             (
               { link, summary, title, thumbnailUrl, thumbnailPlaceholderUrl },
@@ -81,14 +85,14 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                     </div>
                   )}
                 </div>
-                <div className="mb-1 mt-2 md:mt-4 md:mb-2">
+                <div className="mb-1 mt-2 md:mb-2 md:mt-4">
                   {isTitleVisible ? (
                     <h3 className={itemTitleClassName}>{title}</h3>
                   ) : (
                     <h2 className={itemTitleClassName}>{title}</h2>
                   )}
                 </div>
-                <p className="block text-xs md:text-sm font-light leading-normal md:leading-relaxed text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300">
+                <p className="block text-xs font-light leading-normal text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300 md:text-sm md:leading-relaxed">
                   {summary}
                 </p>
               </a>
@@ -100,7 +104,8 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                 className="animated-link mb-10 flex items-center text-base font-light md:mb-32 md:text-2xl"
                 href="/projects"
               >
-              More projects <SlArrowRightCircle className="ml-2 mt-1 md:h-8 md:w-10" />
+                More projects{' '}
+                <SlArrowRightCircle className="ml-2 mt-1 md:h-8 md:w-10" />
               </SmartLink>
             </div>
           )}

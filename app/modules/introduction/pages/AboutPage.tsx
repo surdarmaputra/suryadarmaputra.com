@@ -16,16 +16,26 @@ const experiences = [
     end: null,
     descriptions: [
       <div key={0}>
-        At GoTo Financial, I <span className='font-semibold'>lead</span> the Merchant Lending team,{' '}
-        delivering financing solutions to <span className='font-semibold'>empower</span> our merchant ecosystem and support their business <span className='font-semibold'>growth</span>.
-        I&apos;ve gained experience managing <span className='font-semibold'>high-usage</span> products,{' '}
-        collaborating with <span className='font-semibold'>global teams</span> to integrate multiple subsystems,{' '}
-        and focusing on <span className='font-semibold'>cost efficiency</span> and <span className='font-semibold'>profitability</span>.
+        At GoTo Financial, I <span className="font-semibold">lead</span> the
+        Merchant Lending team, delivering financing solutions to{' '}
+        <span className="font-semibold">empower</span> our merchant ecosystem
+        and support their business <span className="font-semibold">growth</span>
+        . I&apos;ve gained experience managing{' '}
+        <span className="font-semibold">high-usage</span> products,{' '}
+        collaborating with <span className="font-semibold">global teams</span>{' '}
+        to integrate multiple subsystems, and focusing on{' '}
+        <span className="font-semibold">cost efficiency</span> and{' '}
+        <span className="font-semibold">profitability</span>.
       </div>,
       <div key={1}>
-        My first project involved rebranding our flagship product with a new service and user experience.{' '}
-        We successfully delivered it <span className='font-semibold'>on time</span> with <span className='font-semibold'>zero downtime</span>,{' '}
-        <span className='font-semibold'>improved testing coverage</span> by over 50%, and developed a <span className='font-semibold'>standardized UI</span> library with design tokens.
+        My first project involved rebranding our flagship product with a new
+        service and user experience. We successfully delivered it{' '}
+        <span className="font-semibold">on time</span> with{' '}
+        <span className="font-semibold">zero downtime</span>,{' '}
+        <span className="font-semibold">improved testing coverage</span> by over
+        50%, and developed a{' '}
+        <span className="font-semibold">standardized UI</span> library with
+        design tokens.
       </div>,
     ],
   },
@@ -37,13 +47,18 @@ const experiences = [
     end: '2024-07-01',
     descriptions: [
       <div key={0}>
-        Working at a <span className='font-semibold'>fast-growing</span> logistic company has offered valuable learning opportunities.
+        Working at a <span className="font-semibold">fast-growing</span>{' '}
+        logistic company has offered valuable learning opportunities.
       </div>,
       <div key={1}>
-        I <span className="font-semibold">initiated</span> frontend unit testing, <span className="font-semibold">published</span> NPM packages,{' '}
-        <span className="font-semibold">improved</span> CI/CD, built <span className="font-semibold">growth-focused</span> features in web and mobile apps,{' '}
-        <span className="font-semibold">optimized</span> funnels,{' '}
-        conducted A/B testing, and <span className="font-semibold">integrated AI</span> to enhance operations.
+        I <span className="font-semibold">initiated</span> frontend unit
+        testing, <span className="font-semibold">published</span> NPM packages,{' '}
+        <span className="font-semibold">improved</span> CI/CD, built{' '}
+        <span className="font-semibold">growth-focused</span> features in web
+        and mobile apps, <span className="font-semibold">optimized</span>{' '}
+        funnels, conducted A/B testing, and{' '}
+        <span className="font-semibold">integrated AI</span> to enhance
+        operations.
       </div>,
     ],
   },
@@ -55,13 +70,18 @@ const experiences = [
     end: '2021-06-01',
     descriptions: [
       <div key={0}>
-        Bukalapak, beyond being an online marketplace, also offers financial products to empower users by increasing their purchasing power and supporting business growth.
+        Bukalapak, beyond being an online marketplace, also offers financial
+        products to empower users by increasing their purchasing power and
+        supporting business growth.
       </div>,
       <div key={1}>
-        I developed <span className='font-semibold'>webview</span> pages and <span className='font-semibold'>dashboards</span> for financial products,{' '}
-        doing <span className='font-semibold'>cloud migration</span> to GCP, {' '}
-        gaining hands-on experience with <span className='font-semibold'>diverse tech stacks and workflows</span>.{' '}
-        This role marked my first venture into building products in a tech startup environment.
+        I developed <span className="font-semibold">webview</span> pages and{' '}
+        <span className="font-semibold">dashboards</span> for financial
+        products, doing <span className="font-semibold">cloud migration</span>{' '}
+        to GCP, gaining hands-on experience with{' '}
+        <span className="font-semibold">diverse tech stacks and workflows</span>
+        . This role marked my first venture into building products in a tech
+        startup environment.
       </div>,
     ],
   },
@@ -73,10 +93,15 @@ const experiences = [
     end: '2018-07-01',
     descriptions: [
       <div key={0}>
-        Artcak offers mobile and web development services across various industries, including tours and travel, internet providers, and state-owned enterprises.{' '}
-        My responsibilities included developing <span className='font-semibold'>REST APIs</span> and <span className='font-semibold'>web dashboards</span>,{' '}
-        creating <span className='font-semibold'>project starters</span>, implementing <span className='font-semibold'>API testing</span>,{' '}
-        and <span className='font-semibold'>integrating Docker</span> into our workflow.
+        Artcak offers mobile and web development services across various
+        industries, including tours and travel, internet providers, and
+        state-owned enterprises. My responsibilities included developing{' '}
+        <span className="font-semibold">REST APIs</span> and{' '}
+        <span className="font-semibold">web dashboards</span>, creating{' '}
+        <span className="font-semibold">project starters</span>, implementing{' '}
+        <span className="font-semibold">API testing</span>, and{' '}
+        <span className="font-semibold">integrating Docker</span> into our
+        workflow.
       </div>,
     ],
   },
@@ -88,7 +113,10 @@ const experiences = [
     end: '2017-02-01',
     descriptions: [
       <div key={0}>
-        This marked <span className='font-semibold'>the beginning</span> of my professional software development journey. During college, I took on <span className='font-semibold'>freelance projects</span> referred by friends and lecturers.
+        This marked <span className="font-semibold">the beginning</span> of my
+        professional software development journey. During college, I took on{' '}
+        <span className="font-semibold">freelance projects</span> referred by
+        friends and lecturers.
       </div>,
     ],
   },
@@ -115,21 +143,16 @@ function formatWorkDuration(start: string, end: string | null): string {
 export default function AboutPage() {
   return (
     <DefaultLayout isFooterLinksVisible={false}>
-      <HeroSection
-        description="Who is Surya and what he does"
-        title="About"
-      />
+      <HeroSection description="Who is Surya and what he does" title="About" />
 
       <AboutMeShortSection />
 
-      <section className="container mx-auto lg:max-w-5xl mt-4 pt-16 mb-12 text-xl font-light md:mb-20">
-        <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
-            <SlBriefcase className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
+      <section className="container mx-auto mb-12 mt-4 pt-16 text-xl font-light md:mb-20 lg:max-w-5xl">
+        <h2 className="mb-10 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
+          <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
+            <SlBriefcase className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
           </div>
-          <div>
-            Experience
-          </div>
+          <div>Experience</div>
         </h2>
         {experiences.map(
           ({ company, link, role, start, end, descriptions }, index) => (
@@ -139,7 +162,7 @@ export default function AboutPage() {
               {index < experiences.length - 1 && (
                 <div className="absolute left-[3px] top-2 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 pb-1 text-xs md:text-sm font-bold leading-6 text-slate-700 dark:text-slate-300">
+              <h3 className="mb-0 pb-1 text-xs font-bold leading-6 text-slate-700 dark:text-slate-300 md:text-sm">
                 {role}
                 {company && (
                   <>
@@ -160,7 +183,7 @@ export default function AboutPage() {
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-xs md:text-sm font-light leading-6"
+                  className="mb-4 text-xs font-light leading-6 md:text-sm"
                   key={descriptionIndex}
                 >
                   {description}
@@ -171,7 +194,7 @@ export default function AboutPage() {
         )}
       </section>
 
-      <GetInTouchSection className='py-16' />
+      <GetInTouchSection className="py-16" />
     </DefaultLayout>
   );
 }
