@@ -38,7 +38,7 @@ const NAVIGATIONS: Navigation[] = [
   {
     id: 'about',
     label: 'About',
-    landingHref: '#about',
+    landingHref: '/about',
     href: '/about',
   },
   {
@@ -115,7 +115,7 @@ export function Header() {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     headingId: string,
   ) => {
-    if (location.pathname !== '/') return;
+    if (location.pathname !== '/' || !headingId.startsWith('#')) return;
     event.preventDefault();
     const element = document.querySelector(headingId);
     if (element) {
@@ -171,6 +171,7 @@ export function Header() {
             onClick={(event) => handleClickNavigationItem(event, 'body')}
             prefetch="viewport"
             to="/"
+            viewTransition
           >
             <OptimizedImage
               alt="Site logo"
@@ -184,7 +185,7 @@ export function Header() {
               ({ id, label, landingHref, href }) =>
                 shouldShowNavigation(landingHref, href) && (
                   <NavLink
-                    className="animated-link mr-3 py-1 text-xs !font-light md:mr-8 text-slate-500 dark:text-slate-400"
+                    className="animated-link mr-3 py-1 text-xs !font-light text-slate-500 dark:text-slate-400 md:mr-8"
                     key={id}
                     onClick={(event) =>
                       handleClickNavigationItem(event, landingHref)

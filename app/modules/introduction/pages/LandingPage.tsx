@@ -39,9 +39,11 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
 
       <BrandHero />
 
-      <ScrollGuide className='mt-8' onClick={handleClickScrollToProject} />
+      <ScrollGuide className="mt-8" onClick={handleClickScrollToProject} />
 
-      {Boolean(projects?.length) && <ScrollGuide onClick={handleClickScrollToProject} />}
+      {Boolean(projects?.length) && (
+        <ScrollGuide onClick={handleClickScrollToProject} />
+      )}
       <ProjectList
         className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
         featuredOnly
@@ -50,11 +52,18 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
         ref={projectListRef}
       />
 
-      {Boolean(posts?.length) && <ScrollGuide onClick={handleClickScrollToPost} />}
-      <PostList className='mb-32 mt-14 pt-16 md:mt-4 md:pt-28' isTitleVisible posts={posts} ref={postListRef} />
+      {Boolean(posts?.length) && (
+        <ScrollGuide onClick={handleClickScrollToPost} />
+      )}
+      <PostList
+        className="mb-32 mt-14 pt-16 md:mt-4 md:pt-28"
+        isTitleVisible
+        posts={posts}
+        ref={postListRef}
+      />
 
       <ScrollGuide onClick={handleClickScrollToGetInTouch} />
-      <GetInTouchSection className='mt-4 mb-24 pt-20' ref={getInTouchRef} />
+      <GetInTouchSection className="mb-24 mt-4 pt-20" ref={getInTouchRef} />
 
       {!posts?.length && !projects?.length ? (
         <div className="pb-48 pt-16 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">

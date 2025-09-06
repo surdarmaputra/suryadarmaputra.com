@@ -95,6 +95,7 @@ export const AboutMeShortSection = forwardRef<
               })}
               prefetch="viewport"
               to="/about"
+              viewTransition
             >
               More About Me...
             </Link>

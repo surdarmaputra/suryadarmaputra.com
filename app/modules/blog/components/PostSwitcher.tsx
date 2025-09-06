@@ -38,6 +38,7 @@ function PostLink({ post, next = false }: PostLinkProps) {
       prefetch="viewport"
       title={post.title}
       to={post.href}
+      viewTransition
     >
       {next ? <SlArrowRightCircle /> : <SlArrowLeftCircle />}
       <div>{formatTitle(post.title)}</div>
