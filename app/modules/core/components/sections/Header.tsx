@@ -16,10 +16,7 @@ const STICKY_CLASSES_BASE = [
   'shadow-2xl',
 ];
 
-const STICKY_CLASSES_DWEB = [
-  ...STICKY_CLASSES_BASE,
-  'mt-1',
-];
+const STICKY_CLASSES_DWEB = [...STICKY_CLASSES_BASE, 'mt-1'];
 
 const STICKY_CLASSES_MWEB = [
   ...STICKY_CLASSES_BASE,
@@ -39,12 +36,6 @@ interface Navigation {
 
 const NAVIGATIONS: Navigation[] = [
   {
-    id: 'about',
-    label: 'About',
-    landingHref: '#about',
-    href: '/about',
-  },
-  {
     id: 'work',
     label: 'Work',
     landingHref: '#work',
@@ -61,6 +52,12 @@ const NAVIGATIONS: Navigation[] = [
     label: 'Connect',
     landingHref: '#connect',
     href: '',
+  },
+  {
+    id: 'about',
+    label: 'About',
+    landingHref: '/about',
+    href: '/about',
   },
 ];
 
@@ -114,8 +111,11 @@ export function Header() {
     return Boolean(href);
   };
 
-  const handleClickNavigationItem = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, headingId: string) => {
-    if (location.pathname !== '/') return;
+  const handleClickNavigationItem = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    headingId: string,
+  ) => {
+    if (location.pathname !== '/' || !headingId.startsWith('#')) return;
     event.preventDefault();
     const element = document.querySelector(headingId);
     if (element) {
@@ -160,35 +160,42 @@ export function Header() {
       <div className="h-0 w-0" ref={observedRef} />
       <PageProgressBar />
       <header
-        className="container mx-auto lg:max-w-5xl md:left-1/2 md:-translate-x-1/2 fixed left-0 right-0 top-0 z-20"
+        className="container fixed left-0 right-0 top-0 z-20 mx-auto md:left-1/2 md:-translate-x-1/2 lg:max-w-5xl"
         ref={headerRef}
       >
         <div
-          className='
-            flex items-center justify-between py-3 px-4
-            after:opacity-90 after:w-full after:h-full after:absolute after:top-0 after:left-0 after:z-[-1]
-          '
+          className="flex items-center justify-between px-4 py-3 after:absolute after:left-0 after:top-0 after:z-[-1] after:h-full after:w-full after:opacity-90"
           ref={headerContentRef}
         >
-          <Link onClick={(event) => handleClickNavigationItem(event, 'body')} to="/">
+          <Link
+            onClick={(event) => handleClickNavigationItem(event, 'body')}
+            prefetch="viewport"
+            to="/"
+            viewTransition
+          >
             <OptimizedImage
               alt="Site logo"
               className="rounded-md border-2 border-slate-100 dark:border-slate-700"
               src={logoPath}
-              width={36 }
+              width={36}
             />
           </Link>
           <nav className="flex items-center">
-            {NAVIGATIONS.map(({ id, label, landingHref, href }) => shouldShowNavigation(landingHref, href) && (
-              <NavLink
-                className="animated-link mr-3 md:mr-8 py-1 !font-semibold text-sm"
-                key={id}
-                onClick={(event) => handleClickNavigationItem(event, landingHref)}
-                to={location.pathname === '/' ? landingHref : href}
-              >
-                {label}
-              </NavLink>
-            ))}
+            {NAVIGATIONS.map(
+              ({ id, label, landingHref, href }) =>
+                shouldShowNavigation(landingHref, href) && (
+                  <NavLink
+                    className="animated-link mr-3 py-1 text-xs !font-light text-slate-500 dark:text-slate-400 md:mr-8"
+                    key={id}
+                    onClick={(event) =>
+                      handleClickNavigationItem(event, landingHref)
+                    }
+                    to={location.pathname === '/' ? landingHref : href}
+                  >
+                    {label}
+                  </NavLink>
+                ),
+            )}
             <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />
           </nav>
         </div>

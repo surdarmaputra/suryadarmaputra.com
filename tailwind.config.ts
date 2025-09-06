@@ -15,6 +15,9 @@ export default {
           'sans-serif',
         ],
       },
+      fontSize: {
+        '2xs': '0.65rem',
+      },
       animation: {
         'scroll-guide-fade-1': 'scroll-guide-fade 1s ease-in-out infinite 0s',
         'scroll-guide-fade-2': 'scroll-guide-fade 1s ease-in-out infinite 0.3s',

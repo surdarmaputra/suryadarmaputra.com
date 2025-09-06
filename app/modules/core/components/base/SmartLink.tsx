@@ -16,7 +16,7 @@ export function SmartLink({
   }
 
   return (
-    <Link className={className} to={href}>
+    <Link className={className} prefetch="viewport" to={href} viewTransition>
       {children}
     </Link>
   );

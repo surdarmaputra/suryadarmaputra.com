@@ -15,7 +15,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
         title="Blog"
       />
       {posts?.length ? (
-        <PostList posts={posts} />
+        <PostList className='pt-8 md:pt-0 md:pb-20 pb-16' posts={posts} />
       ) : (
         <div className="pb-48 pt-16 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!

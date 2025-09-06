@@ -1,33 +1,36 @@
-import HeroSection from '~/modules/core/components/base/HeroSection';
+import { twMerge } from 'tailwind-merge';
 
-export function BrandHero() {
+import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
+
+interface BrandHeroProps {
+  className?: string;
+}
+
+export function BrandHero({ className }: BrandHeroProps) {
   return (
-    <HeroSection
-      description={
-        <>
-          A software engineer from Indonesia, building{' '}
-          <span className='font-semibold'>websites</span>,{' '}
-          <span className='font-semibold'>mobile apps</span>,{' '}
-          <span className='font-semibold'>tools</span>,{' '}and{' '}
-          <span className='font-semibold'>integrations</span>.
-          Passionate about applying <span className='font-semibold'>pragmatic</span> solutions to tackle business challenges.
-
-          {/* <SmartLink
-            className="animated-underline text-slate-800 dark:text-slate-400"
-            href="/about"
-          >
-            More about me...
-          </SmartLink> */}
-
-        </>
-      }
-      title={
-        <>
-          <span className="block">Surya</span>{' '}
-          <span className="block">Darma</span>{' '}
-          <span className="block">Putra</span>{' '}
-        </>
-      }
-    />
+    <section
+      className={twMerge(
+        'flex w-full items-center justify-between gap-4 text-center md:flex-col-reverse',
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-2 text-left md:text-center">
+        <h1 className="text-xl font-bold leading-6 tracking-tight text-black dark:text-slate-100 md:text-5xl md:font-extrabold">
+          Surya Darma Putra
+        </h1>
+        <p className="w-full text-xs font-light text-slate-600 dark:text-slate-400 md:text-sm">
+          Software Engineer - Frontend, Fullstack, TypeScript, React, Tailwind.
+          Explore my works below.
+        </p>
+      </div>
+      <div className="shrink-0">
+        <OptimizedImage
+          alt="me"
+          className="rounded-full"
+          src="/images/me.png"
+          width={80}
+        />
+      </div>
+    </section>
   );
 }

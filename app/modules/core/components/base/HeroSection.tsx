@@ -12,12 +12,12 @@ export default function HeroSection({
   title,
 }: HeroSectionProps) {
   return (
-    <section className="mb-32 mt-24 text-center md:mb-32">
-      <h1 className="mb-6 text-left md:text-center text-[84px] font-extrabold leading-[0.9] tracking-tight text-black dark:text-slate-100 md:w-1/3 mx-auto">
+    <section className="my-8 md:py-16">
+      <h1 className="text-left md:text-center text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-black dark:text-slate-100 md:w-1/3 mx-auto">
         {title}
       </h1>
 
-      <p className="text-left md:text-center mb-6 w-full font-light text-slate-600 dark:text-slate-400 md:w-3/5 mx-auto">
+      <p className="text-left md:text-center w-full font-light text-xs md:text-sm md:mt-2 tracking-tight leading-normal text-slate-600 dark:text-slate-400 md:w-3/5 mx-auto">
         {description}
       </p>
 

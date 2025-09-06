@@ -12,11 +12,11 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
   return (
     <DefaultLayout>
       <HeroSection
-        description="Portfolio, playground, tools, open sources and more."
+        description="I've built many things on web supporting various businesses. In spare time, I built my own stuff, too."
         title="Work"
       />
       {projects?.length ? (
-        <ProjectList projects={projects} />
+        <ProjectList className='pt-8 pb-24' projects={projects} />
       ) : (
         <div className="pb-48 pt-16 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!

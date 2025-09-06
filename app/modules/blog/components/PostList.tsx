@@ -1,6 +1,5 @@
 import { Post } from '~/modules/blog/types';
 import { PostMetaData } from '~/modules/core/components/base/PostMetaData';
-import { Tags } from '~/modules/core/components/base/Tag';
 
 export interface PostListProps {
   className?: string;
@@ -10,56 +9,50 @@ export interface PostListProps {
 
 import { forwardRef } from 'react';
 import { SlPencil } from 'react-icons/sl';
+import { twMerge } from 'tailwind-merge';
 
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
-export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) => {
-  const { className, posts, isTitleVisible } = props;
+export const PostList = forwardRef<HTMLDivElement, PostListProps>(
+  (props, ref) => {
+    const { className, posts, isTitleVisible } = props;
 
-  if (!posts?.length) return null;
+    if (!posts?.length) return null;
 
-  const itemTitleClassName =
-    'animated-link inline text-2xl font-bold text-slate-900 dark:text-slate-200';
+    const itemTitleClassName =
+      'animated-link inline text-xs md:text-sm font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
 
-  return (
-    <section className={className} id="blog" ref={ref}>
-      {isTitleVisible && (
-        <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
-            <SlPencil className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
-          </div>
-          <div>
-            Blog
-          </div>
-        </h2>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-12">
-        {posts.map(
-          (
-            { date, excerpt, href, readingTime, title, category, tags },
-            index,
-          ) => (
+    return (
+      <section
+        className={twMerge('container mx-auto lg:max-w-5xl', className)}
+        id="blog"
+        ref={ref}
+      >
+        {isTitleVisible && (
+          <h2 className="mb-4 inline-flex w-full items-center gap-2 text-xl font-semibold text-slate-800 dark:text-slate-200 md:mb-12 md:justify-center md:text-4xl">
+            <div className="relative h-3 w-3 rounded-full bg-amber-500 dark:bg-slate-800">
+              <SlPencil className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <div>Blog</div>
+          </h2>
+        )}
+        <div className="mx-auto flex flex-col gap-3 md:w-max">
+          {posts.map(({ date, href, readingTime, title }, index) => (
             <div className="group" key={index}>
               <SmartLink className="block" href={href}>
                 <PostMetaData date={date} readingTime={readingTime} />
-                <div className="mb-4 mt-2">
-                  {isTitleVisible ? (
-                    <h3 className={itemTitleClassName}>{title}</h3>
-                  ) : (
-                    <h2 className={itemTitleClassName}>{title}</h2>
-                  )}
-                </div>
-                <p className="mb-4 block text-sm font-light leading-6 text-slate-600 dark:text-slate-400">
-                  {excerpt}
-                </p>
-                <Tags category={category} tags={tags} />
+                {isTitleVisible ? (
+                  <h3 className={itemTitleClassName}>{title}</h3>
+                ) : (
+                  <h2 className={itemTitleClassName}>{title}</h2>
+                )}
               </SmartLink>
             </div>
-          ),
-        )}
-      </div>
-    </section>
-  );
-});
+          ))}
+        </div>
+      </section>
+    );
+  },
+);
 
 PostList.displayName = 'PostList';
