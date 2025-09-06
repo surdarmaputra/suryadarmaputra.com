@@ -2,7 +2,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import useEmblaCarousel from 'embla-carousel-react';
 import debounce from 'lodash/debounce';
-import { forwardRef, ReactNode, useCallback, useEffect } from 'react';
+import { forwardRef, ReactNode, useCallback } from 'react';
 import { SlArrowLeftCircle, SlArrowRightCircle } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 
@@ -58,27 +58,21 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
       [emblaApi],
     );
 
-    const toggleAutoplay = useCallback(() => {
+    const play = useCallback(() => {
       const autoScroll = emblaApi?.plugins()?.autoScroll;
       if (!autoScroll) return;
-
-      const playOrStop = autoScroll.isPlaying()
-        ? autoScroll.stop
-        : autoScroll.play;
-      playOrStop();
+      autoScroll.play();
     }, [emblaApi]);
 
-    const debouncedToggleAutoplay = debounce(toggleAutoplay, 2000);
+    const debouncedPlay = debounce(play, 2000);
 
-    const handleSettle = useCallback(() => {
-      debouncedToggleAutoplay();
-    }, [debouncedToggleAutoplay]);
-
-    useEffect(() => {
+    const pause = useCallback(() => {
       const autoScroll = emblaApi?.plugins()?.autoScroll;
       if (!autoScroll) return;
-      emblaApi.on('settle', handleSettle);
-    }, [emblaApi, handleSettle]);
+      autoScroll.stop();
+    }, [emblaApi]);
+
+    const debouncedPause = debounce(pause, 2000);
 
     return (
       <div
@@ -86,6 +80,8 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
           'group/multi-item-carousel relative m-auto max-w-[48rem]',
           className,
         )}
+        onMouseEnter={() => debouncedPause()}
+        onMouseLeave={() => debouncedPlay()}
         ref={ref}
       >
         <div className="overflow-hidden py-4" ref={emblaRef}>
