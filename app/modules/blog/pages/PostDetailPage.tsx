@@ -21,23 +21,23 @@ export default function PostDetailPage({
   return (
     <>
       <PostMetaData
-        className="mt-24"
+        className="mt-20"
         date={post.date}
         readingTime={post.readingTime}
       />
-      <h2 className="mb-24 mt-4 text-5xl font-extrabold leading-tight text-slate-900 dark:text-slate-300">
+      <h2 className="container mx-auto lg:max-w-5xl mb-4 mt-4 text-5xl font-extrabold leading-tight text-slate-900 dark:text-slate-300">
         {post.title}
       </h2>
-      <article>
+      <article className='container mx-auto lg:max-w-5xl'>
         <BlocksRenderer blocks={post.blocks} />
       </article>
       <Tags
         category={post.category}
-        className="mb-20 mt-14 md:mt-20"
+        className="container mx-auto lg:max-w-5xl mb-20 mt-14 md:mt-20"
         tags={post.tags}
       />
       <PostSwitcher
-        className="mb-20"
+        className="container mx-auto lg:max-w-5xl mb-20"
         nextPost={nextPost}
         previousPost={previousPost}
       />

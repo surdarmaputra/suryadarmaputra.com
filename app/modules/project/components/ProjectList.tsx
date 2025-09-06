@@ -1,6 +1,7 @@
 import { forwardRef,useEffect, useState } from 'react';
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
+import { twMerge } from 'tailwind-merge';
 
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
@@ -31,11 +32,11 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
     if (!projects?.length) return null;
 
     const itemTitleClassName =
-      'animated-link inline text-md font-semibold text-slate-900 dark:text-slate-200';
+      'animated-link inline text-sm md:text-md font-semibold text-slate-900 dark:text-slate-200';
     const displayedProjects = featuredOnly ? projects.slice(0, 3) : projects;
 
     return (
-      <section className={className} id="work" ref={ref}>
+      <section className={twMerge('container mx-auto lg:max-w-5xl', className)} id="work" ref={ref}>
         {isTitleVisible && (
           <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
             <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
@@ -44,7 +45,7 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
             Work
           </h2>
         )}
-        <div className="relative grid gap-10 md:gap-6 grid-cols-1 md:grid-cols-3">
+        <div className="relative grid gap-10 md:gap-4 grid-cols-1 md:grid-cols-3">
           {displayedProjects.map(
             (
               { link, summary, title, thumbnailUrl, thumbnailPlaceholderUrl },
@@ -80,14 +81,14 @@ export const ProjectList = forwardRef<HTMLDivElement, ProjectListProps>(
                     </div>
                   )}
                 </div>
-                <div className="mb-1 mt-4">
+                <div className="mb-1 mt-2 md:mt-4 md:mb-2">
                   {isTitleVisible ? (
                     <h3 className={itemTitleClassName}>{title}</h3>
                   ) : (
                     <h2 className={itemTitleClassName}>{title}</h2>
                   )}
                 </div>
-                <p className="block text-sm font-light leading-6 text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300">
+                <p className="block text-xs md:text-sm font-light leading-normal md:leading-relaxed text-slate-600 transition group-hover:text-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300">
                   {summary}
                 </p>
               </a>

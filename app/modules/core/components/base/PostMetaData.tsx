@@ -25,7 +25,7 @@ export function PostMetaData({
 
   return (
     <small
-      className={`block text-2xs font-light tracking-tight text-slate-400 dark:text-slate-600 md:text-xs ${className}`}
+      className={`container mx-auto lg:max-w-5xl block text-2xs font-light tracking-tight text-slate-400 dark:text-slate-600 md:text-xs ${className}`}
     >
       {items.map((item, index) => (
         <span className="mr-4 inline-block" key={index}>

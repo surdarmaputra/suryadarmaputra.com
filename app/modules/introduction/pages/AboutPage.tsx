@@ -1,9 +1,7 @@
 import dayjs from 'dayjs';
-import { useRef } from 'react';
 import { SlBriefcase } from 'react-icons/sl';
 
 import HeroSection from '~/modules/core/components/base/HeroSection';
-import ScrollGuide from '~/modules/core/components/base/ScrollGuide';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 
 import { AboutMeShortSection } from '../components/AboutMeShortSection';
@@ -115,17 +113,6 @@ function formatWorkDuration(start: string, end: string | null): string {
 }
 
 export default function AboutPage() {
-  const experienceRef = useRef<HTMLDivElement>(null);
-  const getInTouchRef = useRef<HTMLDivElement>(null);
-
-  const handleClickScrollToExperience = () => {
-    experienceRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleClickScrollToGetInTouch = () => {
-    getInTouchRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <DefaultLayout isFooterLinksVisible={false}>
       <HeroSection
@@ -133,10 +120,9 @@ export default function AboutPage() {
         title="About"
       />
 
-      <AboutMeShortSection className='mb-20' />
+      <AboutMeShortSection />
 
-      <ScrollGuide onClick={handleClickScrollToExperience} />
-      <section className="mt-4 pt-16 mb-12 text-xl font-light md:mb-20" ref={experienceRef}>
+      <section className="container mx-auto lg:max-w-5xl mt-4 pt-16 mb-12 text-xl font-light md:mb-20">
         <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
           <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
             <SlBriefcase className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
@@ -153,7 +139,7 @@ export default function AboutPage() {
               {index < experiences.length - 1 && (
                 <div className="absolute left-[3px] top-2 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 pb-1 text-sm font-bold leading-6 text-slate-700 dark:text-slate-300">
+              <h3 className="mb-0 pb-1 text-xs md:text-sm font-bold leading-6 text-slate-700 dark:text-slate-300">
                 {role}
                 {company && (
                   <>
@@ -174,7 +160,7 @@ export default function AboutPage() {
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-sm font-light leading-6"
+                  className="mb-4 text-xs md:text-sm font-light leading-6"
                   key={descriptionIndex}
                 >
                   {description}
@@ -185,8 +171,7 @@ export default function AboutPage() {
         )}
       </section>
 
-      <ScrollGuide onClick={handleClickScrollToGetInTouch} />
-      <GetInTouchSection className='py-16' ref={getInTouchRef} />
+      <GetInTouchSection className='py-16' />
     </DefaultLayout>
   );
 }

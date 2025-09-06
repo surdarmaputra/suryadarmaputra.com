@@ -1,6 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react';
 import { SlArrowDownCircle, SlMagnifier } from 'react-icons/sl';
 import { Link } from 'react-router';
+import { twMerge } from 'tailwind-merge';
 
 import Button, {
   getButtonClassName,
@@ -24,7 +25,7 @@ export const AboutMeShortSection = forwardRef<
     ref,
   ) => {
     return (
-      <section className={className} id="about" ref={ref}>
+      <section className={twMerge('container mx-auto lg:max-w-5xl', className)} id="about" ref={ref}>
         {isTitleVisible && (
           <h2 className="mb-8 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
             <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
@@ -36,7 +37,7 @@ export const AboutMeShortSection = forwardRef<
 
         <div className="flex gap-16">
           <div>
-            <div className="mb-4 flex items-center gap-4 text-sm font-light leading-6">
+            <div className="mb-4 flex items-center gap-4 text-xs md:text-sm font-light leading-6">
               <p>
                 Hi, I&apos;m <span className="font-semibold">Surya</span>, a
                 software engineer with expertise in{' '}
@@ -61,13 +62,13 @@ export const AboutMeShortSection = forwardRef<
               </div>
             </div>
 
-            <p className="mb-4 text-sm font-light leading-6">
+            <p className="mb-4 text-xs md:text-sm font-light leading-6">
               Beyond web apps, I develop mobile apps, developer tools, set up
               infrastructure and CI/CD, and integrate APIs like Notion or
               ChatGPT. Any challenge software engineering can solve, I’m on it.
             </p>
 
-            <p className="mb-4 text-sm font-light leading-6">
+            <p className="mb-4 text-xs md:text-sm font-light leading-6">
               I believe in <span className="font-semibold">pragmatic</span>{' '}
               problem-solving, not being tied to specific tools or languages. My
               mission is to help businesses{' '}
