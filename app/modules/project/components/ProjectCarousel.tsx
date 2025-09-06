@@ -32,11 +32,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
     if (!projects?.length) return null;
 
     return (
-      <section
-        className={className}
-        id="work"
-        ref={ref}
-      >
+      <section className={className} id="work" ref={ref}>
         <MultipleItemsCarousel
           className="max-w-full"
           itemClassName="w-44 pl-4 lg:w-64"

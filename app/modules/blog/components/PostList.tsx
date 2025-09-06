@@ -13,32 +13,31 @@ import { twMerge } from 'tailwind-merge';
 
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
-export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) => {
-  const { className, posts, isTitleVisible } = props;
+export const PostList = forwardRef<HTMLDivElement, PostListProps>(
+  (props, ref) => {
+    const { className, posts, isTitleVisible } = props;
 
-  if (!posts?.length) return null;
+    if (!posts?.length) return null;
 
-  const itemTitleClassName =
-    'animated-link inline text-xs md:text-sm font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
+    const itemTitleClassName =
+      'animated-link inline text-xs md:text-sm font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
 
-  return (
-    <section className={twMerge('container lg:max-w-5xl mx-auto', className)} id="blog" ref={ref}>
-      {isTitleVisible && (
-        <h2 className="inline-flex items-center gap-2 mb-4 md:mb-12 text-xl md:text-4xl font-semibold text-slate-800 dark:text-slate-200 md:justify-center w-full">
-          <div className='relative w-3 h-3 rounded-full bg-amber-500 dark:bg-slate-800'>
-            <SlPencil className='w-4 h-4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
-          </div>
-          <div>
-            Blog
-          </div>
-        </h2>
-      )}
-      <div className="flex flex-col gap-3 md:w-max mx-auto">
-        {posts.map(
-          (
-            { date, href, readingTime, title },
-            index,
-          ) => (
+    return (
+      <section
+        className={twMerge('container mx-auto lg:max-w-5xl', className)}
+        id="blog"
+        ref={ref}
+      >
+        {isTitleVisible && (
+          <h2 className="mb-4 inline-flex w-full items-center gap-2 text-xl font-semibold text-slate-800 dark:text-slate-200 md:mb-12 md:justify-center md:text-4xl">
+            <div className="relative h-3 w-3 rounded-full bg-amber-500 dark:bg-slate-800">
+              <SlPencil className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <div>Blog</div>
+          </h2>
+        )}
+        <div className="mx-auto flex flex-col gap-3 md:w-max">
+          {posts.map(({ date, href, readingTime, title }, index) => (
             <div className="group" key={index}>
               <SmartLink className="block" href={href}>
                 <PostMetaData date={date} readingTime={readingTime} />
@@ -49,11 +48,11 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
                 )}
               </SmartLink>
             </div>
-          ),
-        )}
-      </div>
-    </section>
-  );
-});
+          ))}
+        </div>
+      </section>
+    );
+  },
+);
 
 PostList.displayName = 'PostList';

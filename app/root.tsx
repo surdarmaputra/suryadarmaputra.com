@@ -55,7 +55,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <Meta />
         <Links />
-        <style>{`
+        <style>
+          {`
           .break-words {
             overflow-wrap: break-word;
           }
@@ -142,7 +143,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         `}
         </style>
       </head>
-      <body className="pt-16 relative mx-auto min-h-screen break-words px-6 flex flex-col justify-between text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400">
+      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 pt-16 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400">
         {children}
         <PiwikScript />
         <ColorModeScript />
