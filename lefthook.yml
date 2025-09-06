@@ -7,10 +7,10 @@ pre-commit:
   commands:
     format:
       glob: '*.{js,ts,tsx,yml}'
-      run: bun format:fix {staged_files}
+      run: bun format:fix {staged_files} && git add {staged_files}
     lint:
       glob: '*.{js,ts,tsx}'
-      run: bun lint:fix {staged_files}
+      run: bun lint:fix {staged_files} && git add {staged_files}
 commit-msg:
   commands:
     commit-lint:

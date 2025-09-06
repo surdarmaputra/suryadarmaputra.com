@@ -13,11 +13,11 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <section className="my-8 md:py-16">
-      <h1 className="text-left md:text-center text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-black dark:text-slate-100 md:w-1/3 mx-auto">
+      <h1 className="mx-auto text-left text-3xl font-extrabold leading-tight tracking-tight text-black dark:text-slate-100 md:w-1/3 md:text-center md:text-5xl">
         {title}
       </h1>
 
-      <p className="text-left md:text-center w-full font-light text-xs md:text-sm md:mt-2 tracking-tight leading-normal text-slate-600 dark:text-slate-400 md:w-3/5 mx-auto">
+      <p className="mx-auto w-full text-left text-xs font-light leading-normal tracking-tight text-slate-600 dark:text-slate-400 md:mt-2 md:w-3/5 md:text-center md:text-sm">
         {description}
       </p>
 
