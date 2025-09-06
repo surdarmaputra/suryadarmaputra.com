@@ -35,6 +35,7 @@ function PostLink({ post, next = false }: PostLinkProps) {
   return (
     <Link
       className={`${wrapperClassName} border border-slate-300 transition hover:border-slate-400 hover:text-slate-500`}
+      prefetch="viewport"
       title={post.title}
       to={post.href}
     >

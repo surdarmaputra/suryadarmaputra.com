@@ -170,7 +170,7 @@ export function Header() {
           '
           ref={headerContentRef}
         >
-          <Link onClick={(event) => handleClickNavigationItem(event, 'body')} to="/">
+          <Link onClick={(event) => handleClickNavigationItem(event, 'body')} prefetch="viewport" to="/">
             <OptimizedImage
               alt="Site logo"
               className="rounded-md border-2 border-slate-100 dark:border-slate-700"

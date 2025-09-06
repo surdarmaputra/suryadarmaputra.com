@@ -79,7 +79,9 @@ export const AboutMeShortSection = forwardRef<HTMLDivElement, AboutMeShortSectio
               color: 'secondary',
               variant: 'outlined',
             })}
-            to="/about">
+            prefetch="viewport"
+            to="/about"
+          >
               More About Me...
           </Link>
           <Button
