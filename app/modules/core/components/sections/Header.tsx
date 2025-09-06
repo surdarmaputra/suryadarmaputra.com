@@ -5,8 +5,6 @@ import { Link, NavLink, useLocation } from 'react-router';
 import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
-import PageProgressBar from '../base/PageProgressBar';
-
 const STICKY_CLASSES_BASE = [
   'after:bg-white',
   'after:dark:bg-slate-900',
@@ -158,7 +156,6 @@ export function Header() {
   return (
     <>
       <div className="h-0 w-0" ref={observedRef} />
-      <PageProgressBar />
       <header
         className="container fixed left-0 right-0 top-0 z-20 mx-auto md:left-1/2 md:-translate-x-1/2 lg:max-w-5xl"
         ref={headerRef}
