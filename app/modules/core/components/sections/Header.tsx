@@ -166,7 +166,7 @@ export function Header() {
         >
           <Link
             onClick={(event) => handleClickNavigationItem(event, 'body')}
-            prefetch="viewport"
+            prefetch="intent"
             to="/"
             viewTransition
           >
