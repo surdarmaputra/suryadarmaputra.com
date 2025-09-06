@@ -1,6 +1,5 @@
 import { Post } from '~/modules/blog/types';
 import { PostMetaData } from '~/modules/core/components/base/PostMetaData';
-import { Tags } from '~/modules/core/components/base/Tag';
 
 export interface PostListProps {
   className?: string;
@@ -10,6 +9,7 @@ export interface PostListProps {
 
 import { forwardRef } from 'react';
 import { SlPencil } from 'react-icons/sl';
+import { twMerge } from 'tailwind-merge';
 
 import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
@@ -19,40 +19,34 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>((props, ref) =
   if (!posts?.length) return null;
 
   const itemTitleClassName =
-    'animated-link inline text-2xl font-bold text-slate-900 dark:text-slate-200';
+    'animated-link inline text-xs md:text-sm font-light leading-tight tracking-tight text-slate-900 dark:text-slate-200';
 
   return (
-    <section className={className} id="blog" ref={ref}>
+    <section className={twMerge('container lg:max-w-5xl mx-auto', className)} id="blog" ref={ref}>
       {isTitleVisible && (
-        <h2 className="inline-flex items-center gap-4 mb-10 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
-          <div className='relative w-8 h-8 rounded-full bg-amber-500 dark:bg-slate-800'>
-            <SlPencil className='w-10 h-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
+        <h2 className="inline-flex items-center gap-2 mb-4 md:mb-12 text-xl md:text-4xl font-semibold text-slate-800 dark:text-slate-200 md:justify-center w-full">
+          <div className='relative w-3 h-3 rounded-full bg-amber-500 dark:bg-slate-800'>
+            <SlPencil className='w-4 h-4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
           </div>
           <div>
             Blog
           </div>
         </h2>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-12">
+      <div className="flex flex-col gap-3 md:w-max mx-auto">
         {posts.map(
           (
-            { date, excerpt, href, readingTime, title, category, tags },
+            { date, href, readingTime, title },
             index,
           ) => (
             <div className="group" key={index}>
               <SmartLink className="block" href={href}>
                 <PostMetaData date={date} readingTime={readingTime} />
-                <div className="mb-4 mt-2">
-                  {isTitleVisible ? (
-                    <h3 className={itemTitleClassName}>{title}</h3>
-                  ) : (
-                    <h2 className={itemTitleClassName}>{title}</h2>
-                  )}
-                </div>
-                <p className="mb-4 block text-sm font-light leading-6 text-slate-600 dark:text-slate-400">
-                  {excerpt}
-                </p>
-                <Tags category={category} tags={tags} />
+                {isTitleVisible ? (
+                  <h3 className={itemTitleClassName}>{title}</h3>
+                ) : (
+                  <h2 className={itemTitleClassName}>{title}</h2>
+                )}
               </SmartLink>
             </div>
           ),

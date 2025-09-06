@@ -142,7 +142,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         `}
         </style>
       </head>
-      <body className="container pt-16 pb-16 relative mx-auto min-h-screen break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400 lg:max-w-5xl">
+      <body className="pt-16 relative mx-auto min-h-screen break-words px-6 flex flex-col justify-between text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400">
         {children}
         <PiwikScript />
         <ColorModeScript />

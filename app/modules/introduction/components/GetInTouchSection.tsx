@@ -33,14 +33,20 @@ export interface GetInTouchSectionProps {
   className?: string;
 }
 import { forwardRef } from 'react';
+import { SlMagnifier } from 'react-icons/sl';
 
 const GetInTouchSection = forwardRef<HTMLElement, GetInTouchSectionProps>((props, ref) => {
   return (
-    <section className={`flex flex-col gap-10 ${props.className}`} id="connect" ref={ref}>
-      <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-200 mx-auto">
-        Let&apos;s Get In Touch
+    <section className={`flex flex-col gap-2 ${props.className}`} id="connect" ref={ref}>
+      <h2 className="inline-flex items-center gap-2 text-xl font-semibold text-slate-800 dark:text-slate-200 mx-auto">
+        <div className='relative w-3 h-3 rounded-full bg-amber-500 dark:bg-slate-800'>
+          <SlMagnifier className='w-4 h-4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' />
+        </div>
+        <div>
+          Find me on
+        </div>
       </h2>
-      <div className="flex gap-4 mx-auto">
+      <div className="flex gap-2 mx-auto">
         {SOCIAL_LINKS.map(({ id, Icon, href, label }) => (
           <a
             aria-label={label}

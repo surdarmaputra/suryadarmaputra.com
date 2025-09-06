@@ -1,5 +1,4 @@
-import { forwardRef,useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { forwardRef, useEffect, useState } from 'react';
 
 import { MultipleItemsCarousel } from '~/modules/core/components/base/Carousel/MultipleItemsCarousel';
 import { Project } from '~/modules/project/types';
@@ -21,9 +20,10 @@ interface ProjectCarouselProps {
 export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
   ({ className, projects }, ref) => {
     const [isClientReady, setIsClientReady] = useState<boolean>(false);
-    const finalProjects = projects?.length && projects.length <= 3
-      ? [...projects, ...projects]
-      : projects;
+    const finalProjects =
+      projects?.length && projects.length <= 3
+        ? [...projects, ...projects, ...projects]
+        : projects;
 
     useEffect(() => {
       setIsClientReady(true);
@@ -32,20 +32,22 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
     if (!projects?.length) return null;
 
     return (
-      <section className={twMerge('pt-8 relative', className)} id="work" ref={ref}>
-        <h2 className='text-3xl font-black text-slate-500 opacity-10 absolute left-6 right-0 top-4'>
-          Works
-        </h2>
+      <section
+        className={className}
+        id="work"
+        ref={ref}
+      >
         <MultipleItemsCarousel
-          className='max-w-full'
-          itemClassName='w-44 pl-4 lg:w-64'
+          className="max-w-full"
+          itemClassName="w-44 pl-4 lg:w-64"
           options={{ loop: true, autoPlay: true, playDirection: 'forward' }}
           slides={[
             ...finalProjects.map((project, index) => (
               <ProjectCard
                 isClientReady={isClientReady}
                 key={index}
-                project={project} />
+                project={project}
+              />
             )),
           ]}
         />

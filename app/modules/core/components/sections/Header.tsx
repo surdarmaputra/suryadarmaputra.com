@@ -36,12 +36,6 @@ interface Navigation {
 
 const NAVIGATIONS: Navigation[] = [
   {
-    id: 'about',
-    label: 'About',
-    landingHref: '/about',
-    href: '/about',
-  },
-  {
     id: 'work',
     label: 'Work',
     landingHref: '#work',
@@ -58,6 +52,12 @@ const NAVIGATIONS: Navigation[] = [
     label: 'Connect',
     landingHref: '#connect',
     href: '',
+  },
+  {
+    id: 'about',
+    label: 'About',
+    landingHref: '/about',
+    href: '/about',
   },
 ];
 
