@@ -16,7 +16,7 @@ export default function ScrollGuide({
     >
       <div className="arrow animate-scroll-guide-fade-1">
         <svg
-          className="h-8 w-8 dark:text-slate-800 text-slate-200"
+          className="h-4 w-4 lg:h-8 lg:w-8 dark:text-slate-800 text-slate-200"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -28,7 +28,7 @@ export default function ScrollGuide({
       </div>
       <div className="arrow animate-scroll-guide-fade-2 -mt-6">
         <svg
-          className="h-8 w-8 dark:text-slate-700 text-slate-300"
+          className="h-4 w-4 lg:h-8 lg:w-8 dark:text-slate-700 text-slate-300"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -40,7 +40,7 @@ export default function ScrollGuide({
       </div>
       <div className="arrow animate-scroll-guide-fade-3 -mt-6">
         <svg
-          className="h-8 w-8 dark:text-slate-600 text-slate-400"
+          className="h-4 w-4 lg:h-8 lg:w-8 dark:text-slate-600 text-slate-400"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
