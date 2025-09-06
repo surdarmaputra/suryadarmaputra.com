@@ -98,7 +98,7 @@ export const AboutMeShortSection = forwardRef<
                 color: 'secondary',
                 variant: 'outlined',
               })}
-              prefetch="intent"
+              prefetch="viewport"
               to="/about"
               viewTransition
             >
