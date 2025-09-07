@@ -1,4 +1,4 @@
-import { SlRocket } from 'react-icons/sl';
+import { SlArrowRightCircle } from 'react-icons/sl';
 
 import HeroSection from '~/modules/core/components/base/HeroSection';
 import { Tags } from '~/modules/core/components/base/Tag';
@@ -17,31 +17,38 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
       <HeroSection
         description={
           <>
-            {project.summary ? <p>{project.summary}</p> : null}
-            {project.tags?.length ? (
-              <div className="flex flex-col gap-1">
-                <div>Tags:</div>
-                <Tags tags={project.tags} />
+            <p>{project.summary}</p>
+            {project.link ? (
+              <div className="mt-2 flex gap-4">
+                <a
+                  className="animated-link flex items-center gap-2 font-medium text-amber-500"
+                  href={project.link}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Preview <SlArrowRightCircle />
+                </a>
               </div>
             ) : null}
           </>
         }
-        title={
-          <>
-            <div className="relative h-4 w-4 rounded-full bg-amber-500 dark:bg-slate-800">
-              <SlRocket className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2" />
-            </div>
-            <div>{project.title}</div>
-          </>
-        }
+        title={project.title}
       />
-      {project.thumbnailUrl ? (
-        <OptimizedImage
-          alt={`${project.title} thumbnail`}
-          className="mx-auto w-60 transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
-          src={project.thumbnailUrl}
-        />
-      ) : null}
+      <div className="container mx-auto flex flex-col gap-8 lg:max-w-xl">
+        {project.thumbnailUrl ? (
+          <OptimizedImage
+            alt={`${project.title} thumbnail`}
+            className="rounded-md shadow-lg"
+            src={project.thumbnailUrl}
+          />
+        ) : null}
+        {project.tags?.length ? (
+          <div className="flex flex-col gap-1">
+            <div>Tags:</div>
+            <Tags tags={project.tags} />
+          </div>
+        ) : null}
+      </div>
     </DefaultLayout>
   );
 }

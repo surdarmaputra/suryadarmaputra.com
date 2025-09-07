@@ -28,6 +28,7 @@
     "@types/react-lazyload": "^3.2.3",
     "@types/react-syntax-highlighter": "^15.5.13",
     "canvas": "^3.0.0-rc2",
+    "cssnano": "^7.1.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "embla-carousel": "^8.6.0",
@@ -53,7 +54,6 @@
     "superagent": "^10.1.1",
     "tailwind-merge": "^2.6.0",
     "undici": "^7.1.0",
-    "vaul": "^1.1.2",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {

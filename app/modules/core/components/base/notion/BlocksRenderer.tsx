@@ -1,12 +1,21 @@
+import { lazy } from 'react';
+
 import type { BlockComponentProps, BlocksRendererProps } from '~/libs/notion';
 
-import { Code } from './Code';
-import { Embed } from './Embed';
 import { Heading } from './Heading';
-import { Image } from './Image';
 import { List, ListItem } from './List';
 import { Paragraph } from './Paragraph';
 import { Quote } from './Quote';
+
+const Code = lazy(() =>
+  import('./Code').then((component) => ({ default: component.Code })),
+);
+const Embed = lazy(() =>
+  import('./Embed').then((component) => ({ default: component.Embed })),
+);
+const Image = lazy(() =>
+  import('./Image').then((component) => ({ default: component.Image })),
+);
 
 const componentMap = {
   paragraph: Paragraph,

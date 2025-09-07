@@ -1,5 +1,6 @@
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
+import { Link } from 'react-router';
 
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
@@ -7,15 +8,10 @@ import { Project } from '../types';
 
 interface ProjectCardProps {
   isClientReady?: boolean;
-  onClickProject?: (project: Project) => void;
   project: Project;
 }
 
-export function ProjectCard({
-  isClientReady,
-  onClickProject,
-  project,
-}: ProjectCardProps) {
+export function ProjectCard({ isClientReady, project }: ProjectCardProps) {
   return (
     <div
       className="group/project-card relative block w-40 lg:w-60"
@@ -25,22 +21,44 @@ export function ProjectCard({
         {project.thumbnailUrl &&
         project.thumbnailPlaceholderUrl &&
         isClientReady ? (
-            <LazyLoad
-              className="h-full w-max"
-              placeholder={
-                <img
+            <>
+              <LazyLoad
+                className="h-full w-max lg:hidden"
+                placeholder={
+                  <img
+                    alt={`${project.title} thumbnail`}
+                    className="h-full blur-xl"
+                    src={project.thumbnailPlaceholderUrl}
+                  />
+                }
+              >
+                <OptimizedImage
                   alt={`${project.title} thumbnail`}
-                  className="h-full blur-xl"
-                  src={project.thumbnailPlaceholderUrl}
+                  className="h-full w-auto transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                  fetchPriority="high"
+                  src={project.thumbnailUrl}
+                  width={160}
                 />
-              }
-            >
-              <OptimizedImage
-                alt={`${project.title} thumbnail`}
-                className="h-full w-auto transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
-                src={project.thumbnailUrl}
-              />
-            </LazyLoad>
+              </LazyLoad>
+              <LazyLoad
+                className="hidden h-full w-max lg:block"
+                placeholder={
+                  <img
+                    alt={`${project.title} thumbnail`}
+                    className="h-full blur-xl"
+                    src={project.thumbnailPlaceholderUrl}
+                  />
+                }
+              >
+                <OptimizedImage
+                  alt={`${project.title} thumbnail`}
+                  className="h-full w-auto transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                  fetchPriority="high"
+                  src={project.thumbnailUrl}
+                  width={240}
+                />
+              </LazyLoad>
+            </>
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out group-hover/project-card:scale-105 dark:bg-slate-200">
               <SlRocket className="h-10 w-10 text-slate-300" />
@@ -53,13 +71,14 @@ export function ProjectCard({
             {project.title}
           </div>
           <div className="flex items-center justify-center gap-3 text-xs font-light text-slate-500 dark:text-slate-600">
-            <button
+            <Link
               className="animated-link -translate-x-full opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
-              onClick={() => onClickProject?.(project)}
+              prefetch="viewport"
+              to={`/work/${project.id}`}
               type="button"
             >
               Detail
-            </button>
+            </Link>
             <a
               className="animated-link flex translate-x-full items-center gap-1 opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
               href={project.link}

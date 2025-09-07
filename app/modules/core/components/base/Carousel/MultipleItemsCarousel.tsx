@@ -101,17 +101,21 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
         </div>
 
         <button
+          aria-label="Scroll to left"
           className="absolute left-2 top-1/2 z-10 -translate-x-full -translate-y-1/2 rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
           disabled={prevBtnDisabled}
           onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+          type="button"
         >
           <SlArrowLeftCircle className="h-8 w-8 md:h-12 md:w-12" />
         </button>
 
         <button
+          aria-label="Scroll to right"
           className="absolute right-2 top-1/2 z-10 -translate-y-1/2 translate-x-full rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
           disabled={nextBtnDisabled}
           onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+          type="button"
         >
           <SlArrowRightCircle className="h-8 w-8 md:h-12 md:w-12" />
         </button>
