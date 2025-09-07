@@ -13,7 +13,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <section className="my-8 md:py-16">
-      <h1 className="mx-auto text-left text-3xl font-extrabold leading-tight tracking-tight text-black dark:text-slate-100 md:w-1/3 md:text-center md:text-5xl">
+      <h1 className="mx-auto flex items-center gap-2 text-left text-3xl font-extrabold leading-tight tracking-tight text-black dark:text-slate-100 md:w-1/3 md:text-center md:text-5xl">
         {title}
       </h1>
 

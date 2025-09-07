@@ -108,7 +108,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             position: relative;
           }
           .text-slate-700 {
-            color: #334155);
+            color: #334155;
           }
           .tracking-tight {
             letter-spacing: -0.025em;
@@ -143,7 +143,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         `}
         </style>
       </head>
-      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 pt-16 text-slate-700 selection:bg-amber-500 selection:text-slate-900 dark:bg-slate-900 dark:text-slate-400">
+      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 pt-16 text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-[scroll-locked]:px-6 data-[scroll-locked]:pt-16 dark:bg-slate-900 dark:text-slate-400">
         {children}
         <PiwikScript />
         <ColorModeScript />
