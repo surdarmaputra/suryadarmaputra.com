@@ -25,7 +25,11 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
         projects={projects}
       />
 
-      <PostList className="py-12 lg:py-16" isTitleVisible posts={posts} />
+      <PostList
+        className="mx-auto py-12 md:w-max lg:py-16"
+        isTitleVisible
+        posts={posts}
+      />
 
       <GetInTouchSection className="py-10" />
 

@@ -17,7 +17,6 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
       <HeroSection
         description={
           <>
-            <p>{project.summary}</p>
             {project.link ? (
               <div className="mt-2 flex gap-4">
                 <a
@@ -34,20 +33,25 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         }
         title={project.title}
       />
-      <div className="container mx-auto flex flex-col gap-8 lg:max-w-xl">
-        {project.thumbnailUrl ? (
-          <OptimizedImage
-            alt={`${project.title} thumbnail`}
-            className="rounded-md shadow-lg"
-            src={project.thumbnailUrl}
-          />
-        ) : null}
-        {project.tags?.length ? (
-          <div className="flex flex-col gap-1">
-            <div>Tags:</div>
-            <Tags tags={project.tags} />
+      <div className="container mx-auto flex flex-col gap-8 lg:max-w-5xl">
+        <div className="flex flex-col gap-6 md:flex-row">
+          {project.thumbnailUrl ? (
+            <OptimizedImage
+              alt={`${project.title} thumbnail`}
+              className="mx-auto rounded-md shadow-lg lg:max-w-xl"
+              src={project.thumbnailUrl}
+            />
+          ) : null}
+          <div className="flex flex-col gap-6">
+            <p>{project.summary}</p>
+            {project.tags?.length ? (
+              <div className="flex flex-col gap-1">
+                <div>Tags:</div>
+                <Tags tags={project.tags} />
+              </div>
+            ) : null}
           </div>
-        ) : null}
+        </div>
       </div>
     </DefaultLayout>
   );

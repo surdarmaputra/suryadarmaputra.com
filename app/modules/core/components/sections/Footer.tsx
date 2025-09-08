@@ -16,7 +16,7 @@ export function Footer({ isLinksVisible = true }: FooterProps) {
   return (
     <footer
       className={twMerge(
-        'relative -mx-6 overflow-hidden pt-8 text-center',
+        'relative -mx-6 overflow-hidden pt-8 text-center md:mt-24',
         isLinksVisible ? 'h-48 md:h-40' : 'h-44 md:h-32',
       )}
     >

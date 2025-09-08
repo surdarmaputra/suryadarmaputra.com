@@ -187,7 +187,9 @@ export function Header() {
                     onClick={(event) =>
                       handleClickNavigationItem(event, landingHref)
                     }
+                    prefetch="viewport"
                     to={location.pathname === '/' ? landingHref : href}
+                    viewTransition
                   >
                     {label}
                   </NavLink>

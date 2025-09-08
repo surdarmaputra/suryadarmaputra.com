@@ -22,7 +22,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
     const [isClientReady, setIsClientReady] = useState<boolean>(false);
 
     const finalProjects =
-      projects?.length && projects.length <= 3
+      projects?.length && projects.length <= 5
         ? [...projects, ...projects, ...projects]
         : projects;
 

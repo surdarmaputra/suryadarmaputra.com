@@ -1,20 +1,29 @@
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router';
+import { twMerge } from 'tailwind-merge';
 
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
 
 import { Project } from '../types';
 
 interface ProjectCardProps {
+  className?: string;
   isClientReady?: boolean;
   project: Project;
 }
 
-export function ProjectCard({ isClientReady, project }: ProjectCardProps) {
+export function ProjectCard({
+  className,
+  isClientReady,
+  project,
+}: ProjectCardProps) {
   return (
     <div
-      className="group/project-card relative block w-40 lg:w-60"
+      className={twMerge(
+        'group/project-card relative block w-40 lg:w-60',
+        className,
+      )}
       rel="noreferrer"
     >
       <div className="h-40 w-40 overflow-hidden rounded-md shadow-lg lg:h-60 lg:w-60">
@@ -76,18 +85,21 @@ export function ProjectCard({ isClientReady, project }: ProjectCardProps) {
               prefetch="viewport"
               to={`/work/${project.id}`}
               type="button"
+              viewTransition
             >
               Detail
             </Link>
-            <a
-              className="animated-link flex translate-x-full items-center gap-1 opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
-              href={project.link}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Preview
-              <SlArrowRightCircle />
-            </a>
+            {project.link ? (
+              <a
+                className="animated-link flex translate-x-full items-center gap-1 opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
+                href={project.link}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Preview
+                <SlArrowRightCircle />
+              </a>
+            ) : null}
           </div>
         </div>
       </div>

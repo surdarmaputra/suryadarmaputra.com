@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { SlBriefcase } from 'react-icons/sl';
+import { SlBriefcase, SlUser } from 'react-icons/sl';
 
 import HeroSection from '~/modules/core/components/base/HeroSection';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
@@ -143,7 +143,17 @@ function formatWorkDuration(start: string, end: string | null): string {
 export default function AboutPage() {
   return (
     <DefaultLayout isFooterLinksVisible={false}>
-      <HeroSection description="Who is Surya and what he does" title="About" />
+      <HeroSection
+        description="Who is Surya and what he does"
+        title={
+          <>
+            <div className="relative h-4 w-4 rounded-full bg-amber-500 dark:bg-slate-800 md:h-8 md:w-8">
+              <SlUser className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 md:h-10 md:w-10" />
+            </div>
+            <div>About</div>
+          </>
+        }
+      />
 
       <AboutMeShortSection />
 
