@@ -1,29 +1,8 @@
-import debounce from 'lodash/debounce';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 
 import { ColorModeToggle } from '~/modules/core/components/base/ColorModeToggle';
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
-
-const STICKY_CLASSES_BASE = [
-  'after:bg-white',
-  'after:dark:bg-slate-900',
-  'border',
-  'dark:border-slate-800',
-  'rounded-xl',
-  'shadow-2xl',
-];
-
-const STICKY_CLASSES_DWEB = [...STICKY_CLASSES_BASE, 'mt-1'];
-
-const STICKY_CLASSES_MWEB = [
-  ...STICKY_CLASSES_BASE,
-  'mb-1',
-  'ml-1',
-  'mr-1',
-  '!px-2',
-  '!py-1.5',
-];
 
 interface Navigation {
   id: string;
@@ -60,9 +39,6 @@ const NAVIGATIONS: Navigation[] = [
 ];
 
 export function Header() {
-  const observedRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const headerContentRef = useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = useState<boolean>(true);
   const location = useLocation();
 
@@ -82,25 +58,6 @@ export function Header() {
       window.document.documentElement.classList.remove('dark');
     }
   };
-
-  const updateStickyHeader = debounce(() => {
-    const isDweb = window.innerWidth > 768;
-    if (isDweb) {
-      headerRef.current?.classList.add('top-0');
-      headerContentRef.current?.classList.add(...STICKY_CLASSES_DWEB);
-    } else {
-      headerRef.current?.classList.add('bottom-0');
-      headerRef.current?.classList.remove('top-0');
-      headerContentRef.current?.classList.add(...STICKY_CLASSES_MWEB);
-    }
-  });
-
-  const updateNonStickyHeader = debounce(() => {
-    headerRef.current?.classList.remove('bottom-0');
-    headerRef.current?.classList.add('top-0');
-    headerContentRef.current?.classList.remove(...STICKY_CLASSES_DWEB);
-    headerContentRef.current?.classList.remove(...STICKY_CLASSES_MWEB);
-  });
 
   const shouldShowNavigation = (landingHref: string, href: string) => {
     if (location.pathname === '/') {
@@ -128,76 +85,42 @@ export function Header() {
     setIsDark(isCurrentlyDark);
   }, [setIsDark]);
 
-  useEffect(() => {
-    const element = observedRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry.isIntersecting) {
-          updateStickyHeader();
-        } else {
-          updateNonStickyHeader();
-        }
-      },
-      { threshold: 0.5 },
-    );
-
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-    };
-  }, [updateNonStickyHeader, updateStickyHeader]);
-
   return (
     <>
-      <div className="h-0 w-0" ref={observedRef} />
-      <header
-        className="container fixed left-0 right-0 top-0 z-20 mx-auto md:left-1/2 md:-translate-x-1/2 lg:max-w-5xl"
-        ref={headerRef}
-      >
-        <div
-          className="flex items-center justify-between px-4 py-3 after:absolute after:left-0 after:top-0 after:z-[-1] after:h-full after:w-full after:opacity-90"
-          ref={headerContentRef}
+      <header className="container mx-auto lg:max-w-5xl flex items-center justify-between py-3 mb-4">
+        <Link
+          onClick={(event) => handleClickNavigationItem(event, 'body')}
+          prefetch="viewport"
+          to="/"
+          viewTransition
         >
-          <Link
-            onClick={(event) => handleClickNavigationItem(event, 'body')}
-            prefetch="viewport"
-            to="/"
-            viewTransition
-          >
-            <OptimizedImage
-              alt="Site logo"
-              className="rounded-md border-2 border-slate-100 dark:border-slate-700"
-              src={logoPath}
-              width={36}
-            />
-          </Link>
-          <nav className="flex items-center">
-            {NAVIGATIONS.map(
-              ({ id, label, landingHref, href }) =>
-                shouldShowNavigation(landingHref, href) && (
-                  <NavLink
-                    className="animated-link mr-3 py-1 text-sm !font-light text-slate-500 dark:text-slate-400 md:mr-8"
-                    key={id}
-                    onClick={(event) =>
-                      handleClickNavigationItem(event, landingHref)
-                    }
-                    prefetch="viewport"
-                    to={location.pathname === '/' ? landingHref : href}
-                    viewTransition
-                  >
-                    {label}
-                  </NavLink>
-                ),
-            )}
-            <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />
-          </nav>
-        </div>
+          <OptimizedImage
+            alt="Site logo"
+            className="rounded-md border-2 border-slate-100 dark:border-slate-700"
+            src={logoPath}
+            width={36}
+          />
+        </Link>
+        <nav className="flex items-center">
+          {NAVIGATIONS.map(
+            ({ id, label, landingHref, href }) =>
+              shouldShowNavigation(landingHref, href) && (
+                <NavLink
+                  className="animated-link mr-3 py-1 text-sm !font-light text-slate-500 dark:text-slate-400 md:mr-8"
+                  key={id}
+                  onClick={(event) =>
+                    handleClickNavigationItem(event, landingHref)
+                  }
+                  prefetch="viewport"
+                  to={location.pathname === '/' ? landingHref : href}
+                  viewTransition
+                >
+                  {label}
+                </NavLink>
+              ),
+          )}
+          <ColorModeToggle isDark={isDark} onChange={toggleColorMode} />
+        </nav>
       </header>
     </>
   );
