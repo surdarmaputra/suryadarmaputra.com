@@ -68,14 +68,14 @@ export function FloatingNavigation() {
       <div className="relative flex gap-4" ref={menuContainerRef}>
         <div
           className={twMerge(
-            'absolute right-0 top-0 h-0 w-0 -translate-y-full overflow-hidden rounded-md border-slate-100 bg-white shadow-lg transition-all ease-in-out dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300',
+            'absolute -top-2 right-0 h-0 w-0 -translate-y-full overflow-hidden rounded-md border-slate-100 bg-white shadow-lg transition-all ease-in-out dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300',
             isMenuVisible && 'h-max w-max border py-2',
           )}
         >
           <nav className="flex flex-col items-end">
             {navigationItems.map(({ id, label, landingHref, to }) => (
               <NavLink
-                className="animated-link my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm !font-light text-slate-500 dark:text-slate-400"
+                className="animated-link my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm font-light text-slate-500 dark:text-slate-400 md:ml-10 md:text-lg"
                 key={id}
                 onClick={(event) =>
                   handleClickNavigationItem(event, landingHref)
