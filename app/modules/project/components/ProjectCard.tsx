@@ -9,62 +9,67 @@ import { Project } from '../types';
 
 interface ProjectCardProps {
   className?: string;
+  imageSize?: {
+    sm: number;
+    lg: number;
+  };
   isClientReady?: boolean;
   project: Project;
 }
 
 export function ProjectCard({
   className,
+  imageSize,
   isClientReady,
   project,
 }: ProjectCardProps) {
   return (
     <div
       className={twMerge(
-        'group/project-card relative block w-40 lg:w-60',
+        'group/project-card relative block h-40 w-40 lg:h-60 lg:w-60',
         className,
       )}
       rel="noreferrer"
     >
-      <div className="h-40 w-40 overflow-hidden rounded-md shadow-lg lg:h-60 lg:w-60">
+      <div className="h-full w-full overflow-hidden rounded-md shadow-lg">
         {project.thumbnailUrl &&
         project.thumbnailPlaceholderUrl &&
         isClientReady ? (
             <>
               <LazyLoad
-                className="h-full w-max lg:hidden"
+                className="h-full w-full lg:hidden"
                 placeholder={
                   <img
                     alt={`${project.title} thumbnail`}
-                    className="h-full blur-xl"
+                    className="h-full w-full object-cover blur-xl"
                     src={project.thumbnailPlaceholderUrl}
                   />
                 }
               >
                 <OptimizedImage
                   alt={`${project.title} thumbnail`}
-                  className="h-full w-auto transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
                   fetchPriority="high"
                   src={project.thumbnailUrl}
-                  width={160}
+                  width={imageSize?.sm || 160}
                 />
               </LazyLoad>
               <LazyLoad
-                className="hidden h-full w-max lg:block"
+                className="hidden h-full w-full lg:block"
                 placeholder={
                   <img
                     alt={`${project.title} thumbnail`}
-                    className="h-full blur-xl"
+                    className="h-full w-full object-cover blur-xl"
                     src={project.thumbnailPlaceholderUrl}
                   />
                 }
               >
                 <OptimizedImage
                   alt={`${project.title} thumbnail`}
-                  className="h-full w-auto transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
                   fetchPriority="high"
                   src={project.thumbnailUrl}
-                  width={240}
+                  width={imageSize?.lg || 240}
                 />
               </LazyLoad>
             </>

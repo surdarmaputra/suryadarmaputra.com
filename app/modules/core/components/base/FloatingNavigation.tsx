@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { SlArrowUp, SlMenu } from 'react-icons/sl';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
 import { useNavbar } from '../../hooks/use-navbar';
@@ -10,8 +10,12 @@ export function FloatingNavigation() {
   const floatingButtonRef = useRef<HTMLDivElement | null>(null);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
-
+  const location = useLocation();
   const { handleClickNavigationItem, navigationItems } = useNavbar();
+  const navItemClassName = twMerge(
+    'animated-link my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm font-light text-slate-500 dark:text-slate-400 md:ml-10 md:text-lg',
+    location.pathname === '/' ? '!font-light' : '',
+  );
 
   const toggleMenu = () =>
     setIsMenuVisible((currentlyVisible) => !currentlyVisible);
@@ -73,9 +77,17 @@ export function FloatingNavigation() {
           )}
         >
           <nav className="flex flex-col items-end">
+            <NavLink
+              className={navItemClassName}
+              prefetch="viewport"
+              to="/"
+              viewTransition
+            >
+              Home
+            </NavLink>
             {navigationItems.map(({ id, label, landingHref, to }) => (
               <NavLink
-                className="animated-link my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm font-light text-slate-500 dark:text-slate-400 md:ml-10 md:text-lg"
+                className={navItemClassName}
                 key={id}
                 onClick={(event) =>
                   handleClickNavigationItem(event, landingHref)
