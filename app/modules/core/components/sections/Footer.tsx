@@ -35,7 +35,7 @@ export function Footer({ isLinksVisible = true }: FooterProps) {
         ))}
       <div
         aria-hidden="true"
-        className="absolute bottom-8 left-0 right-0 text-center text-7xl font-extrabold tracking-tighter text-slate-300 opacity-40 dark:text-slate-800 md:-bottom-4"
+        className="absolute left-0 right-0 text-center text-7xl font-extrabold tracking-tighter text-slate-300 opacity-40 dark:text-slate-800 leading-none -bottom-4"
       >
         Let&apos;s Build
       </div>

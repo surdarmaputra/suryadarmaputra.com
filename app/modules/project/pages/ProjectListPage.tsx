@@ -32,9 +32,10 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
         }
       />
       {projects?.length ? (
-        <div className="container mx-auto flex flex-wrap justify-between gap-2 lg:max-w-5xl">
+        <div className="container mx-auto grid grid-cols-2 gap-4 lg:max-w-5xl lg:grid-cols-3 lg:gap-8">
           {projects.map((project) => (
             <ProjectCard
+              className="w-full lg:w-full"
               isClientReady={isClientReady}
               key={project.id}
               project={project}

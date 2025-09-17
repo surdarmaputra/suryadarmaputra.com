@@ -4,6 +4,7 @@ import { Footer } from '~/modules/core/components/sections/Footer';
 import { Header } from '~/modules/core/components/sections/Header';
 
 import { useDefaultWindowListeners } from '../../hooks/use-default-window-listeners';
+import { FloatingNavigation } from '../base/FloatingNavigation';
 
 interface DefaultLayoutProps {
   children?: React.ReactNode;
@@ -19,6 +20,7 @@ export function DefaultLayout({
     <>
       <Header />
       {children}
+      <FloatingNavigation />
       <Footer isLinksVisible={isFooterLinksVisible} />
     </>
   );
