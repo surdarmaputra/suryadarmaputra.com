@@ -1,10 +1,17 @@
 import './styles/global.css';
 
 import type { LinksFunction } from 'react-router';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from 'react-router';
 
 import ColorModeScript from './modules/core/components/base/ColorModeScript';
-import PiwikScript from './modules/core/components/base/PiwikScript';
+import GTagScript from './modules/core/components/base/GTagScript';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -47,7 +54,15 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export async function loader() {
+  return {
+    googleAnalyticsMeasurementId: process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID,
+  };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { googleAnalyticsMeasurementId } = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -145,10 +160,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-[scroll-locked]:px-6 dark:bg-slate-900 dark:text-slate-400">
         {children}
-        <PiwikScript />
         <ColorModeScript />
         <ScrollRestoration />
         <Scripts />
+        {googleAnalyticsMeasurementId ? (
+          <GTagScript measurementId={googleAnalyticsMeasurementId} />
+        ) : null}
       </body>
     </html>
   );
