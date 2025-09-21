@@ -120,6 +120,14 @@ export function getTitle(page: GetPageResponse): string | null {
   );
 }
 
+export function getSlugFromProperties(
+  properties: Record<string, unknown>,
+): string | null {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (properties?.slug as any[])?.find((item: any) => item.type === 'text')
+    ?.plain_text;
+}
+
 export function joinStrings(strings: string[]): string {
   return strings.filter(Boolean).join(' ').trim();
 }

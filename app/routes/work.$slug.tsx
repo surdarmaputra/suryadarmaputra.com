@@ -23,22 +23,22 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const { id } = params;
-  if (!id) {
+  const { slug } = params;
+  if (!slug) {
     throw redirect('/work');
   }
 
   const projects = await getProjects();
-  const project = projects.find((item) => item.id === id);
+  const project = projects.find((item) => item.slug === slug);
   if (!project) {
     throw redirect('/work');
   }
 
-  return { project };
+  return { project, projects };
 }
 
 export default function WorkById() {
-  const { project } = useLoaderData<typeof loader>();
+  const { project, projects } = useLoaderData<typeof loader>();
 
-  return <ProjectDetailPage project={project} />;
+  return <ProjectDetailPage project={project} projects={projects} />;
 }

@@ -8,10 +8,14 @@ dotenv.config();
 /* eslint-disable import/first */
 import { request } from 'undici';
 
+import { getBlockChildren } from '~/libs/notion/index.server';
+
 import {
+  BlockWithChildren,
   getFileExtensionFromUrl,
   getProperties,
   getTitle,
+  regroupListItems,
 } from '../app/libs/notion';
 import { fetchProjects } from './utils';
 /* eslint-enable import/first */
@@ -21,6 +25,7 @@ interface ProjectData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   properties: Record<string, any>;
   title: string | null;
+  blocks: BlockWithChildren[] | [];
 }
 
 const extrasDirectory = path.resolve(__dirname, '../extras');
@@ -42,7 +47,7 @@ async function fetchImage(url: string, filename: string): Promise<void> {
   await fs.writeFile(placeholderFile, placeholderData);
 }
 
-async function fetchImages(project: ProjectData): Promise<void> {
+async function fetchThumbnailImages(project: ProjectData): Promise<void> {
   if (!('properties' in project)) return;
 
   const { id, properties } = project;
@@ -61,6 +66,30 @@ async function fetchImages(project: ProjectData): Promise<void> {
   }
 }
 
+async function fetchContentImages(blocks: BlockWithChildren[]): Promise<void> {
+  for (const { block, children } of blocks) {
+    if ('type' in block && block.type !== 'image') {
+      if (children?.length) {
+        await fetchContentImages(children);
+      } else {
+        continue;
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const url = block.image?.file?.url || null;
+    if (!url) continue;
+
+    const fileName = block.id;
+    await fetchImage(url, fileName);
+
+    if (children?.length) {
+      await fetchContentImages(children);
+    }
+  }
+}
+
 export async function run(): Promise<void> {
   const rawProjects = await fetchProjects();
 
@@ -74,14 +103,23 @@ export async function run(): Promise<void> {
   for (const project of rawProjects) {
     const title = getTitle(project);
     const properties = getProperties(project);
+
+    // eslint-disable-next-line no-console
+    console.log(`Fetching project detail: ${title}`);
+    const originalBlocks = await getBlockChildren(project.id);
+    const blocks = regroupListItems(originalBlocks);
     const projectData: ProjectData = {
       id: project.id,
       title,
       properties,
+      blocks,
     };
 
-    await fetchImages(projectData);
+    await fetchThumbnailImages(projectData);
+    await fetchContentImages(projectData.blocks);
     projectsData.push(projectData);
+    // eslint-disable-next-line no-console
+    console.log(`Project detail fetched: ${title}`);
   }
 
   await fs.writeFile(projectDataFile, JSON.stringify(projectsData, null, 2));

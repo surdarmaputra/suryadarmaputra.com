@@ -18,7 +18,7 @@ export default function LandingPage({ posts, projects }: LandingPageProps) {
       <div className="absolute right-0 top-24 z-10 h-72 w-72 rounded-full bg-red-400 opacity-10 blur-3xl dark:bg-sky-800"></div>
       <div className="absolute left-0 top-72 z-10 h-72 w-72 rounded-full bg-cyan-400 opacity-10 blur-3xl dark:bg-cyan-600"></div>
 
-      <BrandHero className="py-8" />
+      <BrandHero className="z-20 py-8" />
 
       <ProjectCarousel
         className="z-10 -mx-6 overflow-hidden py-7 lg:py-16"

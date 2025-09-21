@@ -59,7 +59,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
           className="animated-link mx-auto flex w-fit items-center gap-2 text-sm text-amber-500 md:text-base"
           href="/work"
         >
-          More Works
+          Show me all
           <SlArrowRightCircle className="mt-0.5" />
         </SmartLink>
       </section>

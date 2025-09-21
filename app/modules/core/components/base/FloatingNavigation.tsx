@@ -77,14 +77,16 @@ export function FloatingNavigation() {
           )}
         >
           <nav className="flex flex-col items-end">
-            <NavLink
-              className={navItemClassName}
-              prefetch="viewport"
-              to="/"
-              viewTransition
-            >
-              Home
-            </NavLink>
+            {location.pathname !== '/' && (
+              <NavLink
+                className={navItemClassName}
+                prefetch="viewport"
+                to="/"
+                viewTransition
+              >
+                Home
+              </NavLink>
+            )}
             {navigationItems.map(({ id, label, landingHref, to }) => (
               <NavLink
                 className={navItemClassName}

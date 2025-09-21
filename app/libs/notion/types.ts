@@ -96,9 +96,11 @@ export type NumberedListBlock = {
 
 export interface BlocksRendererProps {
   blocks: BlockWithChildren[];
+  imageBasePath?: string;
 }
 
 export interface BlockComponentProps {
+  basePath?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   block: any;
   previousBlockType?: string | null;

@@ -34,7 +34,7 @@ const componentMap = {
 
 type BlockComponent = (props: BlockComponentProps) => React.ReactElement;
 
-export function BlocksRenderer({ blocks }: BlocksRendererProps) {
+export function BlocksRenderer({ blocks, imageBasePath }: BlocksRendererProps) {
   return (
     <>
       {blocks.map(({ block, children }, index) => {
@@ -52,6 +52,7 @@ export function BlocksRenderer({ blocks }: BlocksRendererProps) {
 
         return (
           <BlockComponent
+            basePath={imageBasePath}
             block={block}
             key={block.id}
             previousBlockType={previousBlockType}

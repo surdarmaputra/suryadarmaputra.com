@@ -19,14 +19,14 @@ export function BrandHero({ className }: BrandHeroProps) {
           Surya Darma Putra
         </h1>
         <p className="w-full text-sm font-light text-slate-600 dark:text-slate-400 md:text-base">
-          Software Engineer - Frontend, Fullstack, TypeScript, React, Tailwind.
-          Explore my works below.
+          Software Engineer / Web / Mobile. Explore my works below.
         </p>
       </div>
       <div className="shrink-0">
         <OptimizedImage
           alt="me"
-          className="rounded-full"
+          className="h-20 w-20 rounded-full object-cover"
+          height={80}
           src="/images/me.png"
           width={80}
         />

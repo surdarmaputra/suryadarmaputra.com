@@ -35,49 +35,51 @@ export function ProjectCard({
         {project.thumbnailUrl &&
         project.thumbnailPlaceholderUrl &&
         isClientReady ? (
-            <>
-              <LazyLoad
-                className="h-full w-full lg:hidden"
-                placeholder={
-                  <img
-                    alt={`${project.title} thumbnail`}
-                    className="h-full w-full object-cover blur-xl"
-                    src={project.thumbnailPlaceholderUrl}
-                  />
-                }
-              >
-                <OptimizedImage
+          /* eslint-disable indent */
+          <>
+            <LazyLoad
+              className="h-full w-full lg:hidden"
+              placeholder={
+                <img
                   alt={`${project.title} thumbnail`}
-                  className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
-                  fetchPriority="high"
-                  src={project.thumbnailUrl}
-                  width={imageSize?.sm || 160}
+                  className="h-full w-full object-cover blur-xl"
+                  src={project.thumbnailPlaceholderUrl}
                 />
-              </LazyLoad>
-              <LazyLoad
-                className="hidden h-full w-full lg:block"
-                placeholder={
-                  <img
-                    alt={`${project.title} thumbnail`}
-                    className="h-full w-full object-cover blur-xl"
-                    src={project.thumbnailPlaceholderUrl}
-                  />
-                }
-              >
-                <OptimizedImage
+              }
+            >
+              <OptimizedImage
+                alt={`${project.title} thumbnail`}
+                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                fetchPriority="high"
+                src={project.thumbnailUrl}
+                width={imageSize?.sm || 160}
+              />
+            </LazyLoad>
+            <LazyLoad
+              className="hidden h-full w-full lg:block"
+              placeholder={
+                <img
                   alt={`${project.title} thumbnail`}
-                  className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
-                  fetchPriority="high"
-                  src={project.thumbnailUrl}
-                  width={imageSize?.lg || 240}
+                  className="h-full w-full object-cover blur-xl"
+                  src={project.thumbnailPlaceholderUrl}
                 />
-              </LazyLoad>
-            </>
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out group-hover/project-card:scale-105 dark:bg-slate-200">
-              <SlRocket className="h-10 w-10 text-slate-300" />
-            </div>
-          )}
+              }
+            >
+              <OptimizedImage
+                alt={`${project.title} thumbnail`}
+                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                fetchPriority="high"
+                src={project.thumbnailUrl}
+                width={imageSize?.lg || 240}
+              />
+            </LazyLoad>
+          </>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out group-hover/project-card:scale-105 dark:bg-slate-200">
+            <SlRocket className="h-10 w-10 text-slate-300" />
+          </div>
+        )}
+        {/* eslint-enable indent */}
       </div>
       <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-opacity group-hover/project-card:opacity-100 dark:bg-slate-900/90">
         <div className="flex flex-col gap-4">
@@ -88,7 +90,7 @@ export function ProjectCard({
             <Link
               className="animated-link -translate-x-full opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
               prefetch="viewport"
-              to={`/work/${project.id}`}
+              to={`/work/${project.slug}`}
               type="button"
               viewTransition
             >

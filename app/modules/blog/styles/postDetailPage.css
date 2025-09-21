@@ -58,7 +58,7 @@ article {
   h4,
   h5,
   h6 {
-    @apply mt-16 font-bold text-slate-800 dark:text-slate-300;
+    @apply mt-6 font-bold text-slate-800 dark:text-slate-300;
   }
 
   h2 {

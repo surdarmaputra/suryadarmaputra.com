@@ -15,6 +15,7 @@ import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/
 import { RichText } from './RichText';
 
 interface ImageProps extends BlockComponentProps {
+  basePath?: string;
   block: ImageBlock;
 }
 
@@ -22,7 +23,7 @@ function getAltText(caption: RichTextBlock[]): string {
   return caption.reduce((finalText, text) => finalText + text.plain_text, '');
 }
 
-export function Image({ block }: ImageProps) {
+export function Image({ basePath = '/images/posts', block }: ImageProps) {
   const [isClientReady, setIsClientReady] = useState<boolean>(false);
   const [zoomEnabled, setZoomEnabled] = useState<boolean>(false);
   const handlers = useRef<{
@@ -35,8 +36,8 @@ export function Image({ block }: ImageProps) {
     'type' in block.image && block.image.type === 'file'
       ? getFileExtensionFromUrl(block.image.file.url)
       : '';
-  const url = `/images/posts/${block.id}.${extension}`;
-  const placeholderUrl = `/images/posts/${block.id}-placeholder.png`;
+  const url = `${basePath}/${block.id}.${extension}`;
+  const placeholderUrl = `${basePath}/${block.id}-placeholder.png`;
   const altText = getAltText(captionRichTexts as RichTextBlock[]);
 
   const caption = captionRichTexts.map((richTextBlock, index) => (
@@ -61,15 +62,18 @@ export function Image({ block }: ImageProps) {
     }
   };
 
-  const handleWrapperKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.code === 'Space') {
-      handleWrapperClick();
-    }
-  };
-
   const handleZoomClose = () => {
     if (handlers.current.resetTransform) handlers.current.resetTransform();
     setZoomEnabled(false);
+  };
+
+  const handleWrapperKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.code !== 'Space' && event.code !== 'Escape') return;
+    if (!zoomEnabled) {
+      setZoomEnabled(true);
+    } else {
+      handleZoomClose();
+    }
   };
 
   useEffect(() => {
@@ -86,7 +90,13 @@ export function Image({ block }: ImageProps) {
     >
       {zoomEnabled ? (
         <>
-          <div className="absolute h-full w-full bg-white opacity-95 dark:bg-slate-900"></div>
+          <div
+            className="absolute h-full w-full bg-white opacity-95 dark:bg-slate-900"
+            onClick={handleZoomClose}
+            onKeyUp={handleWrapperKeyUp}
+            role="button"
+            tabIndex={0}
+          />
         </>
       ) : null}
       {isClientReady ? (
@@ -96,7 +106,12 @@ export function Image({ block }: ImageProps) {
               handlers.current.resetTransform = resetTransform;
               return (
                 <TransformComponent>
-                  <OptimizedImage alt={altText} className="z-50" src={url} />
+                  <OptimizedImage
+                    alt={altText}
+                    className="z-50"
+                    onClick={(event) => event.stopPropagation()}
+                    src={url}
+                  />
                 </TransformComponent>
               );
             }}
@@ -116,7 +131,7 @@ export function Image({ block }: ImageProps) {
           </button>
         </div>
       ) : null}
-      {!zoomEnabled ? (
+      {!zoomEnabled && caption?.length ? (
         <span className="p-4 text-center text-sm font-light text-slate-400 dark:text-slate-600">
           {caption}
         </span>

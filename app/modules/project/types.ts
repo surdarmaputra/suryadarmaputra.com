@@ -1,3 +1,5 @@
+import { BlockWithChildren } from '~/libs/notion';
+
 export interface Project {
   category?: string;
   company?: string;
@@ -10,4 +12,7 @@ export interface Project {
   thumbnailPlaceholderUrl?: string | null;
   title: string;
   updatedAt: Date;
+  blocks?: BlockWithChildren[];
+  isHighlighted?: boolean;
+  slug: string;
 }

@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { getFileExtensionFromUrl } from '~/libs/notion';
+import { getFileExtensionFromUrl, getSlugFromProperties } from '~/libs/notion';
 
 import { PROJECTS_FILE } from '../../constants';
 import { Project } from '../../types';
@@ -28,6 +28,7 @@ export async function getProjects(): Promise<Project[]> {
       .map((item: Record<string, any>) => item.plain_text)
       .join(' ');
     const company = project.properties.company?.name;
+    const slug = getSlugFromProperties(project.properties);
 
     return {
       category,
@@ -41,6 +42,9 @@ export async function getProjects(): Promise<Project[]> {
       thumbnailPlaceholderUrl,
       title: project.title,
       updatedAt,
+      blocks: project.blocks,
+      isHighlighted: project.properties.highlighted,
+      slug: slug || project.id,
     };
   });
 }
