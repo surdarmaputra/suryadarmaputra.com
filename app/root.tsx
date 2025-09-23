@@ -2,14 +2,18 @@ import './styles/global.css';
 
 import type { LinksFunction } from 'react-router';
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useRouteError,
 } from 'react-router';
 
+import { GeneralErrorPage } from './modules/blog/pages/GeneralErrorPage';
+import { NotFoundPage } from './modules/blog/pages/NotFoundPage';
 import ColorModeScript from './modules/core/components/base/ColorModeScript';
 import GTagScript from './modules/core/components/base/GTagScript';
 
@@ -61,7 +65,7 @@ export async function loader() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { googleAnalyticsMeasurementId } = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -163,12 +167,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ColorModeScript />
         <ScrollRestoration />
         <Scripts />
-        {googleAnalyticsMeasurementId ? (
-          <GTagScript measurementId={googleAnalyticsMeasurementId} />
+        {loaderData?.googleAnalyticsMeasurementId ? (
+          <GTagScript measurementId={loaderData.googleAnalyticsMeasurementId} />
         ) : null}
       </body>
     </html>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return <NotFoundPage />;
+  }
+
+  return <GeneralErrorPage />;
 }
 
 export default function App() {

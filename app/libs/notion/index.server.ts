@@ -22,7 +22,7 @@ export async function getPagesFromDatabase(
       database_id: databaseId,
       ...parameters,
     });
-    return results;
+    return results as GetPageResponse[];
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('getPagesFromDatabase error: ', error);
