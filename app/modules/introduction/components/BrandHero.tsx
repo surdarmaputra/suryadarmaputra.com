@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
@@ -7,6 +8,12 @@ interface BrandHeroProps {
 }
 
 export function BrandHero({ className }: BrandHeroProps) {
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClientReady(true);
+  }, []);
+
   return (
     <section
       className={twMerge(
@@ -14,7 +21,12 @@ export function BrandHero({ className }: BrandHeroProps) {
         className,
       )}
     >
-      <div className="flex flex-col gap-2 text-left md:text-center">
+      <div
+        className={twMerge(
+          'flex -translate-x-full flex-col gap-2 text-left opacity-0 transition-all duration-300 ease-out md:translate-x-0 md:translate-y-10 md:text-center',
+          isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
+        )}
+      >
         <h1 className="text-xl font-bold leading-6 tracking-tight text-black dark:text-slate-100 md:text-5xl md:font-extrabold">
           Surya Darma Putra
         </h1>
@@ -22,12 +34,17 @@ export function BrandHero({ className }: BrandHeroProps) {
           Software Engineer / Web / Mobile. Explore my works below.
         </p>
       </div>
-      <div className="shrink-0">
+      <div
+        className={twMerge(
+          'shrink-0 translate-x-full opacity-0 transition-all duration-300 ease-out md:-translate-y-full md:translate-x-0',
+          isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
+        )}
+      >
         <OptimizedImage
           alt="me"
           className="h-20 w-20 rounded-full object-cover"
           height={80}
-          src="/images/me.png"
+          src="/images/me.jpeg"
           width={80}
         />
       </div>

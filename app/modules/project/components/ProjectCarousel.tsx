@@ -37,7 +37,14 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
 
     return (
       <section
-        className={twMerge('flex flex-col gap-4 md:gap-6', className)}
+        className={twMerge(
+          'flex flex-col gap-4 md:gap-6',
+          'transition-all duration-700 ease-out',
+          isClientReady
+            ? 'translate-x-0 opacity-100 delay-[300ms]'
+            : 'translate-x-24 opacity-0',
+          className,
+        )}
         id="work"
         ref={ref}
       >
@@ -56,7 +63,11 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
           ]}
         />
         <SmartLink
-          className="animated-link mx-auto flex w-fit items-center gap-2 text-sm text-amber-500 md:text-base"
+          className={twMerge(
+            'animated-link mx-auto flex w-fit items-center gap-2 text-sm text-amber-500 md:text-base',
+            'translate-y-8 opacity-0 transition-all duration-1000 ease-out',
+            isClientReady && 'translate-y-0 opacity-100 delay-[500ms]',
+          )}
           href="/work"
         >
           Show me all

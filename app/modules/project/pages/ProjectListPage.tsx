@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SlRocket } from 'react-icons/sl';
+import { twMerge } from 'tailwind-merge';
 
 import HeroSection from '~/modules/core/components/base/HeroSection';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
@@ -32,7 +33,13 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
         }
       />
       {projects?.length ? (
-        <div className="container mx-auto grid grid-cols-2 gap-4 lg:max-w-5xl lg:grid-cols-3 lg:gap-8">
+        <div
+          className={twMerge(
+            'container mx-auto grid grid-cols-2 gap-4 lg:max-w-5xl lg:grid-cols-3 lg:gap-8',
+            'translate-y-4 opacity-0 transition-all delay-300 duration-300 ease-out',
+            isClientReady ? 'translate-y-0 opacity-100' : '',
+          )}
+        >
           {projects.map((project) => (
             <ProjectCard
               className="w-full lg:w-full"

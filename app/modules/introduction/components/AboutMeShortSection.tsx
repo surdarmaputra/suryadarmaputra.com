@@ -59,9 +59,9 @@ export const AboutMeShortSection = forwardRef<
               <div className="w-2/5 shrink-0 md:hidden">
                 <OptimizedImage
                   alt="me"
-                  className="rounded-full"
-                  src="/images/me.png"
-                  width={150}
+                  className="h-36 w-36 rounded-full object-cover"
+                  src="/images/me.jpeg"
+                  width={144}
                 />
               </div>
             </div>
@@ -83,8 +83,8 @@ export const AboutMeShortSection = forwardRef<
           <div className="hidden w-1/3 shrink-0 md:block">
             <OptimizedImage
               alt="me"
-              className="-mt-24 rounded-full"
-              src="/images/me.png"
+              className="-mt-24 h-60 w-60 rounded-full object-cover"
+              src="/images/me.jpeg"
               width={240}
             />
           </div>
