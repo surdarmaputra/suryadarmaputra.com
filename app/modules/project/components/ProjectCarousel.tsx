@@ -41,7 +41,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
           'flex flex-col gap-4 md:gap-6',
           'transition-all duration-700 ease-out',
           isClientReady
-            ? 'translate-x-0 opacity-100 delay-[300ms]'
+            ? 'translate-x-0 opacity-100 delay-300'
             : 'translate-x-24 opacity-0',
           className,
         )}
@@ -66,7 +66,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
           className={twMerge(
             'animated-link mx-auto flex w-fit items-center gap-2 text-sm text-amber-500 md:text-base',
             'translate-y-8 opacity-0 transition-all duration-1000 ease-out',
-            isClientReady && 'translate-y-0 opacity-100 delay-[500ms]',
+            isClientReady && 'translate-y-0 opacity-100 delay-500',
           )}
           href="/work"
         >

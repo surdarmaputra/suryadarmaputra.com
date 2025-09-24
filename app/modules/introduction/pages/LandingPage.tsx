@@ -1,11 +1,18 @@
-import { PostList } from '~/modules/blog/components/PostList';
+import { lazy } from 'react';
+
 import { Post } from '~/modules/blog/types';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 import { ProjectCarousel } from '~/modules/project/components/ProjectCarousel';
 import { Project } from '~/modules/project/types';
 
 import { BrandHero } from '../components/BrandHero';
-import GetInTouchSection from '../components/GetInTouchSection';
+
+const PostList = lazy(() =>
+  import('~/modules/blog/components/PostList').then((mod) => ({
+    default: mod.PostList,
+  })),
+);
+const GetInTouchSection = lazy(() => import('../components/GetInTouchSection'));
 
 export interface LandingPageProps {
   projects: Project[];
