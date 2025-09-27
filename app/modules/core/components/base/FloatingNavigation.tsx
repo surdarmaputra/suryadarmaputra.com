@@ -13,8 +13,8 @@ export function FloatingNavigation() {
   const location = useLocation();
   const { handleClickNavigationItem, navigationItems } = useNavbar();
   const navItemClassName = twMerge(
-    'animated-link my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm font-light text-slate-500 dark:text-slate-400 md:ml-10 md:text-lg',
-    location.pathname === '/' ? '!font-light' : '',
+    'animated-link cursor-pointer my-2 ml-6 mr-6 py-1 pl-4 text-right text-sm font-light text-slate-500 dark:text-slate-400 md:ml-10 md:text-lg',
+    location.pathname === '/' ? 'font-light!' : '',
   );
 
   const toggleMenu = () =>

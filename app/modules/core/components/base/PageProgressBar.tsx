@@ -44,7 +44,7 @@ const PageProgressBar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
   return (
     <div
       className={twMerge(
-        'fixed top-0 left-0 z-50 h-1 bg-gradient-to-r from-amber-500 via-pink-600 to-sky-500 transition-all',
+        'fixed top-0 left-0 z-50 h-1 bg-linear-to-r from-amber-500 via-pink-600 to-sky-500 transition-all',
         STEP_WIDTHS[widthIndex],
       )}
       ref={ref}

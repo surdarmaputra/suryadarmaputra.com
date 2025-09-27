@@ -77,7 +77,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
     return (
       <div
         className={twMerge(
-          'group/multi-item-carousel relative m-auto max-w-[48rem]',
+          'group/multi-item-carousel relative m-auto max-w-3xl',
           className,
         )}
         onMouseEnter={() => debouncedPause()}
@@ -89,7 +89,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
             {slides.map((item, index) => (
               <div
                 className={twMerge(
-                  'w-[45%] flex-shrink-0 flex-grow-0 pl-3',
+                  'w-[45%] shrink-0 grow-0 pl-3',
                   itemClassName,
                 )}
                 key={index}

@@ -29,7 +29,7 @@ export const PostList = forwardRef<HTMLDivElement, PostListProps>(
     return (
       <section
         className={twMerge(
-          'container mx-auto translate-y-8 opacity-0 transition-all delay-500 duration-300 ease-out lg:max-w-5xl',
+          'container mx-auto translate-y-8 opacity-0 transition-all delay-500 duration-300 ease-out lg:max-w-3xl',
           isClientReady ? 'translate-y-0 opacity-100' : '',
           className,
         )}

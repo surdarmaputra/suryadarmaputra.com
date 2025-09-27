@@ -26,7 +26,7 @@ export const AboutMeShortSection = forwardRef<
   ) => {
     return (
       <section
-        className={twMerge('container mx-auto lg:max-w-5xl', className)}
+        className={twMerge('container mx-auto lg:max-w-3xl', className)}
         id="about"
         ref={ref}
       >

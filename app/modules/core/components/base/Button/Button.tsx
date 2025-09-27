@@ -13,7 +13,7 @@ export function getButtonClassName({
   className?: string;
 }) {
   return twMerge(
-    'px-5 py-2 text-sm font-medium rounded-full flex items-center justify-center gap-2',
+    'px-5 py-2 text-sm font-medium rounded-full flex items-center justify-center gap-2 cursor-pointer',
     BUTTON_COLOR_CLASSNAMES[variant][color],
     className,
   );

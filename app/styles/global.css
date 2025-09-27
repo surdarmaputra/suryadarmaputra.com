@@ -1,6 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: Poppins, Roboto, Segoe UI, Arial, system-ui, sans-serif;
+
+  --text-2xs: 0.65rem;
+
+  --animate-scroll-guide-fade-1: scroll-guide-fade 1s ease-in-out infinite 0s;
+  --animate-scroll-guide-fade-2: scroll-guide-fade 1s ease-in-out infinite 0.3s;
+  --animate-scroll-guide-fade-3: scroll-guide-fade 1s ease-in-out infinite 0.6s;
+
+  @keyframes scroll-guide-fade {
+    0%,
+    20% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    80%,
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 .animated-underline {
   background: linear-gradient(to right, #94a3b8, transparent),

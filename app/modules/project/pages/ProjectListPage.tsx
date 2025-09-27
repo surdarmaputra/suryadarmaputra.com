@@ -35,7 +35,7 @@ export default function ProjectListPage({ projects }: ProjectListPageProps) {
       {projects?.length ? (
         <div
           className={twMerge(
-            'container mx-auto grid grid-cols-2 gap-4 lg:max-w-5xl lg:grid-cols-3 lg:gap-8',
+            'container mx-auto grid grid-cols-2 gap-4 lg:max-w-3xl lg:grid-cols-3 lg:gap-8',
             'translate-y-4 opacity-0 transition-all delay-300 duration-300 ease-out',
             isClientReady ? 'translate-y-0 opacity-100' : '',
           )}

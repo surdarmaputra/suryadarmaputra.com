@@ -5,6 +5,7 @@ import { Header } from '~/modules/core/components/sections/Header';
 
 import { useDefaultWindowListeners } from '../../hooks/use-default-window-listeners';
 import { FloatingNavigation } from '../base/FloatingNavigation';
+import PageProgressBar from '../base/PageProgressBar';
 
 interface DefaultLayoutProps {
   children?: React.ReactNode;
@@ -18,6 +19,7 @@ export function DefaultLayout({
   useDefaultWindowListeners();
   return (
     <>
+      <PageProgressBar />
       <Header />
       {children}
       <FloatingNavigation />
