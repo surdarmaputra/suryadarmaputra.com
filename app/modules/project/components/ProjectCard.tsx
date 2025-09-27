@@ -14,6 +14,8 @@ interface ProjectCardProps {
     lg: number;
   };
   isClientReady?: boolean;
+  isSelected?: boolean;
+  onClick?: () => void;
   project: Project;
 }
 
@@ -21,15 +23,19 @@ export function ProjectCard({
   className,
   imageSize,
   isClientReady,
+  isSelected,
+  onClick,
   project,
 }: ProjectCardProps) {
   return (
     <div
+      aria-hidden="true"
       className={twMerge(
         'group/project-card relative block h-40 w-40 lg:h-60 lg:w-60',
         className,
       )}
-      rel="noreferrer"
+      onClick={onClick}
+      // Removed rel="noreferrer" as it's not applicable to a div without a target="_blank" link
     >
       <div className="h-full w-full overflow-hidden rounded-md shadow-lg">
         {project.thumbnailUrl &&
@@ -49,7 +55,11 @@ export function ProjectCard({
             >
               <OptimizedImage
                 alt={`${project.title} thumbnail`}
-                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                className={twMerge(
+                  'h-full w-full object-cover transition-transform duration-500 ease-in-out',
+                  isSelected && 'scale-105',
+                  'group-hover/project-card:scale-105',
+                )}
                 fetchPriority="high"
                 src={project.thumbnailUrl}
                 width={imageSize?.sm || 160}
@@ -67,7 +77,11 @@ export function ProjectCard({
             >
               <OptimizedImage
                 alt={`${project.title} thumbnail`}
-                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover/project-card:scale-105"
+                className={twMerge(
+                  'h-full w-full object-cover transition-transform duration-500 ease-in-out',
+                  isSelected && 'scale-105',
+                  'group-hover/project-card:scale-105',
+                )}
                 fetchPriority="high"
                 src={project.thumbnailUrl}
                 width={imageSize?.lg || 240}
@@ -75,20 +89,42 @@ export function ProjectCard({
             </LazyLoad>
           </>
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out group-hover/project-card:scale-105 dark:bg-slate-200">
+          <div
+            className={twMerge(
+              'flex h-full w-full items-center justify-center bg-slate-100 transition-transform duration-500 ease-in-out dark:bg-slate-200',
+              isSelected && 'scale-105',
+              'group-hover/project-card:scale-105',
+            )}
+          >
             <SlRocket className="h-10 w-10 text-slate-300" />
           </div>
         )}
         {/* eslint-enable indent */}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-all group-hover/project-card:opacity-100 dark:bg-slate-900/90">
+      <div
+        className={twMerge(
+          'absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-all dark:bg-slate-900/90',
+          isSelected ? 'opacity-100' : '',
+          'group-hover/project-card:opacity-100',
+        )}
+      >
         <div className="flex flex-col gap-4">
-          <div className="-translate-y-full text-center text-base font-semibold leading-tight text-slate-900 opacity-0 transition-all group-hover/project-card:translate-y-0 group-hover/project-card:opacity-100 dark:text-slate-50">
+          <div
+            className={twMerge(
+              '-translate-y-full text-center text-base font-semibold leading-tight text-slate-900 opacity-0 transition-all dark:text-slate-50',
+              isSelected && 'translate-y-0 opacity-100',
+              'group-hover/project-card:translate-y-0 group-hover/project-card:opacity-100',
+            )}
+          >
             {project.title}
           </div>
           <div className="flex items-center justify-center gap-3 text-xs font-light text-slate-500 dark:text-slate-600">
             <Link
-              className="animated-link -translate-x-full opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
+              className={twMerge(
+                'animated-link -translate-x-full opacity-0',
+                isSelected && 'translate-x-0 opacity-100',
+                'group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100',
+              )}
               prefetch="viewport"
               to={`/work/${project.slug}`}
               type="button"
@@ -98,7 +134,11 @@ export function ProjectCard({
             </Link>
             {project.link ? (
               <a
-                className="animated-link flex translate-x-full items-center gap-1 opacity-0 group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100"
+                className={twMerge(
+                  'animated-link flex translate-x-full items-center gap-1 opacity-0',
+                  isSelected && 'translate-x-0 opacity-100',
+                  'group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100',
+                )}
                 href={project.link}
                 rel="noreferrer"
                 target="_blank"

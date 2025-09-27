@@ -17,12 +17,13 @@ interface PropType {
   className?: string;
   itemClassName?: string;
   slides: ReactNode[];
+  onMouseLeave?: () => void;
   options?: EmblaOptionsType & Options;
 }
 
 export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
   (props, ref) => {
-    const { slides, options, className, itemClassName } = props;
+    const { slides, options, className, itemClassName, onMouseLeave } = props;
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
       AutoScroll({
@@ -42,22 +43,6 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
       onNextButtonClick,
     } = usePrevNextButtons(emblaApi);
 
-    const onButtonAutoplayClick = useCallback(
-      (callback: () => void) => {
-        const autoScroll = emblaApi?.plugins()?.autoScroll;
-        if (!autoScroll) return;
-
-        const resetOrStop =
-          autoScroll.options.stopOnInteraction === false
-            ? autoScroll.reset
-            : autoScroll.stop;
-
-        resetOrStop();
-        callback();
-      },
-      [emblaApi],
-    );
-
     const play = useCallback(() => {
       const autoScroll = emblaApi?.plugins()?.autoScroll;
       if (!autoScroll) return;
@@ -74,6 +59,27 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
 
     const debouncedPause = debounce(pause, 2000);
 
+    const handleClickAutoplay = useCallback(
+      (callback: () => void) => {
+        const autoScroll = emblaApi?.plugins()?.autoScroll;
+        if (!autoScroll) return;
+
+        const resetOrStop =
+          autoScroll.options.stopOnInteraction === false
+            ? autoScroll.reset
+            : autoScroll.stop;
+
+        resetOrStop();
+        callback();
+      },
+      [emblaApi],
+    );
+
+    const handleMouseLeave = () => {
+      onMouseLeave?.();
+      debouncedPlay();
+    };
+
     return (
       <div
         className={twMerge(
@@ -81,7 +87,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
           className,
         )}
         onMouseEnter={() => debouncedPause()}
-        onMouseLeave={() => debouncedPlay()}
+        onMouseLeave={handleMouseLeave}
         ref={ref}
       >
         <div className="overflow-hidden py-4" ref={emblaRef}>
@@ -104,7 +110,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
           aria-label="Scroll to left"
           className="absolute left-2 top-1/2 z-10 -translate-x-full -translate-y-1/2 rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
           disabled={prevBtnDisabled}
-          onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+          onClick={() => handleClickAutoplay(onPrevButtonClick)}
           type="button"
         >
           <SlArrowLeftCircle className="h-8 w-8 md:h-12 md:w-12" />
@@ -114,7 +120,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
           aria-label="Scroll to right"
           className="absolute right-2 top-1/2 z-10 -translate-y-1/2 translate-x-full rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
           disabled={nextBtnDisabled}
-          onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+          onClick={() => handleClickAutoplay(onNextButtonClick)}
           type="button"
         >
           <SlArrowRightCircle className="h-8 w-8 md:h-12 md:w-12" />
