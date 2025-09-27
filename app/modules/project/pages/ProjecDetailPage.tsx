@@ -43,7 +43,7 @@ export default function ProjectDetailPage({
         title={project.title}
         titleClassName="text-center justify-center"
       />
-      <div className="container mx-auto my-8 flex flex-col md:text-center lg:max-w-5xl">
+      <div className="container mx-auto my-8 flex flex-col md:text-center lg:max-w-3xl">
         <div className="flex flex-col gap-6">
           {project.thumbnailUrl ? (
             <OptimizedImage

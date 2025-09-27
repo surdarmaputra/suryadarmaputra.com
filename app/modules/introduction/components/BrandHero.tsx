@@ -27,7 +27,7 @@ export function BrandHero({ className }: BrandHeroProps) {
           isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
         )}
       >
-        <h1 className="text-xl font-bold leading-6 tracking-tight text-black dark:text-slate-100 md:text-5xl md:font-extrabold">
+        <h1 className="text-xl font-bold leading-6 md:leading-11 tracking-tight text-black dark:text-slate-100 md:text-5xl md:font-extrabold">
           Surya Darma Putra
         </h1>
         <p className="w-full text-sm font-light text-slate-600 dark:text-slate-400 md:text-base">

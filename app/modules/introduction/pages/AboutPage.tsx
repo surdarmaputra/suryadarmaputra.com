@@ -157,7 +157,7 @@ export default function AboutPage() {
 
       <AboutMeShortSection />
 
-      <section className="container mx-auto mb-12 mt-4 pt-16 text-xl font-light md:mb-20 lg:max-w-5xl">
+      <section className="container mx-auto mb-12 mt-4 pt-16 text-xl font-light md:mb-20 lg:max-w-3xl">
         <h2 className="mb-10 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
           <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
             <SlBriefcase className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />

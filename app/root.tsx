@@ -73,7 +73,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <Meta />
-        <Links />
         <style>
           {`
           .break-words {
@@ -135,83 +134,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
           .w-full {
             width: 100%;
           }
-          .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-          }
-          .duration-300 {
-            transition-duration: 300ms;
-          }
-          .duration-700 {
-            transition-duration: 700ms;
-          }
-          .duration-1000 {
-            transition-duration: 1000ms;
-          }
-          .delay-300 {
-            transition-delay: 300ms;
-          }
-          .delay-500 {
-            transition-delay: 500ms;
-          }
-          .ease-out {
-            transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-          }
-          .opacity-0 {
-            opacity: 0;
-          }
-          .opacity-100 {
-            opacity: 1;
-          }
-          .translate-x-0 {
-            --tw-translate-x: 0px;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          }
-          .translate-x-full {
-            --tw-translate-x: 100%;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          }
-          .translate-x-24 {
-            --tw-translate-x: 6rem;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          }
-          .-translate-x-full {
-            --tw-translate-x: -100%;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          }
-          .translate-y-0 {
-            --tw-translate-y: 0px;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          }
-          @media (min-width: 640px) {
-            .container {
-              max-width: 640px;
-            }
-          }
-          @media (min-width: 768px) {
-            .container {
-              max-width: 768px;
-            }
-            .md:mt-4{
-              margin-top:1rem;
-            }
-            .md:pt-28{
-              padding-top:7rem;
-            }
-          }
-          @media (min-width: 1024px) {
-            .container {
-              max-width: 1024px;
-            }
-            .lg:max-w-5xl {
-              max-width: 64rem;
-            }
-          }
         `}
         </style>
+        <Links />
       </head>
-      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-[scroll-locked]:px-6 dark:bg-slate-900 dark:text-slate-400">
+      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-scroll-locked:px-6 dark:bg-slate-900 dark:text-slate-400">
         {children}
         <ColorModeScript />
         <ScrollRestoration />

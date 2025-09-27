@@ -23,7 +23,7 @@ export default function HeroSection({
   }, []);
 
   return (
-    <section className="container mx-auto my-8 md:py-16 lg:max-w-5xl">
+    <section className="container mx-auto my-8 md:py-16 lg:max-w-3xl">
       <h1
         className={twMerge(
           'flex w-full items-center gap-2 text-left text-3xl font-extrabold leading-none tracking-tight text-black dark:text-slate-100 md:gap-4 md:text-5xl',

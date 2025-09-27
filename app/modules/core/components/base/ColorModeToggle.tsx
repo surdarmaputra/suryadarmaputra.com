@@ -10,8 +10,8 @@ export function ColorModeToggle({ isDark, onChange }: ColorModeToggleProps) {
   const toggleClassName = useMemo(
     () =>
       isDark
-        ? 'bg-slate-300 shadow shadow-slate-300 translate-x-full'
-        : 'bg-amber-500 shadow shadow-amber-500 left-0',
+        ? 'bg-slate-300 shadow-sm shadow-slate-300 translate-x-full'
+        : 'bg-amber-500 shadow-sm shadow-amber-500 left-0',
     [isDark],
   );
 

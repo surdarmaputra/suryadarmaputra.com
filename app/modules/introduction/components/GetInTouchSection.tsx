@@ -53,13 +53,13 @@ const GetInTouchSection = forwardRef<HTMLElement, GetInTouchSectionProps>(
           {SOCIAL_LINKS.map(({ id, Icon, href, label }) => (
             <a
               aria-label={label}
-              className="group rounded-xl bg-slate-50 p-5 transition hover:scale-105 hover:bg-slate-200 dark:bg-slate-900 hover:dark:bg-slate-800"
+              className="group rounded-xl bg-slate-50 p-5 transition hover:scale-105 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800"
               href={href}
               key={id}
               rel="noreferrer"
               target="_blank"
             >
-              <Icon className="h-12 w-12 text-slate-400 transition-transform group-hover:scale-110 group-hover:text-slate-500 group-hover:dark:text-slate-300 md:h-20 md:w-20" />
+              <Icon className="h-12 w-12 text-slate-400 transition-transform group-hover:scale-110 group-hover:text-slate-500 dark:group-hover:text-slate-300 md:h-20 md:w-20" />
             </a>
           ))}
         </div>

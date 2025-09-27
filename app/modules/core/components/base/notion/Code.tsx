@@ -61,7 +61,7 @@ export function Code({ block }: CodeProps) {
 
       {!expanded && (
         <>
-          <div className="absolute bottom-0 h-32 w-full bg-gradient-to-b from-transparent to-white dark:to-slate-900"></div>
+          <div className="absolute bottom-0 h-32 w-full bg-linear-to-b from-transparent to-white dark:to-slate-900"></div>
           <button
             className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center rounded-full bg-slate-800 px-6 py-1 text-sm text-slate-300 shadow-lg transition hover:bg-slate-700"
             onClick={() => setExpanded(true)}

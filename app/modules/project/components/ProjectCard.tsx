@@ -81,7 +81,7 @@ export function ProjectCard({
         )}
         {/* eslint-enable indent */}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-opacity group-hover/project-card:opacity-100 dark:bg-slate-900/90">
+      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-all group-hover/project-card:opacity-100 dark:bg-slate-900/90">
         <div className="flex flex-col gap-4">
           <div className="-translate-y-full text-center text-base font-semibold leading-tight text-slate-900 opacity-0 transition-all group-hover/project-card:translate-y-0 group-hover/project-card:opacity-100 dark:text-slate-50">
             {project.title}

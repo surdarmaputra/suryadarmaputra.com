@@ -14,7 +14,7 @@ export function GeneralErrorPage() {
         or come back later.
       </p>
       <button
-        className="group inline-flex items-center rounded-lg bg-amber-400 px-6 py-2 font-semibold text-slate-900 shadow-lg transition-all duration-200 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:bg-amber-500 dark:text-slate-900"
+        className="group inline-flex items-center rounded-lg bg-amber-400 px-6 py-2 font-semibold text-slate-900 shadow-lg transition-all duration-200 hover:bg-amber-500 focus:outline-hidden focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:bg-amber-500 dark:text-slate-900"
         onClick={() => window.location.reload()}
         type="button"
       >

@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <>
-      <header className="container mx-auto mb-4 flex items-center justify-between py-3 lg:max-w-5xl">
+      <header className="container mx-auto mb-4 flex items-center justify-between py-3 lg:max-w-3xl">
         <Link
           onClick={(event) => handleClickNavigationItem(event, 'body')}
           prefetch="viewport"
@@ -33,7 +33,7 @@ export function Header() {
         <nav className="flex items-center">
           {navigationItems.map(({ id, label, landingHref, to }) => (
             <NavLink
-              className="animated-link mr-3 py-1 text-sm !font-light text-slate-500 dark:text-slate-400 md:mr-8"
+              className="animated-link mr-3 py-1 text-sm font-light! text-slate-500 dark:text-slate-400 md:mr-8"
               key={id}
               onClick={(event) => handleClickNavigationItem(event, landingHref)}
               prefetch="viewport"
