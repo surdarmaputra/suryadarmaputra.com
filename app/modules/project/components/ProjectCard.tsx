@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router';
@@ -14,8 +15,6 @@ interface ProjectCardProps {
     lg: number;
   };
   isClientReady?: boolean;
-  isSelected?: boolean;
-  onClick?: () => void;
   project: Project;
 }
 
@@ -23,10 +22,9 @@ export function ProjectCard({
   className,
   imageSize,
   isClientReady,
-  isSelected,
-  onClick,
   project,
 }: ProjectCardProps) {
+  const [isSelected, setIsSelected] = useState<boolean>(false);
   return (
     <div
       aria-hidden="true"
@@ -34,8 +32,8 @@ export function ProjectCard({
         'group/project-card relative block h-40 w-40 lg:h-60 lg:w-60',
         className,
       )}
-      onClick={onClick}
-      // Removed rel="noreferrer" as it's not applicable to a div without a target="_blank" link
+      onClick={() => setIsSelected(true)}
+      onMouseLeave={() => setIsSelected(false)}
     >
       <div className="h-full w-full overflow-hidden rounded-md shadow-lg">
         {project.thumbnailUrl &&

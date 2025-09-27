@@ -23,7 +23,6 @@ interface ProjectCarouselProps {
 export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
   ({ className, projects }, ref) => {
     const [isClientReady, setIsClientReady] = useState<boolean>(false);
-    const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
     const finalProjects =
       projects?.length && projects.length <= 5
@@ -52,15 +51,12 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
         <MultipleItemsCarousel
           className="max-w-full"
           itemClassName="w-44 pl-4 lg:w-64"
-          onMouseLeave={() => setSelectedProjectId(null)}
           options={{ loop: true, autoPlay: true, playDirection: 'forward' }}
           slides={[
             ...finalProjects.map((project, index) => (
               <ProjectCard
                 isClientReady={isClientReady}
-                isSelected={selectedProjectId === project.id}
                 key={index}
-                onClick={() => setSelectedProjectId(project.id)}
                 project={project}
               />
             )),

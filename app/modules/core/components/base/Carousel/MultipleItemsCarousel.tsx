@@ -17,13 +17,12 @@ interface PropType {
   className?: string;
   itemClassName?: string;
   slides: ReactNode[];
-  onMouseLeave?: () => void;
   options?: EmblaOptionsType & Options;
 }
 
 export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
   (props, ref) => {
-    const { slides, options, className, itemClassName, onMouseLeave } = props;
+    const { slides, options, className, itemClassName } = props;
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
       AutoScroll({
@@ -75,11 +74,6 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
       [emblaApi],
     );
 
-    const handleMouseLeave = () => {
-      onMouseLeave?.();
-      debouncedPlay();
-    };
-
     return (
       <div
         className={twMerge(
@@ -87,7 +81,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
           className,
         )}
         onMouseEnter={() => debouncedPause()}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={() => debouncedPlay()}
         ref={ref}
       >
         <div className="overflow-hidden py-4" ref={emblaRef}>
