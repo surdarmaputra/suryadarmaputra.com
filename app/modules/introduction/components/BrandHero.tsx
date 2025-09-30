@@ -21,22 +21,17 @@ export function BrandHero({ className }: BrandHeroProps) {
         className,
       )}
     >
-      <div
-        className={twMerge(
-          'flex -translate-x-full flex-col gap-2 text-left opacity-0 transition-all duration-300 ease-out md:translate-x-0 md:translate-y-10 md:text-center',
-          isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
-        )}
-      >
-        <h1 className="text-xl font-bold leading-6 md:leading-11 tracking-tight text-black dark:text-slate-100 md:text-5xl md:font-extrabold">
+      <div className="animate-enter-from-left md:animate-enter-from-bottom flex w-2/3 flex-col gap-2 text-left opacity-0 md:text-center">
+        <h1 className="text-xl leading-6 font-bold tracking-tight text-black md:text-5xl md:leading-11 md:font-extrabold dark:text-slate-100">
           Surya Darma Putra
         </h1>
-        <p className="w-full text-sm font-light text-slate-600 dark:text-slate-400 md:text-base">
+        <p className="w-full text-sm font-light text-slate-600 md:text-base dark:text-slate-400">
           Software Engineer / Web / Mobile. Explore my works below.
         </p>
       </div>
       <div
         className={twMerge(
-          'shrink-0 translate-x-full opacity-0 transition-all duration-300 ease-out md:-translate-y-full md:translate-x-0',
+          'shrink-0 translate-x-full opacity-0 transition-all duration-300 ease-out md:translate-x-0 md:-translate-y-full',
           isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
         )}
       >

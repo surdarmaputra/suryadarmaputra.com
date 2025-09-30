@@ -125,9 +125,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           .relative {
             position: relative;
           }
-          .text-slate-700 {
-            color: #334155;
-          }
           .tracking-tight {
             letter-spacing: -0.025em;
           }
@@ -138,7 +135,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </style>
         <Links />
       </head>
-      <body className="relative mx-auto flex min-h-screen flex-col justify-between break-words px-6 text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-scroll-locked:px-6 dark:bg-slate-900 dark:text-slate-400">
+      <body className="relative mx-auto flex min-h-screen flex-col justify-between px-6 break-words text-slate-700 selection:bg-amber-500 selection:text-slate-900 data-scroll-locked:px-6 dark:bg-slate-900 dark:text-slate-400">
         {children}
         <ColorModeScript />
         <ScrollRestoration />

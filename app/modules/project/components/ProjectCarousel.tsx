@@ -38,7 +38,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
     return (
       <section
         className={twMerge(
-          'flex flex-col gap-4 md:gap-6',
+          'group/project-carousel flex flex-col gap-4 md:gap-6',
           'transition-all duration-700 ease-out',
           isClientReady
             ? 'translate-x-0 opacity-100 delay-300'

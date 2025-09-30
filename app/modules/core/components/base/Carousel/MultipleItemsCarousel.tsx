@@ -102,7 +102,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
 
         <button
           aria-label="Scroll to left"
-          className="absolute left-2 top-1/2 z-10 -translate-x-full -translate-y-1/2 rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
+          className="absolute top-1/2 left-2 z-10 -translate-x-full -translate-y-1/2 cursor-pointer rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800 dark:text-slate-400"
           disabled={prevBtnDisabled}
           onClick={() => handleClickAutoplay(onPrevButtonClick)}
           type="button"
@@ -112,7 +112,7 @@ export const MultipleItemsCarousel = forwardRef<HTMLDivElement, PropType>(
 
         <button
           aria-label="Scroll to right"
-          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 translate-x-full rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800"
+          className="absolute top-1/2 right-2 z-10 translate-x-full -translate-y-1/2 cursor-pointer rounded-full bg-slate-50 opacity-0 transition group-hover/multi-item-carousel:translate-x-0 group-hover/multi-item-carousel:opacity-100 dark:bg-slate-800 dark:text-slate-400"
           disabled={nextBtnDisabled}
           onClick={() => handleClickAutoplay(onNextButtonClick)}
           type="button"
