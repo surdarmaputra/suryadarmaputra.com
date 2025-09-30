@@ -101,7 +101,7 @@ export function ProjectCard({
       </div>
       <div
         className={twMerge(
-          'absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-all dark:bg-slate-900/90',
+          'absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center rounded-md bg-slate-50/95 p-2 opacity-0 transition-all dark:bg-slate-900/90',
           isSelected ? 'opacity-100' : '',
           'group-hover/project-card:opacity-100',
         )}
@@ -109,14 +109,14 @@ export function ProjectCard({
         <div className="flex flex-col gap-4">
           <div
             className={twMerge(
-              '-translate-y-full text-center text-base font-semibold leading-tight text-slate-900 opacity-0 transition-all dark:text-slate-50',
+              '-translate-y-full text-center text-base leading-tight font-semibold text-slate-900 opacity-0 transition-all dark:text-slate-50',
               isSelected && 'translate-y-0 opacity-100',
               'group-hover/project-card:translate-y-0 group-hover/project-card:opacity-100',
             )}
           >
             {project.title}
           </div>
-          <div className="flex items-center justify-center gap-3 text-xs font-light text-slate-500 dark:text-slate-600">
+          <div className="flex items-center justify-center gap-3 text-xs font-light text-slate-500 dark:text-slate-100">
             <Link
               className={twMerge(
                 'animated-link -translate-x-full opacity-0',

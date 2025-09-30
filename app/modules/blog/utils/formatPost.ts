@@ -1,3 +1,5 @@
+import { getTextFromProperties } from '~/libs/notion';
+
 import { FullPost, Post } from '../types';
 
 export function formatPost(
@@ -14,6 +16,10 @@ export function formatPost(
   const updatedAt = new Date(properties.updated_at);
   const slug = fileName.replace(/\.json$/, '');
   const href = `/blog/${slug}`;
+  const highlightMessage = getTextFromProperties(
+    properties,
+    'highlight_message',
+  );
 
   return {
     category: properties.category,
@@ -24,6 +30,8 @@ export function formatPost(
     slug,
     tags: properties.tags,
     title,
+    isHighlighted: properties.highlighted,
+    highlightMessage,
     updatedAt,
     ...(isFullPost ? { blocks } : {}),
   };

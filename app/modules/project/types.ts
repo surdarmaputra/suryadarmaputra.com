@@ -14,5 +14,6 @@ export interface Project {
   updatedAt: Date;
   blocks?: BlockWithChildren[];
   isHighlighted?: boolean;
+  highlightMessage?: string;
   slug: string;
 }
