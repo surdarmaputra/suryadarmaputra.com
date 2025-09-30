@@ -70,7 +70,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
           )}
           href="/work"
         >
-          Show me all
+          All Works
           <SlArrowRightCircle className="mt-0.5" />
         </SmartLink>
       </section>

@@ -47,6 +47,12 @@
   }
 }
 
+.animated-border-highlight {
+  @apply bg-gradient-to-br from-[#f59e0b] via-[#db2777] to-transparent;
+  @apply animate-spin;
+  animation-duration: 8s;
+}
+
 .animated-underline {
   background: linear-gradient(to right, #94a3b8, transparent),
     linear-gradient(to right, #f59e0b, #db2777, #0ea5e9);

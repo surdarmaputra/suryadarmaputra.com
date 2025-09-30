@@ -9,6 +9,8 @@ export interface Post {
   slug: string;
   tags?: Array<string>;
   title: string;
+  isHighlighted?: boolean;
+  highlightMessage?: string | null;
   updatedAt: Date;
 }
 

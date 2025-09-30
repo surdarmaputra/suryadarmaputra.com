@@ -120,12 +120,15 @@ export function getTitle(page: GetPageResponse): string | null {
   );
 }
 
-export function getSlugFromProperties(
+export function getTextFromProperties(
   properties: Record<string, unknown>,
+  fieldName: string,
 ): string | null {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (properties?.slug as any[])?.find((item: any) => item.type === 'text')
-    ?.plain_text;
+  return (properties?.[fieldName] as any[])?.find(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (item: any) => item.type === 'text',
+  )?.plain_text;
 }
 
 export function joinStrings(strings: string[]): string {
