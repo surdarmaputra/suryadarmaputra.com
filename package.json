@@ -9,7 +9,7 @@
     "commit": "cz",
     "dev": "react-router dev",
     "format:fix": "prettier --write",
-    "generate": "bun run generate:posts && bun run generate:projects",
+    "generate": "bun run generate:posts && bun run generate:projects && bun run generate:campaigns",
     "generate:posts": "bun scripts/fetch-posts.ts",
     "generate:posts:unpublished": "SHOW_UNPUBLISHED=true bun scripts/fetch-posts.ts",
     "generate:projects": "bun scripts/fetch-projects.ts",
