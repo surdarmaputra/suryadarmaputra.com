@@ -1,7 +1,8 @@
-import { SlPencil } from 'react-icons/sl';
+import { SlPencil, SlRocket, SlStar } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 
 import { Post } from '~/modules/blog/types';
+import { Campaign } from '~/modules/campaign/types';
 import { Project } from '~/modules/project/types';
 
 import { HighlightCard } from './HighlightCard';
@@ -10,15 +11,28 @@ interface HighlightsSectionProps {
   className?: string;
   posts: Post[];
   projects: Project[];
+  campaigns?: Campaign[];
 }
+
+const campaignIconMap: Record<string, JSX.Element> = {
+  rocket: <SlRocket />,
+  pencil: <SlPencil />,
+  star: <SlStar />,
+  new: <SlStar />,
+};
 
 export function HighlightsSection({
   className,
   posts,
   projects,
+  campaigns = [],
 }: HighlightsSectionProps) {
   const highlightedProjects = projects.filter((item) => item.isHighlighted);
   const highlightedPosts = posts.filter((item) => item.isHighlighted);
+  const highlightedCampaigns = campaigns;
+
+  const getCampaignIcon = (icon?: Campaign['icon']) =>
+    campaignIconMap[icon ?? ''] ?? <SlRocket />;
 
   return (
     <div
@@ -27,6 +41,16 @@ export function HighlightsSection({
         className,
       )}
     >
+      {highlightedCampaigns?.map((item) => (
+        <HighlightCard
+          className="animate-enter-from-bottom animate-delay-75 md:w-1/3"
+          description={item.message || ''}
+          href={item.link.internal || item.link.external || '#'}
+          icon={getCampaignIcon(item.icon)}
+          key={item.id}
+          title={item.title}
+        />
+      ))}
       {highlightedProjects?.map((item) => (
         <HighlightCard
           className="animate-enter-from-left animate-delay-75 md:w-1/3"

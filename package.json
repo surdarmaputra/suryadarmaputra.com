@@ -13,6 +13,7 @@
     "generate:posts": "bun scripts/fetchPosts.ts",
     "generate:posts:unpublished": "SHOW_UNPUBLISHED=true bun scripts/fetchPosts.ts",
     "generate:projects": "bun scripts/fetchProjects.ts",
+    "generate:campaigns": "bun scripts/fetchCampaigns.ts",
     "lint": "eslint --max-warnings=0 --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint",
     "lint:fix": "bun run lint --fix",
     "start": "react-router-serve ./build/server/index.js",

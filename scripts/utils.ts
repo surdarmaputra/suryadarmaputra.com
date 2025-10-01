@@ -38,3 +38,14 @@ export function fetchProjects(): Promise<GetPageResponse[]> {
     },
   });
 }
+
+export function fetchCampaigns(): Promise<GetPageResponse[]> {
+  return getPagesFromDatabase(process.env.NOTION_CAMPAIGN_DATABASE_ID, {
+    filter: {
+      property: 'publish',
+      checkbox: {
+        equals: true,
+      },
+    },
+  });
+}

@@ -2,6 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { useLoaderData } from 'react-router';
 
 import { getPosts } from '~/modules/blog/services/PostService/getPosts';
+import { getCampaigns } from '~/modules/campaign/services/CampaignService/getCampaigns';
 import LandingPage from '~/modules/introduction/pages/LandingPage';
 import { getProjects } from '~/modules/project/services/ProjectService/getProjects';
 
@@ -25,15 +26,19 @@ export const meta: MetaFunction = () => {
 export async function loader() {
   const posts = await getPosts();
   const projects = await getProjects();
+  const campaigns = await getCampaigns();
 
   return {
     posts,
     projects,
+    campaigns,
   };
 }
 
 export default function Index() {
-  const { posts, projects } = useLoaderData<typeof loader>();
+  const { posts, projects, campaigns } = useLoaderData<typeof loader>();
 
-  return <LandingPage posts={posts} projects={projects} />;
+  return (
+    <LandingPage campaigns={campaigns} posts={posts} projects={projects} />
+  );
 }
