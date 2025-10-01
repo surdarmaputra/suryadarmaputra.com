@@ -81,6 +81,7 @@ bun run commit
 ### Code conventions
 - Use kebab-case for file and folder names (including React component files).
 - Name React component identifiers with PascalCase inside files.
+- Prefer constants for value lists: use `const VALUE = {one: 'one', two: 'two'} as const` and derive types, instead of union types or enums.
 - Export a single public item per file; keep helpers internal.
 - Prefer named exports.
 - Use `type` aliases instead of `interface`.

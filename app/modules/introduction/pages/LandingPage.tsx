@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 import { Post } from '~/modules/blog/types';
-import { Campaign } from '~/modules/campaign/types';
+import { Campaign, CAMPAIGN_TYPE } from '~/modules/campaign/types';
 import { DefaultLayout } from '~/modules/core/components/layouts/DefaultLayout';
 import { ProjectCarousel } from '~/modules/project/components/ProjectCarousel';
 import { Project } from '~/modules/project/types';
@@ -27,6 +27,17 @@ export default function LandingPage({
   projects,
   campaigns,
 }: LandingPageProps) {
+  const now = new Date();
+  const visibleCampaigns = campaigns
+    ?.filter((item) => item.type === CAMPAIGN_TYPE.landing_highlight)
+    .filter((item) => {
+      const startsOk = now.getTime() >= item.startDate.getTime();
+      if (item.endDate) {
+        return startsOk && now.getTime() <= item.endDate.getTime();
+      }
+      return startsOk;
+    });
+
   return (
     <DefaultLayout isFooterLinksVisible={false}>
       <div className="absolute top-24 right-0 z-10 h-72 w-72 rounded-full bg-red-400 opacity-10 blur-3xl dark:bg-sky-800"></div>
@@ -35,7 +46,7 @@ export default function LandingPage({
       <BrandHero className="z-20 py-12" />
 
       <HighlightsSection
-        campaigns={campaigns}
+        campaigns={visibleCampaigns}
         className="pt-8 pb-12 md:pt-16 md:pb-20"
         posts={posts}
         projects={projects}
@@ -54,7 +65,7 @@ export default function LandingPage({
 
       <GetInTouchSection className="py-10" />
 
-      {!posts?.length && !projects?.length && !campaigns?.length ? (
+      {!posts?.length && !projects?.length && !visibleCampaigns?.length ? (
         <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">
           Content is coming soon!
         </div>
