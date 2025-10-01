@@ -12,7 +12,8 @@ import {
   getFileExtensionFromUrl,
   getProperties,
   getTitle,
-} from '../app/libs/notion';
+} from '~/libs/notion';
+
 import { fetchCampaigns } from './utils';
 /* eslint-enable import/first */
 

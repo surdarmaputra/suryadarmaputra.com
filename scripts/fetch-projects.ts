@@ -8,15 +8,15 @@ dotenv.config();
 /* eslint-disable import/first */
 import { request } from 'undici';
 
-import { getBlockChildren } from '~/libs/notion/index.server';
-
 import {
   BlockWithChildren,
   getFileExtensionFromUrl,
   getProperties,
   getTitle,
   regroupListItems,
-} from '../app/libs/notion';
+} from '~/libs/notion';
+import { getBlockChildren } from '~/libs/notion/index.server';
+
 import { fetchProjects } from './utils';
 /* eslint-enable import/first */
 

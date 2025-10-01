@@ -9,9 +9,6 @@ dotenv.config();
 import { Image } from 'image-js';
 import { request } from 'undici';
 
-import { getBlockChildren } from '~/libs/notion/index.server';
-import { calculateReadingTime } from '~/libs/notion/utils.server';
-
 import {
   BlockWithChildren,
   getExcerpt,
@@ -19,7 +16,10 @@ import {
   getProperties,
   getTitle,
   regroupListItems,
-} from '../app/libs/notion';
+} from '~/libs/notion';
+import { getBlockChildren } from '~/libs/notion/index.server';
+import { calculateReadingTime } from '~/libs/notion/utils.server';
+
 import { fetchPosts } from './utils';
 /* eslint-enable import/first */
 

@@ -9,7 +9,8 @@ import { parseString } from 'xml2js';
 dotenv.config();
 
 /* eslint-disable import/first */
-import { getProperties, getTitle } from '../app/libs/notion';
+import { getProperties, getTitle } from '~/libs/notion';
+
 import { fetchPosts, fetchProjects } from './utils';
 /* eslint-enable import/first */
 

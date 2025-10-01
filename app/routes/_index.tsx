@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { useLoaderData } from 'react-router';
 
 import { getPosts } from '~/modules/blog/services/PostService/getPosts';
-import { getCampaigns } from '~/modules/campaign/services/CampaignService/getCampaigns';
+import { getCampaigns } from '~/modules/campaign/services/campaign-service/get-campaigns';
 import LandingPage from '~/modules/introduction/pages/LandingPage';
 import { getProjects } from '~/modules/project/services/ProjectService/getProjects';
 

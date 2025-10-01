@@ -7,7 +7,7 @@ export type CampaignLink = {
   external?: string | null;
 };
 
-export interface Campaign {
+export type Campaign = {
   id: string;
   title: string;
   message?: string | null;
@@ -18,4 +18,4 @@ export interface Campaign {
   thumbnailPlaceholderUrl?: string | null;
   link: CampaignLink;
   isHighlighted?: boolean;
-}
+};
