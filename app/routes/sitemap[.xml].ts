@@ -20,15 +20,15 @@ export async function loader({ request }: { request: Request }) {
   const routes: SitemapRoute[] = [
     { path: '/', priority: 1.0 }, // highest
     { path: '/about', priority: 0.9 }, // second place
-    { path: '/work', priority: 0.8 }, // third place
-    { path: '/blog', priority: 0.7 }, // others
+    { path: '/works', priority: 0.8 }, // third place
+    { path: '/posts', priority: 0.7 }, // others
   ];
 
   // Project routes
   const projects = await getProjects();
   projects.forEach((project) => {
     routes.push({
-      path: `/work/${project.slug}`,
+      path: `/works/${project.slug}`,
       priority: 0.7,
     });
   });

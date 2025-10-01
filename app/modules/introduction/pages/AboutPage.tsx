@@ -16,26 +16,18 @@ const experiences = [
     end: null,
     descriptions: [
       <div key={0}>
-        At GoTo Financial, I <span className="font-semibold">lead</span> the
-        Merchant Lending team, delivering financing solutions to{' '}
-        <span className="font-semibold">empower</span> our merchant ecosystem
-        and support their business <span className="font-semibold">growth</span>
-        . I&apos;ve gained experience managing{' '}
-        <span className="font-semibold">high-usage</span> products,{' '}
-        collaborating with <span className="font-semibold">global teams</span>{' '}
-        to integrate multiple subsystems, and focusing on{' '}
-        <span className="font-semibold">cost efficiency</span> and{' '}
-        <span className="font-semibold">profitability</span>.
-      </div>,
-      <div key={1}>
-        My first project involved rebranding our flagship product with a new
-        service and user experience. We successfully delivered it{' '}
-        <span className="font-semibold">on time</span> with{' '}
-        <span className="font-semibold">zero downtime</span>,{' '}
-        <span className="font-semibold">improved testing coverage</span> by over
-        50%, and developed a{' '}
-        <span className="font-semibold">standardized UI</span> library with
-        design tokens.
+        GoTo Financial provides wide range of financial services for consumers
+        and merchants. I build and maintain web apps, mobile app, dashboards and
+        frontend libraries to provide lending products across multiple mobile
+        apps. Here I&apos;m challenged to deal with a{' '}
+        <span className="font-semibold">complex system</span> that serves a{' '}
+        <span className="font-semibold">huge traffic</span>, finding balance
+        between <span className="font-semibold">beating time-to-market</span>,{' '}
+        <span className="font-semibold">code quality</span> and{' '}
+        <span className="font-semibold">comply with regulations</span>. Every
+        steps we take will impacting a{' '}
+        <span className="font-semibold">massive amount of users</span> and
+        affect company reputation as a publicly traded entity.
       </div>,
     ],
   },
@@ -47,18 +39,15 @@ const experiences = [
     end: '2024-07-01',
     descriptions: [
       <div key={0}>
-        Working at a <span className="font-semibold">fast-growing</span>{' '}
-        logistic company has offered valuable learning opportunities.
-      </div>,
-      <div key={1}>
-        I <span className="font-semibold">initiated</span> frontend unit
-        testing, <span className="font-semibold">published</span> NPM packages,{' '}
-        <span className="font-semibold">improved</span> CI/CD, built{' '}
-        <span className="font-semibold">growth-focused</span> features in web
-        and mobile apps, <span className="font-semibold">optimized</span>{' '}
-        funnels, conducted A/B testing, and{' '}
-        <span className="font-semibold">integrated AI</span> to enhance
-        operations.
+        Kargo provides transportation solutions, especially trucks, for
+        first-mile, mid-mile and last-mile logistic. Here I experienced working
+        at a <span className="font-semibold">fast-growing - early stage</span>{' '}
+        company. I contributed to{' '}
+        <span className="font-semibold">core engineering</span> and{' '}
+        <span className="font-semibold">product engineering</span> team. I
+        initiated frontend testing, maintained NPM packages, optimized CI/CD,{' '}
+        built and maintained dashboards, mobile webs, and mobile app, conducted
+        A/B testing, optimized funnels, and integrated AI into our products.
       </div>,
     ],
   },
@@ -70,18 +59,15 @@ const experiences = [
     end: '2021-06-01',
     descriptions: [
       <div key={0}>
-        Bukalapak, beyond being an online marketplace, also offers financial
-        products to empower users by increasing their purchasing power and
-        supporting business growth.
-      </div>,
-      <div key={1}>
-        I developed <span className="font-semibold">webview</span> pages and{' '}
-        <span className="font-semibold">dashboards</span> for financial
-        products, doing <span className="font-semibold">cloud migration</span>{' '}
-        to GCP, gaining hands-on experience with{' '}
-        <span className="font-semibold">diverse tech stacks and workflows</span>
-        . This role marked my first venture into building products in a tech
-        startup environment.
+        Bukalapak offers financial solutions to increase customers&apos; buying
+        power and empower shop owners&apos; business. I built{' '}
+        <span className="font-semibold">web apps</span> and{' '}
+        <span className="font-semibold">dashboards</span> to support lending
+        business. This role marked my first venture into building products in a{' '}
+        <span className="font-semibold">tech startup</span> environment, gaining
+        a ton of experiences I never thought before, including cloud
+        infrastructure, architecture migration, being on-call engineer, and
+        learn diverse tech stacks and workflows.
       </div>,
     ],
   },
@@ -96,12 +82,11 @@ const experiences = [
         Artcak offers mobile and web development services across various
         industries, including tours and travel, internet providers, and
         state-owned enterprises. My responsibilities included developing{' '}
-        <span className="font-semibold">REST APIs</span> and{' '}
-        <span className="font-semibold">web dashboards</span>, creating{' '}
-        <span className="font-semibold">project starters</span>, implementing{' '}
+        <span className="font-semibold">REST APIs</span>,{' '}
+        <span className="font-semibold">web dashboards</span>,{' '}
+        <span className="font-semibold">project starters</span>,{' '}
         <span className="font-semibold">API testing</span>, and{' '}
-        <span className="font-semibold">integrating Docker</span> into our
-        workflow.
+        <span className="font-semibold">optimizing developer experience</span>.
       </div>,
     ],
   },
@@ -147,8 +132,8 @@ export default function AboutPage() {
         description="Who is Surya and what he does"
         title={
           <>
-            <div className="relative h-4 w-4 rounded-full bg-amber-500 dark:bg-slate-800 md:h-8 md:w-8">
-              <SlUser className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 md:h-10 md:w-10" />
+            <div className="relative h-4 w-4 rounded-full bg-amber-500 md:h-8 md:w-8 dark:bg-slate-800">
+              <SlUser className="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 md:h-10 md:w-10" />
             </div>
             <div>About</div>
           </>
@@ -157,22 +142,22 @@ export default function AboutPage() {
 
       <AboutMeShortSection />
 
-      <section className="container mx-auto mb-12 mt-4 pt-16 text-xl font-light md:mb-20 lg:max-w-3xl">
+      <section className="container mx-auto mt-4 mb-12 pt-16 text-xl font-light md:mb-20 lg:max-w-3xl">
         <h2 className="mb-10 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
           <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
-            <SlBriefcase className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
+            <SlBriefcase className="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
           </div>
           <div>Experience</div>
         </h2>
         {experiences.map(
           ({ company, link, role, start, end, descriptions }, index) => (
             <div className="relative pb-8 pl-6" key={company}>
-              <div className="absolute left-0 top-2 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
-              <div className="absolute left-0 top-2 inline-flex h-2 w-2 rounded-full bg-amber-500" />
+              <div className="absolute top-2 left-0 inline-flex h-2 w-2 animate-ping rounded-full bg-amber-500" />
+              <div className="absolute top-2 left-0 inline-flex h-2 w-2 rounded-full bg-amber-500" />
               {index < experiences.length - 1 && (
-                <div className="absolute left-[3px] top-2 -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
+                <div className="absolute top-2 left-[3px] -z-10 -mb-10 h-full border-l-2 border-slate-100 dark:border-slate-800" />
               )}
-              <h3 className="mb-0 pb-1 text-sm font-bold leading-6 text-slate-700 dark:text-slate-300 md:text-base">
+              <h3 className="mb-0 pb-1 text-sm leading-6 font-bold text-slate-700 md:text-base dark:text-slate-300">
                 {role}
                 {company && (
                   <>
@@ -188,12 +173,12 @@ export default function AboutPage() {
                   </>
                 )}
               </h3>
-              <small className="mb-4 block text-sm font-light leading-6 text-slate-500">
+              <small className="mb-4 block text-sm leading-6 font-light text-slate-500">
                 {formatWorkDuration(start, end)}
               </small>
               {descriptions.map((description, descriptionIndex) => (
                 <p
-                  className="mb-4 text-sm font-light leading-6 md:text-base"
+                  className="mb-4 text-sm leading-6 font-light md:text-base"
                   key={descriptionIndex}
                 >
                   {description}

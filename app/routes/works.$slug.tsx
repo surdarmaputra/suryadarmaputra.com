@@ -25,13 +25,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export async function loader({ params }: LoaderFunctionArgs) {
   const { slug } = params;
   if (!slug) {
-    throw redirect('/work');
+    throw redirect('/works');
   }
 
   const projects = await getProjects();
   const project = projects.find((item) => item.slug === slug);
   if (!project) {
-    throw redirect('/work');
+    throw redirect('/works');
   }
 
   return { project, projects };

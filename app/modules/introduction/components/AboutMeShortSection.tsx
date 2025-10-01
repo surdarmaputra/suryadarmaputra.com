@@ -33,28 +33,29 @@ export const AboutMeShortSection = forwardRef<
         {isTitleVisible && (
           <h2 className="mb-8 inline-flex items-center gap-4 text-2xl font-extrabold text-slate-800 dark:text-slate-200">
             <div className="relative h-8 w-8 rounded-full bg-amber-500 dark:bg-slate-800">
-              <SlMagnifier className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
+              <SlMagnifier className="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
             </div>
             Who am I?
           </h2>
         )}
 
-        <div className="flex gap-16">
+        <div className="flex items-center gap-16">
           <div>
-            <div className="mb-4 flex items-center gap-4 text-sm font-light leading-6 md:text-base">
+            <div className="mb-4 flex items-center gap-4 text-sm leading-6 font-light md:text-base">
               <p>
                 Hi, I&apos;m <span className="font-semibold">Surya</span>, a
                 software engineer with expertise in{' '}
-                <span className="font-semibold">TypeScript</span> and{' '}
-                <span className="font-semibold">React.js</span>. Currently
-                working at{' '}
+                <span className="font-semibold">web development</span>.
+                Currently at{' '}
                 <SmartLink
                   className="animated-underline"
                   href="https://www.gotocompany.com/en/products/goto-financial"
+                  target="_blank"
                 >
-                  GoTo Financial - Merchant Lending
-                </SmartLink>{' '}
-                team as a <span className="font-semibold">Frontend Lead</span>.
+                  GoTo Financial
+                </SmartLink>
+                , I build products for Lending Team, aiming to provide the best
+                financing solutions for customers and merchants.
               </p>
               <div className="w-2/5 shrink-0 md:hidden">
                 <OptimizedImage
@@ -66,26 +67,20 @@ export const AboutMeShortSection = forwardRef<
               </div>
             </div>
 
-            <p className="mb-4 text-sm font-light leading-6 md:text-base">
-              Beyond web apps, I develop mobile apps, developer tools, set up
-              infrastructure and CI/CD, and integrate APIs like Notion or
-              ChatGPT. Any challenge software engineering can solve, I’m on it.
-            </p>
-
-            <p className="mb-4 text-sm font-light leading-6 md:text-base">
-              I believe in <span className="font-semibold">pragmatic</span>{' '}
-              problem-solving, not being tied to specific tools or languages. My
-              mission is to help businesses{' '}
-              <span className="font-semibold">grow</span> and operate{' '}
-              <span className="font-semibold">efficiently</span>.
+            <p className="mb-4 text-sm leading-6 font-light md:text-base">
+              I prioritize{' '}
+              <span className="font-semibold">customer&apos;s perspective</span>
+              , <span className="font-semibold">pragmatism</span>, and{' '}
+              <span className="font-semibold">compliance</span> when building
+              products.
             </p>
           </div>
-          <div className="hidden w-1/3 shrink-0 md:block">
+          <div className="hidden w-fit shrink-0 md:block">
             <OptimizedImage
               alt="me"
-              className="-mt-24 h-60 w-60 rounded-full object-cover"
+              className="ml-auto h-48 w-48 rounded-full object-cover"
               src="/images/me.jpeg"
-              width={240}
+              width={192}
             />
           </div>
         </div>

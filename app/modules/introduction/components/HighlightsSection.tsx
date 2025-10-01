@@ -37,7 +37,7 @@ export function HighlightsSection({
   return (
     <div
       className={twMerge(
-        'flex flex-col justify-center gap-4 md:flex-row',
+        'flex flex-col flex-wrap justify-center gap-4 md:flex-row',
         className,
       )}
     >
@@ -55,7 +55,7 @@ export function HighlightsSection({
         <HighlightCard
           className="animate-enter-from-left animate-delay-75 md:w-1/3"
           description={item.highlightMessage || item.summary}
-          href={`/work/${item.slug}`}
+          href={`/works/${item.slug}`}
           key={item.id}
           title={item.title}
         />
@@ -64,7 +64,7 @@ export function HighlightsSection({
         <HighlightCard
           className="animate-enter-from-right animate-delay-75 md:w-1/3"
           description={item.highlightMessage || ''}
-          href={`/blog/${item.slug}`}
+          href={`/posts/${item.slug}`}
           icon={<SlPencil />}
           key={item.slug}
           title={item.title}

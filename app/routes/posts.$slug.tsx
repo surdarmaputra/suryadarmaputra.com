@@ -1,4 +1,9 @@
-import { LoaderFunctionArgs, MetaFunction, redirect , useLoaderData } from 'react-router';
+import {
+  LoaderFunctionArgs,
+  MetaFunction,
+  redirect,
+  useLoaderData,
+} from 'react-router';
 
 import PostDetailPage from '~/modules/blog/pages/PostDetailPage';
 import { getPostDetailAndNavigationBySlug } from '~/modules/blog/services/PostService/getPostDetailAndNavigationBySlug';

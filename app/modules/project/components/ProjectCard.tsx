@@ -124,7 +124,7 @@ export function ProjectCard({
                 'group-hover/project-card:translate-x-0 group-hover/project-card:opacity-100',
               )}
               prefetch="viewport"
-              to={`/work/${project.slug}`}
+              to={`/works/${project.slug}`}
               type="button"
               viewTransition
             >

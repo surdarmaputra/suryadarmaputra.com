@@ -44,9 +44,9 @@ export async function getFeedXML({
   const sitemapString = `
     <rss xmlns:blogChannel="${domain}" version="2.0">
     <channel>
-      <title>Surya's blog</title>
+      <title>Surya's articles</title>
       <link>${domain}</link>
-      <description>Blog posts written by Surya Darma Putra</description>
+      <description>Articles written by Surya Darma Putra</description>
       <language>en-us</language>
       <ttl>40</ttl>
       ${sitemapPostString}

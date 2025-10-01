@@ -12,16 +12,16 @@ interface Navigation {
 
 const NAVIGATION_ITEMS: Navigation[] = [
   {
-    id: 'work',
-    label: 'Work',
-    landingHref: '#work',
-    href: '/work',
+    id: 'works',
+    label: 'Works',
+    landingHref: '#works',
+    href: '/works',
   },
   {
-    id: 'blog',
-    label: 'Blog',
-    landingHref: '#blog',
-    href: '/blog',
+    id: 'posts',
+    label: 'Articles',
+    landingHref: '#posts',
+    href: '/posts',
   },
   {
     id: 'connect',

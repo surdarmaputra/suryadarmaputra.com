@@ -6,11 +6,11 @@ import { getPosts } from '~/modules/blog/services/PostService/getPosts';
 export const meta: MetaFunction = () => {
   return [
     {
-      title: 'Blog - Surya Darma Putra',
+      title: 'Articles - Surya Darma Putra',
     },
     {
       name: 'description',
-      content: 'Blog posts by Surya Darma Putra',
+      content: 'Articles by Surya Darma Putra',
     },
     {
       name: 'keywords',

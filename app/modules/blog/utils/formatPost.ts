@@ -15,7 +15,7 @@ export function formatPost(
     : new Date(properties.created_at);
   const updatedAt = new Date(properties.updated_at);
   const slug = fileName.replace(/\.json$/, '');
-  const href = `/blog/${slug}`;
+  const href = `/posts/${slug}`;
   const highlightMessage = getTextFromProperties(
     properties,
     'highlight_message',

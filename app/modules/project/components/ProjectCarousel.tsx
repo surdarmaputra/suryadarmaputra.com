@@ -45,7 +45,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
             : 'translate-x-24 opacity-0',
           className,
         )}
-        id="work"
+        id="works"
         ref={ref}
       >
         <MultipleItemsCarousel
@@ -68,7 +68,7 @@ export const ProjectCarousel = forwardRef<HTMLDivElement, ProjectCarouselProps>(
             'translate-y-8 opacity-0 transition-all duration-1000 ease-out',
             isClientReady && 'translate-y-0 opacity-100 delay-500',
           )}
-          href="/work"
+          href="/works"
         >
           All Works
           <SlArrowRightCircle className="mt-0.5" />

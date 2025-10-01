@@ -42,7 +42,7 @@ function normalizeUrl(urlString: string) {
 }
 
 const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:5173');
-const blogUrl = `${baseUrl}blog/`;
+const blogUrl = `${baseUrl}posts/`;
 const feedUrl = `${blogUrl}feed`;
 const extrasUrl = `${baseUrl}extras.json`;
 

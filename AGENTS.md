@@ -1,7 +1,7 @@
 ## Project agents guide: suryadarmaputra.com
 
 ### Mission
-Deliver a fast, accessible, and maintainable personal site with blog and projects, keeping content in sync, images optimized, and SEO artifacts up to date. Default to safe edits, small diffs, and zero-regression changes.
+Deliver a fast, accessible, and maintainable personal site with posts and projects, keeping content in sync, images optimized, and SEO artifacts up to date. Default to safe edits, small diffs, and zero-regression changes.
 
 ### Success criteria (KPIs)
 - **Availability**: builds pass and site serves without runtime errors.
@@ -57,9 +57,9 @@ bun run commit
 
 ## Codebase map (high‑level)
 - `app/`
-  - `routes/` React Router file‑based routes (home, blog, work, sitemap, robots, api.optimize-image).
+  - `routes/` React Router file‑based routes (home, posts, works, sitemap, robots, api.optimize-image).
   - `modules/`
-    - `blog/` pages, components, services (feed, list/detail fetch), styles.
+    - `posts/` pages, components, services (feed, list/detail fetch), styles.
     - `project/` list/detail, services.
     - `introduction/` landing/about sections.
     - `core/` base UI, layouts, scripts (analytics, color mode, notion components).
@@ -101,7 +101,7 @@ Other than these folders, a module may only contain: `constants.ts` and `types.t
 
 ## Content & data
 - Posts and projects are generated from external sources into `posts/` and `extras/projects.json` via scripts.
-- Blog feed at `routes/blog.feed.ts`; sitemap at `routes/sitemap[.xml].ts`; robots at `routes/robots[.txt].ts`.
+- Posts feed at `routes/posts.feed.ts`; sitemap at `routes/sitemap[.xml].ts`; robots at `routes/robots[.txt].ts`.
 - Image optimization via `app/modules/image-optimizer/services/ImageOptimizerService/getOptimizedImage.ts` and `routes/api.optimize-image.ts`.
 
 ## Guardrails for agents
@@ -112,8 +112,8 @@ Other than these folders, a module may only contain: `constants.ts` and `types.t
 - Respect environment conditionals (e.g., `NETLIFY_DEPLOYMENT`) when altering build/runtime logic.
 
 ## Common tasks
-- **Add a blog post**: update source, run `bun run generate` → verify `routes/blog._index.tsx` and `blog.$slug.tsx` render.
-- **Add a project**: update `extras/projects.json` or source → `bun run generate:projects` → verify `routes/work._index.tsx` and `work.$slug.tsx`.
+- **Add a blog post**: update source, run `bun run generate` → verify `routes/posts._index.tsx` and `posts.$slug.tsx` render.
+- **Add a project**: update `extras/projects.json` or source → `bun run generate:projects` → verify `routes/works._index.tsx` and `works.$slug.tsx`.
 - **Optimize an image**: use `OptimizedImage` component; the API route handles transforms.
 - **Release housekeeping**: `bun run versioning`, ensure CHANGELOG updates; deploy via Netlify.
 
