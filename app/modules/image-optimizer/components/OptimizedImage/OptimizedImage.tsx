@@ -1,8 +1,9 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 
 const DENSITY_FACTORS = [1, 2] as const;
 const DENSITY_REDUCTION_MULTIPLIER = 0.8;
 const SUPPORTED_FORMATS = ['avif', 'webp', 'jpeg', 'png'] as const;
+const OPTIMIZED_FORMATS = ['webp', 'avif'] as const;
 const TAILWIND_BREAKPOINTS = [640, 768, 1024, 1280, 1536] as const;
 
 type ImageFormat = (typeof SUPPORTED_FORMATS)[number];
@@ -13,21 +14,6 @@ const hasOriginUrl = (url: string): boolean => {
   } catch {
     return false;
   }
-};
-
-const detectBestFormat = (): ImageFormat => {
-  const canvas = document.createElement('canvas');
-  if (canvas.getContext && canvas.getContext('2d')) {
-    for (const format of SUPPORTED_FORMATS) {
-      if (
-        canvas.toDataURL(`image/${format}`).indexOf(`data:image/${format}`) ===
-        0
-      ) {
-        return format;
-      }
-    }
-  }
-  return 'jpeg';
 };
 
 const generateOptimizedUrl = (
@@ -99,35 +85,38 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
   ({ src, width, alt, fetchPriority, ...rest }, ref) => {
     if (!src) throw new Error("The 'src' prop is required for OptimizedImage.");
 
-    const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
-    const [format, setFormat] = useState<ImageFormat | undefined>(undefined);
-    const srcSet = generateSrcSet(imageUrl, format, width);
+    const requestDomain = import.meta.env.VITE_BASE_URL;
+    const imageUrl = hasOriginUrl(src) ? src : `${requestDomain}${src}`;
     const sizes = generateSizes(width);
-
-    useEffect(() => {
-      const requestDomain =
-        typeof window !== 'undefined' ? window.location.origin : '';
-      setFormat(detectBestFormat());
-      setImageUrl(hasOriginUrl(src) ? src : `${requestDomain}${src}`);
-    }, [src]);
 
     if (!imageUrl) return null;
 
     return (
-      <img
-        alt={alt}
-        fetchPriority={fetchPriority}
-        ref={ref}
-        sizes={sizes}
-        src={generateOptimizedUrl(
-          imageUrl,
-          format as ImageFormat,
-          width || 320,
-        )}
-        srcSet={srcSet}
-        width={width}
-        {...rest}
-      />
+      <picture>
+        {OPTIMIZED_FORMATS.map((format) => (
+          <source
+            key={format}
+            sizes={sizes}
+            srcSet={generateSrcSet(imageUrl, format, width)}
+            type={`image/${format}`}
+          />
+        ))}
+        {/* Fallback to original requested image (either optimized or not) */}
+        <img
+          alt={alt}
+          fetchPriority={fetchPriority}
+          ref={ref}
+          sizes={sizes}
+          src={generateOptimizedUrl(
+            imageUrl,
+            SUPPORTED_FORMATS[0],
+            width || 320,
+          )}
+          srcSet={generateSrcSet(imageUrl, SUPPORTED_FORMATS[0], width)}
+          width={width}
+          {...rest}
+        />
+      </picture>
     );
   },
 );

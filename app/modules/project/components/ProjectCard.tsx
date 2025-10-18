@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { SlArrowRightCircle, SlRocket } from 'react-icons/sl';
-import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
@@ -14,14 +13,12 @@ interface ProjectCardProps {
     sm: number;
     lg: number;
   };
-  isClientReady?: boolean;
   project: Project;
 }
 
 export function ProjectCard({
   className,
   imageSize,
-  isClientReady,
   project,
 }: ProjectCardProps) {
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -36,55 +33,32 @@ export function ProjectCard({
       onMouseLeave={() => setIsSelected(false)}
     >
       <div className="h-full w-full overflow-hidden rounded-md shadow-lg">
-        {project.thumbnailUrl &&
-        project.thumbnailPlaceholderUrl &&
-        isClientReady ? (
+        {project.thumbnailUrl && project.thumbnailPlaceholderUrl ? (
           /* eslint-disable indent */
           <>
-            <LazyLoad
-              className="h-full w-full lg:hidden"
-              placeholder={
-                <img
-                  alt={`${project.title} thumbnail`}
-                  className="h-full w-full object-cover blur-xl"
-                  src={project.thumbnailPlaceholderUrl}
-                />
-              }
-            >
-              <OptimizedImage
-                alt={`${project.title} thumbnail`}
-                className={twMerge(
-                  'h-full w-full object-cover transition-transform duration-500 ease-in-out',
-                  isSelected && 'scale-105',
-                  'group-hover/project-card:scale-105',
-                )}
-                fetchPriority="high"
-                src={project.thumbnailUrl}
-                width={imageSize?.sm || 160}
-              />
-            </LazyLoad>
-            <LazyLoad
-              className="hidden h-full w-full lg:block"
-              placeholder={
-                <img
-                  alt={`${project.title} thumbnail`}
-                  className="h-full w-full object-cover blur-xl"
-                  src={project.thumbnailPlaceholderUrl}
-                />
-              }
-            >
-              <OptimizedImage
-                alt={`${project.title} thumbnail`}
-                className={twMerge(
-                  'h-full w-full object-cover transition-transform duration-500 ease-in-out',
-                  isSelected && 'scale-105',
-                  'group-hover/project-card:scale-105',
-                )}
-                fetchPriority="high"
-                src={project.thumbnailUrl}
-                width={imageSize?.lg || 240}
-              />
-            </LazyLoad>
+            <OptimizedImage
+              alt={`${project.title} thumbnail`}
+              className={twMerge(
+                'h-full w-full object-cover transition-transform duration-500 ease-in-out',
+                isSelected && 'scale-105',
+                'group-hover/project-card:scale-105',
+              )}
+              fetchPriority="high"
+              src={project.thumbnailUrl}
+              width={imageSize?.sm || 160}
+            />
+
+            <OptimizedImage
+              alt={`${project.title} thumbnail`}
+              className={twMerge(
+                'h-full w-full object-cover transition-transform duration-500 ease-in-out',
+                isSelected && 'scale-105',
+                'group-hover/project-card:scale-105',
+              )}
+              fetchPriority="high"
+              src={project.thumbnailUrl}
+              width={imageSize?.lg || 240}
+            />
           </>
         ) : (
           <div

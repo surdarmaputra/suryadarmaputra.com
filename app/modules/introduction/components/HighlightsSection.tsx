@@ -37,13 +37,13 @@ export function HighlightsSection({
   return (
     <div
       className={twMerge(
-        'flex flex-col flex-wrap justify-center gap-4 md:flex-row',
+        'container mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 md:justify-start lg:max-w-3xl',
         className,
       )}
     >
       {highlightedCampaigns?.map((item) => (
         <HighlightCard
-          className="animate-enter-from-bottom animate-delay-75 md:w-1/3"
+          className="md:w-auto"
           description={item.message || ''}
           href={item.link.internal || item.link.external || '#'}
           icon={getCampaignIcon(item.icon)}
@@ -53,7 +53,7 @@ export function HighlightsSection({
       ))}
       {highlightedProjects?.map((item) => (
         <HighlightCard
-          className="animate-enter-from-left animate-delay-75 md:w-1/3"
+          className="md:w-auto"
           description={item.highlightMessage || item.summary}
           href={`/works/${item.slug}`}
           key={item.id}
@@ -62,7 +62,7 @@ export function HighlightsSection({
       ))}
       {highlightedPosts?.map((item) => (
         <HighlightCard
-          className="animate-enter-from-right animate-delay-75 md:w-1/3"
+          className="md:w-auto"
           description={item.highlightMessage || ''}
           href={`/posts/${item.slug}`}
           icon={<SlPencil />}

@@ -1,5 +1,10 @@
+import { forwardRef } from 'react';
+import { SlPencil } from 'react-icons/sl';
+import { twMerge } from 'tailwind-merge';
+
 import { Post } from '~/modules/blog/types';
 import { PostMetaData } from '~/modules/core/components/base/PostMetaData';
+import { SmartLink } from '~/modules/core/components/base/SmartLink';
 
 export interface PostListProps {
   className?: string;
@@ -7,30 +12,18 @@ export interface PostListProps {
   isTitleVisible?: boolean;
 }
 
-import { forwardRef, useEffect, useState } from 'react';
-import { SlPencil } from 'react-icons/sl';
-import { twMerge } from 'tailwind-merge';
-
-import { SmartLink } from '~/modules/core/components/base/SmartLink';
-
 export const PostList = forwardRef<HTMLDivElement, PostListProps>(
   (props, ref) => {
     const { className, posts, isTitleVisible } = props;
     const itemTitleClassName =
       'text-sm md:text-base leading-snug tracking-tight';
-    const [isClientReady, setIsClientReady] = useState<boolean>(false);
-
-    useEffect(() => {
-      setIsClientReady(true);
-    }, []);
 
     if (!posts?.length) return null;
 
     return (
       <section
         className={twMerge(
-          'container mx-auto translate-y-8 opacity-0 transition-all delay-500 duration-300 ease-out lg:max-w-3xl',
-          isClientReady ? 'translate-y-0 opacity-100' : '',
+          'animate-enter-from-bottom container mx-auto lg:max-w-3xl',
           className,
         )}
         id="posts"

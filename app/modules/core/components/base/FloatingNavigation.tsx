@@ -66,10 +66,10 @@ export function FloatingNavigation() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-30 translate-x-[150%] transition-transform"
+      className="fixed right-4 bottom-4 z-30 translate-x-[150%] transition-transform"
       ref={floatingButtonRef}
     >
-      <div className="relative flex gap-4" ref={menuContainerRef}>
+      <div className="relative flex gap-2" ref={menuContainerRef}>
         <div
           className={twMerge(
             'absolute -top-2 right-0 h-0 w-0 -translate-y-full overflow-hidden rounded-md border-slate-100 bg-white shadow-lg transition-all ease-in-out dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300',

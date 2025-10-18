@@ -115,8 +115,8 @@
   }
 }
 
-@utility animate-delay-75 {
-  animation-delay: 0.75s;
+@utility animate-delay-25 {
+  animation-delay: 0.25s;
 }
 
 @utility animated-underline {

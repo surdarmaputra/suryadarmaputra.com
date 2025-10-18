@@ -52,18 +52,19 @@ export default function LandingPage({
         projects={projects}
       />
 
-      <ProjectCarousel
-        className="z-10 -mx-6 overflow-hidden pt-10 pb-8 lg:py-20"
-        projects={projects}
-      />
-
       <PostList
         className="mx-auto py-12 md:w-max lg:py-16"
         isTitleVisible
         posts={posts}
       />
 
-      <GetInTouchSection className="py-10" />
+      <ProjectCarousel
+        className="z-10 -mx-6 overflow-hidden pt-10 pb-8 lg:py-20 [&_h2]:px-6"
+        isTitleVisible
+        projects={projects}
+      />
+
+      <GetInTouchSection className="pt-16 pb-10" />
 
       {!posts?.length && !projects?.length && !visibleCampaigns?.length ? (
         <div className="pt-16 pb-48 text-center text-4xl font-bold text-slate-200 dark:text-slate-700">

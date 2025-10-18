@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import OptimizedImage from '~/modules/image-optimizer/components/OptimizedImage/OptimizedImage';
@@ -8,12 +7,6 @@ interface BrandHeroProps {
 }
 
 export function BrandHero({ className }: BrandHeroProps) {
-  const [isClientReady, setIsClientReady] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsClientReady(true);
-  }, []);
-
   return (
     <section
       className={twMerge(
@@ -26,15 +19,10 @@ export function BrandHero({ className }: BrandHeroProps) {
           Surya Darma Putra
         </h1>
         <p className="w-full text-sm font-light text-slate-600 md:text-base dark:text-slate-400">
-          Software Engineer / Web / Mobile. Explore my works below.
+          Software engineer building websites and mobile apps.
         </p>
       </div>
-      <div
-        className={twMerge(
-          'shrink-0 translate-x-full opacity-0 transition-all duration-300 ease-out md:translate-x-0 md:-translate-y-full',
-          isClientReady ? 'translate-x-0 opacity-100 md:translate-y-0' : '',
-        )}
-      >
+      <div className="shrink-0">
         <OptimizedImage
           alt="me"
           className="h-20 w-20 rounded-full object-cover"
