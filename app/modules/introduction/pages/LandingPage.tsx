@@ -59,7 +59,7 @@ export default function LandingPage({
       />
 
       <ProjectCarousel
-        className="z-10 -mx-6 overflow-hidden pt-10 pb-8 lg:py-20 [&_h2]:px-6"
+        className="z-10 overflow-hidden pt-10 pb-8 lg:py-20"
         isTitleVisible
         projects={projects}
       />

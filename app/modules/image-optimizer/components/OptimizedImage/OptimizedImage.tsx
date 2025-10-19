@@ -8,27 +8,27 @@ const TAILWIND_BREAKPOINTS = [640, 768, 1024, 1280, 1536] as const;
 
 type ImageFormat = (typeof SUPPORTED_FORMATS)[number];
 
-const hasOriginUrl = (url: string): boolean => {
+function hasOriginUrl(url: string): boolean {
   try {
     return new URL(url).origin !== 'null';
   } catch {
     return false;
   }
-};
+}
 
-const generateOptimizedUrl = (
+function generateOptimizedUrl(
   url: string,
   format: ImageFormat,
   width: number,
-): string => {
+): string {
   return `/api/optimize-image?url=${encodeURIComponent(url)}&width=${width}&format=${format}`;
-};
+}
 
-const generateSrcSet = (
+function generateSrcSet(
   url?: string,
   format?: ImageFormat,
   width?: number,
-): string => {
+): string {
   if (!url || !format) {
     return '';
   }
@@ -58,9 +58,9 @@ const generateSrcSet = (
   }
 
   return srcSetEntries.join(', ');
-};
+}
 
-const generateSizes = (width?: number): string => {
+function generateSizes(width?: number): string {
   if (width) {
     // If width prop is provided, return the fixed width in CSS pixels
     return `${width}px`;
@@ -72,7 +72,15 @@ const generateSizes = (width?: number): string => {
       `(max-width: ${breakpoint}px) ${Math.round(breakpoint * DENSITY_REDUCTION_MULTIPLIER)}px`,
   );
   return [...sizesByBreakpoint, '100vw'].join(', ');
-};
+}
+
+function getFormatFromSrc(src: string): ImageFormat {
+  const extension = src.split('.').pop();
+  if (extension && SUPPORTED_FORMATS.includes(extension as ImageFormat)) {
+    return extension as ImageFormat;
+  }
+  return OPTIMIZED_FORMATS[0];
+}
 
 interface OptimizedImageProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -112,7 +120,7 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
             SUPPORTED_FORMATS[0],
             width || 320,
           )}
-          srcSet={generateSrcSet(imageUrl, SUPPORTED_FORMATS[0], width)}
+          srcSet={generateSrcSet(imageUrl, getFormatFromSrc(imageUrl), width)}
           width={width}
           {...rest}
         />

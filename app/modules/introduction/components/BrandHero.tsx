@@ -14,7 +14,7 @@ export function BrandHero({ className }: BrandHeroProps) {
         className,
       )}
     >
-      <div className="animate-enter-from-left md:animate-enter-from-bottom flex w-2/3 flex-col gap-2 text-left opacity-0 md:text-center">
+      <div className="flex w-2/3 flex-col gap-2 text-left md:text-center">
         <h1 className="text-xl leading-6 font-bold tracking-tight text-black md:text-5xl md:leading-11 md:font-extrabold dark:text-slate-100">
           Surya Darma Putra
         </h1>

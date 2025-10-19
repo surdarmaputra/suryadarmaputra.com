@@ -38,7 +38,7 @@ const NAVIGATION_ITEMS: Navigation[] = [
 ];
 
 export function useNavbar() {
-  const [isDark, setIsDark] = useState<boolean>(true);
+  const [isDark, setIsDark] = useState<boolean>(false);
   const location = useLocation();
 
   const logoPath = useMemo(
@@ -88,7 +88,7 @@ export function useNavbar() {
 
   useEffect(() => {
     const isCurrentlyDark = !window.localStorage.theme
-      ? true
+      ? false
       : window.localStorage.theme === 'dark';
     setIsDark(isCurrentlyDark);
   }, [setIsDark]);
