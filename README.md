@@ -1,106 +1,43 @@
-[suryadarmaputra.com](https://suryadarmaputra.com)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7533c657-0503-4acf-8ad7-47bedd8ec26a/deploy-status)](https://app.netlify.com/sites/suryadarmaputra/deploys)
-
-Surya's personal site built with [Remix](https://remix.run)
-
-## Getting Started
-
-- Install asdf
-- Install project dependencies
-```sh
-asdf install
-bun install
-```
-
-> If gyp error occurred when installing canvas, install canvas dependencies: 
-> - For MacOS: brew install pkg-config cairo libpng jpeg giflib
-> - For Linux: apt get install python3 make g++ pixman-dev cairo-dev pango-dev pkgconfig
-
-- Copy initial files
-```sh
-cp .env.example .env
-cp extras/projects.json.example extras/projects.json
-```
-- Provide Notion token and database IDs
-
-## Development
-
-Run the dev server:
+# Astro Starter Kit: Minimal
 
 ```sh
-bun run dev
+bun create astro@latest -- --template minimal
 ```
 
-Generate content
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-```sh
-bun run generage
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-## Deployment
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-First, build your app for production:
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-```sh
-bun run build
-```
+Any static assets, like images, can be placed in the `public/` directory.
 
-Then run the app in production mode:
+## 🧞 Commands
 
-```sh
-bun run start
-```
+All commands are run from the root of the project, from a terminal:
 
-Now you'll need to pick a host to deploy it to.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `bun install`             | Installs dependencies                            |
+| `bun dev`             | Starts local dev server at `localhost:4321`      |
+| `bun build`           | Build your production site to `./dist/`          |
+| `bun preview`         | Preview your build locally, before deploying     |
+| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bun astro -- --help` | Get help using the Astro CLI                     |
 
-### DIY
+## 👀 Want to learn more?
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `bun run build`
-
-- `build/server`
-- `build/client`
-
-### Deploy to Netlify
-
-1. Install the [Netlify CLI](https://www.netlify.com/products/dev/):
-
-```sh
-bun add --global netlify-cli
-```
-
-If you have previously installed the Netlify CLI, you should update it to the latest version:
-
-```sh
-bun add --global netlify-cli@latest
-```
-
-2. Sign up and log in to Netlify:
-
-```sh
-netlify login
-```
-
-3. Create a new site:
-
-```sh
-netlify init
-```
-
-4. Deploy a preview
-
-```sh
-netlify deploy
-```
-
-5. Deploy production
-
-```sh
-netlify deploy --prod
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
