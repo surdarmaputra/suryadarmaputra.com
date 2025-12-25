@@ -1,0 +1,6 @@
+[build]
+  command = "bun run generate && bun run build:netlify"
+  publish = "build/client"
+
+[functions]
+  included_files = ["extras/**", "posts/**"]

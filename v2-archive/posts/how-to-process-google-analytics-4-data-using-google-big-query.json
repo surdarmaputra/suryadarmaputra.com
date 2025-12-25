@@ -1,0 +1,1704 @@
+{
+  "title": "How to Process Google Analytics 4 Data using Google BigQuery",
+  "excerpt": "Google Analytics 4 (GA4) is a powerful tool that provides valuable insights into user behaviour on your website. By tracking user interactions and events, GA4 can help you understand how visitors interact with your website and identify areas for improveme...",
+  "properties": {
+    "highlighted": true,
+    "tags": [
+      "google-analytics",
+      "analytics"
+    ],
+    "updated_at": "2025-09-30T16:34:00.000Z",
+    "highlight_message": [],
+    "custom_created_at": null,
+    "language": "en",
+    "created_at": "2023-04-03T08:11:00.000Z",
+    "category": "software-engineering",
+    "publish": true
+  },
+  "readingTime": "2 mins read",
+  "blocks": [
+    {
+      "block": {
+        "object": "block",
+        "id": "c7a1a332-c9b2-460f-85b5-a067064bb785",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:12:00.000Z",
+        "last_edited_time": "2023-04-04T23:13:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Google Analytics 4 (GA4) is a powerful tool that provides valuable insights into user behaviour on your website. By tracking user interactions and events, GA4 can help you understand how visitors interact with your website and identify areas for improvement. However, analyzing GA4 data can be challenging, especially for large websites with a high traffic volume. In this article, we'll explore how to process GA4 data using Google BigQuery, a powerful data analytics tool that can help you extract valuable insights from your GA4 data. We'll cover how to set up a BigQuery account, create a dataset, and import your GA4 data into BigQuery. Make sure a Google Analytics 4 property already configured or visit ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Google Analytics 4 (GA4) is a powerful tool that provides valuable insights into user behaviour on your website. By tracking user interactions and events, GA4 can help you understand how visitors interact with your website and identify areas for improvement. However, analyzing GA4 data can be challenging, especially for large websites with a high traffic volume. In this article, we'll explore how to process GA4 data using Google BigQuery, a powerful data analytics tool that can help you extract valuable insights from your GA4 data. We'll cover how to set up a BigQuery account, create a dataset, and import your GA4 data into BigQuery. Make sure a Google Analytics 4 property already configured or visit ",
+              "href": null
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": "this link",
+                "link": {
+                  "url": "https://suryadarmaputra.com/blog/how-to-setup-google-analytics-4-in-next-js"
+                }
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "this link",
+              "href": "https://suryadarmaputra.com/blog/how-to-setup-google-analytics-4-in-next-js"
+            },
+            {
+              "type": "text",
+              "text": {
+                "content": " to set it up.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": " to set it up.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "4985c253-5280-4811-ad94-ff1d2ce3e75b",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:21:00.000Z",
+        "last_edited_time": "2023-04-03T08:21:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "45f05aa9-0a8b-4dca-afe0-9cb6cb6178f9",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:21:00.000Z",
+        "last_edited_time": "2023-04-03T08:21:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Create a Google Cloud Project",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Create a Google Cloud Project",
+              "href": null
+            }
+          ],
+          "is_toggleable": false,
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "id": "0a6ed101-2fc5-46eb-a2b5-52024b141eac-bulleted_list",
+        "type": "bulleted_list"
+      },
+      "children": [
+        {
+          "block": {
+            "object": "block",
+            "id": "0a6ed101-2fc5-46eb-a2b5-52024b141eac",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:21:00.000Z",
+            "last_edited_time": "2023-04-03T08:23:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Visit ",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Visit ",
+                  "href": null
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "https://console.cloud.google.com/",
+                    "link": {
+                      "url": "https://console.cloud.google.com/"
+                    }
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "https://console.cloud.google.com/",
+                  "href": "https://console.cloud.google.com/"
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": ", click the project dropdown on the page header then New Project",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": ", click the project dropdown on the page header then New Project",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "760cb0d2-ba1b-40ef-b74f-1a3f23e0cacd",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "0a6ed101-2fc5-46eb-a2b5-52024b141eac"
+                },
+                "created_time": "2023-04-03T08:23:00.000Z",
+                "last_edited_time": "2023-04-03T08:23:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/1d5f4fef-080f-4baa-a3ff-1d5189f5a54b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466S6HICBZV%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163946Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIDqlqzEeN7gMb6rusZnY3nRdTpGA%2FbMqu1vQThZCmCC9AiEA4FOZxcsFqBKfA3%2FXwarHwSSnPwe3dvVa8soMZn2ZV3oqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDATS%2FqoHFNWtCKOzLCrcA3gFErbkW6J2RfUUGuDNbgKbxwyDmoXIDSotIntW8pYRNL4Y2Y%2F76TOoH7L5OF9pLmr5dotcaCTWW4FLXWfmN5r%2FiRV8frppQSXJIjSWeQ%2FmlkzVsxxs%2FhtVuaDt2HWaedjM9L7ARoHAtODHNGDFAm8gyAW%2BVmZSDqiB0tAMs8OSZJNKoqsW17xUXyLkaGAJ2c9HplXm4Wgv0muOYtEP1ZnL9UkKaiFyCUY5c1EwV%2BtO4%2FCjmXzRM8LV2PO8HQMMEijYzT%2FHDY%2BHZt0MDqvutsMI2L21vt3gFNkIjBip7MJmWH0CCSO5DQQkl0wuBDnn1GNEeZQYo%2BXHOMDlhIjVRaBRcL35NC7mfhDiWk%2FNNv8Mmx6qfLbTw0LY3pUM9wvoPGJHy6jkSrqHJ6kAU5EdABi2S7L%2BFJ9gkPb4QipeTb11ZZVojj6Fosyq3maRt0BoYb%2FT67Tg3shwHF%2B0BbkQyFZMcqrYidCYIPLhW6TKg0iJXnjnLBxdjUvVD3HoOd5NGMsMlI1gFjQ2D6Imc7wAriAnQXle5E5%2FLuMgbZjfstvw%2B76p%2FS3hhYUzSGwgelrWQO1UjdwOI0wwkhxsEBmdy2TaY56amB045WOzxnsyyGitlp9H%2FBj8cOvhV7gAMND578YGOqUBrbO8SbL9%2BZGkRJqjkyjOVUzKiv5D7MrA4nokkA8EHZrjfDNF%2FhyIsZW4OFaFhFo8LSl9HWbW129WF%2FthRdDyXcV6nJJLxUxA6sNcGwSjfiHwBXq1xwmV1b7c94%2FFR3KBelavhCZrXY0%2F6VrZXY8O%2BGA%2FGpTC9PWj1cSCksTL8wFIgAj%2BIR5VGC4e9g6dr83kol5qsqrsv90V3yoisw8jv7Ij7uDb&X-Amz-Signature=f600099a2ae4ba69f9fa214804d3b3c7c727d0310f9ac29932b2d6b7ce49cb26&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:46.297Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "0cd254dd-b4df-4262-a377-7b6c578bf136",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:22:00.000Z",
+            "last_edited_time": "2023-04-03T08:29:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Set the project name then click Create",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Set the project name then click Create",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "3fb6cda1-01aa-4c09-bb05-b8700e11d997",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "0cd254dd-b4df-4262-a377-7b6c578bf136"
+                },
+                "created_time": "2023-04-03T08:24:00.000Z",
+                "last_edited_time": "2023-04-03T08:29:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/1acfaa99-53ac-4b97-9136-4219d19b88ba/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WI2UGYJC%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163946Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIADNJF7eZOzx5aG4PgZFx2GWZMtbmlTC0maoGWmdcJMsAiEAqNqDwWprSnSo%2FMx9IzLa%2BSzl%2BB%2FyeEAU0sp%2Bf6ikTBEqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDNIwLX6sLwLyRwCTsCrcA4CfR%2BVLKRRe%2FBYUX17V3EMbMkzw%2BdntcMg3i41KF%2FU9InK2fMmkw9i%2FibFP8Unuhjf7NGmuMVKnW7BGhb0ejoFWn5ZwQbTLu7YAiNqwrcO%2BCFeAcfeICnEkIRz1lEJ%2F1Hi0TcDtZM6WEOLSEY5bMVggWOu4EPdoCOrvxLf1Gh03il%2Bm9puMGtnG%2BNs%2FLjYkiAiMhCYdegYsroRwFAFwrV513EUf6J5zxk5R9kfQRdr1ORjSQwd3qQSpJ0bfWGUP8EwpD%2FfplTDs%2Bb1UIPhbhQlhsKuOQJXQqlWTp46KMUUXNagetcEwEUjsMu9wWGTLBoe9fY53NeUvobDbNGA4TvKZBQ53AFEtb4s0llmVcwI0pA%2FpbmB7%2B3Gv09Ljmsuo61bR71VVOIaQnH3bIULWLGTxFePCWgF6EsDoMPqdPzp8UY4hNRWtggl3u1vopwngSbsDBYKT%2BLvExwy1jCB5oKE503pn23ldxpA%2BOnf7vWl9VIK4emuKBCO6pDiEln5gYJR%2B4XPQGT2qBUzHM5ZVgvtxFph6VqOPMd27ridr%2BlXYHGs1LbsOGDgnS8UjtjM6%2BFaS3GlIHhpdrGBlZg3zdwQkZpTYKd4%2BlN0QIn0ySy6tm06QrCd9%2F%2BrEXNc2MNH578YGOqUBx%2F26DmpuEjBcTTqwRNv5U5A5P5YF08x2WeLUA%2BuGzDbeKVMdP8HO5Udr9y1YrmevidIFx0VQNX5KcltfDsynlcVMcmcPhdAU%2B9iBdTTUldCsXjr%2BCJmN3UeTwEMAeRf9FGRNxVfbDXnxmnKL3GbyIZFWlsdcVuK1JiAXiHsGxOlJbWXnw206aHWVEhhKe76wza1ikQzUZDsM%2BcwCv6upm45OqEHl&X-Amz-Signature=e4c8dd37b8b41dc50c055ba9eb106d4d2c102e273749c3d285ca7f7734602caf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:46.616Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "dcfbe477-d69b-4f52-9e6d-5d39d321e552",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:24:00.000Z",
+            "last_edited_time": "2023-04-03T08:29:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "When the project is created, let’s start to manage it by selecting it first from the project dropdown",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "When the project is created, let’s start to manage it by selecting it first from the project dropdown",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "3124dba2-6549-469b-83a8-7a8662c3d78d",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "dcfbe477-d69b-4f52-9e6d-5d39d321e552"
+                },
+                "created_time": "2023-04-03T08:28:00.000Z",
+                "last_edited_time": "2023-04-03T08:29:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/a80936a8-82f9-41d4-a8f2-03bf8751834c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466SZMJMQ76%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163946Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJIMEYCIQDKk1bxB2G3JoN%2FvAeURdX%2FHyFAFBi9wNDbMs4wRSMPDwIhAOmS7rUqPD0JyzkNLox4RuhbAtnDHgzKvP6KuerbLtzZKogECPH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzI%2BT3d4qlwltVUUzAq3AMD1U0SZp1dgG7GifGVikY9%2F8KWPNErNfHJYDkPF8WDavqHXoECHCw3RkLX%2Bi8eCE%2BdbhExESsFJqXNUSann52mMPWNLfaVyf4%2FizwTYsxHVXukP16mHsC3o3psRMLM5Nsgxgxrg3WR%2BjvHh1gi%2Bt3wu8AKu3Qf0%2FebSolmOk%2BhqLMi8nQMSGLkL7WEsxfsA9x8GfA9OEPZ9HDsQt5XMoQdp4HYNK5VbuFYHkVKuniunxFmsuzCY0sDDAqKOOKlQmw2EhZl37SkViuJRpUW%2B%2FldffrN%2BdALrWiVR%2FNTKOjMq0sZQR9GCOQtnQ6xqAycINbgNewkfCOvU0Ql430RGkHQ3UbnkzsX8N8FEJCU6JEV54GQ88nqSJAqNiMubJYmMHD0UUD%2B3GDuOFmA0Wbe%2FHWYRB4QRu3fKBA%2B6WUTuUEV3zT6pxoZ%2BCN5DozqK739Rob4DmqSZR%2Bs16VylDJuWwaogWjUhizIjD9jKzycUp4%2Fk%2Bp1e1gUhgTE1Y4l3Vi9LkcVpwk8kOB2TPvGhxr0DIQdj4QV7HBRU5lNCw%2FP21khlqfzvA1zfgt924b3Bbrr5we0mPRZyGtptK7lZwmvGzsomBO4m7r2WbT5CG6%2B0Lwnt81nfMmVZG4wiVZW2DCH%2Bu%2FGBjqkAedhG6T%2Bv8k8kPs1jNFVV1%2BDF15DIPu8Jv4YhRHsWnE3dzCWdQd9%2FoVQxFgnflbDtdnGDd2aQ5%2B5eO%2F6W%2F3EnlDuCXzgkglAVro8G0auh6NjVY0stCSY2gDLIk7LgFRtpD7529iQxlIkH2fxwJz1SiVny90A8RYt%2Bk%2F1H3chuC7cDevZZV%2F%2FbQShjDR9mWHyXLIzuePT%2BzESxf2Cko%2BxnuLLBA%2FR&X-Amz-Signature=7757e309fe7a839d161577e63bd3d915d31d4cce90a676d963870922710849e3&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:46.982Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "a220aabf-bbc8-48b0-9c9b-5acb8d431c98",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:28:00.000Z",
+            "last_edited_time": "2023-04-03T08:32:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "From the sidebar menu, go to APIs & Services → Enabled APIs & services",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "From the sidebar menu, go to APIs & Services → Enabled APIs & services",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "e184f77b-7656-4b61-9aa5-54356e70b978",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "a220aabf-bbc8-48b0-9c9b-5acb8d431c98"
+                },
+                "created_time": "2023-04-03T08:29:00.000Z",
+                "last_edited_time": "2023-04-03T08:32:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/e19bcb41-4496-4e5e-b3eb-dab1b39b35a0/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466TRID564P%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163947Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJIMEYCIQDMzUdZJPPcYKyBBSYDfAPz2w4SVMPu8GZ8VwkmMrAnPwIhAMHrUeyMl5nXfK%2F%2BrX%2FlcZo3oOIM8TnDKrw0P14apr5TKogECPH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzsGTXivqmb3Xg6%2Bxsq3AMA5PzAVZrEmteFdLYruVSgORPHD0y9u%2B2xJHwfFI%2FeTO2kkdEGGizoul5gnGFNGD88ghTR11G5gcIB1WCQuZZPIkwLwaN7zBvUmoJUxkGUd1td6iGtpdUQqtpzbC9egz%2Fd4ya2bPI17hXN6USIJIw3vgMx1woZVvhoVYUpcy7IpJs5LoBCw16IUeMu6HYYU58DbPMY49JPV7sD3tc7eL6%2F8J41YRPr4G4PYdYGeBLgFoM6bieHvlo%2BLN2J3la8zbEtbv4gTTMRPCAE92f91eHOJRACdpw3PAdCm8gqzQekWgDUKz6MAOIVzR%2F59ZbuBZrCSpTyCg61rxX6U%2B8V%2BvbmQpOCnrk%2FChm96sonR%2Fix%2Farrts0OnkdrqLMYf8%2BOsMJMTw0ja3HdMi84X51Y8H2siS7D1GsG%2BW7kkQCpk7Ug4nhuC7ANyyD7wydfZnI2SyevpAWVAjyqbWhrkJIC2EfI1JMU5cfzm4nifxm7%2BNbrDA9YI%2BkfOTlgqACqMo5tOZhrz16GmKOi9gnLqRHMJ9YJvmXAjwddNgZ5PW%2FVsX%2FIEkAA%2B%2BZXaTJ2wLvulTiVzKo52%2BlGMy2vnNTbS09s6LWv0sowF688AnComRjNIK%2FYiH7jZljPoEEboKkrVzCF%2Bu%2FGBjqkAUq4JCUf%2FbQUIm90RpdnAm%2B50WufdHtO8PpOb1NM6ZbKDDrPl46dKtxXUOfjsuUpGsvMkPvzH8KnSi%2B1xQ5gYCJnVOzwTm%2BE12ucOguMO4aOepJJ9hD7e90oB9knNyC08CJ8XiRDMLaobU6hHQiCjPBHtV%2Bj4IRWi4u%2FIEeLkk45VBzM81EcE7D3%2FyAukfcV0wGJrSyhGqK0VUFc2sAB28J3UNz4&X-Amz-Signature=2cf6e1bf837eabff85ef78882bc1248a97af60798d534075f3a99f2691dea4ae&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:47.290Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "b133a06a-071d-4ed3-8dc2-5c2b7758f7a3",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:29:00.000Z",
+            "last_edited_time": "2023-04-03T08:31:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Click ENABLE APIS AND SERVICES",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Click ENABLE APIS AND SERVICES",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "c157d0e0-464a-4408-8c22-cab0755d2b0a",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "b133a06a-071d-4ed3-8dc2-5c2b7758f7a3"
+                },
+                "created_time": "2023-04-03T08:29:00.000Z",
+                "last_edited_time": "2023-04-03T08:31:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/d1a26220-55e4-448e-9a8e-ecb8c7d4fa98/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667QOCHTOC%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163950Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJGMEQCICMy%2Fo0pIaF3qUA0XObLsp7KSAihbd6E4z9uTFGtW9iVAiANruyXhdFFeuBcSFsixBw7Moce0Xk%2BwMbOcYOIsNrubSqIBAjx%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMjFnr1q2fzrIM68blKtwDD9ZdRLdbVwAcmHRc8z0LHouFhvpOoGXoFH%2BpWReM4HIEfrA%2BRXL0IOWtIWE8ahxbzIoLWOrDiXzPwxGS0%2BmpphldJIIww50PvtX6KiTZ5IPezggJACrnnuI6dWLFW04zdPUUux%2FtMuDeSL%2FoqV53NIq5aDlY0oDEempS3lRu986XE2xbMDv7sPGRy%2BASt%2BJX%2FpNdfWStdGy9QSTB99prG0g%2BSp9Qr3lK%2F4HdyrzMaUvMLjKqL9wW6akQXwtuQwh2puSzRSJ3mejapBxHasT0GBUdmZW0kysxkmbvKQz0YBIovKn%2B0qdBRLjs9h8kLteyDMc5e28rt4qQ5JFBGCJ03Zu2%2BBfyoQmzASLlBuA2ZpfVG%2FiosTEdAddBI5fxzBuWdyPH14RNtnOEvUIvogdOOA5QubsPnubsYeC7ckDeJJ%2BE1JauTAjUNebxURWoHNY6UJYOURPuUM5vf5joWN6LwBQ7u3XtBkGvBaOpOjQ2aMyHWsNO7eGW1krye4xgY%2Bn5M8yMnGX5Km5l7otK9zkLK59f6VhbbyreHAnxcEonF1DIWlxQG5NifcGvDVjI7FMt8u2zd2rtdFRRS1gZObwRQFr4M61nqaWa5swTPtV7Czoe8B7GGJV%2B81LhsUAw2vnvxgY6pgEAQQsaaaqk7pE5DWZjA5%2FcCNVunZ2hSl4nzMvEs2bSrBdBWvt%2F7%2FI5A5gzBATwRv0UFUaZtMS4ZDktRm4jIp9yUNqzuWNtj9Nx5CUr1nJrfSIzliAoWSMTZ8A%2FgDvWJWx405bgdjWcXLOerBcPzBQ8AjWitmiMA4s4q2o3glyp5FPgR4XM9%2F9HlvQ4GC8l2SwFiGKNrZlF10JW%2FVqy3AAmY%2FtlI5iU&X-Amz-Signature=852b2afa28d613f8fb27d1d70549c6d3cd97771d97800545526c543ba6eb387e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:50.797Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "46241c84-0b9a-4743-b4f5-be26dbdeee16",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:30:00.000Z",
+            "last_edited_time": "2023-04-03T08:32:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "From the API Library page, search BigQuery and make sure BigQuery API is enabled",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "From the API Library page, search BigQuery and make sure BigQuery API is enabled",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "d3084a95-ca2f-44a2-b1fc-192ef29d900f",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "46241c84-0b9a-4743-b4f5-be26dbdeee16"
+                },
+                "created_time": "2023-04-03T08:31:00.000Z",
+                "last_edited_time": "2023-04-03T08:32:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/d7d5d55f-1158-4bd3-b0dd-05d8735cd7f6/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466R5I7I7MU%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163951Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCP3rhReOVhg7v0DlPrWnvmSoCcyoOe9R0zztReZEjpsgIgCA1zABKVAX%2BU%2F5ZpDFxc64ofqTzc5Mjqy4DWrmdIwWcqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDMR03xiDOmLxOEoGVyrcA7CHTbzAvoIvPGhKfXoN2aOB4Cc5zw%2FGQ3w5PzFRczB7%2FpEG9szeYCprXjhb6hmaZ4uTy5778j%2FV5%2BC2idE%2BO0TZRx9kH%2Bs7O%2FoPzUpcnZ4zeUEYC9hHZ8sXAUPQscqSo7NBT4sj9H%2FyqC1KwKW3U70VRbXPr%2FeasC89HVGWwyjBNHYb6w3HbatJPDC0xJ2D0zwAR3sYolLY%2FJPQmdZxkTS086kj5oxR3FT2Vd1De6Rj6ZSevfr2WVsyDjlxWI0x86OdbOPR%2FyS8UtBS2%2FpOm5FdTb2mZjmkjD%2BceBTxySE9MGCHngxC2UmJPAfJQe4OJ%2BsNAidqeSEBx3wwJ75P%2FBN3H5ojN2dL2%2Fhx%2FTvxnY95eTn8FAhY3xtNL1HRZnUez0lIvH0gBCvv4C7nTpCC47VfXvOADUA8fbxiieWjgZ%2BSPNYLQ2UVJkIUT9HDkzaLGvFc7uL2zq84QYpvDmM7oft%2FUWC%2B7x7YqHMyMfHvDaPXhZYo6tc6aXs6jW1SV6MRkjBiVkjPOn8HK72vawhiVCkzpV4X386m2DObFJ1h0l96L54FPgTIe%2BkmT2Re7aJRuGhtMxCGuLzjJzWAuYgscTxreUpVSLrQtc1sttsMHqPOnrgtvUz0%2Fa3benfrMIX678YGOqUBlMFOmXW8oZJpSCjs5giR5%2FnC7xINuVd44mRF8ZU8CVroThYQRhweWC5LA7NCd%2BRXl818V975cZMnLs38MfwN6wdYUNwEfUlA1znDTmkPPov7Y90UhSBqBC3E4O7CQD67A7c3kf%2Fs3sFBIu%2B0oVot8jBqlW3GPIRVBbpVzB3d2dgUND4GoROeo21LXcwbnQ2xIOhvjc8L7WXDKbQ0NXT%2BDJWRQPBi&X-Amz-Signature=1510916d8453fbc911902bf72d7f8ac92d679ef4ff39d84e9f8ddbbebd35801d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:51.218Z"
+                  }
+                }
+              },
+              "children": null
+            },
+            {
+              "block": {
+                "object": "block",
+                "id": "1dcd6e96-c6b4-4185-82b5-1a658d7dcd82",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "46241c84-0b9a-4743-b4f5-be26dbdeee16"
+                },
+                "created_time": "2023-04-03T08:32:00.000Z",
+                "last_edited_time": "2023-04-03T08:32:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "paragraph",
+                "paragraph": {
+                  "rich_text": [],
+                  "color": "default"
+                }
+              },
+              "children": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "30f52023-bcb4-43f1-84a4-014fc4733c52",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:36:00.000Z",
+        "last_edited_time": "2023-04-03T08:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Create A Billing Account for The Project",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Create A Billing Account for The Project",
+              "href": null
+            }
+          ],
+          "is_toggleable": false,
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "07163cb3-8f08-42ab-a180-c4add57f3f41",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:36:00.000Z",
+        "last_edited_time": "2023-04-04T23:02:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "When exporting data from Google Analytics to BigQuery, we can do streaming export, in which the data will be exported whenever a new event is saved in Google Analytics. But, to enable streaming export, let’s create a billing account in our Google Cloud project.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "When exporting data from Google Analytics to BigQuery, we can do streaming export, in which the data will be exported whenever a new event is saved in Google Analytics. But, to enable streaming export, let’s create a billing account in our Google Cloud project.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "id": "411bdb71-f156-4fc8-8688-6884a0b2acdb-bulleted_list",
+        "type": "bulleted_list"
+      },
+      "children": [
+        {
+          "block": {
+            "object": "block",
+            "id": "411bdb71-f156-4fc8-8688-6884a0b2acdb",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:38:00.000Z",
+            "last_edited_time": "2023-04-04T23:02:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "From the Google Cloud sidebar, go to the Billing menu",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "From the Google Cloud sidebar, go to the Billing menu",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "6f22721b-81c8-4941-b9da-b33a41318a93",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "411bdb71-f156-4fc8-8688-6884a0b2acdb"
+                },
+                "created_time": "2023-04-03T08:39:00.000Z",
+                "last_edited_time": "2023-04-03T08:46:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/63e33944-a77f-40ce-9168-3d5cc81c78e1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466SCMV2D6D%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163951Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJIMEYCIQCMnpQne%2FoUPv1I78W3%2Fgx3AkJ8dDOymTwJy2xNy70K5AIhAJnsSP5qILYU6yVQ169s5GKElmaEfyg9b3ZJNXHWJiLLKogECPH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwiUpOA5o%2BMzJzVhyAq3APrNBSsgGNRPjeGvohqfh4R%2B3%2FfqO57P%2Fb7GqkuZsnHcxyTmiBeJdZaTQIPw9VezuK4HlvfXpkRjJ%2FcKOckQbpYKXwA72DFJDx8NKZSLuaqagB6XMr1dsksGpFzmuCOcSe4Y2L5foBcLbM6IPf3cLT819e%2Be3BeSoNeQ3xoHs%2FpEGMRIqF7Ma2ZMOMbUovhujjnxeEa6aY7vmaGs3HPBhAsOr1kHa4tGyKcY1%2FSc9nr1GzQ8i42YVOpz9RYKOAWML9Lpyp8gzYXj0sJM7fl3B0BoJyn7Y5tQTe8ufLqwhbTgZv%2BxMI5Dmjeyz3kFDKOnfDT6lkh3SgkoDevvomXcGOwXOZItflJVZ%2BbHr2pADt2sUWqSpFmHyYMP8srcAvp5iL94tmSuD23tC7opwGrgWjo%2BIrFD%2FaMKrJ4wiFg7CkV8uWs4iNx4PnvU4L%2FSYz1PXQw0lDP3hlt36%2BymSAwcu5bQ%2BpG6pAZ2cv6XL0chAr7ON0t2n%2FU0cqv9Bl36p8zCXBcVDxZ%2Fnfi0U0%2BtWMAwoKGJs6i2ZJT%2B%2FZVPLfcdIFn%2FNpk73Cb9uNjLlz8hGdDbQqK%2F3v5qiekwVcfc8pTUw5swrmE3qGWPmZW3aV3l0AOQk7w9Txxz0GYhEmhHzCc%2Bu%2FGBjqkAbS151Epje2%2F0QkRAcOGchs834m7fzKQ%2B1aUp3xn8Xc%2BgxgKEU3%2BsB%2FQmx1E1xVmtvRmK7%2F7mj%2FKontk3KYm6hSRSg7VH8a%2BFpagyHPGI2fP2rJufDXfTYQhuPVq8fJJ5swVCiExaFYiC9ms0y4NKoDSqEWtdz8M6eU04M6gWgBldunj6xfMyVreBKdlVYWucfb5On33f2LIbX3x6ReoyGMrJxRJ&X-Amz-Signature=f63de4fd781b47b7152216b7c199a4a18d7ce7ce04220f84f8220ecb9e1c5ffd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:51.935Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "ae8c0fa0-e968-411c-bbe2-5b75fd8c8c29",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:39:00.000Z",
+            "last_edited_time": "2023-04-03T08:40:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": false,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Click Link a Billing Account, then fill out the form based on your personal information",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Click Link a Billing Account, then fill out the form based on your personal information",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": null
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "1eefbe40-6fa7-4d61-8227-cf2ca5d55483",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:40:00.000Z",
+            "last_edited_time": "2023-04-03T08:46:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "When billing is created successfully, refresh the page and go to Billing → Overview",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "When billing is created successfully, refresh the page and go to Billing → Overview",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "f2e56d09-4ed6-468f-be92-8e4eff677e3d",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "1eefbe40-6fa7-4d61-8227-cf2ca5d55483"
+                },
+                "created_time": "2023-04-03T08:45:00.000Z",
+                "last_edited_time": "2023-04-03T08:46:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/146cc8b7-2eab-44e8-9237-ba18660f844f/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466W4LPFEG6%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163952Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCICw3pZ8VJNtF3KmEJeslILwEH21BOafb1j3pYnj4wyWuAiEAmx05rQ72pgxnsKH3LJIRlKJdyvJKC5C%2FjrN12ufxpRUqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDDuLUmhLGVZl8UO41yrcA6yfJKrWcq%2BjikbMlbrThkI1wxKGT7ApPOwljmC24nDIiiElhKYRWre%2Ba9HCyekqdEwdVYDMDm0%2FwQeL770OeZRrx1FKZs%2BnR6d%2B5qIqghRNO4tCkxfmqz5bY4Qg%2BjdoIQgCC9ynnpEf5D35aJ7wnI8CgeZM4UPPt64%2F7YNPW%2FzUjsl5jM7%2Bi0cpwfS8ZmcjfZQD8aJZz5pYH5MOJ5iqxJhylf%2FNM8fZKKDG5eT8fjfeY6givRp%2FpMbrXB72QCx3Marvrp%2Bd4dKkZPO%2B9e4d5DJr%2BA2xUYEzpeaBmteeYu7ik%2F0vLHor5yuNm2YTdS2B%2FPq51o5titYsC%2FhoHn16bG1yN7GwnVPOIIfXFFZ8pMYXiwxCBvcSX1qS93RQ8m7uEERpb3iDcbi%2Bw6cQ1POsL59szZeV2YEh01N2COB%2Fx%2Bljy8JcpmuTUV9FBSRxAGtDIrXSqwLv1%2BbnJ%2BuESzmmdFuBa50boRGrY7jyxFxp1bBSwsGYmxpAtlKvGU%2F0QcW%2BxpP9FIuY9UYzvkHk16thCvpZayqZDXmEcDqaTPtV5nyo0qTnqCCyRU8ETmu2dffDPoG5WBCvIxXcuTAxAlM9%2BKs4cbTjluiL%2F7czaM4397uixXJERrcYuz%2B2QYSMMKf678YGOqUB8Mf0Tn%2B2veis%2B6LaLJvQErPXS15LSRA%2Btg50H%2BZKr59ksJq6H4JO2NDQJmHJRY5m6UgtiPwudUmFESBdsIqGw4o7%2FYhOwoxWMrs5AcZKykRT7uswe5b58o6i2xiIB7wofLV%2B7qcOesDfp58R2uxtaaB5hkcitagQxZnAUCEkpHFUyYwsF4kwtQ1%2FYmxu%2Bgx0W9k5ALN1sCr9hlvLaQHAd1hQ3rH%2F&X-Amz-Signature=f3cfe7cb16ae31b056c1fd18c9a69b005c2d3654f6e1cc7e0a56b8e60a3679ec&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:52.306Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "e4fb1e3b-2765-49c7-98ba-ecf0d588d74a",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:45:00.000Z",
+            "last_edited_time": "2023-04-03T08:46:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "If you see the overview of your project billing, then you can continue the link Google Analytics to BigQuery",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "If you see the overview of your project billing, then you can continue the link Google Analytics to BigQuery",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "60381e07-477e-4217-8435-75760e1ac37d",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "e4fb1e3b-2765-49c7-98ba-ecf0d588d74a"
+                },
+                "created_time": "2023-04-03T08:46:00.000Z",
+                "last_edited_time": "2023-04-03T08:46:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/89439851-1f1e-4685-bc77-d20c146decab/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466ZGRMNPQY%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163952Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCwPET8zsRLgKyQCr3VI95fQ5iMWPTmb5wPC23J0q%2BLHAIgY2ibYO%2F2kxshnqDhW6b%2Bc0Sx5LhCm72nuPLA98oDlnEqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDCsHZgV4yZu%2FzBuOEyrcA6aLcr4h1RwYYD6yf4lE6DU0tnwA0n5XR1B3CobzOis17iIzE9PU4V1Jh4kpK8NbrrP7qRvz%2FYwVpkPXCrTDW33GSGNYiql%2B6xXnXTMVxA%2FMbjRTKl1evBNuRdiK2EQgIeYa8bSPUevM78JHbnU9EPSArusvH3El9fkb5pDWB2Ge%2BMuwLqGwPJ9QVcxAk8nx6vW%2F6JCVvIdFr1xPoyUd%2BEWINC%2Ff7mijPB8817xAdwpTpLCAMoWJtDLlF0Y0JM6aBMhBTbNmJ1Eg0a0lsjV9e4pBYsW%2F24FaC8%2Fh2ssTzv%2BSPQa17FdfWpiln9BU7ZnpyRiZg%2Frad3HPF5xtpdZWGWyGH1YEx0ceNY2UqB0kAjgXn65rTrhrU85tx2jlqmdvrSobNrEqfja1xxa2IwMeMbU9zgEQjeeqpR%2FFpdqq6CK%2FNZgkZUpjtRSKI4V%2Bl3wy8%2FSc2k8jGcD4v0g7bPl%2FCFmHL1UI9i9F%2FRuakvxw13SVYZWzVSQW278mYKPYGAHRhsjFtY6sR6pzZbAgazfy5MHsYQMHEmnjo9DuIB6xjbofBL9Q%2BGvmZBaFwwsiGY7oseiBSZfu7xQ%2BbH97FAVmSj5Iyig7S94mKcjqu05%2BFyR3i%2BgqIZ5Q7nbwB%2BnxMNj678YGOqUBcOxHwmZpGGyn0leLTSNrq9JqNUZx7mUZ5bHdFO1Csv%2FxSL6Sp1mWFVWJH01awrDxJ1BL0LDEN328P%2BqUi2BVVv7DZaTVKd4G9lK5FjSYyMRN8ssRb8Ko0k1rtBjZT4VAVBF3muGiX73dNk0eR3xwcAsgjZL4Vo7JXEgbAchGmiZZmpeBQ7v8GP4IrXFQkmarbsQVcLcJimr3NEG0mSOhXXktgz2o&X-Amz-Signature=aac1ee60c8cbf9ce6a74650c29b026c3f31adbea297d9adab4862f8f238de639&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:52.601Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "d0d43026-9a1a-4a6b-8bc3-4bc906e84a58",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-03T08:32:00.000Z",
+        "last_edited_time": "2023-04-03T08:36:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "heading_2",
+        "heading_2": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Connect Google Analytics to BigQuery",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Connect Google Analytics to BigQuery",
+              "href": null
+            }
+          ],
+          "is_toggleable": false,
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "id": "e15fc7c2-a3fd-477c-98ff-0403e5881711-bulleted_list",
+        "type": "bulleted_list"
+      },
+      "children": [
+        {
+          "block": {
+            "object": "block",
+            "id": "e15fc7c2-a3fd-477c-98ff-0403e5881711",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:32:00.000Z",
+            "last_edited_time": "2023-04-03T09:22:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Open the Google Analytics dashboard and go to Admin → BigQuery Links",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Open the Google Analytics dashboard and go to Admin → BigQuery Links",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "59e19def-8958-4269-ada5-bc1621909207",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "e15fc7c2-a3fd-477c-98ff-0403e5881711"
+                },
+                "created_time": "2023-04-03T08:33:00.000Z",
+                "last_edited_time": "2023-04-03T09:22:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/94d290ba-2333-434d-8e04-9554ad872a1c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665ISMWYFC%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163952Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJGMEQCIAJ7Cds%2Bz7J0LxbAya13V1cJ%2FYhPMJPLbexHs2wIpdhUAiBkNnZkE8hXqIO1zJaAWLBvEm4KEIyqD9SS%2FbmGgf3xdSqIBAjx%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMEMjhFdFrbtDc1%2FapKtwDMuzCKauEDlS6dMFQhtzN%2FWELtT9Odm0%2Buqz0CQCcBZtD%2FRGzOFCbmpB1fSxohjqFBBT8QYyamEDp684llY8DUaKg75lPUaVacH%2BZJbfq6PCifvwxgHnRka5UFdybBHoAw7hx1UlUMExb0j4mBBwHm7wY7GmCSR%2B5ApJJV1xm2fMDBbgXqsFr1QxxkIOlvgxsX7v7y9t%2Fm7LmQOFqJn%2BQvY%2BQPW7%2FGWKNsM26URTmpzcMjzFjq9USYp%2BwDNR2FP%2FbcUGl2u5gHzUOatvsH3czIBZMaSloofrMFC5n4yLBQC7c2LSayBP%2B2ucp4xZ%2BszrU142WfvX50Yc5pzrEcrmtxEHfgK2lcT6qTa70lIOs5cWZLILgo5%2BT%2B%2FkcZWuXEU9CoJfcGDHLEgc%2BwE8UgPFKXXF8sDDsSf8bnRzPtPCglT2KbQSXjgYThuoKXBFgRQjkx4th7Edg3JvFR38Ys2Sh0v3RcNWXgzpmaAT321hG7CV4KCE4N%2F6MrviJZaEEbvg53oW1h5Qa33fPYMfMmBQH0HP%2Bm3Bl8dQ4Rdqi9IyItDclF%2FaIeu6MLHYXIRYV4WRxUKpCFbllJsZiCmze85SeWaUmOEJoL%2BGSIDQtnoR9R0r6Fh4bGTyUMYnrXBYw9PnvxgY6pgENEdVNLwOGh3RZFIakFvbPBcIojca%2FWEKu%2FLVqFc34Wi3Jwq7iAvCyqGkF0xtQzn1KEtVFx05g2Ne%2BqcmVO4ejP60oa1CQkxzqevp2Zkdd%2F%2Bdd4T4StziTDkC%2F3U1o6aOxD057ty4%2B%2BF8F7H4vtuXbSSjlRWjsqtVFzkQNHi1TNknq7l3f6S5w6F6ta9RnkeC4%2Bcyj2wZV4lTmuNmPUlv6mU8kFa9I&X-Amz-Signature=73250e2e2e147272fbe782a291f82548ac7b23d7372c7e4066037305cc49e9e1&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:52.918Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "aab8f2fa-8df3-42bc-94e4-aaba950f07f0",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:34:00.000Z",
+            "last_edited_time": "2023-04-04T22:57:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": false,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Create a new link and choose the project we created earlier",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Create a new link and choose the project we created earlier",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": null
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "11b74108-8d6f-4357-b122-3bc14f4b9c3b",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-03T08:48:00.000Z",
+            "last_edited_time": "2023-04-04T22:58:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Enable Daily and Streaming frequency. I use streaming data to quickly check if the analytics is working well because it records data in real-time, then use the daily data to analyze all historical data. ",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Enable Daily and Streaming frequency. I use streaming data to quickly check if the analytics is working well because it records data in real-time, then use the daily data to analyze all historical data. ",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "4123d75a-da60-4590-9348-7962ce0bd1a1",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "11b74108-8d6f-4357-b122-3bc14f4b9c3b"
+                },
+                "created_time": "2023-04-03T08:48:00.000Z",
+                "last_edited_time": "2023-04-03T09:22:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/1cd05d45-6856-4a39-94da-6bdd5b62cc06/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466THMFWQZA%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163953Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIDNws0qWqsSIEaF8LgyDjNOqN5AhjbfoP0mwciGGZhWXAiEA%2FEKkcknwW3KIfAvCqj4hTJFIOhnL%2BXsttqTbTL470VkqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDEj9UPXnnROlhQWzZyrcA7JJv7NLbJScx90zS4nY1ltWfH4%2FP96Mpw86G3prOvbLjgZDNsvgtWhbh2DTtoV%2FmC5HWm106yc7lX76RjguQ2TivoI7MT9aOO15PodIZ5d4JmpHdmY6QjwhCzcXV1tD%2BEkYxTQeJ1CP7K1YL6tSz%2FV49WoK0i4Ata4WeVMAeNa1LNyBiEuh1LWCBjSqwpqn3V1on7CBXWj%2Fkg1%2B%2BJIocfE%2F67jRsLaSyy3aco9l3zVuF5L8IBow65p%2F7Rc%2F4Mu4a7gPEq8U51c%2B%2FNyLN4y2b1y1RIT%2BfoGDYArHzBCrr%2Ff9LfTJLMD%2Bo2DiMDWCeCEZ%2B2Jl04lbT%2BOr6Hezf%2BaqO%2FZWCqHGFzoEfzrkwteUazVYq17LbkPiT8SUw%2BXBrHVtsc22L%2Ft9iDYjuvRxv6Gq6nwK1kayzS%2BQ%2FrAZmUUDVlaT0KV14SWpj%2F%2BDaEjtolXdl8CwXbgls9BApxVlGBWNPepBS4T3B94VAgyXr%2FE3y04pHXNbuBPkRxA9Mt08wcMoi%2BGUqLxZ95DX%2F3Ilkt43jfrAcvfT5eaz6CgyLAjOWFBTwZbgKHJ1xnyxy4s7VHunB7y8U9GZBMcIHKCzpiqG5PPP3nSBuL2%2FyZ%2FiSC6R%2B0PBkWCJYMwO9PI1KIWdMOH578YGOqUBcgKMxncaU46TC0VaB48BAUpmU%2FtLJMOsqUWNzJFuhqTMTvIXDSBeTaRc7wwjuVdCRhPKe7PI%2BD35SzHeM%2F43DssgPz95KOOY9TJvrllN6%2Fc5Wr%2FPXd3Ycw43suvHsiRSVIWYOe8G1OGxTWGxz4uT8q%2FYJofXrg1e1EqvSCVNFKUa7sxHdR7ZGD78GKJobJHk48kC7iARlwSUrXJPFkIwJKLxVYJS&X-Amz-Signature=19ee7680534a9b729382f7f09ee6212a9207da302be8b6d7d930802a519cc830&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:53.267Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "e036c10f-6225-4ed3-ac21-dbaa0dc663af",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-04T22:58:00.000Z",
+            "last_edited_time": "2023-04-04T23:21:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "From the Google Cloud Console, open IAM & Admin → IAM page and make sure firebase-measurement@system.gserviceaccount.com is granted permission as BigQuery User",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "From the Google Cloud Console, open IAM & Admin → IAM page and make sure firebase-measurement@system.gserviceaccount.com is granted permission as BigQuery User",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": [
+            {
+              "block": {
+                "object": "block",
+                "id": "4f51f070-dd83-46db-b647-3a884827fad7",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "e036c10f-6225-4ed3-ac21-dbaa0dc663af"
+                },
+                "created_time": "2023-04-04T23:19:00.000Z",
+                "last_edited_time": "2023-04-04T23:21:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/281ddc40-3018-458e-b352-5af9ab204b00/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4664W2M5WO7%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163953Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCOyRnZvxVejdr7gxLavzOOBQlHv9CAv6hht0iTFEgYwgIgXeQzgCHE%2FRU5TXqOCyLnP%2FfS907fLOYkaWZuywDKOfIqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDI44jPcQMQgl3c0WXCrcA1BAF6qjuRZqwzv9oTZnyQdBa%2B3whgXMwchHUwhpcDJGpozIda8hxTOrKJOC1jjAa%2BtsxkvDZlmCmLsKpfX%2Fl6927BM6oqm0%2FLbFsJyhjgt1BipH0fbi85vnbzR2XPrkQUiqYnxg755OiJaXciQ7kXSHGYhKrnW5vySGydqTPjngr1N%2BXXoIryfc6vVfoeu3ImM%2FfGWknbYBvgqIc98rb1pr1JdmDMDxmmhZeSUSm5vgF3Cw8XNC2%2Fs%2B9kjAFKlt3ehNA4TBhBtWGf98EG9TTJ3izexGqy7rQ8B3MoX91vaF2jdSrVxn4g8ji%2Fq3tuty5PKKq3n%2FNwokUo0E%2B3mXlQKUKFjizQNxHO2yuPM5UvZddIcDPS8cKSaCkhv%2BdVaLVFWmCc8df9slzTyY7%2BMlMi0by%2FIK2oMWdv8%2BP6wlsUZ4LN0lEIzZSpDb5e2ojZc3lnMuiOmO7ZxmlY9aESxPJqZFVOMX8xWBs55%2BlaiYW3SUhraQadW%2Bl%2FEI%2FAqbnDbWb2fXy0O8H6ioVFi7TqeRfT%2FBlG7Cg67HOkr%2FJ3OTW%2FMxcovJkxADZoM3PR%2FVmWMGdYKzwkHH%2Fh7fZuQDX%2BMQFQNUhhFgqkFHLtRGPjA5vnSw42Ojr9yWdSHCaJgZMP7578YGOqUBDyIBRSxaUCzuaD2HfhL%2FJeSAdPns1%2Bv90kvmIpoPFbAaYegu%2FE60nv53exW548g6ZxDRev%2Bbk6Pz88RcoLKQn6wVGj8ZzHv%2F6C%2FUzv0w4BjFd%2FV8acsjFc3mJIXri9hQsXt89%2Fa6b7ZL01QMC78j7DMeSYb%2BnaR3ZsnuMlPh88Tx%2Fbq%2FOzbG8c3XZw7H5UOUNLFYo1o1z77G1BwTgEbI%2F22Pbcff&X-Amz-Signature=1fc01d2e61db2950a9218e77db80c440f1e3cd6692c7e127e3bb611cd675275f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:53.570Z"
+                  }
+                }
+              },
+              "children": null
+            },
+            {
+              "block": {
+                "object": "block",
+                "id": "d0244485-79b6-4f29-8d1b-f968be4fcca1",
+                "parent": {
+                  "type": "block_id",
+                  "block_id": "e036c10f-6225-4ed3-ac21-dbaa0dc663af"
+                },
+                "created_time": "2023-04-04T23:19:00.000Z",
+                "last_edited_time": "2023-04-04T23:21:00.000Z",
+                "created_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "last_edited_by": {
+                  "object": "user",
+                  "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+                },
+                "has_children": false,
+                "archived": false,
+                "in_trash": false,
+                "type": "image",
+                "image": {
+                  "caption": [],
+                  "type": "file",
+                  "file": {
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/5773e0f4-f558-4c8b-bad3-f48557fe16f9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4664W2M5WO7%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163953Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCOyRnZvxVejdr7gxLavzOOBQlHv9CAv6hht0iTFEgYwgIgXeQzgCHE%2FRU5TXqOCyLnP%2FfS907fLOYkaWZuywDKOfIqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDI44jPcQMQgl3c0WXCrcA1BAF6qjuRZqwzv9oTZnyQdBa%2B3whgXMwchHUwhpcDJGpozIda8hxTOrKJOC1jjAa%2BtsxkvDZlmCmLsKpfX%2Fl6927BM6oqm0%2FLbFsJyhjgt1BipH0fbi85vnbzR2XPrkQUiqYnxg755OiJaXciQ7kXSHGYhKrnW5vySGydqTPjngr1N%2BXXoIryfc6vVfoeu3ImM%2FfGWknbYBvgqIc98rb1pr1JdmDMDxmmhZeSUSm5vgF3Cw8XNC2%2Fs%2B9kjAFKlt3ehNA4TBhBtWGf98EG9TTJ3izexGqy7rQ8B3MoX91vaF2jdSrVxn4g8ji%2Fq3tuty5PKKq3n%2FNwokUo0E%2B3mXlQKUKFjizQNxHO2yuPM5UvZddIcDPS8cKSaCkhv%2BdVaLVFWmCc8df9slzTyY7%2BMlMi0by%2FIK2oMWdv8%2BP6wlsUZ4LN0lEIzZSpDb5e2ojZc3lnMuiOmO7ZxmlY9aESxPJqZFVOMX8xWBs55%2BlaiYW3SUhraQadW%2Bl%2FEI%2FAqbnDbWb2fXy0O8H6ioVFi7TqeRfT%2FBlG7Cg67HOkr%2FJ3OTW%2FMxcovJkxADZoM3PR%2FVmWMGdYKzwkHH%2Fh7fZuQDX%2BMQFQNUhhFgqkFHLtRGPjA5vnSw42Ojr9yWdSHCaJgZMP7578YGOqUBDyIBRSxaUCzuaD2HfhL%2FJeSAdPns1%2Bv90kvmIpoPFbAaYegu%2FE60nv53exW548g6ZxDRev%2Bbk6Pz88RcoLKQn6wVGj8ZzHv%2F6C%2FUzv0w4BjFd%2FV8acsjFc3mJIXri9hQsXt89%2Fa6b7ZL01QMC78j7DMeSYb%2BnaR3ZsnuMlPh88Tx%2Fbq%2FOzbG8c3XZw7H5UOUNLFYo1o1z77G1BwTgEbI%2F22Pbcff&X-Amz-Signature=2ac829605a32ef7e400b28ef6c5ff4ceed07b15b774536a4a905adeaf76f1291&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-30T17:39:53.571Z"
+                  }
+                }
+              },
+              "children": null
+            }
+          ]
+        },
+        {
+          "block": {
+            "object": "block",
+            "id": "cf23eba9-1a6c-4246-a9bb-23592331fe94",
+            "parent": {
+              "type": "page_id",
+              "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+            },
+            "created_time": "2023-04-04T22:58:00.000Z",
+            "last_edited_time": "2023-04-04T23:18:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+            },
+            "has_children": false,
+            "archived": false,
+            "in_trash": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Visit your website to trigger the analytics events, then open our BigQuery project from ",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Visit your website to trigger the analytics events, then open our BigQuery project from ",
+                  "href": null
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "https://console.cloud.google.com/bigquery",
+                    "link": {
+                      "url": "https://console.cloud.google.com/bigquery"
+                    }
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "https://console.cloud.google.com/bigquery",
+                  "href": "https://console.cloud.google.com/bigquery"
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": " and make sure the analytics data is being collected. If no data is collected yet, it might take one day or more for the data to be available. ",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": " and make sure the analytics data is being collected. If no data is collected yet, it might take one day or more for the data to be available. ",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          "children": null
+        }
+      ]
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "669f573b-83db-4370-a595-9d523c48f7fb",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-04T23:00:00.000Z",
+        "last_edited_time": "2023-04-04T23:00:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "image",
+        "image": {
+          "caption": [],
+          "type": "file",
+          "file": {
+            "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/684016eb-2091-4956-b4b6-d55e981fa1c2/51307598-3ae5-406c-b02a-58d3a51b95ff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB46672Z5RNGR%2F20250930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250930T163945Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCBpkFMjCnxe287nowvFGcNfrNZIVZtpvTTq4hMqX00dAIgLiOTkdVHK6GiTRRXJrrt89TugfnAMr%2BrXVZ78XeSnGgqiAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDOHfdsDWwFWyeqKetSrcAwHcgILeEWekNFS0P5m9PLUgrt%2BCiT9ZXKxXN5uMRyBBp7Y8IKrLwC9%2BkaHrwF4uQU7Wlsfsc%2BiBnjNehfRtN5YlkhOC3T9TW%2BcLPOJtfz81d6j1wFSrsdkmSzKoXQeGGfMdvrFn%2Bkfp20Y8gtImu9toLOyNgMw3MFeF%2Bcv1Oqvbu4Vej8e3HsjI2n8zFfColb6oUNFAvi8qH7jqrDuIg7bJWs%2FJ9KWU5J%2Fq6uVol2eOvadbZhb6k59hiTINJDXVL9b3rDM5AR8wempF6OkPo%2FJY%2BfkTFinEbq42JjgR0cwvkEsh0Vx55i3yVTgmeh9pidS3Em1HTGeittvQGM6BMMi1RB%2FFFdOlildpHYKTsohZN2kkQyUrq8b7dcROYbxsXSPawzoLmvZSEBAIgz2dxCltlLsknQ1C8OpB3XUo%2BITdhTPvAKMyL5Wtp1BN8VEG3ptktyH2N%2BjY1eHf9EAd5%2BcbAXXrt36lS11ZV95gjjCKBw7BAUrxmPBv75kDuGTk9Cl84HK4094BJRLYYjUyB8yO%2BD5SZFHtJrbcXAyJwx%2FchmQGL6NucLhXepwsyDjOtGwSGxMY0gnu1AUohXG2IDRf1zjrvf9N5uL98ADlcXFO7jag7%2BHawDqrp45MMMX678YGOqUB1jvHgQqrOudbodv8XekNPyhKnjscXam7VLu%2FUYFSN5%2Ff1XDbIBrbaELDztz%2FR0cqi4zDi2NEn0ZUu%2Fo4tqRNcWzeLPqqM%2FMa5ZkVnOBnWnZ7A6XFRmLIn3QhlHWOUGHCV1noacX%2F2NclnnC1HPRoSVuS9FtzQhhCgiEz9GEgDtcHUnGLfbkDZQObSswTo0bvkj2QC%2F7nbShcuHFah78%2Fb4xf3Hrq&X-Amz-Signature=d88830a0e5e75e4a3542d9d9790a0226e6dea38c6cb8fc97c1aac8355c598ac6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "expiry_time": "2025-09-30T17:39:45.983Z"
+          }
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "f02f1dfd-8585-485b-a9b6-2213f5ef1124",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-04T23:10:00.000Z",
+        "last_edited_time": "2023-04-04T23:10:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [],
+          "color": "default"
+        }
+      },
+      "children": null
+    },
+    {
+      "block": {
+        "object": "block",
+        "id": "5a014ae8-f26c-42fe-bfed-91b8f123c7cf",
+        "parent": {
+          "type": "page_id",
+          "page_id": "498df8b7-ecb2-48ea-822a-eb244304f950"
+        },
+        "created_time": "2023-04-04T23:10:00.000Z",
+        "last_edited_time": "2023-04-04T23:10:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "8875cd9d-a548-45fd-82b0-fc1ea3c49cb1"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "paragraph",
+        "paragraph": {
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Congratulations! Now we have more flexibility to process the analytics data using BigQuery.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Congratulations! Now we have more flexibility to process the analytics data using BigQuery.",
+              "href": null
+            }
+          ],
+          "color": "default"
+        }
+      },
+      "children": null
+    }
+  ]
+}
