@@ -1,21 +1,24 @@
 ---
+import { generateRandomElementTiltAngle } from "../../utils/ui-utils";
+
 interface Props {
   url: string;
   label: string;
+  index: number;
 }
 
-const { url, label } = Astro.props;
-
-// Determine platform from label (label now contains the platform name)
+const { url, label, index } = Astro.props;
 const platform = label.toLowerCase();
+const tilt = generateRandomElementTiltAngle(index);
 ---
 
 <a
   href={url}
   target="_blank"
   rel="noopener noreferrer"
-  class="card bg-base-100 border-neutral border-4 hover-lift p-4 md:p-6 lg:p-8 text-center min-h-[120px] min-w-[120px] md:min-h-[160px] md:min-w-[160px] lg:min-h-[200px] lg:min-w-[200px] flex flex-col items-center justify-center gap-2 md:gap-3 lg:gap-4 transition-all group/social-link"
+  class="card badge-tilt bg-base-100 border-neutral border-4 hover-lift p-4 md:p-6 lg:p-8 text-center min-h-[100px] min-w-[100px] md:min-h-[160px] md:min-w-[160px] lg:min-h-[200px] lg:min-w-[200px] flex flex-col items-center justify-center gap-2 md:gap-3 lg:gap-4 transition-all group/social-link"
   aria-label={label}
+  style={`--badge-tilt: ${tilt}deg;`}
 >
   <div class="mb-2 md:mb-3 lg:mb-4 transition-transform duration-300 group-hover/social-link:scale-125 text-neutral">
     {platform === "linkedin" && (

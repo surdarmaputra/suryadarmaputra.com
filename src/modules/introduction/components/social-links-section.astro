@@ -31,7 +31,7 @@ const socialLinks = [
       {title}
     </h2>
     
-    <div class="flex gap-2 md:gap-6 justify-center items-center mx-auto">
+    <div class="flex gap-4 md:gap-8 justify-center items-center mx-auto">
       {socialLinks.map((link, index) => {
         const delay = index * 150;
         let delayClass = "animation-delay-0";
@@ -45,7 +45,7 @@ const socialLinks = [
           <div
             class={`animate-fade-in-up ${delayClass}`}
           >
-            <SocialLink url={link.url} label={link.label} />
+            <SocialLink url={link.url} label={link.label} index={index} />
           </div>
         );
       })}

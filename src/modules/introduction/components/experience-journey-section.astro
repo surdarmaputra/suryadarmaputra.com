@@ -1,9 +1,10 @@
 ---
 import Ornament from "../../core/components/base/ornament.astro";
 import SkillBadge from "../../core/components/base/skill-badge.astro";
+import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
 
 const title = "From Websites to All Things Tech";
-const subtitle = "Extensive experience developing software across diverse technologies";
+const subtitle = "Having extensive experience developing softwares across diverse technologies";
 const skills = [
   "JavaScript",
   "TypeScript",
@@ -22,9 +23,7 @@ const skills = [
 // Generate random tilt angles and colors for badges
 const badgeConfigs = skills.map((_, index) => {
   // Create slight random tilts (-8 to 8 degrees) that still feel balanced
-  const baseAngle = (index % 3) * 3 - 3; // Creates pattern: -3, 0, 3, -3, 0, 3...
-  const randomOffset = (Math.random() - 0.5) * 4; // Adds -2 to 2 degrees variation
-  const tilt = baseAngle + randomOffset;
+  const tilt = generateRandomElementTiltAngle(index);
 
   // DaisyUI badge color variants
   const colors = [
@@ -41,7 +40,7 @@ const badgeConfigs = skills.map((_, index) => {
 });
 ---
 
-<section id="experience" class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="experience-heading">
+<section id="experience" class="pt-16 pb-24 md:py-52 relative overflow-hidden" aria-labelledby="experience-heading">
   <Ornament variant="square" size="md" color="primary" position="top-left" />
   
   <div class="container mx-auto px-4 relative z-10">
