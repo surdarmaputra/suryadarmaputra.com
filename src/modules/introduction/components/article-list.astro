@@ -54,8 +54,16 @@ const { articles = mockArticles, title = "Articles" } = Astro.props;
           day: "numeric",
         });
         
+        const delay = index * 100;
+        let delayClass = "transition-delay-0";
+        if (delay === 100) delayClass = "transition-delay-100";
+        else if (delay === 200) delayClass = "transition-delay-200";
+        else if (delay === 300) delayClass = "transition-delay-300";
+        else if (delay === 400) delayClass = "transition-delay-400";
+        else if (delay === 500) delayClass = "transition-delay-500";
+        
         return (
-          <div class="scroll-reveal animate-fade-in-up" style={`animation-delay: ${index * 100}ms;`}>
+          <div class={`scroll-reveal ${delayClass}`}>
             <article>
               <div class="flex items-center md:justify-center gap-4 text-sm md:text-base text-base-content/60 mb-0.5">
                 <time datetime={article.date}>{formattedDate}</time>

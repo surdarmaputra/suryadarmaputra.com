@@ -21,62 +21,61 @@ const projectCount = projects.length;
 ---
 
 <div class="relative">
-      <div
-        id={carouselId}
-        class="carousel carousel-center w-[calc(100%+28px)] gap-4 overflow-x-auto scroll-smooth scrollbar-hide px-4 -ml-4 -mr-4 md:px-6 md:-ml-6 md:-mr-6 py-6"
-        role="region"
-        aria-label="Projects carousel"
-      >
-        {projects.map((project, index) => (
-          <div class="carousel-item w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-8px)] flex-shrink-0" data-index={index}>
-            <ProjectCard {...project} />
-          </div>
-        ))}
+  <div
+    id={carouselId}
+    class="carousel carousel-center w-[calc(100%+28px)] gap-4 overflow-x-auto scroll-smooth scrollbar-hide px-4 -ml-4 -mr-4 md:px-6 md:-ml-6 md:-mr-6 py-6"
+    role="region"
+    aria-label="Projects carousel"
+  >
+    {projects.map((project, index) => (
+      <div class="carousel-item w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-8px)] flex-shrink-0" data-index={index}>
+        <ProjectCard {...project} />
       </div>
-      
-      {projects.length > 3 && (
-        <div class="flex justify-center gap-4 mt-8">
-          <Button
-            variant="outline"
-            circle={true}
-            class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-            aria-label="Previous project"
-            data-carousel-prev={carouselId}
-            id={`prev-${carouselId}`}
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </Button>
-          <Button
-            variant="outline"
-            circle={true}
-            class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-            aria-label="Next project"
-            data-carousel-next={carouselId}
-            id={`next-${carouselId}`}
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </Button>
-        </div>
-      )}
+    ))}
+  </div>
+
+  {projects.length > 3 && (
+    <div class="flex justify-center gap-4 mt-8">
+      <Button
+        variant="outline"
+        circle={true}
+        class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+        aria-label="Previous project"
+        data-carousel-prev={carouselId}
+        id={`prev-${carouselId}`}
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </Button>
+      <Button
+        variant="outline"
+        circle={true}
+        class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+        aria-label="Next project"
+        data-carousel-next={carouselId}
+        id={`next-${carouselId}`}
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </Button>
     </div>
+  )}
 </div>
 
 <script define:vars={{ carouselId, projectCount: projects.length }}>
@@ -84,7 +83,8 @@ const projectCount = projects.length;
   const prevButton = document.getElementById(`prev-${carouselId}`);
   const nextButton = document.getElementById(`next-${carouselId}`);
   
-  if (carousel && prevButton && nextButton && projectCount > 3) g    let autoPlayInterval = null;
+  if (carousel && prevButton && nextButton && projectCount > 3) {
+    let autoPlayInterval = null;
     let autoPlayPaused = false;
     const AUTO_PLAY_DELAY = 3000; // 3 seconds between auto-scrolls
     const RESUME_DELAY = 5000; // Resume auto-play after 5 seconds of no interaction

@@ -66,8 +66,8 @@ const experiences: WorkExperience[] = [
     </h2>
     
     <div class="max-w-4xl mx-auto flex flex-col gap-16">
-      {experiences.map((experience, index) => (
-        <WorkExperienceItem experience={experience} index={index} />
+      {experiences.map((experience) => (
+        <WorkExperienceItem experience={experience} />
       ))}
     </div>
   </div>

@@ -28,6 +28,7 @@ See [template.md](./template.md) for the ADR template.
 |-----|-------|--------|
 | [001](./001-module-based-architecture.md) | Module-Based Architecture | Accepted |
 | [002](./002-accessibility-semantic-html.md) | Accessibility and Semantic HTML Guidelines | Accepted |
+| [003](./003-tailwind-css-styling-guidelines.md) | Tailwind CSS Styling Guidelines | Accepted |
 
 ## Creating a New ADR
 

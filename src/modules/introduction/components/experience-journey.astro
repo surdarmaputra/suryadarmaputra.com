@@ -59,8 +59,8 @@ const badgeConfigs = skills.map((_, index) => {
       <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
         {badgeConfigs.map((config) => (
           <div
-            class="inline-block transition-transform duration-300 hover:rotate-6 active:rotate-6"
-            style={`transform: rotate(${config.tilt}deg);`}
+            class="inline-block badge-tilt transition-transform duration-300 hover:rotate-6 active:rotate-6"
+            style={`--badge-tilt: ${config.tilt}deg;`}
           >
             <SkillBadge skill={config.skill} delay={config.delay} color={config.color} />
           </div>

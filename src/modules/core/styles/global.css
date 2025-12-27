@@ -13,15 +13,135 @@
   --color-accent-lavender: #c4a5e8;
   --color-accent-mint: #a8e6c8;
   --color-accent-peach: #ffc9a5;
+
+  /* Animation keyframes */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce-soft {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* Animation utilities */
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+@utility animate-bounce-soft {
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+
+@utility animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+/* Transition delay utilities for staggered animations */
+@utility transition-delay-0 {
+  transition-delay: 0ms;
+}
+
+@utility transition-delay-100 {
+  transition-delay: 100ms;
+}
+
+@utility transition-delay-200 {
+  transition-delay: 200ms;
+}
+
+@utility transition-delay-300 {
+  transition-delay: 300ms;
+}
+
+@utility transition-delay-400 {
+  transition-delay: 400ms;
+}
+
+@utility transition-delay-500 {
+  transition-delay: 500ms;
+}
+
+/* Animation delay utilities for staggered animations */
+@utility animation-delay-0 {
+  animation-delay: 0ms;
+}
+
+@utility animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+@utility animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+@utility animation-delay-450 {
+  animation-delay: 450ms;
+}
+
+@utility animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+@utility animation-delay-750 {
+  animation-delay: 750ms;
+}
+
+/* Badge tilt utility using CSS custom property */
+@utility badge-tilt {
+  transform: rotate(var(--badge-tilt, 0deg));
+}
+
+/* Hover micro-interactions */
+@utility hover-lift {
+  @apply transition-[transform,box-shadow] duration-300 ease-in-out;
+}
+
+@layer utilities {
+  .hover-lift:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+}
+
+@utility hover-scale {
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+@layer utilities {
+  .hover-scale:hover {
+    @apply scale-105;
+  }
+}
+
+/* Scroll-triggered animations */
+@utility scroll-reveal {
+  @apply opacity-0 translate-y-8 transition-[opacity,transform] duration-[600ms] ease-out;
+}
+
+@layer utilities {
+  .scroll-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
 }
 
 /* Ensure ornaments are subtle */
 .ornament {
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
+  @apply pointer-events-none z-0 opacity-[0.08];
 }
 
 .ornament[data-position="center"] {
-  opacity: 0.05;
+  @apply opacity-[0.05];
 }

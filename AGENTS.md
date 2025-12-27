@@ -125,7 +125,19 @@ docs/                   # Documentation
 
 ### Styling Guidelines (Tailwind/DaisyUI)
 
-**CRITICAL: Classname Construction Rule**
+**CRITICAL: All styling MUST follow Tailwind CSS guidelines. See ADR-003 in `docs/adr/003-tailwind-css-styling-guidelines.md` for complete rules.**
+
+#### Quick Reference
+
+- Use Tailwind utility classes whenever possible
+- For reusable custom utilities: use `@utility` directive in `global.css`
+- For component-specific styles: regular CSS classes (no utility directive)
+- Always use `@apply` directive in custom utilities/classes
+- Avoid inline styles; prefer CSS classes/utilities (exception: CSS custom properties for dynamic values)
+- Before creating: check `src/modules/core/styles/global.css` for existing utilities
+- Reference: `src/modules/core/styles/global.css` for examples
+
+#### Classname Construction Rule
 
 - **NEVER** use string interpolation for Tailwind/DaisyUI classnames
 - **ALWAYS** use string mapping with full text classnames
