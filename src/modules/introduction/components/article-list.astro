@@ -1,0 +1,52 @@
+---
+import type { Article } from '../types';
+import Card from '../../core/components/base/card.astro';
+
+interface Props {
+  articles?: Article[];
+}
+
+// Mock data for now
+const mockArticles: Article[] = [
+  {
+    id: '1',
+    title: 'Getting Started with Astro',
+    description: 'Learn how to build fast, modern websites with Astro framework.',
+    date: '2024-01-15',
+    slug: 'getting-started-with-astro',
+  },
+  {
+    id: '2',
+    title: 'Understanding Module-Based Architecture',
+    description: 'A deep dive into organizing code with modular architecture patterns.',
+    date: '2024-01-10',
+    slug: 'module-based-architecture',
+  },
+  {
+    id: '3',
+    title: 'Building with DaisyUI',
+    description: 'Creating beautiful UIs with DaisyUI and Tailwind CSS.',
+    date: '2024-01-05',
+    slug: 'building-with-daisyui',
+  },
+];
+
+const { articles = mockArticles } = Astro.props;
+---
+
+<section class="py-20 px-4">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center font-serif">Latest Articles</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {articles.map((article) => (
+        <Card
+          title={article.title}
+          description={article.description}
+          date={article.date}
+          link={`/articles/${article.slug}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+

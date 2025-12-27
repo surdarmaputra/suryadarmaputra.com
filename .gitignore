@@ -3,7 +3,7 @@
 .netlify/
 .astro/
 /.cache
-/build
+/dist
 /extras/**
 /posts/**
 /public/images/posts/**

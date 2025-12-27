@@ -1,8 +1,12 @@
 {
   "mcpServers": {
     "Astro docs": {
-      "type": "http",
-      "url": "https://mcp.docs.astro.build/mcp"
+      "url": "https://mcp.docs.astro.build/mcp",
+      "transport": "http"
+    },
+    "daisyui-github": {
+      "url": "https://gitmcp.io/saadeghi/daisyui",
+      "transport": "http"
     }
   }
 }
