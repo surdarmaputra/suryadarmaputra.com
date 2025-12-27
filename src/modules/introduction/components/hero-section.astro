@@ -1,4 +1,6 @@
 ---
+import Button from "../../core/components/base/button.astro";
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -7,24 +9,24 @@ interface Props {
 }
 
 const {
-  title = 'Welcome to My Website',
-  subtitle = 'Exploring ideas, sharing knowledge, and building things',
+  title = "Welcome to My Website",
+  subtitle = "Exploring ideas, sharing knowledge, and building things",
   ctaText,
   ctaLink,
 } = Astro.props;
 ---
 
-<section class="hero min-h-[70vh]">
+<section class="hero min-h-[70vh]" aria-label="Hero section">
   <div class="hero-content text-center">
     <div class="max-w-2xl">
       <h1 class="text-6xl md:text-7xl font-bold font-serif mb-6">{title}</h1>
-      <p class="text-lg md:text-xl text-base-content/70 mb-8 max-w-xl mx-auto leading-relaxed">
+      <p class="text-lg md:text-xl text-base-content/80 mb-8 max-w-xl mx-auto leading-relaxed">
         {subtitle}
       </p>
       {ctaText && ctaLink && (
-        <a href={ctaLink} class="btn btn-primary btn-lg">
+        <Button href={ctaLink} variant="primary" size="lg">
           {ctaText}
-        </a>
+        </Button>
       )}
     </div>
   </div>

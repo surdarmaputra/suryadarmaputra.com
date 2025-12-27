@@ -120,10 +120,147 @@ docs/                   # Documentation
 - Name component identifiers with PascalCase
 - Prefer named exports
 - Use `type` aliases instead of `interface` when possible
-- Follow a11y and semantic HTML best practices
+- Follow a11y and semantic HTML best practices (see ADR-002)
 - Fix code to satisfy linter rules; do not disable rules
 
+### Styling Guidelines (Tailwind/DaisyUI)
+
+**CRITICAL: Classname Construction Rule**
+
+- **NEVER** use string interpolation for Tailwind/DaisyUI classnames
+- **ALWAYS** use string mapping with full text classnames
+- This ensures Tailwind/DaisyUI's JIT compiler can detect the classes and include them in the CSS
+
+**Why This Matters:**
+Tailwind/DaisyUI's JIT compiler scans source code for class names. Dynamically constructed classnames (using template literals) are not detected, so the CSS is not generated, resulting in missing styles.
+
+**Examples:**
+
+```typescript
+// ❌ BAD: String interpolation - JIT compiler cannot detect these
+const variantClass = `btn-${variant}`;
+const sizeClass = `btn-${size}`;
+
+// ✅ GOOD: String mapping with full classnames - JIT compiler can detect these
+const variantClassMap: Record<ButtonVariant, string> = {
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  accent: "btn-accent",
+  // ... all variants with full classnames
+};
+
+const sizeClassMap: Record<ButtonSize, string> = {
+  xs: "btn-xs",
+  sm: "btn-sm",
+  md: "",
+  lg: "btn-lg",
+  xl: "btn-xl",
+};
+
+const variantClass = variantClassMap[variant];
+const sizeClass = sizeClassMap[size];
+```
+
+**Reference Implementation:**
+See `src/modules/core/components/base/button.astro` for a complete example of proper classname mapping.
+
+### Accessibility (A11y) Guidelines
+
+**CRITICAL: All code MUST follow strict accessibility guidelines. See ADR-002 for detailed rules.**
+
+#### Semantic HTML Requirements
+
+- **ALWAYS** use semantic HTML elements:
+  - `<header>` for site headers
+  - `<nav>` for navigation
+  - `<main>` for main content
+  - `<article>` for standalone content
+  - `<section>` for thematic grouping
+  - `<aside>` for sidebar content
+  - `<footer>` for footers
+- **AVOID** generic `<div>` and `<span>` when semantic alternatives exist
+- **MAINTAIN** proper heading hierarchy (h1 → h2 → h3, no skipping levels)
+- **USE** appropriate semantic elements for content structure
+
+#### Accessibility Requirements
+
+- **Images**: ALL images MUST have descriptive `alt` attributes
+  - Good: `<img src="photo.jpg" alt="A person reading a book in a library" />`
+  - Bad: `<img src="photo.jpg" />` or `<img src="photo.jpg" alt="" />`
+- **Forms**: ALL form inputs MUST have associated `<label>` elements
+  - Good: `<label for="email">Email</label><input type="email" id="email" />`
+  - Bad: `<input type="email" placeholder="Email" />`
+- **Interactive Elements**: ALL interactive elements MUST be keyboard accessible
+  - Use `<button>` for actions, not `<div>` with click handlers
+  - Ensure focus indicators are visible
+  - Maintain logical tab order
+- **ARIA**: Use ARIA attributes when semantic HTML is insufficient
+  - Use `aria-label` for icon-only buttons
+  - Use `aria-describedby` for additional context
+  - Use `role` attributes only when necessary
+- **Keyboard Navigation**: ALL functionality MUST be accessible via keyboard
+  - No mouse-only interactions
+  - Proper focus management
+  - Escape key closes modals/dropdowns
+
+#### Examples
+
+```html
+<!-- Good: Semantic and accessible -->
+<header>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <article>
+    <h1>Article Title</h1>
+    <img src="photo.jpg" alt="Descriptive alt text" />
+    <form>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
+      <button type="submit">Submit</button>
+    </form>
+  </article>
+</main>
+
+<!-- Bad: Non-semantic and inaccessible -->
+<div class="header">
+  <div class="nav">
+    <div class="link">Home</div>
+  </div>
+</div>
+<div class="content">
+  <div class="title">Article Title</div>
+  <img src="photo.jpg" />
+  <div class="form">
+    <input type="email" placeholder="Email" />
+    <div class="button" onclick="submit()">Submit</div>
+  </div>
+</div>
+```
+
+#### Enforcement
+
+- BiomeJS linting enforces a11y rules at error level
+- Pre-commit hooks prevent commits with a11y violations
+- All a11y errors MUST be fixed before code can be committed
+- See ADR-002 in `docs/adr/002-accessibility-semantic-html.md` for complete guidelines
+
 ## Guardrails for Agents
+
+### Accessibility and Semantic HTML Enforcement
+
+- **MANDATORY**: All code MUST follow strict accessibility guidelines (see ADR-002)
+- **ALWAYS** use semantic HTML elements instead of generic divs/spans
+- **ALWAYS** include alt text for images, labels for form inputs
+- **ALWAYS** ensure keyboard accessibility for all interactive elements
+- **NEVER** skip heading levels (h1 → h2 → h3)
+- **NEVER** use non-interactive elements (div, span) for interactive functionality
+- **ALWAYS** fix a11y linting errors before committing
+- See "Accessibility (A11y) Guidelines" section below for detailed rules
 
 ### Architecture Enforcement
 
@@ -143,6 +280,15 @@ docs/                   # Documentation
   2. Check if existing code can be extended or reused
   3. Consider if the new code should be in core (if reusable) or module-specific
 - **AVOID** duplicating functionality that already exists in core
+
+### Component Creation Decision
+
+- **If a similar component is needed multiple times in a page**, create a reusable component:
+  1. **First**: Check if a DaisyUI component exists for this use case
+  2. **If DaisyUI has it**: Create a wrapper component in `src/modules/core/components/base/` using the DaisyUI component
+  3. **If DaisyUI doesn't have it**: Create a custom component following the same pattern
+  4. **Example**: If buttons are used multiple times with similar styling/props, create a `Button` component wrapper around DaisyUI's `btn` class
+- **Single use components** can remain inline, but if you find yourself repeating similar markup, extract it to a component
 
 ### Code Quality
 

@@ -9,6 +9,7 @@
 /public/images/posts/**
 /public/images/projects/**
 node_modules
+.biome
 
 !**/*.example
 

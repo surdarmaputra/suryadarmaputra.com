@@ -27,6 +27,7 @@ See [template.md](./template.md) for the ADR template.
 | ADR | Title | Status |
 |-----|-------|--------|
 | [001](./001-module-based-architecture.md) | Module-Based Architecture | Accepted |
+| [002](./002-accessibility-semantic-html.md) | Accessibility and Semantic HTML Guidelines | Accepted |
 
 ## Creating a New ADR
 

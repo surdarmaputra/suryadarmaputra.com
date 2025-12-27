@@ -7,4 +7,3 @@ export type Article = {
   date: string;
   slug: string;
 };
-

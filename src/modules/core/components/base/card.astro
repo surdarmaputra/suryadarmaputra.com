@@ -1,4 +1,6 @@
 ---
+import Button from "./button.astro";
+
 interface Props {
   title: string;
   description?: string;
@@ -7,18 +9,18 @@ interface Props {
   linkText?: string;
 }
 
-const { title, description, date, link, linkText = 'Read More →' } = Astro.props;
+const { title, description, date, link, linkText = "Read More →" } = Astro.props;
 ---
 
 <article class="card border border-base-300">
   <div class="card-body">
     {date && <time class="text-sm text-base-content/50 mb-2">{date}</time>}
     <h3 class="card-title font-serif text-xl mb-3">{title}</h3>
-    {description && <p class="text-base-content/70 mb-4 line-clamp-3">{description}</p>}
+    {description && <p class="text-base-content/80 mb-4 line-clamp-3">{description}</p>}
     <slot />
     {link && (
       <div class="card-actions">
-        <a href={link} class="btn btn-ghost btn-sm">
+        <a href={link} class="link no-underline" aria-label={`${linkText} - ${title}`}>
           {linkText}
         </a>
       </div>
