@@ -8,7 +8,7 @@ interface Props {
   currentPath?: string;
 }
 
-const { title = "Surya Darmaputra", description = "Personal website", currentPath } = Astro.props;
+const { title = "", description = "Personal website", currentPath } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,7 +25,7 @@ const { title = "Surya Darmaputra", description = "Personal website", currentPat
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title ? `${title} - Surya Darma Putra` : "Surya Darma Putra"}</title>
   </head>
   <body class="font-sans">
     <Header currentPath={currentPath} />

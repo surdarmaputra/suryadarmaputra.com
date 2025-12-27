@@ -2,57 +2,20 @@
 import Ornament from "../../core/components/base/ornament.astro";
 import ProjectCarousel from "./project-carousel.astro";
 
+interface Project {
+  thumbnail?: string;
+  title: string;
+  description: string;
+  learnMoreLink?: string;
+  previewLink?: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
 const title = "Project & Open Source";
-const projects = [
-  {
-    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+One",
-    title: "Project One",
-    description:
-      "A modern web application built with React and TypeScript, featuring real-time updates and responsive design.",
-    learnMoreLink: "/projects/project-one",
-    previewLink: "https://example.com/project-one",
-  },
-  {
-    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Two",
-    title: "Project Two",
-    description:
-      "An open-source library for data visualization, making complex charts simple and accessible.",
-    learnMoreLink: "/projects/project-two",
-    previewLink: "https://example.com/project-two",
-  },
-  {
-    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Three",
-    title: "Project Three",
-    description:
-      "A full-stack application with Node.js backend and modern frontend, showcasing best practices.",
-    learnMoreLink: "/projects/project-three",
-    previewLink: "https://example.com/project-three",
-  },
-  {
-    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+Four",
-    title: "Project Four",
-    description:
-      "A mobile-first responsive website with advanced animations and micro-interactions for enhanced user experience.",
-    learnMoreLink: "/projects/project-four",
-    previewLink: "https://example.com/project-four",
-  },
-  {
-    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Five",
-    title: "Project Five",
-    description:
-      "An e-commerce platform with payment integration, inventory management, and real-time order tracking.",
-    learnMoreLink: "/projects/project-five",
-    previewLink: "https://example.com/project-five",
-  },
-  {
-    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Six",
-    title: "Project Six",
-    description:
-      "A collaborative workspace tool with real-time synchronization, file sharing, and team communication features.",
-    learnMoreLink: "/projects/project-six",
-    previewLink: "https://example.com/project-six",
-  },
-];
+const { projects } = Astro.props;
 ---
 
 <section class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="projects-heading">

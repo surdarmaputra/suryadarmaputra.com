@@ -1,52 +1,103 @@
 ---
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
-import ArticleList from "../components/article-list.astro";
-import ExperienceJourney from "../components/experience-journey.astro";
+import ArticleListSection from "../components/article-list-section.astro";
+import ExperienceJourneySection from "../components/experience-journey-section.astro";
 import HeroSection from "../components/hero-section.astro";
 import ProjectCarouselSection from "../components/project-carousel-section.astro";
 import SocialLinksSection from "../components/social-links-section.astro";
-import WorkExperience from "../components/work-experience.astro";
+import WorkExperienceSection from "../components/work-experience-section.astro";
+import type { Article } from "../types";
+
+const projects = [
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+One",
+    title: "Project One",
+    description:
+      "A modern web application built with React and TypeScript, featuring real-time updates and responsive design.",
+    learnMoreLink: "/projects/project-one",
+    previewLink: "https://example.com/project-one",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Two",
+    title: "Project Two",
+    description:
+      "An open-source library for data visualization, making complex charts simple and accessible.",
+    learnMoreLink: "/projects/project-two",
+    previewLink: "https://example.com/project-two",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Three",
+    title: "Project Three",
+    description:
+      "A full-stack application with Node.js backend and modern frontend, showcasing best practices.",
+    learnMoreLink: "/projects/project-three",
+    previewLink: "https://example.com/project-three",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+Four",
+    title: "Project Four",
+    description:
+      "A mobile-first responsive website with advanced animations and micro-interactions for enhanced user experience.",
+    learnMoreLink: "/projects/project-four",
+    previewLink: "https://example.com/project-four",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Five",
+    title: "Project Five",
+    description:
+      "An e-commerce platform with payment integration, inventory management, and real-time order tracking.",
+    learnMoreLink: "/projects/project-five",
+    previewLink: "https://example.com/project-five",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Six",
+    title: "Project Six",
+    description:
+      "A collaborative workspace tool with real-time synchronization, file sharing, and team communication features.",
+    learnMoreLink: "/projects/project-six",
+    previewLink: "https://example.com/project-six",
+  },
+];
+
+const articles: Article[] = [
+  {
+    id: "1",
+    title: "Getting Started with Astro",
+    description: "Learn how to build fast, modern websites with Astro framework.",
+    date: "2024-01-15",
+    slug: "getting-started-with-astro",
+    minsRead: 5,
+  },
+  {
+    id: "2",
+    title: "Understanding Module-Based Architecture",
+    description: "A deep dive into organizing code with modular architecture patterns.",
+    date: "2024-01-10",
+    slug: "module-based-architecture",
+    minsRead: 8,
+  },
+  {
+    id: "3",
+    title: "Building with DaisyUI",
+    description: "Creating beautiful UIs with DaisyUI and Tailwind CSS.",
+    date: "2024-01-05",
+    slug: "building-with-daisyui",
+    minsRead: 6,
+  },
+];
 ---
 
-<PageLayout title="Surya Darmaputra - Home" description="Personal website and blog">
+<PageLayout title="Home" description="Personal website and blog">
   <HeroSection />
   
-  <ExperienceJourney />
+  <ExperienceJourneySection />
   
-  <ProjectCarouselSection />
+  <ProjectCarouselSection projects={projects} />
   
-  <WorkExperience />
+  <WorkExperienceSection />
   
-  <ArticleList
-    title="Articles"
-    articles={[
-      {
-        id: "1",
-        title: "Getting Started with Astro",
-        description: "Learn how to build fast, modern websites with Astro framework.",
-        date: "2024-01-15",
-        slug: "getting-started-with-astro",
-        minsRead: 5,
-      },
-      {
-        id: "2",
-        title: "Understanding Module-Based Architecture",
-        description: "A deep dive into organizing code with modular architecture patterns.",
-        date: "2024-01-10",
-        slug: "module-based-architecture",
-        minsRead: 8,
-      },
-      {
-        id: "3",
-        title: "Building with DaisyUI",
-        description: "Creating beautiful UIs with DaisyUI and Tailwind CSS.",
-        date: "2024-01-05",
-        slug: "building-with-daisyui",
-        minsRead: 6,
-      },
-    ]}
-  />
+  <ArticleListSection articles={articles} />
   
   <SocialLinksSection />
   
