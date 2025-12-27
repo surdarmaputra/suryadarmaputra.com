@@ -152,16 +152,12 @@ const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr
     });
   }
   
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initSmoothScroll();
-      initActiveSection();
-    });
-  } else {
+  import { initAfterNavigation } from "../../core/utils/ui-utils";
+  
+  initAfterNavigation(() => {
     initSmoothScroll();
     initActiveSection();
-  }
+  });
 </script>
 
 <style>

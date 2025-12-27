@@ -108,6 +108,7 @@ const currentPath = Astro.url.pathname;
 
 <script>
   import { initArticleListItemScrollReveal } from "../../article/utils/ui-utils";
+  import { initAfterNavigation } from "../../core/utils/ui-utils";
   
   // Smooth scroll for anchor links
   function initSmoothScroll() {
@@ -132,15 +133,8 @@ const currentPath = Astro.url.pathname;
     });
   }
   
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initArticleListItemScrollReveal();
-      initSmoothScroll();
-    });
-  } else {
-    // DOM is already ready
+  initAfterNavigation(() => {
     initArticleListItemScrollReveal();
     initSmoothScroll();
-  }
+  });
 </script>

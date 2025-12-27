@@ -98,106 +98,132 @@ const navItems = [
   </nav>
 </header>
 
-<script is:inline>
-  // Mobile menu overlay toggle with animations
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const overlay = document.getElementById('mobile-menu-overlay');
-  const menuItems = overlay?.querySelectorAll('.mobile-menu-item');
-  const menuIconOpen = toggle?.querySelector('.menu-icon-open');
-  const menuIconClose = toggle?.querySelector('.menu-icon-close');
-  const body = document.body;
+<script>
+  import { initAfterNavigation } from "../../utils/ui-utils";
   
-  let isMenuOpen = false;
+  // Store cleanup functions
+  let cleanupFunctions = [];
   
-  const openMenu = () => {
-    if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+  function initHeader() {
+    // Clean up previous listeners
+    cleanupFunctions.forEach((cleanup) => cleanup());
+    cleanupFunctions = [];
     
-    isMenuOpen = true;
-    body.style.overflow = 'hidden';
-    toggle.setAttribute('aria-expanded', 'true');
-    overlay.setAttribute('aria-hidden', 'false');
-    overlay.classList.remove('pointer-events-none');
-    menuIconOpen.classList.add('hidden');
-    menuIconClose.classList.remove('hidden');
+    // Mobile menu overlay toggle with animations
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const menuItems = overlay?.querySelectorAll('.mobile-menu-item');
+    const menuIconOpen = toggle?.querySelector('.menu-icon-open');
+    const menuIconClose = toggle?.querySelector('.menu-icon-close');
+    const body = document.body;
     
-    // Trigger overlay fade-in
-    requestAnimationFrame(() => {
-      overlay.classList.remove('opacity-0');
-      overlay.classList.add('opacity-100');
-    });
+    if (!toggle || !overlay) return;
     
-    // Animate menu items with stagger
-    if (menuItems) {
-      menuItems.forEach((item, index) => {
-        const element = item;
-        setTimeout(() => {
-          element.classList.remove('opacity-0', 'translate-y-4');
-          element.classList.add('opacity-100', 'translate-y-0');
-        }, 100 + index * 50);
-      });
+    // Close menu if open (reset state)
+    let isMenuOpen = false;
+    if (overlay.classList.contains('opacity-100')) {
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (menuIconOpen) menuIconOpen.classList.remove('hidden');
+      if (menuIconClose) menuIconClose.classList.add('hidden');
+      body.style.overflow = '';
     }
-  };
   
-  const closeMenu = () => {
-    if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
-    
-    isMenuOpen = false;
-    body.style.overflow = '';
-    toggle.setAttribute('aria-expanded', 'false');
-    overlay.setAttribute('aria-hidden', 'true');
-    menuIconOpen.classList.remove('hidden');
-    menuIconClose.classList.add('hidden');
-    
-    // Animate menu items out
-    if (menuItems) {
-      menuItems.forEach((item) => {
-        const element = item;
-        element.classList.remove('opacity-100', 'translate-y-0');
-        element.classList.add('opacity-0', 'translate-y-4');
+    const openMenu = () => {
+      if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+      
+      isMenuOpen = true;
+      body.style.overflow = 'hidden';
+      toggle.setAttribute('aria-expanded', 'true');
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.remove('pointer-events-none');
+      menuIconOpen.classList.add('hidden');
+      menuIconClose.classList.remove('hidden');
+      
+      // Trigger overlay fade-in
+      requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
       });
-    }
+      
+      // Animate menu items with stagger
+      if (menuItems) {
+        menuItems.forEach((item, index) => {
+          const element = item;
+          setTimeout(() => {
+            element.classList.remove('opacity-0', 'translate-y-4');
+            element.classList.add('opacity-100', 'translate-y-0');
+          }, 100 + index * 50);
+        });
+      }
+    };
     
-    // Fade out overlay
-    overlay.classList.remove('opacity-100');
-    overlay.classList.add('opacity-0');
+    const closeMenu = () => {
+      if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+      
+      isMenuOpen = false;
+      body.style.overflow = '';
+      toggle.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      menuIconOpen.classList.remove('hidden');
+      menuIconClose.classList.add('hidden');
+      
+      // Animate menu items out
+      if (menuItems) {
+        menuItems.forEach((item) => {
+          const element = item;
+          element.classList.remove('opacity-100', 'translate-y-0');
+          element.classList.add('opacity-0', 'translate-y-4');
+        });
+      }
+      
+      // Fade out overlay
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0');
+      
+      setTimeout(() => {
+        overlay.classList.add('pointer-events-none');
+      }, 300);
+    };
     
-    setTimeout(() => {
-      overlay.classList.add('pointer-events-none');
-    }, 300);
-  };
-  
-  if (toggle && overlay) {
-    toggle.addEventListener('click', (e) => {
+    // Toggle click handler
+    const toggleHandler = (e) => {
       e.stopPropagation();
       if (isMenuOpen) {
         closeMenu();
       } else {
         openMenu();
       }
-    });
+    };
+    toggle.addEventListener('click', toggleHandler);
+    cleanupFunctions.push(() => toggle.removeEventListener('click', toggleHandler));
     
-    // Close menu when clicking on overlay background
-    overlay.addEventListener('click', (e) => {
+    // Overlay click handler
+    const overlayHandler = (e) => {
       if (e.target === overlay) {
         closeMenu();
       }
-    });
+    };
+    overlay.addEventListener('click', overlayHandler);
+    cleanupFunctions.push(() => overlay.removeEventListener('click', overlayHandler));
     
-    // Close menu when clicking on a menu link
+    // Menu link click handlers
     const menuLinks = overlay.querySelectorAll('a');
     menuLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMenu();
-      });
+      const linkHandler = () => closeMenu();
+      link.addEventListener('click', linkHandler);
+      cleanupFunctions.push(() => link.removeEventListener('click', linkHandler));
     });
     
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
+    // Escape key handler
+    const escapeHandler = (e) => {
       if (e.key === 'Escape' && isMenuOpen) {
         closeMenu();
       }
-    });
-  }
+    };
+    document.addEventListener('keydown', escapeHandler);
+    cleanupFunctions.push(() => document.removeEventListener('keydown', escapeHandler));
   
   // Animated underline for desktop navigation
   const desktopNav = document.getElementById('desktop-nav');
@@ -274,7 +300,7 @@ const navItems = [
     // Handle window resize to reposition underline
     // @ts-ignore
     let resizeTimeout = undefined;
-    window.addEventListener('resize', () => {
+    const resizeHandler = () => {
       if (resizeTimeout !== undefined) {
         clearTimeout(resizeTimeout);
       }
@@ -284,25 +310,34 @@ const navItems = [
           updateUnderline(navLinks[targetIndex], true);
         }
       }, 100);
+    };
+    window.addEventListener('resize', resizeHandler);
+    cleanupFunctions.push(() => window.removeEventListener('resize', resizeHandler));
+  }
+  
+    // Smooth scroll for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach((anchor) => {
+      const anchorHandler = (e) => {
+        const href = anchor.getAttribute('href');
+        if (href && href !== '#') {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }
+      };
+      anchor.addEventListener('click', anchorHandler);
+      cleanupFunctions.push(() => anchor.removeEventListener('click', anchorHandler));
     });
   }
   
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (href && href !== '#') {
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-        }
-      }
-    });
-  });
+  // Initialize using utility function
+  initAfterNavigation(initHeader);
 </script>
 
 <style>
