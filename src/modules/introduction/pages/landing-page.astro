@@ -1,13 +1,13 @@
 ---
+import ArticleListSection from "../../article/components/article-list-section.astro";
+import type { Article } from "../../article/types";
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
-import ArticleListSection from "../components/article-list-section.astro";
 import ExperienceJourneySection from "../components/experience-journey-section.astro";
 import HeroSection from "../components/hero-section.astro";
 import ProjectCarouselSection from "../components/project-carousel-section.astro";
 import SocialLinksSection from "../components/social-links-section.astro";
 import WorkExperienceSection from "../components/work-experience-section.astro";
-import type { Article } from "../types";
 
 const projects = [
   {
@@ -86,9 +86,11 @@ const articles: Article[] = [
     minsRead: 6,
   },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
-<PageLayout title="Home" description="Personal website and blog">
+<PageLayout title="Home" description="Personal website and blog" currentPath={currentPath}>
   <HeroSection />
   
   <ExperienceJourneySection />
@@ -105,28 +107,7 @@ const articles: Article[] = [
 </PageLayout>
 
 <script>
-  // Wait for DOM to be fully loaded
-  function initScrollReveal() {
-    // Intersection Observer for scroll-triggered animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px',
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    // Observe all scroll-reveal elements
-    document.querySelectorAll('.scroll-reveal').forEach((el) => {
-      observer.observe(el);
-    });
-  }
+  import { initArticleListItemScrollReveal } from "../../article/utils/ui-utils";
   
   // Smooth scroll for anchor links
   function initSmoothScroll() {
@@ -154,12 +135,12 @@ const articles: Article[] = [
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      initScrollReveal();
+      initArticleListItemScrollReveal();
       initSmoothScroll();
     });
   } else {
     // DOM is already ready
-    initScrollReveal();
+    initArticleListItemScrollReveal();
     initSmoothScroll();
   }
 </script>
