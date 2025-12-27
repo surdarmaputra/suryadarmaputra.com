@@ -17,7 +17,13 @@ interface Props {
   href?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  circle?: boolean;
   class?: string;
+  id?: string;
+  target?: string;
+  rel?: string;
+  [key: `data-${string}`]: string | undefined;
+  [key: `aria-${string}`]: string | undefined;
 }
 
 const {
@@ -26,7 +32,9 @@ const {
   href,
   type = "button",
   disabled = false,
+  circle = false,
   class: className = "",
+  ...restProps
 } = Astro.props;
 
 // Use full class names so Tailwind/DaisyUI JIT compiler can detect them
@@ -52,16 +60,19 @@ const sizeClassMap: Record<ButtonSize, string> = {
 
 const variantClass = variantClassMap[variant];
 const sizeClass = sizeClassMap[size];
-const classParts = ["btn", variantClass, sizeClass, className].filter(Boolean);
+const circleClass = circle ? "btn-circle" : "";
+const classParts = ["btn border-2", variantClass, sizeClass, circleClass, className].filter(
+  Boolean
+);
 const classes = classParts.join(" ");
 ---
 
 {href ? (
-  <a href={href} class={classes} aria-disabled={disabled ? 'true' : undefined}>
+  <a href={href} class={classes} aria-disabled={disabled ? 'true' : undefined} {...restProps}>
     <slot />
   </a>
 ) : (
-  <button type={type} class={classes} disabled={disabled}>
+  <button type={type} class={classes} disabled={disabled} {...restProps}>
     <slot />
   </button>
 )}

@@ -1,0 +1,75 @@
+---
+import Ornament from "../../core/components/base/ornament.astro";
+import WorkExperienceItem from "./work-experience-item.astro";
+
+interface Project {
+  thumbnail?: string;
+  title: string;
+  description: string;
+  learnMoreLink?: string;
+  previewLink?: string;
+}
+
+interface WorkExperience {
+  companyName: string;
+  roles: Array<{ title: string; timeRange: string }>;
+  description: string;
+  achievements?: string[];
+  projects?: Project[];
+}
+
+const title = "Work Experience";
+const experiences: WorkExperience[] = [
+  {
+    companyName: "Tech Company Inc.",
+    roles: [
+      { title: "Senior Developer", timeRange: "2020 - Present" },
+      { title: "Developer", timeRange: "2018 - 2020" },
+    ],
+    description:
+      "Led development of multiple web applications using modern technologies. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+    achievements: [
+      "Improved application performance by 40% through optimization",
+      "Mentored junior developers and established coding standards",
+      "Led migration to microservices architecture",
+    ],
+    projects: [
+      {
+        title: "Enterprise Dashboard",
+        description: "Real-time analytics dashboard for business intelligence",
+        learnMoreLink: "/projects/enterprise-dashboard",
+      },
+    ],
+  },
+  {
+    companyName: "Startup Co.",
+    roles: [{ title: "Developer", timeRange: "2016 - 2018" }],
+    description:
+      "Built and maintained web applications from scratch. Worked in a fast-paced startup environment with agile methodologies.",
+    achievements: [
+      "Developed core features that increased user engagement by 60%",
+      "Implemented CI/CD pipeline reducing deployment time by 50%",
+    ],
+  },
+];
+---
+
+<section class="py-24 md:py-36 relative overflow-hidden bg-base-200/20" aria-labelledby="work-heading">
+  <Ornament variant="square" size="lg" color="accent" position="bottom-left" />
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <h2
+      id="work-heading"
+      class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-accent-content animate-fade-in-up"
+    >
+      {title}
+    </h2>
+    
+    <div class="max-w-4xl mx-auto flex flex-col gap-16">
+      {experiences.map((experience, index) => (
+        <WorkExperienceItem experience={experience} index={index} />
+      ))}
+    </div>
+  </div>
+</section>
+

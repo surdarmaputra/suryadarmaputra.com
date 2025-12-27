@@ -1,0 +1,72 @@
+---
+import Ornament from "../../core/components/base/ornament.astro";
+import SkillBadge from "../../core/components/base/skill-badge.astro";
+
+const title = "From Websites to All Things Tech";
+const subtitle = "Extensive experience developing software across diverse technologies";
+const skills = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Vue",
+  "Astro",
+  "Node.js",
+  "Python",
+  "AWS",
+  "Docker",
+  "Kubernetes",
+  "GraphQL",
+  "PostgreSQL",
+];
+
+// Generate random tilt angles and colors for badges
+const badgeConfigs = skills.map((_, index) => {
+  // Create slight random tilts (-8 to 8 degrees) that still feel balanced
+  const baseAngle = (index % 3) * 3 - 3; // Creates pattern: -3, 0, 3, -3, 0, 3...
+  const randomOffset = (Math.random() - 0.5) * 4; // Adds -2 to 2 degrees variation
+  const tilt = baseAngle + randomOffset;
+
+  // DaisyUI badge color variants
+  const colors = [
+    "badge-primary",
+    "badge-secondary",
+    "badge-info",
+    "badge-success",
+    "badge-warning",
+    "badge-error",
+  ];
+  const color = colors[index % colors.length];
+
+  return { skill: skills[index], tilt, color, delay: index * 100 };
+});
+---
+
+<section id="experience" class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="experience-heading">
+  <Ornament variant="square" size="md" color="primary" position="top-left" />
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        id="experience-heading"
+        class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-6 text-accent-content animate-fade-in-up"
+      >
+        {title}
+      </h2>
+      <p class="text-xl md:text-3xl font-semibold text-accent-content/90 mb-4 animate-fade-in-up animate-delay-200">
+        {subtitle}
+      </p>
+      
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+        {badgeConfigs.map((config) => (
+          <div
+            class="inline-block transition-transform duration-300 hover:rotate-6 active:rotate-6"
+            style={`transform: rotate(${config.tilt}deg);`}
+          >
+            <SkillBadge skill={config.skill} delay={config.delay} color={config.color} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+

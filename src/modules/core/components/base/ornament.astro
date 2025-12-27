@@ -1,0 +1,56 @@
+---
+interface Props {
+  variant?: "circle" | "square" | "dots";
+  size?: "sm" | "md" | "lg";
+  color?: "primary" | "secondary" | "accent";
+  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
+}
+
+const { variant = "circle", size = "md", color = "primary", position = "center" } = Astro.props;
+
+const sizeMap: Record<"sm" | "md" | "lg", string> = {
+  sm: "w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32",
+  md: "w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64",
+  lg: "w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96",
+};
+
+const positionMap: Record<
+  "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center",
+  string
+> = {
+  "top-left": "top-0 left-0",
+  "top-right": "top-0 right-0",
+  "bottom-left": "bottom-0 left-0",
+  "bottom-right": "bottom-0 right-0",
+  center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+};
+
+const colorClassMap: Record<"primary" | "secondary" | "accent", string> = {
+  primary: "bg-accent-lavender",
+  secondary: "bg-accent-mint",
+  accent: "bg-accent-peach",
+};
+---
+
+<div class={`ornament absolute ${sizeMap[size]} ${positionMap[position]} opacity-10 pointer-events-none z-0`} data-variant={variant} data-color={color} data-position={position}>
+  {variant === 'circle' && (
+    <div class={`w-full h-full rounded-full ${colorClassMap[color]}`}></div>
+  )}
+  {variant === 'square' && (
+    <div class={`w-full h-full rounded-lg translate-y-1/2 ${colorClassMap[color]} rotate-45`}></div>
+  )}
+  {variant === 'dots' && (
+    <div class="w-full h-full grid grid-cols-3 gap-2 md:gap-3 lg:gap-4 place-items-center">
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+      <div class={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${colorClassMap[color]}`}></div>
+    </div>
+  )}
+</div>
+

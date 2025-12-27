@@ -1,0 +1,229 @@
+---
+import Button from "../../core/components/base/button.astro";
+import ProjectCard from "./project-card.astro";
+
+interface Project {
+  thumbnail?: string;
+  title: string;
+  description: string;
+  learnMoreLink?: string;
+  previewLink?: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+const projectCount = projects.length;
+---
+
+<div class="relative">
+      <div
+        id={carouselId}
+        class="carousel carousel-center w-[calc(100%+28px)] gap-4 overflow-x-auto scroll-smooth scrollbar-hide px-4 -ml-4 -mr-4 md:px-6 md:-ml-6 md:-mr-6 py-6"
+        role="region"
+        aria-label="Projects carousel"
+      >
+        {projects.map((project, index) => (
+          <div class="carousel-item w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-8px)] flex-shrink-0" data-index={index}>
+            <ProjectCard {...project} />
+          </div>
+        ))}
+      </div>
+      
+      {projects.length > 3 && (
+        <div class="flex justify-center gap-4 mt-8">
+          <Button
+            variant="outline"
+            circle={true}
+            class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+            aria-label="Previous project"
+            data-carousel-prev={carouselId}
+            id={`prev-${carouselId}`}
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </Button>
+          <Button
+            variant="outline"
+            circle={true}
+            class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+            aria-label="Next project"
+            data-carousel-next={carouselId}
+            id={`next-${carouselId}`}
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </Button>
+        </div>
+      )}
+    </div>
+</div>
+
+<script define:vars={{ carouselId, projectCount: projects.length }}>
+  const carousel = document.getElementById(carouselId);
+  const prevButton = document.getElementById(`prev-${carouselId}`);
+  const nextButton = document.getElementById(`next-${carouselId}`);
+  
+  if (carousel && prevButton && nextButton && projectCount > 3) g    let autoPlayInterval = null;
+    let autoPlayPaused = false;
+    const AUTO_PLAY_DELAY = 3000; // 3 seconds between auto-scrolls
+    const RESUME_DELAY = 5000; // Resume auto-play after 5 seconds of no interaction
+    
+    const getScrollAmount = () => {
+      // Get the width of one card plus gap
+      const firstItem = carousel.querySelector('.carousel-item');
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth;
+        const gap = 16; // gap-4 = 1rem = 16px
+        return itemWidth + gap;
+      }
+      return carousel.offsetWidth * 0.5;
+    };
+    
+    const updateButtonStates = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      const isAtStart = scrollLeft <= 0;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1; // -1 for rounding errors
+      
+      prevButton.disabled = isAtStart;
+      nextButton.disabled = isAtEnd;
+      
+      // If at the end, restart from the beginning for auto-play
+      if (isAtEnd && autoPlayInterval && !autoPlayPaused) {
+        // Scroll back to start smoothly
+        setTimeout(() => {
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 500);
+      }
+    };
+    
+    const startAutoPlay = () => {
+      if (autoPlayInterval) return; // Already running
+      
+      autoPlayInterval = setInterval(() => {
+        if (autoPlayPaused) return;
+        
+        const { scrollLeft, scrollWidth, clientWidth } = carousel;
+        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1;
+        
+        if (isAtEnd) {
+          // Reset to start
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll forward
+          const scrollAmount = getScrollAmount();
+          carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+        
+        updateButtonStates();
+      }, AUTO_PLAY_DELAY);
+    };
+    
+    const pauseAutoPlay = () => {
+      autoPlayPaused = true;
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    };
+    
+    const resumeAutoPlay = () => {
+      autoPlayPaused = false;
+      if (!autoPlayInterval) {
+        startAutoPlay();
+      }
+    };
+    
+    let resumeTimeout = null;
+    const pauseAndResume = () => {
+      pauseAutoPlay();
+      
+      // Clear any existing resume timeout
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+      }
+      
+      // Resume after delay
+      resumeTimeout = setTimeout(() => {
+        resumeAutoPlay();
+      }, RESUME_DELAY);
+    };
+    
+    // Initial state check
+    updateButtonStates();
+    
+    // Start auto-play
+    startAutoPlay();
+    
+    // Update on scroll
+    carousel.addEventListener('scroll', updateButtonStates);
+    
+    // Update on resize (items might change size)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateButtonStates();
+        // Restart auto-play after resize
+        pauseAutoPlay();
+        setTimeout(resumeAutoPlay, 1000);
+      }, 100);
+    });
+    
+    // Pause auto-play on manual navigation
+    prevButton.addEventListener('click', () => {
+      if (prevButton.disabled) return;
+      pauseAndResume();
+      const scrollAmount = getScrollAmount();
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    
+    nextButton.addEventListener('click', () => {
+      if (nextButton.disabled) return;
+      pauseAndResume();
+      const scrollAmount = getScrollAmount();
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+    
+    // Pause auto-play on hover, resume on mouse leave
+    carousel.addEventListener('mouseenter', pauseAutoPlay);
+    carousel.addEventListener('mouseleave', resumeAutoPlay);
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      pauseAutoPlay();
+    });
+  }
+</script>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+

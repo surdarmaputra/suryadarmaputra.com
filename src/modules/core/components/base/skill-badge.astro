@@ -1,0 +1,17 @@
+---
+interface Props {
+  skill: string;
+  delay?: number;
+  color?: string;
+}
+
+const { skill, delay = 0, color = "badge-outline" } = Astro.props;
+---
+
+<span
+  class={`badge badge-lg ${color} animate-fade-in-up`}
+  style={`animation-delay: ${delay}ms;`}
+>
+  {skill}
+</span>
+

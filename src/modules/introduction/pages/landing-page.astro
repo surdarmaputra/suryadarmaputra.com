@@ -1,16 +1,97 @@
 ---
+import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import ArticleList from "../components/article-list.astro";
+import ExperienceJourney from "../components/experience-journey.astro";
 import HeroSection from "../components/hero-section.astro";
+import ProjectCarouselSection from "../components/project-carousel-section.astro";
+import SocialLinksSection from "../components/social-links-section.astro";
+import WorkExperience from "../components/work-experience.astro";
 ---
 
 <PageLayout title="Surya Darmaputra - Home" description="Personal website and blog">
-  <HeroSection
-    title="Surya Darmaputra"
-    subtitle="Exploring ideas, sharing knowledge, and building things"
-    ctaText="View Articles"
-    ctaLink="/articles"
+  <HeroSection />
+  
+  <ExperienceJourney />
+  
+  <ProjectCarouselSection />
+  
+  <WorkExperience />
+  
+  <ArticleList
+    title="Articles"
+    articles={[
+      {
+        id: "1",
+        title: "Getting Started with Astro",
+        description: "Learn how to build fast, modern websites with Astro framework.",
+        date: "2024-01-15",
+        slug: "getting-started-with-astro",
+        minsRead: 5,
+      },
+      {
+        id: "2",
+        title: "Understanding Module-Based Architecture",
+        description: "A deep dive into organizing code with modular architecture patterns.",
+        date: "2024-01-10",
+        slug: "module-based-architecture",
+        minsRead: 8,
+      },
+      {
+        id: "3",
+        title: "Building with DaisyUI",
+        description: "Creating beautiful UIs with DaisyUI and Tailwind CSS.",
+        date: "2024-01-05",
+        slug: "building-with-daisyui",
+        minsRead: 6,
+      },
+    ]}
   />
-  <ArticleList />
+  
+  <SocialLinksSection />
+  
+  <Footer />
 </PageLayout>
 
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px',
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all scroll-reveal elements
+  document.querySelectorAll('.scroll-reveal').forEach((el) => {
+    observer.observe(el);
+  });
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (href && href !== '#') {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }
+    });
+  });
+</script>

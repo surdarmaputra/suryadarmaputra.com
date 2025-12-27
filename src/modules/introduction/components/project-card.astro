@@ -1,0 +1,46 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Card from "../../core/components/base/card.astro";
+
+interface Props {
+  thumbnail?: string;
+  title: string;
+  description: string;
+  learnMoreLink?: string;
+  previewLink?: string;
+}
+
+const { thumbnail, title, description, learnMoreLink, previewLink } = Astro.props;
+---
+
+<Card
+  title={title}
+  description={description}
+  class="hover-lift h-full flex flex-col group/project-card"
+  bodyClass="flex-grow"
+  titleClass="font-serif text-2xl"
+>
+  {thumbnail && (
+    <figure slot="header" class="aspect-video overflow-hidden rounded-none">
+      <img
+        src={thumbnail}
+        alt={`${title} thumbnail`}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover/project-card:scale-110"
+        loading="lazy"
+      />
+    </figure>
+  )}
+  <div slot="actions" class="card-actions justify-end gap-2">
+    {previewLink && (
+      <Button href={previewLink} variant="outline" size="sm" class="hover-scale">
+        Preview
+      </Button>
+    )}
+    {learnMoreLink && (
+      <Button href={learnMoreLink} variant="primary" size="sm" class="hover-scale">
+        Learn More
+      </Button>
+    )}
+  </div>
+</Card>
+

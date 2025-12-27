@@ -6,4 +6,5 @@ export type Article = {
   description: string;
   date: string;
   slug: string;
+  minsRead?: number;
 };

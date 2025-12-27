@@ -1,0 +1,339 @@
+---
+import "../../styles/animations.css";
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/articles", label: "Articles" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-sm">
+  <nav class="container mx-auto px-4 py-4" aria-label="Main navigation">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center hover-scale" aria-label="Home">
+        <picture>
+          <source srcset="/site-logo-bw.png" media="(prefers-color-scheme: dark)" />
+          <img src="/site-logo.png" alt="Surya Darmaputra Logo" class="h-10 w-auto" />
+        </picture>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-6 relative" id="desktop-nav">
+        {navItems.map((item, index) => (
+          <a
+            href={item.href}
+            class={`nav-link relative no-underline transition-colors ${
+              currentPath === item.href ? 'font-black' : 'text-base-content'
+            }`}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+            data-nav-index={index}
+          >
+            {item.label}
+          </a>
+        ))}
+        <span class="nav-underline absolute bottom-0 left-0 h-1 bg-base-content transition-all duration-300 ease-out" id="nav-underline"></span>
+      </div>
+      
+      <button
+        class="md:hidden btn btn-ghost btn-sm relative z-[60]"
+        id="mobile-menu-toggle"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="w-6 h-6 menu-icon-open"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg
+          class="w-6 h-6 menu-icon-close hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 md:hidden opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+>
+  <nav class="h-full flex flex-col items-center justify-center px-6" aria-label="Mobile navigation">
+    <ul class="flex flex-col gap-8 text-center">
+      {navItems.map((item, index) => (
+        <li class="mobile-menu-item opacity-0 translate-y-4">
+          <a
+            href={item.href}
+            class={`text-2xl transition-colors ${
+              currentPath === item.href ? 'font-black underline' : ''
+            }`}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+            data-menu-index={index}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+  </nav>
+</header>
+
+<script is:inline>
+  // Mobile menu overlay toggle with animations
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const menuItems = overlay?.querySelectorAll('.mobile-menu-item');
+  const menuIconOpen = toggle?.querySelector('.menu-icon-open');
+  const menuIconClose = toggle?.querySelector('.menu-icon-close');
+  const body = document.body;
+  
+  let isMenuOpen = false;
+  
+  const openMenu = () => {
+    if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+    
+    isMenuOpen = true;
+    body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.remove('pointer-events-none');
+    menuIconOpen.classList.add('hidden');
+    menuIconClose.classList.remove('hidden');
+    
+    // Trigger overlay fade-in
+    requestAnimationFrame(() => {
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-100');
+    });
+    
+    // Animate menu items with stagger
+    if (menuItems) {
+      menuItems.forEach((item, index) => {
+        const element = item;
+        setTimeout(() => {
+          element.classList.remove('opacity-0', 'translate-y-4');
+          element.classList.add('opacity-100', 'translate-y-0');
+        }, 100 + index * 50);
+      });
+    }
+  };
+  
+  const closeMenu = () => {
+    if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+    
+    isMenuOpen = false;
+    body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    menuIconOpen.classList.remove('hidden');
+    menuIconClose.classList.add('hidden');
+    
+    // Animate menu items out
+    if (menuItems) {
+      menuItems.forEach((item) => {
+        const element = item;
+        element.classList.remove('opacity-100', 'translate-y-0');
+        element.classList.add('opacity-0', 'translate-y-4');
+      });
+    }
+    
+    // Fade out overlay
+    overlay.classList.remove('opacity-100');
+    overlay.classList.add('opacity-0');
+    
+    setTimeout(() => {
+      overlay.classList.add('pointer-events-none');
+    }, 300);
+  };
+  
+  if (toggle && overlay) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    
+    // Close menu when clicking on overlay background
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeMenu();
+      }
+    });
+    
+    // Close menu when clicking on a menu link
+    const menuLinks = overlay.querySelectorAll('a');
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    });
+  }
+  
+  // Animated underline for desktop navigation
+  const desktopNav = document.getElementById('desktop-nav');
+  const navUnderline = document.getElementById('nav-underline');
+  const navLinks = desktopNav?.querySelectorAll('.nav-link');
+  
+  if (desktopNav && navUnderline && navLinks) {
+    let activeIndex = -1;
+    let hoveredIndex = -1;
+    let isTransitioning = false;
+    
+    // Function to update underline position using transform for better performance
+    // @ts-ignore
+    const updateUnderline = (targetLink, immediate = false) => {
+      if (isTransitioning && !immediate) return;
+      
+      const navContainer = desktopNav;
+      const linkRect = targetLink.getBoundingClientRect();
+      const navRect = navContainer.getBoundingClientRect();
+      
+      const offsetLeft = linkRect.left - navRect.left;
+      const width = linkRect.width;
+      
+      if (immediate) {
+        navUnderline.style.transition = 'none';
+        navUnderline.style.width = `${width}px`;
+        navUnderline.style.transform = `translateX(${offsetLeft}px)`;
+        navUnderline.style.opacity = '1';
+        // Force reflow
+        navUnderline.offsetHeight;
+        navUnderline.style.transition = '';
+      } else {
+        isTransitioning = true;
+        navUnderline.style.width = `${width}px`;
+        navUnderline.style.transform = `translateX(${offsetLeft}px)`;
+        navUnderline.style.opacity = '1';
+        
+        // Reset transition flag after animation completes
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 300);
+      }
+    };
+    
+    // Find active link and position underline
+    navLinks.forEach((link, index) => {
+      if (link.getAttribute('aria-current') === 'page') {
+        activeIndex = index;
+        updateUnderline(link, true);
+      }
+      
+      // Handle hover
+      link.addEventListener('mouseenter', () => {
+        hoveredIndex = index;
+        updateUnderline(link);
+      });
+      
+      // Handle mouse leave - return to active if exists
+      link.addEventListener('mouseleave', () => {
+        hoveredIndex = -1;
+        if (activeIndex >= 0) {
+          updateUnderline(navLinks[activeIndex]);
+        } else {
+          navUnderline.style.opacity = '0';
+        }
+      });
+    });
+    
+    // Initialize underline position
+    if (activeIndex < 0) {
+      navUnderline.style.opacity = '0';
+    }
+    
+    // Handle window resize to reposition underline
+    // @ts-ignore
+    let resizeTimeout = undefined;
+    window.addEventListener('resize', () => {
+      if (resizeTimeout !== undefined) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(() => {
+        const targetIndex = hoveredIndex >= 0 ? hoveredIndex : activeIndex;
+        if (targetIndex >= 0) {
+          updateUnderline(navLinks[targetIndex], true);
+        }
+      }, 100);
+    });
+  }
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (href && href !== '#') {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+  
+  .nav-underline {
+    pointer-events: none;
+    will-change: transform, width;
+    transform-origin: left center;
+  }
+  
+  .mobile-menu-item {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  .mobile-menu-item a {
+    display: inline-block;
+    transition: color 0.2s ease;
+  }
+  
+  .mobile-menu-item a:hover {
+    color: hsl(var(--p));
+  }
+</style>
+

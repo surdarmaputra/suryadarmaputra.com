@@ -8,4 +8,20 @@
     "DM Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: "DM Serif Text", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Accent colors for ornaments (more saturated but still soft) */
+  --color-accent-lavender: #c4a5e8;
+  --color-accent-mint: #a8e6c8;
+  --color-accent-peach: #ffc9a5;
+}
+
+/* Ensure ornaments are subtle */
+.ornament {
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ornament[data-position="center"] {
+  opacity: 0.05;
 }
