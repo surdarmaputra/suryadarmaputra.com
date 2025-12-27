@@ -1,14 +1,7 @@
 ---
 import Ornament from "../../core/components/base/ornament.astro";
+import type { Project } from "../../project/types";
 import WorkExperienceItem from "./work-experience-item.astro";
-
-interface Project {
-  thumbnail?: string;
-  title: string;
-  description: string;
-  learnMoreLink?: string;
-  previewLink?: string;
-}
 
 interface WorkExperience {
   companyName: string;

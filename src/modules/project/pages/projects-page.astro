@@ -1,0 +1,154 @@
+---
+import Ornament from "../../core/components/base/ornament.astro";
+import Footer from "../../core/components/layouts/footer.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import ProjectSection from "../components/project-section.astro";
+import ProjectsSidebar from "../components/projects-sidebar.astro";
+import type { Project } from "../types";
+
+const currentPath = Astro.url.pathname;
+
+// Personal & Open Source projects
+const personalProjects: Project[] = [
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+One",
+    title: "Project One",
+    description:
+      "A modern web application built with React and TypeScript, featuring real-time updates and responsive design.",
+    learnMoreLink: "/projects/project-one",
+    previewLink: "https://example.com/project-one",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Two",
+    title: "Project Two",
+    description:
+      "An open-source library for data visualization, making complex charts simple and accessible.",
+    learnMoreLink: "/projects/project-two",
+    previewLink: "https://example.com/project-two",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Three",
+    title: "Project Three",
+    description:
+      "A full-stack application with Node.js backend and modern frontend, showcasing best practices.",
+    learnMoreLink: "/projects/project-three",
+    previewLink: "https://example.com/project-three",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+Four",
+    title: "Project Four",
+    description:
+      "A mobile-first responsive website with advanced animations and micro-interactions for enhanced user experience.",
+    learnMoreLink: "/projects/project-four",
+    previewLink: "https://example.com/project-four",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Five",
+    title: "Project Five",
+    description:
+      "An e-commerce platform with payment integration, inventory management, and real-time order tracking.",
+    learnMoreLink: "/projects/project-five",
+    previewLink: "https://example.com/project-five",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Six",
+    title: "Project Six",
+    description:
+      "A collaborative workspace tool with real-time synchronization, file sharing, and team communication features.",
+    learnMoreLink: "/projects/project-six",
+    previewLink: "https://example.com/project-six",
+  },
+];
+
+// Tech Company Inc. projects
+const techCompanyProjects: Project[] = [
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Enterprise+Dashboard",
+    title: "Enterprise Dashboard",
+    description: "Real-time analytics dashboard for business intelligence",
+    learnMoreLink: "/projects/enterprise-dashboard",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Microservices+Platform",
+    title: "Microservices Platform",
+    description: "Scalable microservices architecture for enterprise applications",
+    learnMoreLink: "/projects/microservices-platform",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Performance+Optimization",
+    title: "Performance Optimization",
+    description: "Application performance improvements and optimization strategies",
+    learnMoreLink: "/projects/performance-optimization",
+  },
+];
+
+// Startup Co. projects
+const startupCoProjects: Project[] = [
+  {
+    thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Core+Features",
+    title: "Core Features",
+    description: "Core application features that increased user engagement by 60%",
+    learnMoreLink: "/projects/core-features",
+  },
+  {
+    thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=CI+CD+Pipeline",
+    title: "CI/CD Pipeline",
+    description: "Automated deployment pipeline reducing deployment time by 50%",
+    learnMoreLink: "/projects/cicd-pipeline",
+  },
+];
+
+const sections = [
+  {
+    id: "personal-projects",
+    title: "Personal & Open Source",
+    projects: personalProjects,
+  },
+  {
+    id: "tech-company-inc",
+    title: "Tech Company Inc.",
+    projects: techCompanyProjects,
+  },
+  {
+    id: "startup-co",
+    title: "Startup Co.",
+    projects: startupCoProjects,
+  },
+];
+
+const sidebarSections = sections.map((section) => ({
+  id: section.id,
+  label: section.title,
+}));
+---
+
+<PageLayout title="Projects" description="Projects and work experience" currentPath={currentPath}>
+  <div class="relative min-h-screen">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <Ornament variant="circle" size="md" color="accent" position="top-left" />
+      <Ornament variant="dots" size="md" color="primary" position="top-right" />
+      <Ornament variant="square" size="lg" color="secondary" position="center" />
+    </div>
+
+    <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+      <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-8 md:mb-24 text-center text-base-content animate-fade-in-up">
+        Projects
+      </h1>
+      
+      <div class="flex flex-col lg:flex-row gap-8">
+        <aside class="lg:w-64 lg:flex-shrink-0">
+          <ProjectsSidebar sections={sidebarSections} />
+        </aside>
+        
+        <div class="flex-1 flex flex-col gap-20">
+          {sections.map((section) => (
+            <ProjectSection id={section.id} title={section.title} projects={section.projects} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <Footer />
+</PageLayout>
+

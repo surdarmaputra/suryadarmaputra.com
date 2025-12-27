@@ -1,13 +1,6 @@
 ---
+import type { Project } from "../../project/types";
 import ProjectCarousel from "./project-carousel.astro";
-
-interface Project {
-  thumbnail?: string;
-  title: string;
-  description: string;
-  learnMoreLink?: string;
-  previewLink?: string;
-}
 
 interface WorkExperience {
   companyName: string;

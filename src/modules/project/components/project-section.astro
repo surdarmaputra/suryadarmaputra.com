@@ -1,0 +1,52 @@
+---
+import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
+import type { Project } from "../types";
+import ProjectCard from "./project-card.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  projects: Project[];
+}
+
+const { id, title, projects } = Astro.props;
+
+// Generate random tilt angles for each card with smaller tilt (max 2 degrees)
+const projectConfigs = projects.map((project, index) => {
+  const tilt = generateRandomElementTiltAngle(index, 2); // Max 2 degrees for subtle tilt
+
+  // Calculate animation delay for staggered fade-in
+  const delay = index * 100;
+  let delayClass = "animation-delay-0";
+  if (delay === 100) delayClass = "animation-delay-150";
+  else if (delay === 200) delayClass = "animation-delay-300";
+  else if (delay === 300) delayClass = "animation-delay-450";
+  else if (delay === 400) delayClass = "animation-delay-600";
+  else if (delay >= 500) delayClass = "animation-delay-750";
+
+  return { project, tilt, delayClass };
+});
+---
+
+<section id={id} class="relative overflow-hidden animate-fade-in-up" aria-labelledby={`${id}-heading`}>
+  <div class="container mx-auto px-4 relative z-10">
+    <h3
+      id={`${id}-heading`}
+      class="text-2xl md:text-3xl font-bold font-serif mb-8 text-center md:text-left text-base-content"
+    >
+      {title}
+    </h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projectConfigs.map((config) => (
+        <div
+          class={`badge-tilt transition-transform duration-300 hover:rotate-1 ${config.delayClass}`}
+          style={`--badge-tilt: ${config.tilt}deg;`}
+        >
+          <ProjectCard {...config.project} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+

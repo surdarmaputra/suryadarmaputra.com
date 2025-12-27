@@ -1,0 +1,177 @@
+---
+interface Section {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+const sidebarId = `projects-sidebar-${Math.random().toString(36).substr(2, 9)}`;
+const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<nav
+  id={sidebarId}
+  class="hidden md:block sticky top-36 z-40 self-start"
+  aria-label="Projects navigation"
+>
+  <ul class="flex flex-col gap-2">
+    {sections.map((section) => (
+      <li>
+        <a
+          href={`#${section.id}`}
+          class="nav-link block px-2 py-1 text-sm font-medium text-base-content/70 hover:text-base-content hover:font-bold transition-all relative group"
+          data-section-id={section.id}
+        >
+          <span class="relative">
+            {section.label}
+            <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-base-content transition-all duration-300 group-hover:w-full"></span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<nav
+  id={mobileNavId}
+  class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-base-100/90 backdrop-blur-sm border-t border-base-300 shadow-lg"
+  aria-label="Projects navigation"
+>
+  <ul class="flex overflow-x-auto gap-2 px-4 py-3 scrollbar-hide">
+    {sections.map((section) => (
+      <li class="flex-shrink-0">
+        <a
+          href={`#${section.id}`}
+          class="nav-link block px-4 py-2 rounded-md text-sm font-medium text-base-content/70 hover:text-base-content hover:font-bold transition-all relative whitespace-nowrap group"
+          data-section-id={section.id}
+        >
+          <span class="relative">
+            {section.label}
+            <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-base-content transition-all duration-300 group-hover:w-full"></span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script define:vars={{ sidebarId, mobileNavId }}>
+  // Smooth scroll to sections
+  function initSmoothScroll() {
+    const desktopNav = document.getElementById(sidebarId);
+    const mobileNav = document.getElementById(mobileNavId);
+    
+    const desktopLinks = desktopNav ? desktopNav.querySelectorAll('.nav-link') : [];
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll('.nav-link') : [];
+    const allLinks = [...desktopLinks, ...mobileLinks];
+    
+    allLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth',
+            });
+          }
+        }
+      });
+    });
+  }
+  
+  // Active section detection using Intersection Observer
+  let currentObserver = null;
+  
+  function initActiveSection() {
+    const sections = document.querySelectorAll('section[id]');
+    const desktopNav = document.getElementById(sidebarId);
+    const mobileNav = document.getElementById(mobileNavId);
+    
+    const desktopLinks = desktopNav ? desktopNav.querySelectorAll('.nav-link') : [];
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll('.nav-link') : [];
+    const allLinks = [...desktopLinks, ...mobileLinks];
+    
+    if (sections.length === 0 || allLinks.length === 0) return;
+    
+    // Disconnect previous observer if exists
+    if (currentObserver) {
+      currentObserver.disconnect();
+    }
+    
+    // Use different rootMargin for mobile vs desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: isMobile ? '-100px 0px -60% 0px' : '-80px 0px -50% 0px',
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          
+          // Update active nav link
+          allLinks.forEach((link) => {
+            const linkSectionId = link.getAttribute('data-section-id');
+            const underline = link.querySelector('.nav-underline');
+            if (linkSectionId === sectionId) {
+              link.classList.add('font-bold', 'text-base-content');
+              link.classList.remove('text-base-content/70');
+              if (underline) {
+                underline.classList.add('w-full');
+                underline.classList.remove('w-0');
+              }
+            } else {
+              link.classList.remove('font-bold', 'text-base-content');
+              link.classList.add('text-base-content/70');
+              if (underline) {
+                underline.classList.remove('w-full');
+                underline.classList.add('w-0');
+              }
+            }
+          });
+        }
+      });
+    }, observerOptions);
+    
+    currentObserver = observer;
+    
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initSmoothScroll();
+      initActiveSection();
+    });
+  } else {
+    initSmoothScroll();
+    initActiveSection();
+  }
+</script>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+

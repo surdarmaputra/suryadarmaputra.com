@@ -1,14 +1,7 @@
 ---
 import Button from "../../core/components/base/button.astro";
-import ProjectCard from "./project-card.astro";
-
-interface Project {
-  thumbnail?: string;
-  title: string;
-  description: string;
-  learnMoreLink?: string;
-  previewLink?: string;
-}
+import ProjectCard from "../../project/components/project-card.astro";
+import type { Project } from "../../project/types";
 
 interface Props {
   projects: Project[];
