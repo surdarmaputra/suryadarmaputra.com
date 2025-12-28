@@ -1,0 +1,185 @@
+---
+import ArticleDetailsPage from "../../modules/article/pages/article-details-page.astro";
+
+export async function getStaticPaths() {
+  // Mock article slugs - in real implementation, this would come from a data source
+  const slugs = [
+    "getting-started-with-astro",
+    "module-based-architecture",
+    "building-with-daisyui",
+  ];
+
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Mock article data - in real implementation, this would come from a data source
+const mockArticles: Record<
+  string,
+  {
+    title: string;
+    date: string;
+    minsRead: number;
+    content: Array<{
+      type: "paragraph" | "image" | "bullet-list";
+      paragraph?: string;
+      image?: string;
+      alt?: string;
+      bullets?: string[];
+    }>;
+    categories: string[];
+    previousArticle?: { title: string; slug: string };
+    nextArticle?: { title: string; slug: string };
+  }
+> = {
+  "getting-started-with-astro": {
+    title: "Getting Started with Astro",
+    date: "2024-01-15",
+    minsRead: 5,
+    content: [
+      {
+        type: "paragraph",
+        paragraph:
+          "Astro is a modern static site generator that allows you to build fast, content-focused websites. It's designed to ship less JavaScript to the browser, resulting in faster page loads and better performance.",
+      },
+      {
+        type: "image",
+        image: "https://placehold.co/800x450/4A5568/FFFFFF?text=Astro+Framework",
+        alt: "Astro framework logo and interface",
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "One of the key features of Astro is its component islands architecture. This allows you to use any framework (React, Vue, Svelte, etc.) for interactive components while keeping the rest of your site as static HTML.",
+      },
+      {
+        type: "bullet-list",
+        bullets: [
+          "Zero JavaScript by default - only add interactivity where needed",
+          "Component islands architecture for optimal performance",
+          "Built-in support for multiple frameworks",
+          "Excellent developer experience with TypeScript support",
+        ],
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "Getting started with Astro is straightforward. You can create a new project using the Astro CLI, and within minutes, you'll have a working static site ready for deployment.",
+      },
+    ],
+    categories: ["Web Development", "Astro", "Static Sites"],
+    nextArticle: {
+      title: "Understanding Module-Based Architecture",
+      slug: "module-based-architecture",
+    },
+  },
+  "module-based-architecture": {
+    title: "Understanding Module-Based Architecture",
+    date: "2024-01-10",
+    minsRead: 8,
+    content: [
+      {
+        type: "paragraph",
+        paragraph:
+          "Module-based architecture is a software design pattern that organizes code into self-contained, reusable modules. Each module has a specific responsibility and can be developed, tested, and maintained independently.",
+      },
+      {
+        type: "image",
+        image: "https://placehold.co/800x450/2D3748/FFFFFF?text=Module+Architecture",
+        alt: "Diagram showing module-based architecture structure",
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "This approach offers several benefits, including better code organization, improved maintainability, and easier collaboration among team members. Each module can be thought of as a building block that contributes to the overall system.",
+      },
+      {
+        type: "bullet-list",
+        bullets: [
+          "Improved code organization and structure",
+          "Better separation of concerns",
+          "Easier testing and debugging",
+          "Enhanced reusability across projects",
+          "Simplified team collaboration",
+        ],
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "When implementing module-based architecture, it's important to define clear interfaces between modules and establish consistent patterns for communication and data flow.",
+      },
+    ],
+    categories: ["Architecture", "Software Design", "Best Practices"],
+    previousArticle: {
+      title: "Getting Started with Astro",
+      slug: "getting-started-with-astro",
+    },
+    nextArticle: {
+      title: "Building with DaisyUI",
+      slug: "building-with-daisyui",
+    },
+  },
+  "building-with-daisyui": {
+    title: "Building with DaisyUI",
+    date: "2024-01-05",
+    minsRead: 6,
+    content: [
+      {
+        type: "paragraph",
+        paragraph:
+          "DaisyUI is a component library built on top of Tailwind CSS that provides beautiful, accessible UI components out of the box. It's designed to work seamlessly with Tailwind's utility-first approach while adding semantic component classes.",
+      },
+      {
+        type: "image",
+        image: "https://placehold.co/800x450/1A202C/FFFFFF?text=DaisyUI+Components",
+        alt: "DaisyUI component examples",
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "One of the main advantages of DaisyUI is its theming system. You can easily customize the look and feel of your application by adjusting theme variables, and it supports multiple built-in themes including light and dark modes.",
+      },
+      {
+        type: "bullet-list",
+        bullets: [
+          "Built on Tailwind CSS for consistency",
+          "Accessible components by default",
+          "Easy theming and customization",
+          "Multiple built-in themes",
+          "Active community and regular updates",
+        ],
+      },
+      {
+        type: "paragraph",
+        paragraph:
+          "Getting started with DaisyUI is as simple as installing it via npm and adding it to your Tailwind configuration. Once set up, you can use component classes like `btn`, `card`, and `modal` to quickly build beautiful interfaces.",
+      },
+    ],
+    categories: ["UI Design", "Tailwind CSS", "Components"],
+    previousArticle: {
+      title: "Understanding Module-Based Architecture",
+      slug: "module-based-architecture",
+    },
+  },
+};
+
+const articleData = mockArticles[slug || ""];
+
+if (!articleData) {
+  return Astro.redirect("/articles");
+}
+---
+
+<ArticleDetailsPage
+  title={articleData.title}
+  date={articleData.date}
+  minsRead={articleData.minsRead}
+  content={articleData.content}
+  categories={articleData.categories}
+  previousArticle={articleData.previousArticle}
+  nextArticle={articleData.nextArticle}
+/>
+

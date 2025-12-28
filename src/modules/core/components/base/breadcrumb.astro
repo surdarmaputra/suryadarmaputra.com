@@ -15,11 +15,11 @@ const { items } = Astro.props;
   <div class="breadcrumbs">
     <ul>
       {items.map((item, index) => (
-        <li>
+        <li class="max-w-32 md:max-w-none">
           {item.href ? (
-            <a href={item.href}>{item.label}</a>
+            <a href={item.href} class="truncate block">{item.label}</a>
           ) : (
-            <span class={index === items.length - 1 ? "font-bold" : ""}>{item.label}</span>
+            <span class={`truncate block ${index === items.length - 1 ? "font-bold" : ""}`}>{item.label}</span>
           )}
         </li>
       ))}
