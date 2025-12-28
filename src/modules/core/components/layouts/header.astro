@@ -40,7 +40,7 @@ const navItems = [
       </div>
       
       <button
-        class="md:hidden btn btn-ghost btn-sm relative z-[60]"
+        class="md:hidden btn btn-ghost btn-sm relative z-60"
         id="mobile-menu-toggle"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
@@ -95,14 +95,12 @@ const navItems = [
     </ul>
   </nav>
 </div>
-  </nav>
-</header>
 
 <script>
   import { initAfterNavigation } from "../../utils/ui-utils";
   
   // Store cleanup functions
-  let cleanupFunctions = [];
+  let cleanupFunctions: (() => void)[] = [];
   
   function initHeader() {
     // Clean up previous listeners
@@ -188,7 +186,7 @@ const navItems = [
     };
     
     // Toggle click handler
-    const toggleHandler = (e) => {
+    const toggleHandler = (e: Event) => {
       e.stopPropagation();
       if (isMenuOpen) {
         closeMenu();
@@ -200,7 +198,7 @@ const navItems = [
     cleanupFunctions.push(() => toggle.removeEventListener('click', toggleHandler));
     
     // Overlay click handler
-    const overlayHandler = (e) => {
+    const overlayHandler = (e: Event) => {
       if (e.target === overlay) {
         closeMenu();
       }
@@ -217,7 +215,7 @@ const navItems = [
     });
     
     // Escape key handler
-    const escapeHandler = (e) => {
+    const escapeHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMenuOpen) {
         closeMenu();
       }
@@ -236,8 +234,7 @@ const navItems = [
     let isTransitioning = false;
     
     // Function to update underline position using transform for better performance
-    // @ts-ignore
-    const updateUnderline = (targetLink, immediate = false) => {
+    const updateUnderline = (targetLink: HTMLElement, immediate = false) => {
       if (isTransitioning && !immediate) return;
       
       const navContainer = desktopNav;
@@ -272,20 +269,20 @@ const navItems = [
     navLinks.forEach((link, index) => {
       if (link.getAttribute('aria-current') === 'page') {
         activeIndex = index;
-        updateUnderline(link, true);
+        updateUnderline(link as HTMLElement, true);
       }
       
       // Handle hover
       link.addEventListener('mouseenter', () => {
         hoveredIndex = index;
-        updateUnderline(link);
+        updateUnderline(link as HTMLElement);
       });
       
       // Handle mouse leave - return to active if exists
       link.addEventListener('mouseleave', () => {
         hoveredIndex = -1;
         if (activeIndex >= 0) {
-          updateUnderline(navLinks[activeIndex]);
+          updateUnderline(navLinks[activeIndex] as HTMLElement);
         } else {
           navUnderline.style.opacity = '0';
         }
@@ -298,8 +295,7 @@ const navItems = [
     }
     
     // Handle window resize to reposition underline
-    // @ts-ignore
-    let resizeTimeout = undefined;
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
     const resizeHandler = () => {
       if (resizeTimeout !== undefined) {
         clearTimeout(resizeTimeout);
@@ -307,7 +303,7 @@ const navItems = [
       resizeTimeout = setTimeout(() => {
         const targetIndex = hoveredIndex >= 0 ? hoveredIndex : activeIndex;
         if (targetIndex >= 0) {
-          updateUnderline(navLinks[targetIndex], true);
+          updateUnderline(navLinks[targetIndex] as HTMLElement, true);
         }
       }, 100);
     };
@@ -318,7 +314,7 @@ const navItems = [
     // Smooth scroll for anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach((anchor) => {
-      const anchorHandler = (e) => {
+      const anchorHandler = (e: Event) => {
         const href = anchor.getAttribute('href');
         if (href && href !== '#') {
           const target = document.querySelector(href);
