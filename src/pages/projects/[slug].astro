@@ -1,0 +1,106 @@
+---
+import ProjectDetailsPage from "../../modules/project/pages/project-details-page.astro";
+import type { Project } from "../../modules/project/types";
+
+export async function getStaticPaths() {
+  // Mock project slugs - in real implementation, this would come from a data source
+  const slugs = ["project-one", "project-two"];
+
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Mock project data - in real implementation, this would come from a data source
+const mockProjects: Record<
+  string,
+  {
+    title: string;
+    previewLink?: string;
+    content: Array<{ image?: string; paragraph: string }>;
+    tags: string[];
+    relatedProjects: Project[];
+  }
+> = {
+  "project-one": {
+    title: "Project One",
+    previewLink: "https://example.com/project-one",
+    content: [
+      {
+        image: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+One+Image+1",
+        paragraph:
+          "This is the first paragraph describing the project. It provides an overview of what the project is about and its main objectives.",
+      },
+      {
+        paragraph:
+          "This is the second paragraph with more detailed information about the project implementation, technologies used, and key features.",
+      },
+      {
+        image: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+One+Image+2",
+        paragraph:
+          "This is the third paragraph discussing the results, impact, and lessons learned from the project.",
+      },
+    ],
+    tags: ["React", "TypeScript", "Node.js", "MongoDB", "AWS"],
+    relatedProjects: [
+      {
+        thumbnail: "https://placehold.co/800x450/2D3748/FFFFFF?text=Project+Two",
+        title: "Project Two",
+        description:
+          "An open-source library for data visualization, making complex charts simple and accessible.",
+        learnMoreLink: "/projects/project-two",
+        previewLink: "https://example.com/project-two",
+      },
+      {
+        thumbnail: "https://placehold.co/800x450/1A202C/FFFFFF?text=Project+Three",
+        title: "Project Three",
+        description:
+          "A full-stack application with Node.js backend and modern frontend, showcasing best practices.",
+        learnMoreLink: "/projects/project-three",
+        previewLink: "https://example.com/project-three",
+      },
+    ],
+  },
+  "project-two": {
+    title: "Project Two",
+    content: [
+      {
+        image: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+Two+Image+1",
+        paragraph:
+          "This is a description of Project Two. It showcases different aspects of the project and its unique features.",
+      },
+      {
+        paragraph: "Additional details about Project Two's implementation and technical stack.",
+      },
+    ],
+    tags: ["Python", "Django", "PostgreSQL", "Docker"],
+    relatedProjects: [
+      {
+        thumbnail: "https://placehold.co/800x450/4A5568/FFFFFF?text=Project+One",
+        title: "Project One",
+        description:
+          "A modern web application built with React and TypeScript, featuring real-time updates and responsive design.",
+        learnMoreLink: "/projects/project-one",
+        previewLink: "https://example.com/project-one",
+      },
+    ],
+  },
+};
+
+const projectData = mockProjects[slug || ""];
+
+if (!projectData) {
+  return Astro.redirect("/projects");
+}
+---
+
+<ProjectDetailsPage
+  title={projectData.title}
+  previewLink={projectData.previewLink}
+  content={projectData.content}
+  tags={projectData.tags}
+  relatedProjects={projectData.relatedProjects}
+/>
+

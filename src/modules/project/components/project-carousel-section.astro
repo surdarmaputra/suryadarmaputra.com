@@ -1,14 +1,7 @@
 ---
 import Ornament from "../../core/components/base/ornament.astro";
+import type { Project } from "../types";
 import ProjectCarousel from "./project-carousel.astro";
-
-interface Project {
-  thumbnail?: string;
-  title: string;
-  description: string;
-  learnMoreLink?: string;
-  previewLink?: string;
-}
 
 interface Props {
   projects: Project[];

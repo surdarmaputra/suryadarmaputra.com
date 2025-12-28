@@ -1,0 +1,159 @@
+---
+import Breadcrumb from "../../core/components/base/breadcrumb.astro";
+import Button from "../../core/components/base/button.astro";
+import Ornament from "../../core/components/base/ornament.astro";
+import Footer from "../../core/components/layouts/footer.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
+import ProjectCarousel from "../components/project-carousel.astro";
+import type { Project } from "../types";
+
+interface ContentItem {
+  image?: string;
+  paragraph: string;
+}
+
+interface Props {
+  title: string;
+  previewLink?: string;
+  content: ContentItem[];
+  tags: string[];
+  relatedProjects: Project[];
+}
+
+const { title, previewLink, content, tags, relatedProjects } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: title },
+];
+
+// Generate tilt angles for tags
+const tagConfigs = tags.map((tag, index) => {
+  const tilt = generateRandomElementTiltAngle(index, 3);
+  const colors = [
+    "badge-primary",
+    "badge-secondary",
+    "badge-accent",
+    "badge-neutral",
+    "badge-info",
+    "badge-success",
+  ];
+  const color = colors[index % colors.length];
+  return { tag, tilt, color };
+});
+---
+
+<PageLayout title={title} description={`${title} project details`} currentPath={currentPath}>
+  <div class="relative min-h-screen">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <Ornament variant="circle" size="md" color="accent" position="top-left" />
+      <Ornament variant="dots" size="md" color="primary" position="top-right" />
+      <Ornament variant="square" size="lg" color="secondary" position="center" />
+    </div>
+
+    <div class="container mx-auto px-4 py-12 md:py-28 relative z-10">
+      <!-- Breadcrumb -->
+      <div class="mb-1 flex justify-center">
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
+
+      <!-- Page Title -->
+      <h1 class={`text-6xl md:text-7xl lg:text-8xl font-bold font-serif text-center text-base-content animate-fade-in-up${!previewLink ? " mb-20 md:mb-28" : ""}`}>
+        {title}
+      </h1>
+
+      <!-- Preview Button -->
+      {previewLink && (
+        <div class="flex justify-center mb-20 md:mb-28 mt-8">
+          <Button
+            href={previewLink}
+            variant="outline"
+            size="sm"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover-scale transition-transform"
+          >
+            <svg
+              class="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+            Preview Project
+          </Button>
+        </div>
+      )}
+
+      <!-- Content Sections -->
+      <div class="max-w-4xl mx-auto space-y-12 mb-16">
+        {content.map((item, index) => {
+          const delay = index * 100;
+          let delayClass = "animation-delay-0";
+          if (delay === 100) delayClass = "animation-delay-150";
+          else if (delay === 200) delayClass = "animation-delay-300";
+          else if (delay === 300) delayClass = "animation-delay-450";
+          else if (delay === 400) delayClass = "animation-delay-600";
+          else if (delay >= 500) delayClass = "animation-delay-750";
+
+          return (
+            <div class={`animate-fade-in-up ${delayClass}`}>
+              {item.image && (
+                <figure class="mb-6 border-4 border-neutral rounded-lg shadow-lg overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={`${title} - Image ${index + 1}`}
+                    class="w-full"
+                  />
+                </figure>
+              )}
+              <p class="text-base-content leading-relaxed">{item.paragraph}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Tags Section -->
+      <div class="max-w-4xl mx-auto my-16">
+        <h2 class="text-2xl md:text-3xl font-bold font-serif mb-6 text-base-content">Tags</h2>
+        <div class="flex flex-wrap gap-4">
+          {tagConfigs.map((config) => (
+            <span
+              class={`badge badge-lg ${config.color} badge-tilt transition-transform duration-300 hover:rotate-1`}
+              style={`--badge-tilt: ${config.tilt}deg;`}
+            >
+              {config.tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Related Projects Carousel -->
+      {relatedProjects.length > 0 && (
+        <section class="max-w-6xl mx-auto mt-24 md:mt-36" aria-labelledby="related-projects-heading">
+          <h2
+            id="related-projects-heading"
+            class="text-4xl md:text-5xl font-bold font-serif mb-12 text-center text-base-content"
+          >
+            Explore more projects
+          </h2>
+          <ProjectCarousel projects={relatedProjects} />
+        </section>
+      )}
+    </div>
+  </div>
+
+  <Footer />
+</PageLayout>
+
