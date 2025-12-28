@@ -4,9 +4,8 @@
 .astro/
 /.cache
 /dist
-/extras/**
-/posts/**
-/public/images/posts/**
+/src/_generated/**
+/public/images/articles/**
 /public/images/projects/**
 node_modules
 .biome

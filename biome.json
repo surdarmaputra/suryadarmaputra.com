@@ -15,7 +15,8 @@
       "!**/.cache",
       "!**/build",
       "!**/bun.lock",
-      "!**/v2-archive"
+      "!**/v2-archive",
+      "!**/scripts"
     ]
   },
   "formatter": {

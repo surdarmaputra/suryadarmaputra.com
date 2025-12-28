@@ -9,11 +9,25 @@
     "astro": "astro",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "commitlint": "commitlint"
+    "commitlint": "commitlint",
+    "generate": "bun run generate:articles && bun run generate:projects",
+    "generate:articles": "bun scripts/fetch-articles.ts",
+    "generate:projects": "bun scripts/fetch-projects.ts",
+    "sync": "bun scripts/sync-with-notion.ts"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.15",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.6"
+    "@types/lodash": "^4.17.21",
+    "@types/xml2js": "^0.4.14",
+    "astro": "^5.16.6",
+    "canvas": "^3.0.0-rc3",
+    "dotenv": "^16.4.7",
+    "image-js": "^0.35.6",
+    "lodash": "^4.17.21",
+    "reading-time": "^1.5.0",
+    "undici": "^7.1.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",

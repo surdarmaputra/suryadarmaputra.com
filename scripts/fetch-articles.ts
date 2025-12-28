@@ -1,0 +1,114 @@
+import dotenv from 'dotenv';
+import fs from 'fs/promises';
+import { kebabCase } from 'lodash';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
+
+/* eslint-disable import/first */
+import { Image } from 'image-js';
+import { request } from 'undici';
+
+import {
+  type BlockWithChildren,
+  getExcerpt,
+  getFileExtensionFromUrl,
+  getProperties,
+  getTitle,
+  regroupListItems,
+} from '../src/modules/core/libs/notion';
+import { getBlockChildren } from '../src/modules/core/libs/notion/client';
+import { calculateReadingTime } from '../src/modules/core/libs/notion/utils';
+
+import { fetchArticles } from './utils';
+/* eslint-enable import/first */
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface PageData {
+  blocks: BlockWithChildren[] | [];
+  excerpt: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  properties: Record<string, any>;
+  readingTime: string;
+  title: string | null;
+}
+
+const articlesDirectory = path.resolve(__dirname, '../src/_generated/data/articles');
+const imagesDirectory = path.resolve(__dirname, '../public/images/articles');
+
+async function fetchImage(url: string, filename: string): Promise<void> {
+  const { body } = await request(url);
+  const imageData = await body.arrayBuffer();
+  const imageBuffer = Buffer.from(imageData);
+
+  const extension = getFileExtensionFromUrl(url);
+  const outputFile = `${imagesDirectory}/${filename}.${extension}`;
+  const placeholderFile = `${imagesDirectory}/${filename}-placeholder.png`;
+  const placeholderRaw = await Image.load(imageBuffer);
+  const placeholderData = placeholderRaw.resize({ width: 50 }).toBuffer();
+
+  await fs.writeFile(outputFile, imageBuffer);
+  await fs.writeFile(placeholderFile, placeholderData);
+}
+
+async function fetchImages(blocks: BlockWithChildren[]): Promise<void> {
+  for (const { block, children } of blocks) {
+    if ('type' in block && block.type !== 'image') {
+      if (children?.length) {
+        await fetchImages(children);
+      } else {
+        continue;
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const url = block.image?.file?.url || null;
+    if (!url) continue;
+
+    const fileName = block.id;
+    await fetchImage(url, fileName);
+
+    if (children?.length) {
+      await fetchImages(children);
+    }
+  }
+}
+
+export async function run(): Promise<void> {
+  const rawPages = await fetchArticles();
+
+  await fs.rm(articlesDirectory, { force: true, recursive: true });
+  await fs.mkdir(articlesDirectory, { recursive: true });
+
+  await fs.rm(imagesDirectory, { force: true, recursive: true });
+  await fs.mkdir(imagesDirectory, { recursive: true });
+
+  for (const page of rawPages) {
+    const title = getTitle(page);
+    const properties = getProperties(page);
+    const originalBlocks = await getBlockChildren(page.id);
+    const readingTime = calculateReadingTime(originalBlocks);
+    const blocks = regroupListItems(originalBlocks);
+    const excerpt = getExcerpt(blocks);
+    const pageData: PageData = {
+      title,
+      excerpt,
+      properties,
+      readingTime,
+      blocks,
+    };
+    const slug = title ? kebabCase(title) : null;
+    const filePath = path.join(articlesDirectory, `${slug}.json`);
+    await fetchImages(originalBlocks);
+    await fs.writeFile(filePath, JSON.stringify(pageData, null, 2));
+    // eslint-disable-next-line no-console
+    console.log('Generated: ', filePath);
+  }
+}
+
+run();
+
