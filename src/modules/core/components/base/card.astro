@@ -25,12 +25,18 @@ const {
 <article class={`card border-neutral border-4 bg-base-100 overflow-hidden ${className}`}>
   <slot name="header" />
   <div class={`card-body ${bodyClass}`}>
-    {date && <time class="text-sm text-base-content/50 mb-2">{date}</time>}
-    {title && <h3 class={`card-title ${titleClass} mb-3`}>{title}</h3>}
-    {description && <p class="text-base-content/80 mb-4 line-clamp-3">{description}</p>}
-    <slot />
+    {date && <time class="text-sm text-base-content/50 mb-2 shrink-0">{date}</time>}
+    {title && <h3 class={`card-title ${titleClass} mb-3 shrink-0`}>{title}</h3>}
+    {description && (
+      <p class="text-base-content/80 mb-4 line-clamp-3 overflow-hidden shrink-0 max-h-16">
+        {description}
+      </p>
+    )}
+    <div class="grow min-h-0">
+      <slot />
+    </div>
     {link && (
-      <div class="card-actions">
+      <div class="card-actions shrink-0">
         <a href={link} class="link no-underline" aria-label={`${linkText} - ${title || ""}`}>
           {linkText}
         </a>

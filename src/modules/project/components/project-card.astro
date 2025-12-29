@@ -17,7 +17,7 @@ const { thumbnail, title, description, learnMoreLink, previewLink } = Astro.prop
   title={title}
   description={description}
   class="hover-lift h-full flex flex-col group/project-card transition-all duration-300"
-  bodyClass="flex-grow"
+  bodyClass="flex-grow flex flex-col min-h-0"
   titleClass="font-serif text-2xl"
 >
   {thumbnail && (
@@ -32,7 +32,7 @@ const { thumbnail, title, description, learnMoreLink, previewLink } = Astro.prop
   )}
   <div slot="actions" class="card-actions justify-end gap-2">
     {previewLink && (
-      <Button href={previewLink} variant="outline" size="sm" class="hover-scale">
+      <Button href={previewLink} target="_blank" variant="outline" size="sm" class="hover-scale">
         Preview
       </Button>
     )}

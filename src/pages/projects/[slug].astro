@@ -1,10 +1,12 @@
 ---
 import ProjectDetailsPage from "../../modules/project/pages/project-details-page.astro";
+import { getProjects } from "../../modules/project/services/project-service";
 import type { Project } from "../../modules/project/types";
 
 export async function getStaticPaths() {
   // Mock project slugs - in real implementation, this would come from a data source
-  const slugs = ["project-one", "project-two"];
+  const projects = await getProjects();
+  const slugs = projects.map((project: Project) => project.title);
 
   return slugs.map((slug) => ({
     params: { slug },
