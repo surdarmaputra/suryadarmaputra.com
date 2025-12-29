@@ -15,6 +15,9 @@ export type Project = {
   learnMoreLink?: string;
   previewLink?: string;
   company?: string;
+  slug: string;
+  tags?: string[];
+  categories?: string[];
 };
 
 export type ProjectGroup = {

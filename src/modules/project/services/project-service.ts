@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { getTextFromProperties } from "../../core/libs/notion";
 import type { NotionProjectData, Project } from "../types";
 import { transformNotionDataToProject } from "../utils/project-utils";
 
@@ -24,7 +25,7 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   const projects = await getProjects();
-  return projects.find((project) => project.learnMoreLink === `/projects/${slug}`) || null;
+  return projects.find((project) => project.slug === slug) || null;
 }
 
 export async function getProjectById(id: string): Promise<Project | null> {
@@ -32,4 +33,15 @@ export async function getProjectById(id: string): Promise<Project | null> {
   const notionProject = notionProjects.find((project) => project.id === id);
   if (!notionProject) return null;
   return transformNotionDataToProject(notionProject);
+}
+
+export async function getNotionProjectDataBySlug(slug: string): Promise<NotionProjectData | null> {
+  const notionProjects = await loadProjectsData();
+
+  const notionProject = notionProjects.find((p) => {
+    const projectSlug = getTextFromProperties(p.properties, "slug") || p.id;
+    return projectSlug === slug;
+  });
+
+  return notionProject || null;
 }

@@ -1,7 +1,6 @@
 ---
+import Badge from "../../core/components/base/badge.astro";
 import Ornament from "../../core/components/base/ornament.astro";
-import SkillBadge from "../../core/components/base/skill-badge.astro";
-import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
 
 const title = "From Websites to All Things Tech";
 const subtitle = "Having extensive experience developing softwares across diverse technologies";
@@ -19,25 +18,6 @@ const skills = [
   "GraphQL",
   "PostgreSQL",
 ];
-
-// Generate random tilt angles and colors for badges
-const badgeConfigs = skills.map((_, index) => {
-  // Create slight random tilts (-8 to 8 degrees) that still feel balanced
-  const tilt = generateRandomElementTiltAngle(index);
-
-  // DaisyUI badge color variants
-  const colors = [
-    "badge-primary",
-    "badge-secondary",
-    "badge-info",
-    "badge-success",
-    "badge-warning",
-    "badge-error",
-  ];
-  const color = colors[index % colors.length];
-
-  return { skill: skills[index], tilt, color, delay: index * 100 };
-});
 ---
 
 <section id="experience" class="pt-16 pb-24 md:py-52 relative overflow-hidden" aria-labelledby="experience-heading">
@@ -56,13 +36,10 @@ const badgeConfigs = skills.map((_, index) => {
       </p>
       
       <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
-        {badgeConfigs.map((config) => (
-          <div
-            class="inline-block badge-tilt transition-transform duration-300 hover:rotate-6 active:rotate-6"
-            style={`--badge-tilt: ${config.tilt}deg;`}
-          >
-            <SkillBadge skill={config.skill} delay={config.delay} color={config.color} />
-          </div>
+        {skills.map((skill, index) => (
+          <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+            {skill}
+          </Badge>
         ))}
       </div>
     </div>

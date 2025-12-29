@@ -1,9 +1,9 @@
 ---
+import Badge from "../../core/components/base/badge.astro";
 import Breadcrumb from "../../core/components/base/breadcrumb.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
-import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
 
 interface ContentItem {
   type: "paragraph" | "image" | "bullet-list";
@@ -43,21 +43,6 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
   year: "numeric",
   month: "long",
   day: "numeric",
-});
-
-// Generate tilt angles for categories
-const categoryConfigs = categories.map((category, index) => {
-  const tilt = generateRandomElementTiltAngle(index, 3);
-  const colors = [
-    "badge-primary",
-    "badge-secondary",
-    "badge-accent",
-    "badge-neutral",
-    "badge-info",
-    "badge-success",
-  ];
-  const color = colors[index % colors.length];
-  return { category, tilt, color };
 });
 ---
 
@@ -130,13 +115,10 @@ const categoryConfigs = categories.map((category, index) => {
       {categories.length > 0 && (
         <div class="max-w-4xl mx-auto my-16">
           <div class="flex flex-wrap gap-4">
-            {categoryConfigs.map((config) => (
-              <span
-                class={`badge badge-lg ${config.color} badge-tilt transition-transform duration-300 hover:rotate-1`}
-                style={`--badge-tilt: ${config.tilt}deg;`}
-              >
-                {config.category}
-              </span>
+            {categories.map((category, index) => (
+              <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+                {category}
+              </Badge>
             ))}
           </div>
         </div>

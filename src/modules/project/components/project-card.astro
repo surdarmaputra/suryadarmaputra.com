@@ -1,4 +1,5 @@
 ---
+import Badge from "../../core/components/base/badge.astro";
 import Button from "../../core/components/base/button.astro";
 import Card from "../../core/components/base/card.astro";
 
@@ -8,9 +9,10 @@ interface Props {
   description: string;
   learnMoreLink?: string;
   previewLink?: string;
+  categories?: string[];
 }
 
-const { thumbnail, title, description, learnMoreLink, previewLink } = Astro.props;
+const { thumbnail, title, description, learnMoreLink, previewLink, categories } = Astro.props;
 ---
 
 <Card
@@ -29,6 +31,15 @@ const { thumbnail, title, description, learnMoreLink, previewLink } = Astro.prop
         loading="lazy"
       />
     </figure>
+  )}
+  {categories && categories.length > 0 && (
+    <div slot="after-title" class="mb-3 flex flex-wrap gap-2">
+      {categories.map((category, index) => (
+        <Badge variant="neutral" style="outline" itemIndex={index} size="sm">
+          {category}
+        </Badge>
+      ))}
+    </div>
   )}
   <div slot="actions" class="card-actions justify-end gap-2">
     {previewLink && (

@@ -42,6 +42,22 @@ export function transformNotionDataToProject(notionData: NotionProjectData): Pro
   // Get company name
   const company = properties.company?.name || undefined;
 
+  // Get tags - tags is an array of strings
+  // biome-ignore lint/suspicious/noExplicitAny: expected
+  const tagsArray = properties.tags as any[];
+  const tags =
+    Array.isArray(tagsArray) && tagsArray.length > 0
+      ? tagsArray.map((tag) => (typeof tag === "string" ? tag : String(tag)))
+      : undefined;
+
+  // Get categories - categories is an array of objects with name property
+  // biome-ignore lint/suspicious/noExplicitAny: expected
+  const categoriesArray = properties.categories as any[];
+  const categories =
+    Array.isArray(categoriesArray) && categoriesArray.length > 0
+      ? categoriesArray.map((cat) => cat?.name || String(cat)).filter(Boolean)
+      : undefined;
+
   return {
     thumbnail,
     title: title || "",
@@ -49,6 +65,9 @@ export function transformNotionDataToProject(notionData: NotionProjectData): Pro
     learnMoreLink,
     previewLink,
     company,
+    slug,
+    tags,
+    categories,
   };
 }
 
