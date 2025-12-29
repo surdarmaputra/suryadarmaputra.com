@@ -32,7 +32,7 @@ const { experience } = Astro.props;
   </div>
   
   <div class="space-y-4">
-    <p class="text-accent-content/80 leading-relaxed">{experience.description}</p>
+    <p class="text-accent-content/80 leading-relaxed" set:html={experience.description} />
     
     {experience.achievements && experience.achievements.length > 0 && (
       <div>

@@ -1,7 +1,9 @@
 ---
 import Button from "../../core/components/base/button.astro";
 import Ornament from "../../core/components/base/ornament.astro";
+import { getProjectsByCompany } from "../../project/services/project-service";
 import type { Project } from "../../project/types";
+import { formatWorkDuration } from "../utils/date-utils";
 import WorkExperienceItem from "./work-experience-item.astro";
 
 interface WorkExperience {
@@ -20,39 +22,73 @@ const { isDownloadResumeVisible = false } = Astro.props;
 
 const resumePdfUrl = "/resume.pdf";
 const title = "Work Experience";
-const experiences: WorkExperience[] = [
+
+// Experience data adapted from AboutPage.tsx
+const experienceData = [
   {
-    companyName: "Tech Company Inc.",
-    roles: [
-      { title: "Senior Developer", timeRange: "2020 - Present" },
-      { title: "Developer", timeRange: "2018 - 2020" },
-    ],
-    description:
-      "Led development of multiple web applications using modern technologies. Collaborated with cross-functional teams to deliver high-quality software solutions.",
-    achievements: [
-      "Improved application performance by 40% through optimization",
-      "Mentored junior developers and established coding standards",
-      "Led migration to microservices architecture",
-    ],
-    projects: [
-      {
-        title: "Enterprise Dashboard",
-        description: "Real-time analytics dashboard for business intelligence",
-        learnMoreLink: "/projects/enterprise-dashboard",
-      },
+    company: "GoTo Financial",
+    role: "Frontend Lead",
+    start: "2024-07-01",
+    end: null,
+    descriptions: [
+      "GoTo Financial provides wide range of financial services for consumers and merchants. I build and maintain web apps, mobile app, dashboards and frontend libraries to provide lending products across multiple mobile apps. Here I'm challenged to deal with a <strong>complex system</strong> that serves a <strong>huge traffic</strong>, finding balance between <strong>beating time-to-market</strong>, <strong>code quality</strong> and <strong>comply with regulations</strong>. Every steps we take will impacting a <strong>massive amount of users</strong> and affect company reputation as a publicly traded entity.",
     ],
   },
   {
-    companyName: "Startup Co.",
-    roles: [{ title: "Developer", timeRange: "2016 - 2018" }],
-    description:
-      "Built and maintained web applications from scratch. Worked in a fast-paced startup environment with agile methodologies.",
-    achievements: [
-      "Developed core features that increased user engagement by 60%",
-      "Implemented CI/CD pipeline reducing deployment time by 50%",
+    company: "Kargo Technologies",
+    role: "Senior Frontend Engineer",
+    start: "2021-06-01",
+    end: "2024-07-01",
+    descriptions: [
+      "Kargo provides transportation solutions, especially trucks, for first-mile, mid-mile and last-mile logistic. Here I experienced working at a <strong>fast-growing - early stage</strong> company. I contributed to <strong>core engineering</strong> and <strong>product engineering</strong> team. I initiated frontend testing, maintained NPM packages, optimized CI/CD, built and maintained dashboards, mobile webs, and mobile app, conducted A/B testing, optimized funnels, and integrated AI into our products.",
+    ],
+  },
+  {
+    company: "Bukalapak",
+    role: "Frontend Engineer",
+    start: "2018-07-01",
+    end: "2021-06-01",
+    descriptions: [
+      "Bukalapak offers financial solutions to increase customers' buying power and empower shop owners' business. I built <strong>web apps</strong> and <strong>dashboards</strong> to support lending business. This role marked my first venture into building products in a <strong>tech startup</strong> environment, gaining a ton of experiences I never thought before, including cloud infrastructure, architecture migration, being on-call engineer, and learn diverse tech stacks and workflows.",
+    ],
+  },
+  {
+    company: "Artcak Technology",
+    role: "Web Developer",
+    start: "2017-02-01",
+    end: "2018-07-01",
+    descriptions: [
+      "Artcak offers mobile and web development services across various industries, including tours and travel, internet providers, and state-owned enterprises. My responsibilities included developing <strong>REST APIs</strong>, <strong>web dashboards</strong>, <strong>project starters</strong>, <strong>API testing</strong>, and <strong>optimizing developer experience</strong>.",
+    ],
+  },
+  {
+    company: null,
+    role: "Freelance Web Developer",
+    start: "2015-11-01",
+    end: "2017-02-01",
+    descriptions: [
+      "This marked <strong>the beginning</strong> of my professional software development journey. During college, I took on <strong>freelance projects</strong> referred by friends and lecturers.",
     ],
   },
 ];
+
+// Fetch projects for each company and map to WorkExperience interface
+const experiences: WorkExperience[] = await Promise.all(
+  experienceData.map(async (exp) => {
+    const projects = exp.company ? await getProjectsByCompany(exp.company) : [];
+    return {
+      companyName: exp.company || "Freelance",
+      roles: [
+        {
+          title: exp.role,
+          timeRange: formatWorkDuration(exp.start, exp.end),
+        },
+      ],
+      description: exp.descriptions.join(" "),
+      projects: projects.length > 0 ? projects : undefined,
+    };
+  })
+);
 ---
 
 <section class="py-24 md:py-36 relative overflow-hidden bg-base-200/20" aria-labelledby="work-heading">
