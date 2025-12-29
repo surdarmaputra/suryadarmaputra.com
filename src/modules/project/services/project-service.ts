@@ -45,3 +45,11 @@ export async function getNotionProjectDataBySlug(slug: string): Promise<NotionPr
 
   return notionProject || null;
 }
+
+export async function getProjectsByCompany(company?: string): Promise<Project[]> {
+  const allProjects = await getProjects();
+  if (!company || company.toLowerCase() === "personal") {
+    return allProjects.filter((p) => !p.company || p.company.toLowerCase() === "personal");
+  }
+  return allProjects.filter((p) => p.company && p.company.toLowerCase() === company.toLowerCase());
+}
