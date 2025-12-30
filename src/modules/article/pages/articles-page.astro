@@ -1,5 +1,4 @@
 ---
-import Footer from "../../core/components/layouts/footer.astro";
 import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
 import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
@@ -14,14 +13,12 @@ const currentPath = Astro.url.pathname;
   title="Articles"
   description="Articles and blog posts"
   currentPath={currentPath}
-  mainClass="container mx-auto py-12 md:py-28 relative z-10"
+  mainClass="container max-w-5xl mx-auto px-4 py-12 md:py-28 relative z-10"
 >
   <OrnamentWrapper>
     <PageHeader title="Articles" size="large" align="center" animate />
-    <ArticleListSection articles={articles} customWrapperClass="pt-0" />
+    <ArticleListSection articles={articles} />
   </OrnamentWrapper>
-
-  <Footer />
 </PageLayout>
 
 <script>

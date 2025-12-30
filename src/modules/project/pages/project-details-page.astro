@@ -1,7 +1,6 @@
 ---
 import Badge from "../../core/components/base/badge.astro";
 import Button from "../../core/components/base/button.astro";
-import Footer from "../../core/components/layouts/footer.astro";
 import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
 import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
@@ -34,7 +33,7 @@ const breadcrumbItems = [
   title={title}
   description={`${title} project details`}
   currentPath={currentPath}
-  mainClass="container mx-auto px-4 py-12 md:py-28 relative z-10"
+  mainClass="container max-w-5xl mx-auto px-4 py-12 md:py-28 relative z-10"
 >
   <OrnamentWrapper>
     <PageHeader
@@ -123,9 +122,6 @@ const breadcrumbItems = [
           <ProjectCarousel projects={relatedProjects} />
         </section>
       )}
-    </div>
-  </div>
-
-  <Footer />
+  </OrnamentWrapper>
 </PageLayout>
 

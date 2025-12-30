@@ -1,7 +1,6 @@
 ---
 import ArticleListSection from "../../article/components/article-list-section.astro";
 import { getArticles } from "../../article/services/article-service";
-import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import ProjectCarouselSection from "../../project/components/project-carousel-section.astro";
 import { getProjectsByCompany } from "../../project/services/project-service";
@@ -33,8 +32,6 @@ const currentPath = Astro.url.pathname;
   <ArticleListSection articles={articles} title="Articles" />
   
   <SocialLinksSection />
-  
-  <Footer />
 </PageLayout>
 
 <script>

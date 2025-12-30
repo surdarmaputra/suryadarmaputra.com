@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import "../../styles/global.css";
+import Footer from "./footer.astro";
 import Header from "./header.astro";
 
 interface Props {
@@ -35,7 +36,7 @@ const { title = "", description = "Personal website", currentPath, mainClass } =
     <main class={mainClass}>
       <slot />
     </main>
-    <slot name="footer" />
+    <Footer />
   </body>
 </html>
 

@@ -94,7 +94,7 @@ const experiences: WorkExperience[] = await Promise.all(
 <section class="py-24 md:py-36 relative overflow-hidden bg-base-200/20" aria-labelledby="work-heading">
   <Ornament variant="square" size="lg" color="accent" position="bottom-left" />
   
-  <div class="container mx-auto px-4 relative z-10">
+  <div class="container max-w-5xl mx-auto px-4 relative z-10">
     <h2
       id="work-heading"
       class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-accent-content animate-fade-in-up"
@@ -102,7 +102,7 @@ const experiences: WorkExperience[] = await Promise.all(
       {title}
     </h2>
     
-    <div class="max-w-4xl mx-auto flex flex-col gap-16">
+    <div class="flex flex-col gap-16">
       {experiences.map((experience) => (
         <WorkExperienceItem experience={experience} />
       ))}
