@@ -1,4 +1,5 @@
 ---
+import { Code as AstroCode } from "astro:components";
 import { concatPlainTexts } from "../renderer-utils";
 import type { BlockWithChildren, RichTextBlock } from "../types";
 
@@ -20,7 +21,10 @@ const richTexts = (codeBlock?.rich_text || []) as any[];
 const codeText = concatPlainTexts(richTexts);
 ---
 
-<pre class="my-8 overflow-x-auto rounded-lg bg-base-300 p-4 md:p-6 border border-base-content/10">
-  <code class={`text-sm md:text-base font-mono language-${language}`}>{codeText}</code>
-</pre>
+<AstroCode 
+  lang={language} 
+  code={codeText} 
+  class="my-2 md:my-4 p-2 border-4 border-neutral rounded-lg shadow-lg" 
+  theme="aurora-x"
+/>
 

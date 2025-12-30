@@ -1,4 +1,5 @@
 ---
+import { Code as AstroCode } from "astro:components";
 import { hasAnnotation } from "../renderer-utils";
 import type { RichTextBlock } from "../types";
 
@@ -34,7 +35,7 @@ const classString = annotationClasses.length > 0 ? annotationClasses.join(" ") :
     {annotations.code ? <code>{plainText}</code> : plainText}
   </a>
 ) : annotations.code ? (
-  <code class={classString}>{plainText}</code>
+  <AstroCode code={plainText} inline={true} class={`${classString} py-0.5 px-1 text-sm rounded-md`} />
 ) : hasFormatting ? (
   <span class={classString}>{plainText}</span>
 ) : (
