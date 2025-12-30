@@ -4,7 +4,6 @@ import {
   getNotionProjectDataBySlug,
   getProjects,
 } from "../../modules/project/services/project-service";
-import { transformBlocksToContent } from "../../modules/project/utils/project-content-utils";
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -35,11 +34,6 @@ if (!project) {
   return Astro.redirect("/projects");
 }
 
-// Transform blocks to content items
-const content = notionProjectData.blocks
-  ? transformBlocksToContent(notionProjectData.blocks, notionProjectData.id)
-  : [];
-
 // Get related projects (exclude current project, randomize, limit to 9)
 const filteredProjects = projects.filter((p) => p.slug !== slug);
 const shuffledProjects = [...filteredProjects].sort(() => Math.random() - 0.5);
@@ -49,7 +43,8 @@ const relatedProjects = shuffledProjects.slice(0, 9);
 <ProjectDetailsPage
   title={project.title}
   previewLink={project.previewLink}
-  content={content}
+  blocks={notionProjectData.blocks || []}
+  projectId={notionProjectData.id}
   tags={project.tags || []}
   relatedProjects={relatedProjects}
   categories={project.categories}

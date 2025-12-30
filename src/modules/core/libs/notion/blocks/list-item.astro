@@ -1,0 +1,39 @@
+---
+import { getBlockRichText } from "../renderer-utils";
+import type { BlockWithChildren } from "../types";
+import RichText from "./rich-text.astro";
+
+interface Props {
+  block: BlockWithChildren["block"];
+  children?: BlockWithChildren[];
+  imageBasePath: string;
+  imageIdPrefix?: string;
+  renderChildren?: typeof import("../blocks-renderer.astro").default;
+}
+
+const { block, children, imageBasePath, imageIdPrefix, renderChildren } = Astro.props;
+
+// Assign to capitalized variable for Astro to recognize as component
+const RenderChildren = renderChildren;
+
+if (!("type" in block)) {
+  return null;
+}
+
+const isListItem = block.type === "bulleted_list_item" || block.type === "numbered_list_item";
+if (!isListItem) {
+  return null;
+}
+
+const richTexts = getBlockRichText(block);
+---
+
+<li class="pl-2">
+  {richTexts.map((richTextBlock) => (
+    <RichText block={richTextBlock} />
+  ))}
+  {children && children.length > 0 && RenderChildren && (
+    <RenderChildren blocks={children} imageBasePath={imageBasePath} imageIdPrefix={imageIdPrefix} />
+  )}
+</li>
+

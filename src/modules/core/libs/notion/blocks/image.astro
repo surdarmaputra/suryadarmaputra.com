@@ -1,0 +1,54 @@
+---
+import { getImageAltText, getImageExtension } from "../renderer-utils";
+import type { BlockWithChildren } from "../types";
+import RichText from "./rich-text.astro";
+
+interface Props {
+  block: BlockWithChildren["block"];
+  imageBasePath: string;
+  imageIdPrefix?: string;
+  imageIndex?: number;
+}
+
+const { block, imageBasePath, imageIdPrefix, imageIndex } = Astro.props;
+
+if (!("type" in block) || block.type !== "image") {
+  return null;
+}
+
+// Get image extension
+const extension = getImageExtension(block);
+if (!extension) {
+  return null;
+}
+
+// Build image path
+// Articles: /images/articles/{block.id}.{ext}
+// Projects: /images/projects/{imageIdPrefix}-{imageIndex}.{ext}
+const imagePath =
+  imageIdPrefix && imageIndex !== undefined
+    ? `${imageBasePath}/${imageIdPrefix}-${imageIndex}.${extension}`
+    : `${imageBasePath}/${block.id}.${extension}`;
+
+const altText = getImageAltText(block);
+
+// Get caption
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const caption = (block.image as any)?.caption || [];
+---
+
+<figure class="my-4 md:my-6 border-4 border-neutral rounded-lg shadow-lg overflow-hidden">
+  <img
+    src={imagePath}
+    alt={altText || "Image"}
+    class="w-full"
+  />
+  {caption.length > 0 && (
+    <figcaption class="p-4 text-center text-sm md:text-base text-base-content/70 italic">
+      {caption.map((richTextBlock: any) => (
+        <RichText block={richTextBlock} />
+      ))}
+    </figcaption>
+  )}
+</figure>
+

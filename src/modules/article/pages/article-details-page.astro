@@ -4,14 +4,8 @@ import Breadcrumb from "../../core/components/base/breadcrumb.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
-
-interface ContentItem {
-  type: "paragraph" | "image" | "bullet-list";
-  paragraph?: string;
-  image?: string;
-  alt?: string;
-  bullets?: string[];
-}
+import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
+import type { BlockWithChildren } from "../../core/libs/notion/types";
 
 interface ArticleNav {
   title: string;
@@ -22,13 +16,13 @@ interface Props {
   title: string;
   date: string;
   minsRead?: number;
-  content: ContentItem[];
+  blocks: BlockWithChildren[];
   categories: string[];
   previousArticle?: ArticleNav;
   nextArticle?: ArticleNav;
 }
 
-const { title, date, minsRead, content, categories, previousArticle, nextArticle } = Astro.props;
+const { title, date, minsRead, blocks, categories, previousArticle, nextArticle } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const breadcrumbItems = [
@@ -73,42 +67,8 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
       </div>
 
       <!-- Content Sections -->
-      <div class="space-y-12 mb-16">
-        {content.map((item, index) => {
-          const delay = index * 100;
-          let delayClass = "animation-delay-0";
-          if (delay === 100) delayClass = "animation-delay-150";
-          else if (delay === 200) delayClass = "animation-delay-300";
-          else if (delay === 300) delayClass = "animation-delay-450";
-          else if (delay === 400) delayClass = "animation-delay-600";
-          else if (delay >= 500) delayClass = "animation-delay-750";
-
-          return (
-            <div class={`animate-fade-in-up ${delayClass}`}>
-              {item.type === "paragraph" && item.paragraph && (
-                <p class="text-base-content leading-relaxed">{item.paragraph}</p>
-              )}
-
-              {item.type === "image" && item.image && (
-                <figure class="mb-6 border-4 border-neutral rounded-lg shadow-lg overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.alt || `${title} - Image ${index + 1}`}
-                    class="w-full"
-                  />
-                </figure>
-              )}
-
-              {item.type === "bullet-list" && item.bullets && (
-                <ul class="list-disc list-outside space-y-2 ml-5">
-                  {item.bullets.map((bullet) => (
-                    <li class="text-base-content leading-relaxed">{bullet}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          );
-        })}
+      <div class="mb-16">
+        <BlocksRenderer blocks={blocks} imageBasePath="/images/articles" />
       </div>
 
       <!-- Categories Section -->

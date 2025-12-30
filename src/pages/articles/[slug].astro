@@ -4,7 +4,6 @@ import {
   getArticleDetailAndNavigationBySlug,
   getNotionArticleDataBySlug,
 } from "../../modules/article/services/article-service";
-import { transformBlocksToContent } from "../../modules/article/utils/article-content-utils";
 
 export async function getStaticPaths() {
   const { getArticles } = await import("../../modules/article/services/article-service");
@@ -28,15 +27,12 @@ if (!article) {
   return Astro.redirect("/articles");
 }
 
-// Get raw Notion data for blocks transformation
+// Get raw Notion data for blocks
 const notionArticleData = await getNotionArticleDataBySlug(slug);
 
-if (!notionArticleData) {
+if (!notionArticleData || !notionArticleData.blocks) {
   return Astro.redirect("/articles");
 }
-
-// Transform blocks to content items
-const content = transformBlocksToContent(notionArticleData.blocks);
 
 // Get categories from article
 const categories = article.categories || [];
@@ -46,7 +42,7 @@ const categories = article.categories || [];
   title={article.title}
   date={article.date}
   minsRead={article.minsRead}
-  content={content}
+  blocks={notionArticleData.blocks}
   categories={categories}
   previousArticle={previousArticle ? { title: previousArticle.title, slug: previousArticle.slug } : undefined}
   nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug } : undefined}

@@ -5,24 +5,22 @@ import Button from "../../core/components/base/button.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
+import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
+import type { BlockWithChildren } from "../../core/libs/notion/types";
 import ProjectCarousel from "../components/project-carousel.astro";
 import type { Project } from "../types";
-
-interface ContentItem {
-  image?: string;
-  paragraph: string;
-}
 
 interface Props {
   title: string;
   previewLink?: string;
-  content: ContentItem[];
+  blocks: BlockWithChildren[];
+  projectId: string;
   tags: string[];
   relatedProjects: Project[];
   categories?: string[];
 }
 
-const { title, previewLink, content, tags, relatedProjects, categories } = Astro.props;
+const { title, previewLink, blocks, projectId, tags, relatedProjects, categories } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const breadcrumbItems = [
@@ -94,31 +92,8 @@ const breadcrumbItems = [
       )}
 
       <!-- Content Sections -->
-      <div class="max-w-4xl mx-auto flex flex-col gap-6 mb-16">
-        {content.map((item, index) => {
-          const delay = index * 100;
-          let delayClass = "animation-delay-0";
-          if (delay === 100) delayClass = "animation-delay-150";
-          else if (delay === 200) delayClass = "animation-delay-300";
-          else if (delay === 300) delayClass = "animation-delay-450";
-          else if (delay === 400) delayClass = "animation-delay-600";
-          else if (delay >= 500) delayClass = "animation-delay-750";
-
-          return (
-            <div class={`animate-fade-in-up ${delayClass}`}>
-              {item.image && (
-                <figure class="mb-6 border-4 border-neutral rounded-lg shadow-lg overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={`${title} - Image ${index + 1}`}
-                    class="w-full"
-                  />
-                </figure>
-              )}
-              <p class="text-base-content leading-relaxed">{item.paragraph}</p>
-            </div>
-          );
-        })}
+      <div class="max-w-4xl mx-auto mb-16">
+        <BlocksRenderer blocks={blocks} imageBasePath="/images/projects" imageIdPrefix={projectId} />
       </div>
 
       <!-- Tags Section -->

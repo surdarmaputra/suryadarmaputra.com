@@ -1,0 +1,43 @@
+---
+import { hasAnnotation } from "../renderer-utils";
+import type { RichTextBlock } from "../types";
+
+interface Props {
+  block: RichTextBlock;
+}
+
+const { block } = Astro.props;
+const { annotations, plain_text: plainText, href } = block;
+
+if (!plainText) {
+  return null;
+}
+
+// Build class string for annotations
+const annotationClasses: string[] = [];
+if (annotations.bold) annotationClasses.push("font-semibold");
+if (annotations.italic) annotationClasses.push("italic");
+if (annotations.strikethrough) annotationClasses.push("line-through");
+if (annotations.underline) annotationClasses.push("underline");
+
+const hasFormatting = hasAnnotation(annotations);
+const classString = annotationClasses.length > 0 ? annotationClasses.join(" ") : undefined;
+---
+
+{href ? (
+  <a
+    href={href}
+    rel="noreferrer"
+    target="_blank"
+    class={`${classString} link link-primary`}
+  >
+    {annotations.code ? <code>{plainText}</code> : plainText}
+  </a>
+) : annotations.code ? (
+  <code class={classString}>{plainText}</code>
+) : hasFormatting ? (
+  <span class={classString}>{plainText}</span>
+) : (
+  plainText
+)}
+
