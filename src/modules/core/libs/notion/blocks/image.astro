@@ -31,11 +31,11 @@ const altText = getImageAltText(block);
 const caption = (block.image as any)?.caption || [];
 ---
 
-<figure class="my-4 md:my-6 border-4 border-neutral rounded-lg shadow-lg overflow-hidden">
+<figure class="my-4 md:my-6 overflow-hidden">
   <img
     src={imagePath}
     alt={altText || "Image"}
-    class="w-full"
+    class="w-full border-4 border-neutral rounded-lg shadow-lg"
   />
   {caption.length > 0 && (
     <figcaption class="p-4 text-center text-sm md:text-base text-base-content/70 italic">

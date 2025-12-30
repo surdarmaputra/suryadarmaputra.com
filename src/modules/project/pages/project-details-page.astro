@@ -51,7 +51,7 @@ const breadcrumbItems = [
 
       <!-- Category Badges -->
       {categories && categories.length > 0 && (
-        <div class="flex justify-center flex-wrap gap-2 mt-4 mb-4">
+        <div class={`flex justify-center flex-wrap gap-2 mt-4 ${!previewLink ? "mb-20 md:mb-28" : "mb-4"}`}>
           {categories.map((category, index) => (
             <Badge size="lg" variant="neutral" style="outline" itemIndex={index}>
               {category}
