@@ -3,35 +3,9 @@ import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import ArticleListSection from "../components/article-list-section.astro";
-import type { Article } from "../types";
+import { getArticles } from "../services/article-service";
 
-const articles: Article[] = [
-  {
-    id: "1",
-    title: "Getting Started with Astro",
-    description: "Learn how to build fast, modern websites with Astro framework.",
-    date: "2024-01-15",
-    slug: "getting-started-with-astro",
-    minsRead: 5,
-  },
-  {
-    id: "2",
-    title: "Understanding Module-Based Architecture",
-    description: "A deep dive into organizing code with modular architecture patterns.",
-    date: "2024-01-10",
-    slug: "module-based-architecture",
-    minsRead: 8,
-  },
-  {
-    id: "3",
-    title: "Building with DaisyUI",
-    description: "Creating beautiful UIs with DaisyUI and Tailwind CSS.",
-    date: "2024-01-05",
-    slug: "building-with-daisyui",
-    minsRead: 6,
-  },
-];
-
+const articles = await getArticles();
 const currentPath = Astro.url.pathname;
 ---
 
