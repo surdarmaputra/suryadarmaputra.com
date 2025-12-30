@@ -5,28 +5,6 @@ import { concatPlainTexts as concatPlainTextsUtil, getFileExtensionFromUrl } fro
 export { concatPlainTextsUtil as concatPlainTexts };
 
 /**
- * Generate image path based on context
- * - Articles: uses block.id directly as filename
- * - Projects: uses imageIdPrefix-index pattern
- */
-export function getImagePath(
-  blockId: string,
-  imageBasePath: string,
-  imageIdPrefix?: string
-): string | null {
-  // For articles, we need to get the extension from the block itself
-  // This will be handled in the image component
-  if (!imageIdPrefix) {
-    // Articles: block.id is the filename (extension will be determined from block)
-    return `${imageBasePath}/${blockId}`;
-  }
-
-  // For projects, we need the index - this will be calculated in the image component
-  // This function is mainly for the base path structure
-  return `${imageBasePath}/${imageIdPrefix}`;
-}
-
-/**
  * Extract rich text from any block type
  */
 // biome-ignore lint/suspicious/noExplicitAny: expected

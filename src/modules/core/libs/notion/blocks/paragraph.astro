@@ -8,12 +8,10 @@ interface Props {
   children?: BlockWithChildren[];
   previousBlockType?: string | null;
   imageBasePath: string;
-  imageIdPrefix?: string;
   renderChildren?: typeof import("../blocks-renderer.astro").default;
 }
 
-const { block, children, previousBlockType, imageBasePath, imageIdPrefix, renderChildren } =
-  Astro.props;
+const { block, children, previousBlockType, imageBasePath, renderChildren } = Astro.props;
 
 // Assign to capitalized variable for Astro to recognize as component
 const RenderChildren = renderChildren;
@@ -36,7 +34,7 @@ const spacingClass =
       <RichText block={richTextBlock} />
     ))}
     {children && children.length > 0 && RenderChildren && (
-      <RenderChildren blocks={children} imageBasePath={imageBasePath} imageIdPrefix={imageIdPrefix} />
+      <RenderChildren blocks={children} imageBasePath={imageBasePath} />
     )}
   </p>
 )}

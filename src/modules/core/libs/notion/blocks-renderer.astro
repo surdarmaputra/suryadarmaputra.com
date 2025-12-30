@@ -13,39 +13,9 @@ import type { BlockWithChildren } from "./types";
 interface Props {
   blocks: BlockWithChildren[];
   imageBasePath: string;
-  imageIdPrefix?: string;
-  imageIndex?: number;
 }
 
-const { blocks, imageBasePath, imageIdPrefix, imageIndex: startImageIndex = 0 } = Astro.props;
-
-// Count images before a specific index (including nested images)
-function countImagesBeforeIndex(blocks: BlockWithChildren[], targetIndex: number): number {
-  let count = 0;
-  for (let i = 0; i < targetIndex; i++) {
-    const { block, children } = blocks[i];
-    if ("type" in block && block.type === "image") {
-      count++;
-    }
-    if (children && children.length > 0) {
-      count += countAllImages(children);
-    }
-  }
-  return count;
-}
-
-function countAllImages(blocks: BlockWithChildren[]): number {
-  let count = 0;
-  for (const { block, children } of blocks) {
-    if ("type" in block && block.type === "image") {
-      count++;
-    }
-    if (children && children.length > 0) {
-      count += countAllImages(children);
-    }
-  }
-  return count;
-}
+const { blocks, imageBasePath } = Astro.props;
 ---
 
 {blocks.map(({ block, children }, index) => {
@@ -58,13 +28,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
       ? blocks[index - 1].block.type
       : null;
 
-  // Calculate image index for projects
-  let currentImageIndex: number | undefined = undefined;
-  if (block.type === "image" && imageIdPrefix) {
-    const imagesBefore = countImagesBeforeIndex(blocks, index);
-    currentImageIndex = startImageIndex + imagesBefore + 1;
-  }
-
   switch (block.type) {
     case "paragraph":
       return (
@@ -73,7 +36,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
           children={children || undefined}
           previousBlockType={previousBlockType}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
           renderChildren={BlocksRendererRecursive}
         />
       );
@@ -86,7 +48,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
           block={block}
           children={children || undefined}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
           renderChildren={BlocksRendererRecursive}
         />
       );
@@ -98,7 +59,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
           block={block}
           children={children || undefined}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
           renderChildren={BlocksRendererRecursive}
         />
       );
@@ -110,7 +70,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
           block={block}
           children={children || undefined}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
           renderChildren={BlocksRendererRecursive}
         />
       );
@@ -120,8 +79,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
         <Image
           block={block}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
-          imageIndex={currentImageIndex}
         />
       );
 
@@ -134,7 +91,6 @@ function countAllImages(blocks: BlockWithChildren[]): number {
           block={block}
           children={children || undefined}
           imageBasePath={imageBasePath}
-          imageIdPrefix={imageIdPrefix}
           renderChildren={BlocksRendererRecursive}
         />
       );

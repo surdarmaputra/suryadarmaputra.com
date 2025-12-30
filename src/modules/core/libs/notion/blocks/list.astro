@@ -5,11 +5,10 @@ interface Props {
   block: BlockWithChildren["block"];
   children?: BlockWithChildren[];
   imageBasePath: string;
-  imageIdPrefix?: string;
   renderChildren?: typeof import("../blocks-renderer.astro").default;
 }
 
-const { block, children, imageBasePath, imageIdPrefix, renderChildren } = Astro.props;
+const { block, children, imageBasePath, renderChildren } = Astro.props;
 
 // Assign to capitalized variable for Astro to recognize as component
 const RenderChildren = renderChildren;
@@ -29,14 +28,14 @@ const listTag = block.type === "bulleted_list" ? "ul" : "ol";
 {listTag === "ul" && (
   <ul class="my-6 space-y-3 ml-6 list-disc list-outside text-base md:text-lg leading-relaxed text-base-content">
     {children && children.length > 0 && RenderChildren && (
-      <RenderChildren blocks={children} imageBasePath={imageBasePath} imageIdPrefix={imageIdPrefix} />
+      <RenderChildren blocks={children} imageBasePath={imageBasePath} />
     )}
   </ul>
 )}
 {listTag === "ol" && (
   <ol class="my-6 space-y-3 ml-6 list-decimal list-outside text-base md:text-lg leading-relaxed text-base-content">
     {children && children.length > 0 && RenderChildren && (
-      <RenderChildren blocks={children} imageBasePath={imageBasePath} imageIdPrefix={imageIdPrefix} />
+      <RenderChildren blocks={children} imageBasePath={imageBasePath} />
     )}
   </ol>
 )}
