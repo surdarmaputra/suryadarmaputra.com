@@ -1,19 +1,20 @@
 ---
 import Ornament from "../../core/components/base/ornament.astro";
 import SocialLink from "../../core/components/base/social-link.astro";
+import { SOCIAL_LINKS } from "../../core/constants";
 
 const title = "Let's connect";
 const socialLinks = [
   {
-    url: "https://linkedin.com/in/surdarmaputra",
+    url: SOCIAL_LINKS.LINKEDIN,
     label: "LinkedIn",
   },
   {
-    url: "https://github.com/surdarmaputra",
+    url: SOCIAL_LINKS.GITHUB,
     label: "GitHub",
   },
   {
-    url: "https://twitter.com/surdarmaputra",
+    url: SOCIAL_LINKS.TWITTER,
     label: "Twitter",
   },
 ];
@@ -23,10 +24,10 @@ const socialLinks = [
   <Ornament variant="square" size="md" color="secondary" position="top-right" />
   <Ornament variant="dots" size="md" color="secondary" position="bottom-left" />
   
-  <div class="container max-w-5xl mx-auto px-4 relative z-10">
+  <div class="container-z">
     <h2
       id="social-heading"
-      class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-base-content animate-fade-in-up"
+      class="heading-large mb-20 text-center text-base-content animate-fade-in-up"
     >
       {title}
     </h2>

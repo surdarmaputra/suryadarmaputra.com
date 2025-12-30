@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { PERSONAL } from "../../constants";
 import "../../styles/global.css";
 import Footer from "./footer.astro";
 import Header from "./header.astro";
@@ -28,7 +29,7 @@ const { title = "", description = "Personal website", currentPath, mainClass } =
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? `${title} - Surya Darma Putra` : "Surya Darma Putra"}</title>
+    <title>{title ? `${title} - ${PERSONAL.NAME}` : PERSONAL.NAME}</title>
     <ClientRouter />
   </head>
   <body class="font-sans">

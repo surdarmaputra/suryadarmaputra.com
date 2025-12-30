@@ -14,11 +14,11 @@ const { articles, title, customWrapperClass } = Astro.props;
   class={`relative overflow-hidden py-24 md:py-32${customWrapperClass ? ` ${customWrapperClass}` : ""}`}
   aria-labelledby="articles-heading"
 >
-  <div class="container max-w-5xl mx-auto px-4 relative z-10">
+  <div class="container-z">
     {title && (
       <h2
         id="articles-heading"
-        class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-base-content animate-fade-in-up"
+        class="heading-large mb-20 text-center text-base-content animate-fade-in-up"
       >
         {title}
       </h2>

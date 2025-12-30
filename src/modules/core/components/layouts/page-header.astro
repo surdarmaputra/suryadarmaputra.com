@@ -27,8 +27,7 @@ const {
 } = Astro.props;
 
 // Title size classes
-const titleSizeClasses =
-  size === "large" ? "text-6xl md:text-7xl lg:text-8xl" : "text-4xl md:text-5xl";
+const titleSizeClasses = size === "large" ? "heading-large" : "heading-default";
 
 // Title alignment classes
 const titleAlignClasses = align === "center" ? "text-center" : "text-left";

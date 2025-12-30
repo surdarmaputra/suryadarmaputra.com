@@ -175,3 +175,37 @@
 .ornament[data-position="center"] {
   @apply opacity-[0.05];
 }
+
+/* Container utilities */
+@utility container-base {
+  @apply container max-w-5xl mx-auto px-4;
+}
+
+@utility container-z {
+  @apply container max-w-5xl mx-auto px-4 relative z-10;
+}
+
+@utility page-padding {
+  @apply py-12 md:py-28;
+}
+
+@utility page-padding-z {
+  @apply py-12 md:py-28 relative z-10;
+}
+
+@utility page-container {
+  @apply container max-w-5xl mx-auto px-4 py-12 md:py-28 relative z-10;
+}
+
+/* Typography utilities */
+@utility heading-large {
+  @apply text-6xl md:text-7xl lg:text-8xl font-bold font-serif;
+}
+
+@utility heading-default {
+  @apply text-4xl md:text-5xl font-bold font-serif;
+}
+
+@utility heading-medium {
+  @apply text-2xl md:text-3xl font-bold font-serif;
+}

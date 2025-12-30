@@ -3,6 +3,7 @@ import Button from "../../core/components/base/button.astro";
 import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
 import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
+import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
 import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
 import WorkExperienceSection from "../components/work-experience-section.astro";
 
@@ -10,11 +11,11 @@ const currentPath = Astro.url.pathname;
 
 // Photo and bio data
 const photoUrl = "https://placehold.co/600x800/4A5568/FFFFFF?text=Photo";
-const name = "Surya Darma Putra";
-const secondaryTitle = "Full-stack developer, building modern websites and applications";
-const linkedinUrl = "https://linkedin.com/in/surdarmaputra";
-const githubUrl = "https://github.com/surdarmaputra";
-const twitterUrl = "https://twitter.com/surdarmaputra";
+const name = PERSONAL.NAME;
+const secondaryTitle = PERSONAL.TITLE;
+const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
+const githubUrl = SOCIAL_LINKS.GITHUB;
+const twitterUrl = SOCIAL_LINKS.TWITTER;
 
 const bioParagraphs = [
   "I'm a passionate full-stack developer with a love for creating beautiful, functional web applications. With years of experience in modern web technologies, I specialize in building responsive, accessible, and performant websites.",
@@ -30,20 +31,20 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
 
 <PageLayout
   title="About Me"
-  description="About Surya Darma Putra"
+  description={`About ${PERSONAL.NAME}`}
   currentPath={currentPath}
-  mainClass="py-12 md:py-28 relative z-10"
+  mainClass="page-padding-z"
 >
   <OrnamentWrapper>
     <PageHeader title="About Me" size="large" align="center" animate />
 
     <!-- 2-Column About Section -->
-    <section class="container max-w-5xl mx-auto px-4 mb-20" aria-labelledby="about-heading">
+    <section class="container-base mb-20" aria-labelledby="about-heading">
         <div class="flex flex-col-reverse md:flex-row gap-16 items-start">
           <!-- Left Column: Bio Content -->
           <div class="space-y-6 animate-fade-in-up animation-delay-150">
             <div>
-              <h2 id="about-heading" class="text-2xl md:text-3xl font-bold font-serif text-base-content mb-2">
+              <h2 id="about-heading" class="heading-medium text-base-content mb-2">
                 {name}
               </h2>
               <p class="text-base-content mb-2">
