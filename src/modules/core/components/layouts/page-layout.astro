@@ -7,9 +7,10 @@ interface Props {
   title?: string;
   description?: string;
   currentPath?: string;
+  mainClass?: string;
 }
 
-const { title = "", description = "Personal website", currentPath } = Astro.props;
+const { title = "", description = "Personal website", currentPath, mainClass } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,7 +32,7 @@ const { title = "", description = "Personal website", currentPath } = Astro.prop
   </head>
   <body class="font-sans">
     <Header currentPath={currentPath} />
-    <main>
+    <main class={mainClass}>
       <slot />
     </main>
     <slot name="footer" />

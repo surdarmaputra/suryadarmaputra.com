@@ -1,7 +1,7 @@
 ---
 import Badge from "../../core/components/base/badge.astro";
-import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
 import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
@@ -40,50 +40,48 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
 });
 ---
 
-<PageLayout title={title} description={`${title} article`} currentPath={currentPath}>
-  <div class="relative min-h-screen">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <Ornament variant="circle" size="md" color="accent" position="top-left" />
-      <Ornament variant="dots" size="md" color="primary" position="top-right" />
-      <Ornament variant="square" size="lg" color="secondary" position="center" />
+<PageLayout
+  title={title}
+  description={`${title} article`}
+  currentPath={currentPath}
+  mainClass="container max-w-4xl mx-auto px-4 py-12 md:py-28 relative z-10"
+>
+  <OrnamentWrapper>
+    <PageHeader
+      title={title}
+      breadcrumbItems={breadcrumbItems}
+      size="default"
+      align="left"
+      animate
+    >
+      <div slot="extra" class="flex items-center gap-4 text-base-content/60 text-sm md:text-base mb-12 md:mb-16">
+        <time datetime={date}>{formattedDate}</time>
+        <span>•</span>
+        <span>{minsRead || 5} min read</span>
+      </div>
+    </PageHeader>
+
+    <!-- Content Sections -->
+    <div class="mb-16">
+      <BlocksRenderer blocks={blocks} imageBasePath="/images/articles" />
     </div>
 
-    <div class="container max-w-4xl mx-auto px-4 py-12 md:py-28 relative z-10">
-      <PageHeader
-        title={title}
-        breadcrumbItems={breadcrumbItems}
-        size="default"
-        align="left"
-        animate
-      >
-        <div slot="extra" class="flex items-center gap-4 text-base-content/60 text-sm md:text-base mb-12 md:mb-16">
-          <time datetime={date}>{formattedDate}</time>
-          <span>•</span>
-          <span>{minsRead || 5} min read</span>
+    <!-- Categories Section -->
+    {categories.length > 0 && (
+      <div class="my-16">
+        <div class="flex flex-wrap gap-4">
+          {categories.map((category, index) => (
+            <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+              {category}
+            </Badge>
+          ))}
         </div>
-      </PageHeader>
-
-      <!-- Content Sections -->
-      <div class="mb-16">
-        <BlocksRenderer blocks={blocks} imageBasePath="/images/articles" />
       </div>
+    )}
 
-      <!-- Categories Section -->
-      {categories.length > 0 && (
-        <div class="max-w-4xl mx-auto my-16">
-          <div class="flex flex-wrap gap-4">
-            {categories.map((category, index) => (
-              <Badge size="lg" colorRandomizer={index} itemIndex={index}>
-                {category}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- Previous/Next Navigation -->
-      {(previousArticle || nextArticle) && (
-        <div class="max-w-4xl mx-auto mt-16 flex flex-col md:flex-row justify-between gap-4">
+    <!-- Previous/Next Navigation -->
+    {(previousArticle || nextArticle) && (
+      <div class="mt-16 flex flex-col md:flex-row justify-between gap-4">
           {previousArticle ? (
             <a
               href={`/articles/${previousArticle.slug}`}

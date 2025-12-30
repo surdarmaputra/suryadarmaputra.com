@@ -3,13 +3,27 @@ import type { Article } from "../types";
 
 interface Props {
   articles: Article[];
+  title?: string;
+  customWrapperClass?: string;
 }
 
-const { articles } = Astro.props;
+const { articles, title, customWrapperClass } = Astro.props;
 ---
 
-<section class="relative overflow-hidden" aria-labelledby="articles-heading">
-  <div class="flex flex-col gap-8 md:items-center">
+<section
+  class={`relative overflow-hidden py-24 md:py-32${customWrapperClass ? ` ${customWrapperClass}` : ""}`}
+  aria-labelledby="articles-heading"
+>
+  <div class="container mx-auto px-4 relative z-10">
+    {title && (
+      <h2
+        id="articles-heading"
+        class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-base-content animate-fade-in-up"
+      >
+        {title}
+      </h2>
+    )}
+    <div class="flex flex-col gap-8 md:items-center">
       {articles.map((article, index) => {
         const articleDate = new Date(article.date);
         const formattedDate = articleDate.toLocaleDateString("en-US", {
@@ -17,7 +31,7 @@ const { articles } = Astro.props;
           month: "long",
           day: "numeric",
         });
-        
+
         const delay = index * 100;
         let delayClass = "transition-delay-0";
         if (delay === 100) delayClass = "transition-delay-100";
@@ -25,7 +39,7 @@ const { articles } = Astro.props;
         else if (delay === 300) delayClass = "transition-delay-300";
         else if (delay === 400) delayClass = "transition-delay-400";
         else if (delay === 500) delayClass = "transition-delay-500";
-        
+
         return (
           <div class={`scroll-reveal ${delayClass}`}>
             <article>
@@ -45,6 +59,7 @@ const { articles } = Astro.props;
           </div>
         );
       })}
+    </div>
   </div>
 </section>
 
