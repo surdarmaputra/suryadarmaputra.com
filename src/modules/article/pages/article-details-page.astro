@@ -1,8 +1,8 @@
 ---
 import Badge from "../../core/components/base/badge.astro";
-import Breadcrumb from "../../core/components/base/breadcrumb.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
 import type { BlockWithChildren } from "../../core/libs/notion/types";
@@ -49,22 +49,19 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
     </div>
 
     <div class="container max-w-4xl mx-auto px-4 py-12 md:py-28 relative z-10">
-      <!-- Breadcrumb -->
-      <div class="mb-1">
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
-
-      <!-- Page Title -->
-      <h1 class="text-4xl md:text-5xl font-bold font-serif text-left text-base-content animate-fade-in-up mb-6">
-        {title}
-      </h1>
-
-      <!-- Date and Reading Time -->
-      <div class="flex items-center gap-4 text-base-content/60 text-sm md:text-base mb-12 md:mb-16">
-        <time datetime={date}>{formattedDate}</time>
-        <span>•</span>
-        <span>{minsRead || 5} min read</span>
-      </div>
+      <PageHeader
+        title={title}
+        breadcrumbItems={breadcrumbItems}
+        size="default"
+        align="left"
+        animate
+      >
+        <div slot="extra" class="flex items-center gap-4 text-base-content/60 text-sm md:text-base mb-12 md:mb-16">
+          <time datetime={date}>{formattedDate}</time>
+          <span>•</span>
+          <span>{minsRead || 5} min read</span>
+        </div>
+      </PageHeader>
 
       <!-- Content Sections -->
       <div class="mb-16">

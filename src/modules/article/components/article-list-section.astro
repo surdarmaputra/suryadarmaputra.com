@@ -5,19 +5,11 @@ interface Props {
   articles: Article[];
 }
 
-const title = "Articles";
 const { articles } = Astro.props;
 ---
 
-<section class="py-24 md:py-32 relative overflow-hidden" aria-labelledby="articles-heading">
-  <div class="container mx-auto px-6 relative z-10">
-    <h2
-      id="articles-heading"
-      class="text-6xl md:text-7xl lg:text-8xl font-bold font-serif mb-20 text-center text-base-content animate-fade-in-up"
-    >
-      {title}
-    </h2>
-    <div class="flex flex-col gap-8 md:items-center">
+<section class="relative overflow-hidden" aria-labelledby="articles-heading">
+  <div class="flex flex-col gap-8 md:items-center">
       {articles.map((article, index) => {
         const articleDate = new Date(article.date);
         const formattedDate = articleDate.toLocaleDateString("en-US", {
@@ -53,7 +45,6 @@ const { articles } = Astro.props;
           </div>
         );
       })}
-    </div>
   </div>
 </section>
 

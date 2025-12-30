@@ -1,0 +1,58 @@
+---
+import Breadcrumb from "../base/breadcrumb.astro";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  breadcrumbItems?: BreadcrumbItem[];
+  size?: "large" | "default";
+  align?: "center" | "left";
+  animate?: boolean;
+  breadcrumbAlign?: "center" | "left";
+  titleClass?: string;
+}
+
+const {
+  title,
+  breadcrumbItems,
+  size = "default",
+  align = "left",
+  animate = false,
+  breadcrumbAlign = "left",
+  titleClass = "",
+} = Astro.props;
+
+// Title size classes
+const titleSizeClasses =
+  size === "large" ? "text-6xl md:text-7xl lg:text-8xl" : "text-4xl md:text-5xl";
+
+// Title alignment classes
+const titleAlignClasses = align === "center" ? "text-center" : "text-left";
+
+// Animation class
+const animationClass = animate ? "animate-fade-in-up" : "";
+
+// Breadcrumb alignment classes
+const breadcrumbWrapperClasses = breadcrumbAlign === "center" ? "flex justify-center" : "";
+---
+
+{breadcrumbItems && breadcrumbItems.length > 0 && (
+  <div class={`mb-1 ${breadcrumbWrapperClasses}`}>
+    <Breadcrumb items={breadcrumbItems} />
+  </div>
+)}
+
+<h1
+  class={`${titleSizeClasses} font-bold font-serif text-base-content ${titleAlignClasses} ${animationClass} ${Astro.slots.has("extra") ? "mb-6" : "mb-20"} ${titleClass}`}
+>
+  {title}
+</h1>
+
+<slot name="extra" />
+
+{Astro.slots.has("extra") && <div class="mb-20" aria-hidden="true"></div>}
+

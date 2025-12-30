@@ -1,9 +1,9 @@
 ---
 import Badge from "../../core/components/base/badge.astro";
-import Breadcrumb from "../../core/components/base/breadcrumb.astro";
 import Button from "../../core/components/base/button.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import Footer from "../../core/components/layouts/footer.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
 import type { BlockWithChildren } from "../../core/libs/notion/types";
@@ -39,57 +39,60 @@ const breadcrumbItems = [
     </div>
 
     <div class="container mx-auto px-4 py-12 md:py-28 relative z-10">
-      <!-- Breadcrumb -->
-      <div class="mb-1 flex justify-center">
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
+      <PageHeader
+        title={title}
+        breadcrumbItems={breadcrumbItems}
+        size="large"
+        align="center"
+        animate
+        breadcrumbAlign="center"
+      >
+        <div slot="extra">
+          {categories && categories.length > 0 && (
+            <div class="flex justify-center flex-wrap gap-2 mt-4 mb-4">
+              {categories.map((category, index) => (
+                <Badge size="lg" variant="neutral" style="outline" itemIndex={index}>
+                  {category}
+                </Badge>
+              ))}
+            </div>
+          )}
 
-      <!-- Page Title -->
-      <h1 class={`text-6xl md:text-7xl lg:text-8xl font-bold font-serif text-center text-base-content animate-fade-in-up${!previewLink && (!categories || categories.length === 0) ? " mb-20 md:mb-28" : ""}`}>
-        {title}
-      </h1>
+          {previewLink && (
+            <div class="flex justify-center mb-20 md:mb-28 mt-8">
+              <Button
+                href={previewLink}
+                variant="outline"
+                size="sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover-scale transition-transform"
+              >
+                <svg
+                  class="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+                Preview Project
+              </Button>
+            </div>
+          )}
 
-      <!-- Category Badges -->
-      {categories && categories.length > 0 && (
-        <div class={`flex justify-center flex-wrap gap-2 mt-4 ${!previewLink ? "mb-20 md:mb-28" : "mb-4"}`}>
-          {categories.map((category, index) => (
-            <Badge size="lg" variant="neutral" style="outline" itemIndex={index}>
-              {category}
-            </Badge>
-          ))}
+          {!previewLink && (!categories || categories.length === 0) && (
+            <div class="mb-20 md:mb-28"></div>
+          )}
         </div>
-      )}
-
-      <!-- Preview Button -->
-      {previewLink && (
-        <div class="flex justify-center mb-20 md:mb-28 mt-8">
-          <Button
-            href={previewLink}
-            variant="outline"
-            size="sm"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover-scale transition-transform"
-          >
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-            Preview Project
-          </Button>
-        </div>
-      )}
+      </PageHeader>
 
       <!-- Content Sections -->
       <div class="max-w-4xl mx-auto mb-16">
