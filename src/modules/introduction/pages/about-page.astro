@@ -10,18 +10,12 @@ import WorkExperienceSection from "../components/work-experience-section.astro";
 const currentPath = Astro.url.pathname;
 
 // Photo and bio data
-const photoUrl = "https://placehold.co/600x800/4A5568/FFFFFF?text=Photo";
+const photoUrl = "/images/me.jpeg";
 const name = PERSONAL.NAME;
 const secondaryTitle = PERSONAL.TITLE;
 const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
 const githubUrl = SOCIAL_LINKS.GITHUB;
 const twitterUrl = SOCIAL_LINKS.TWITTER;
-
-const bioParagraphs = [
-  "I'm a passionate full-stack developer with a love for creating beautiful, functional web applications. With years of experience in modern web technologies, I specialize in building responsive, accessible, and performant websites.",
-  "My journey in software development has been driven by curiosity and a commitment to continuous learning. I enjoy working with cutting-edge technologies and finding elegant solutions to complex problems.",
-  "When I'm not coding, you can find me exploring new frameworks, contributing to open-source projects, or sharing knowledge with the developer community.",
-];
 
 // Generate tilt angles for stacked photos
 const photoTilt1 = generateRandomElementTiltAngle(0, 4);
@@ -112,9 +106,29 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
 
             <!-- Bio Paragraphs -->
             <div class="space-y-4">
-              {bioParagraphs.map((paragraph) => (
-                <p class="text-base-content leading-relaxed">{paragraph}</p>
-              ))}
+              <p class="text-base-content leading-relaxed">
+                Hi, I'm <span class="font-semibold">{name.split(' ')[0]}</span>, a
+                software engineer with expertise in{' '}
+                <span class="font-semibold">web development</span>.
+                Currently at{' '}
+                <a
+                  href="https://www.gotocompany.com/en/products/goto-financial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link-hover"
+                >
+                  GoTo Financial
+                </a>
+                , I build products for Lending Team, aiming to provide the best
+                financing solutions for customers and merchants.
+              </p>
+              <p class="text-base-content leading-relaxed">
+                I prioritize{' '}
+                <span class="font-semibold">customer's perspective</span>
+                , <span class="font-semibold">pragmatism</span>, and{' '}
+                <span class="font-semibold">compliance</span> when building
+                products.
+              </p>
             </div>
           </div>
 
@@ -144,7 +158,7 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
               <!-- Front photo (top layer) -->
               <div
                 id="front-photo"
-                class="badge-tilt bg-base-100 border-4 border-neutral rounded-xl shadow-xl p-3 md:p-4 w-full hover:rotate-3 transition-transform duration-300 relative z-20"
+                class="badge-tilt bg-base-100 border-4 border-neutral rounded-xl shadow-xl p-3 md:p-4 w-full hover:rotate-3 active:rotate-3 transition-transform duration-300 relative z-20"
                 style={`--badge-tilt: ${photoTilt1}deg;`}
               >
                 <div class="bg-base-200 aspect-3/4 overflow-hidden rounded">
