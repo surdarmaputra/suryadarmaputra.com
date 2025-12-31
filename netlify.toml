@@ -1,0 +1,4 @@
+[build]
+  command = "bun run generate && bun run build"
+  publish = "dist"
+
