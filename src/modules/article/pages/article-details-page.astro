@@ -85,6 +85,7 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
             <a
               href={`/articles/${previousArticle.slug}`}
               class="link link-hover text-left flex-1 group"
+              aria-label={`Previous article: ${previousArticle.title}`}
             >
               <div class="text-sm text-base-content/60 mb-1">← Previous</div>
               <div class="truncate text-base-content group-hover:text-primary">
@@ -99,6 +100,7 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
             <a
               href={`/articles/${nextArticle.slug}`}
               class="link link-hover text-right flex-1 group"
+              aria-label={`Next article: ${nextArticle.title}`}
             >
               <div class="text-sm text-base-content/60 mb-1">Next →</div>
               <div class="truncate text-base-content group-hover:text-primary">

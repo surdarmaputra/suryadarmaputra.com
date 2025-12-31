@@ -30,7 +30,12 @@ function isNavItemActive(itemHref: string, path: string): boolean {
     <div class="flex items-center justify-between">
       <a href="/" class="flex items-center hover-scale" aria-label="Home">
         <picture>
-          <img src="/site-logo-bw.png" alt={`${PERSONAL.NAME} Logo`} class="h-10 w-auto" />
+          <img 
+            src="/site-logo-bw.png" 
+            alt={`${PERSONAL.NAME} Logo`} 
+            class="h-10 w-auto" 
+            fetchpriority="high"
+          />
         </picture>
       </a>
       
@@ -91,6 +96,7 @@ function isNavItemActive(itemHref: string, path: string): boolean {
               }`}
               aria-current={isActive ? 'page' : undefined}
               data-menu-index={index}
+              tabindex="-1"
             >
               {item.label}
             </a>
@@ -128,9 +134,15 @@ function isNavItemActive(itemHref: string, path: string): boolean {
       overlay.classList.remove('opacity-100');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       toggle.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
       if (menuIconOpen) menuIconOpen.classList.remove('hidden');
       if (menuIconClose) menuIconClose.classList.add('hidden');
       body.style.overflow = '';
+      // Ensure links are non-focusable when menu is closed
+      const menuLinks = overlay.querySelectorAll('a');
+      menuLinks.forEach((link) => {
+        link.setAttribute('tabindex', '-1');
+      });
     }
   
     const openMenu = () => {
@@ -143,6 +155,12 @@ function isNavItemActive(itemHref: string, path: string): boolean {
       overlay.classList.remove('pointer-events-none');
       menuIconOpen.classList.add('hidden');
       menuIconClose.classList.remove('hidden');
+      
+      // Make links focusable when menu is open
+      const menuLinks = overlay.querySelectorAll('a');
+      menuLinks.forEach((link) => {
+        link.removeAttribute('tabindex');
+      });
       
       // Trigger overlay fade-in
       requestAnimationFrame(() => {
@@ -171,6 +189,12 @@ function isNavItemActive(itemHref: string, path: string): boolean {
       overlay.setAttribute('aria-hidden', 'true');
       menuIconOpen.classList.remove('hidden');
       menuIconClose.classList.add('hidden');
+      
+      // Make links non-focusable when menu is closed
+      const menuLinks = overlay.querySelectorAll('a');
+      menuLinks.forEach((link) => {
+        link.setAttribute('tabindex', '-1');
+      });
       
       // Animate menu items out
       if (menuItems) {

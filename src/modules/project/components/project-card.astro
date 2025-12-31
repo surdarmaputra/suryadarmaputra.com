@@ -43,12 +43,25 @@ const { thumbnail, title, description, learnMoreLink, previewLink, categories } 
   )}
   <div slot="actions" class="card-actions justify-end gap-2">
     {previewLink && (
-      <Button href={previewLink} target="_blank" variant="outline" size="sm" class="hover-scale">
+      <Button
+        href={previewLink}
+        target="_blank"
+        variant="outline"
+        size="sm"
+        class="hover-scale"
+        aria-label={`Preview ${title} project`}
+      >
         Preview
       </Button>
     )}
     {learnMoreLink && (
-      <Button href={learnMoreLink} variant="primary" size="sm" class="hover-scale">
+      <Button
+        href={learnMoreLink}
+        variant="primary"
+        size="sm"
+        class="hover-scale"
+        aria-label={`Learn more about ${title} project`}
+      >
         Learn More
       </Button>
     )}
