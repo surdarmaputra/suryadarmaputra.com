@@ -21,7 +21,7 @@ interface Props {
 
 const { isDownloadResumeVisible = false } = Astro.props;
 
-const resumePdfUrl = "/resume.pdf";
+const resumePdfUrl = "";
 const title = "Work Experience";
 
 // Experience data adapted from AboutPage.tsx
@@ -114,7 +114,7 @@ const experiences: WorkExperience[] = await Promise.all(
         <WorkExperienceItem experience={experience} />
       ))}
       
-      {isDownloadResumeVisible && (
+      {isDownloadResumeVisible && resumePdfUrl && (
         <div class="flex justify-center mt-8">
           <Button
             href={resumePdfUrl}

@@ -10,7 +10,7 @@ import SocialLinksSection from "../components/social-links-section.astro";
 import WorkExperienceSection from "../components/work-experience-section.astro";
 
 // Fetch personal projects and randomize for landing page
-const personalProjects = await getProjectsByCompany();
+const personalProjects = await getProjectsByCompany("personal");
 const shuffledProjects = [...personalProjects].sort(() => Math.random() - 0.5);
 const projects = shuffledProjects.slice(0, 6);
 

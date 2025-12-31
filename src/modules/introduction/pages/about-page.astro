@@ -5,6 +5,8 @@ import PageHeader from "../../core/components/layouts/page-header.astro";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
 import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
 import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
+import ProjectCarousel from "../../project/components/project-carousel.astro";
+import { getProjectsByCompany } from "../../project/services/project-service";
 import WorkExperienceSection from "../components/work-experience-section.astro";
 
 const currentPath = Astro.url.pathname;
@@ -21,6 +23,9 @@ const twitterUrl = SOCIAL_LINKS.TWITTER;
 const photoTilt1 = generateRandomElementTiltAngle(0, 4);
 const photoTilt2 = generateRandomElementTiltAngle(1, 8);
 const photoTilt3 = generateRandomElementTiltAngle(2, 12);
+
+// Fetch personal projects for carousel
+const personalProjects = await getProjectsByCompany("personal");
 ---
 
 <PageLayout
@@ -109,7 +114,7 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
               <p class="text-base-content leading-relaxed">
                 Hi, I'm <span class="font-semibold">{name.split(' ')[0]}</span>, a
                 software engineer with expertise in{' '}
-                <span class="font-semibold">web development</span>.
+                <span class="font-semibold">website and application development</span>.
                 Currently at{' '}
                 <a
                   href="https://www.gotocompany.com/en/products/goto-financial"
@@ -123,11 +128,7 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
                 financing solutions for customers and merchants.
               </p>
               <p class="text-base-content leading-relaxed">
-                I prioritize{' '}
-                <span class="font-semibold">customer's perspective</span>
-                , <span class="font-semibold">pragmatism</span>, and{' '}
-                <span class="font-semibold">compliance</span> when building
-                products.
+                I also publish my own projects and articles in this site. Feel free to check them out!
               </p>
             </div>
           </div>
@@ -179,6 +180,16 @@ const photoTilt3 = generateRandomElementTiltAngle(2, 12);
     </div>
 
     <WorkExperienceSection isDownloadResumeVisible={true} />
+
+    <!-- Personal Projects Carousel -->
+    {personalProjects.length > 0 && (
+      <section class="container-base mt-20" aria-label="Personal projects">
+        <p class="text-base-content/80 text-center mb-8 text-lg">
+          Take a look at some of my personal projects
+        </p>
+        <ProjectCarousel projects={personalProjects} />
+      </section>
+    )}
   </OrnamentWrapper>
 </PageLayout>
 
