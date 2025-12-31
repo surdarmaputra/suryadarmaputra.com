@@ -24,20 +24,26 @@ const navItems = [
         </picture>
       </a>
       
-      <div class="hidden md:flex items-center gap-6 relative" id="desktop-nav">
+      <div class="hidden md:flex items-center gap-6" id="desktop-nav">
         {navItems.map((item, index) => (
           <a
             href={item.href}
-            class={`nav-link relative no-underline transition-colors ${
-              currentPath === item.href ? 'font-black' : 'text-base-content'
+            class={`nav-link block px-2 py-1 text-sm font-medium transition-all relative group ${
+              currentPath === item.href 
+                ? 'font-bold text-base-content' 
+                : 'text-base-content/70 hover:text-base-content hover:font-bold'
             }`}
             aria-current={currentPath === item.href ? 'page' : undefined}
             data-nav-index={index}
           >
-            {item.label}
+            <span class="relative">
+              {item.label}
+              <span class={`nav-underline absolute bottom-0 left-0 h-0.5 bg-base-content transition-all duration-300 ${
+                currentPath === item.href ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
+            </span>
           </a>
         ))}
-        <span class="nav-underline absolute bottom-0 left-0 h-1 bg-base-content transition-all duration-300 ease-out" id="nav-underline"></span>
       </div>
       
       <button
@@ -224,93 +230,6 @@ const navItems = [
     document.addEventListener('keydown', escapeHandler);
     cleanupFunctions.push(() => document.removeEventListener('keydown', escapeHandler));
   
-  // Animated underline for desktop navigation
-  const desktopNav = document.getElementById('desktop-nav');
-  const navUnderline = document.getElementById('nav-underline');
-  const navLinks = desktopNav?.querySelectorAll('.nav-link');
-  
-  if (desktopNav && navUnderline && navLinks) {
-    let activeIndex = -1;
-    let hoveredIndex = -1;
-    let isTransitioning = false;
-    
-    // Function to update underline position using transform for better performance
-    const updateUnderline = (targetLink: HTMLElement, immediate = false) => {
-      if (isTransitioning && !immediate) return;
-      
-      const navContainer = desktopNav;
-      const linkRect = targetLink.getBoundingClientRect();
-      const navRect = navContainer.getBoundingClientRect();
-      
-      const offsetLeft = linkRect.left - navRect.left;
-      const width = linkRect.width;
-      
-      if (immediate) {
-        navUnderline.style.transition = 'none';
-        navUnderline.style.width = `${width}px`;
-        navUnderline.style.transform = `translateX(${offsetLeft}px)`;
-        navUnderline.style.opacity = '1';
-        // Force reflow
-        navUnderline.offsetHeight;
-        navUnderline.style.transition = '';
-      } else {
-        isTransitioning = true;
-        navUnderline.style.width = `${width}px`;
-        navUnderline.style.transform = `translateX(${offsetLeft}px)`;
-        navUnderline.style.opacity = '1';
-        
-        // Reset transition flag after animation completes
-        setTimeout(() => {
-          isTransitioning = false;
-        }, 300);
-      }
-    };
-    
-    // Find active link and position underline
-    navLinks.forEach((link, index) => {
-      if (link.getAttribute('aria-current') === 'page') {
-        activeIndex = index;
-        updateUnderline(link as HTMLElement, true);
-      }
-      
-      // Handle hover
-      link.addEventListener('mouseenter', () => {
-        hoveredIndex = index;
-        updateUnderline(link as HTMLElement);
-      });
-      
-      // Handle mouse leave - return to active if exists
-      link.addEventListener('mouseleave', () => {
-        hoveredIndex = -1;
-        if (activeIndex >= 0) {
-          updateUnderline(navLinks[activeIndex] as HTMLElement);
-        } else {
-          navUnderline.style.opacity = '0';
-        }
-      });
-    });
-    
-    // Initialize underline position
-    if (activeIndex < 0) {
-      navUnderline.style.opacity = '0';
-    }
-    
-    // Handle window resize to reposition underline
-    let resizeTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
-    const resizeHandler = () => {
-      if (resizeTimeout !== undefined) {
-        clearTimeout(resizeTimeout);
-      }
-      resizeTimeout = setTimeout(() => {
-        const targetIndex = hoveredIndex >= 0 ? hoveredIndex : activeIndex;
-        if (targetIndex >= 0) {
-          updateUnderline(navLinks[targetIndex] as HTMLElement, true);
-        }
-      }, 100);
-    };
-    window.addEventListener('resize', resizeHandler);
-    cleanupFunctions.push(() => window.removeEventListener('resize', resizeHandler));
-  }
   
     // Smooth scroll for anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -343,13 +262,7 @@ const navItems = [
   }
   
   .nav-link {
-    padding: 0.5rem 0;
-  }
-  
-  .nav-underline {
-    pointer-events: none;
-    will-change: transform, width;
-    transform-origin: left center;
+    padding: 0;
   }
   
   .mobile-menu-item {
