@@ -9,12 +9,10 @@ interface Props {
 }
 
 const { sections } = Astro.props;
-const sidebarId = `projects-sidebar-${Math.random().toString(36).substr(2, 9)}`;
-const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <nav
-  id={sidebarId}
+  id="projects-sidebar-desktop"
   class="hidden md:block sticky pt-20 top-12 z-40 self-start"
   aria-label="Projects navigation"
 >
@@ -37,7 +35,7 @@ const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr
 </nav>
 
 <nav
-  id={mobileNavId}
+  id="projects-sidebar-mobile"
   class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-base-100/90 backdrop-blur-sm border-t border-base-300 shadow-lg"
   aria-label="Projects navigation"
 >
@@ -59,18 +57,20 @@ const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr
   </ul>
 </nav>
 
-<script define:vars={{ sidebarId, mobileNavId }}>
+<script>
+  import { initAfterNavigation } from "../../core/utils/ui-utils";
+  
   // Smooth scroll to sections
-  function initSmoothScroll() {
-    const desktopNav = document.getElementById(sidebarId);
-    const mobileNav = document.getElementById(mobileNavId);
+  function initSmoothScroll(): void {
+    const desktopNav = document.getElementById("projects-sidebar-desktop");
+    const mobileNav = document.getElementById("projects-sidebar-mobile");
     
-    const desktopLinks = desktopNav ? desktopNav.querySelectorAll('.nav-link') : [];
-    const mobileLinks = mobileNav ? mobileNav.querySelectorAll('.nav-link') : [];
+    const desktopLinks = desktopNav ? desktopNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
     const allLinks = [...desktopLinks, ...mobileLinks];
     
     allLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', (e: MouseEvent) => {
         const href = link.getAttribute('href');
         if (href && href.startsWith('#')) {
           const target = document.querySelector(href);
@@ -91,18 +91,49 @@ const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr
   }
   
   // Active section detection using Intersection Observer
-  let currentObserver = null;
+  let currentObserver: IntersectionObserver | undefined;
   
-  function initActiveSection() {
-    const sections = document.querySelectorAll('section[id]');
-    const desktopNav = document.getElementById(sidebarId);
-    const mobileNav = document.getElementById(mobileNavId);
+  function updateActiveLink(activeSectionId: string | null): void {
+    const desktopNav = document.getElementById("projects-sidebar-desktop");
+    const mobileNav = document.getElementById("projects-sidebar-mobile");
     
-    const desktopLinks = desktopNav ? desktopNav.querySelectorAll('.nav-link') : [];
-    const mobileLinks = mobileNav ? mobileNav.querySelectorAll('.nav-link') : [];
+    const desktopLinks = desktopNav ? desktopNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
     const allLinks = [...desktopLinks, ...mobileLinks];
     
-    if (sections.length === 0 || allLinks.length === 0) return;
+    allLinks.forEach((link) => {
+      const linkSectionId = link.getAttribute('data-section-id');
+      const underline = link.querySelector<HTMLElement>('.nav-underline');
+      if (linkSectionId === activeSectionId) {
+        link.classList.add('font-bold', 'text-base-content');
+        link.classList.remove('text-base-content/70');
+        if (underline) {
+          underline.classList.add('w-full');
+          underline.classList.remove('w-0');
+        }
+      } else {
+        link.classList.remove('font-bold', 'text-base-content');
+        link.classList.add('text-base-content/70');
+        if (underline) {
+          underline.classList.remove('w-full');
+          underline.classList.add('w-0');
+        }
+      }
+    });
+  }
+  
+  function initActiveSection(): void {
+    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const desktopNav = document.getElementById("projects-sidebar-desktop");
+    const mobileNav = document.getElementById("projects-sidebar-mobile");
+    
+    const desktopLinks = desktopNav ? desktopNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
+    const mobileLinks = mobileNav ? mobileNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
+    const allLinks = [...desktopLinks, ...mobileLinks];
+    
+    if (sections.length === 0 || allLinks.length === 0) {
+      return;
+    }
     
     // Disconnect previous observer if exists
     if (currentObserver) {
@@ -110,50 +141,98 @@ const mobileNavId = `projects-sidebar-mobile-${Math.random().toString(36).substr
     }
     
     // Use different rootMargin for mobile vs desktop
-    const isMobile = window.innerWidth < 768;
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: isMobile ? '-100px 0px -60% 0px' : '-80px 0px -50% 0px',
+    // Mobile: less restrictive bottom margin to ensure sections are detected
+    const isMobile: boolean = window.innerWidth < 768;
+    const observerOptions: IntersectionObserverInit = {
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      rootMargin: isMobile ? '-100px 0px -40% 0px' : '-80px 0px -50% 0px',
     };
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const visibleSections = new Map<string, number>();
+    
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        const sectionId = entry.target.getAttribute('id');
+        if (!sectionId) return;
+        
         if (entry.isIntersecting) {
-          const sectionId = entry.target.getAttribute('id');
-          
-          // Update active nav link
-          allLinks.forEach((link) => {
-            const linkSectionId = link.getAttribute('data-section-id');
-            const underline = link.querySelector('.nav-underline');
-            if (linkSectionId === sectionId) {
-              link.classList.add('font-bold', 'text-base-content');
-              link.classList.remove('text-base-content/70');
-              if (underline) {
-                underline.classList.add('w-full');
-                underline.classList.remove('w-0');
-              }
-            } else {
-              link.classList.remove('font-bold', 'text-base-content');
-              link.classList.add('text-base-content/70');
-              if (underline) {
-                underline.classList.remove('w-full');
-                underline.classList.add('w-0');
-              }
-            }
-          });
+          visibleSections.set(sectionId, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(sectionId);
         }
       });
+      
+      // Find the section with the highest intersection ratio
+      let activeSectionId: string | null = null;
+      let maxRatio: number = 0;
+      
+      visibleSections.forEach((ratio: number, sectionId: string) => {
+        if (ratio > maxRatio) {
+          maxRatio = ratio;
+          activeSectionId = sectionId;
+        }
+      });
+      
+      // If no section is visible, find the closest one to the viewport top
+      if (!activeSectionId && sections.length > 0) {
+        const isMobile: boolean = window.innerWidth < 768;
+        const viewportTop: number = isMobile ? 100 : 80;
+        let closestSection: HTMLElement | null = null;
+        let closestDistance: number = Infinity;
+        
+        for (let i = 0; i < sections.length; i++) {
+          const section = sections[i] as HTMLElement;
+          const rect = section.getBoundingClientRect();
+          const distance = Math.abs(rect.top - viewportTop);
+          
+          if (rect.top <= viewportTop + 300 && distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = section;
+          }
+        }
+        
+        if (closestSection) {
+          const sectionId = closestSection.getAttribute('id');
+          if (sectionId) {
+            activeSectionId = sectionId;
+          }
+        }
+      }
+      
+      if (activeSectionId) {
+        updateActiveLink(activeSectionId);
+      }
     }, observerOptions);
     
     currentObserver = observer;
     
-    sections.forEach((section) => {
+    sections.forEach((section: HTMLElement) => {
       observer.observe(section);
     });
+    
+    // Initial check on page load
+    setTimeout(() => {
+      const isMobile: boolean = window.innerWidth < 768;
+      const viewportTop: number = isMobile ? 100 : 80;
+      let activeSectionId: string | null = null;
+      let closestDistance: number = Infinity;
+      
+      sections.forEach((section: HTMLElement) => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top - viewportTop);
+        
+        if (rect.top <= viewportTop + 300 && distance < closestDistance) {
+          closestDistance = distance;
+          activeSectionId = section.getAttribute('id');
+        }
+      });
+      
+      if (activeSectionId) {
+        updateActiveLink(activeSectionId);
+      }
+    }, 200);
   }
-  
-  import { initAfterNavigation } from "../../core/utils/ui-utils";
-  
+ 
   initAfterNavigation(() => {
     initSmoothScroll();
     initActiveSection();
