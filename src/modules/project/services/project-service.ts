@@ -2,7 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 import { getTextFromProperties } from "../../core/libs/notion";
 import type { NotionProjectData, Project } from "../types";
-import { transformNotionDataToProject } from "../utils/project-utils";
+import {
+  getCompanyKey,
+  normalizeCompanyName,
+  transformNotionDataToProject,
+} from "../utils/project-utils";
 
 const PROJECTS_FILE = path.resolve(process.cwd(), "src/_generated/data/site/projects.json");
 
@@ -46,10 +50,23 @@ export async function getNotionProjectDataBySlug(slug: string): Promise<NotionPr
   return notionProject || null;
 }
 
-export async function getProjectsByCompany(company?: string): Promise<Project[]> {
+export async function getProjectsByCompany(company?: string | null): Promise<Project[]> {
   const allProjects = await getProjects();
-  if (!company || company.toLowerCase() === "personal") {
-    return allProjects.filter((p) => !p.company || p.company.toLowerCase() === "personal");
+
+  if (!company) {
+    // Return projects with no company or "personal" company
+    return allProjects.filter((p) => {
+      const projectCompanyKey = normalizeCompanyName(p.company);
+      return !p.company || projectCompanyKey === "personal";
+    });
   }
-  return allProjects.filter((p) => p.company && p.company.toLowerCase() === company.toLowerCase());
+
+  // Get the normalized company key from the provided company name (could be display title or key)
+  const targetCompanyKey = getCompanyKey(company);
+
+  // Filter projects by matching normalized company keys
+  return allProjects.filter((p) => {
+    const projectCompanyKey = normalizeCompanyName(p.company);
+    return projectCompanyKey === targetCompanyKey;
+  });
 }

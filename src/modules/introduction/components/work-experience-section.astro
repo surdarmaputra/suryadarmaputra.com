@@ -3,6 +3,7 @@ import Button from "../../core/components/base/button.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import { getProjectsByCompany } from "../../project/services/project-service";
 import type { Project } from "../../project/types";
+import { getCompanyDisplayTitle } from "../../project/utils/project-utils";
 import { formatWorkDuration } from "../utils/date-utils";
 import WorkExperienceItem from "./work-experience-item.astro";
 
@@ -24,9 +25,10 @@ const resumePdfUrl = "/resume.pdf";
 const title = "Work Experience";
 
 // Experience data adapted from AboutPage.tsx
+// Company values use company keys (e.g., "goto", "kargo") for consistency with project mapping
 const experienceData = [
   {
-    company: "GoTo Financial",
+    company: "goto",
     role: "Frontend Lead",
     start: "2024-07-01",
     end: null,
@@ -35,7 +37,7 @@ const experienceData = [
     ],
   },
   {
-    company: "Kargo Technologies",
+    company: "kargo",
     role: "Senior Frontend Engineer",
     start: "2021-06-01",
     end: "2024-07-01",
@@ -44,7 +46,7 @@ const experienceData = [
     ],
   },
   {
-    company: "Bukalapak",
+    company: "bukalapak",
     role: "Frontend Engineer",
     start: "2018-07-01",
     end: "2021-06-01",
@@ -53,7 +55,7 @@ const experienceData = [
     ],
   },
   {
-    company: "Artcak Technology",
+    company: "artcak",
     role: "Web Developer",
     start: "2017-02-01",
     end: "2018-07-01",
@@ -75,9 +77,14 @@ const experienceData = [
 // Fetch projects for each company and map to WorkExperience interface
 const experiences: WorkExperience[] = await Promise.all(
   experienceData.map(async (exp) => {
+    // Fetch projects using company key directly
     const projects = exp.company ? await getProjectsByCompany(exp.company) : [];
+
+    // Get the display title from the mapping, or "Freelance" for null company
+    const companyDisplayTitle = exp.company ? getCompanyDisplayTitle(exp.company) : "Freelance";
+
     return {
-      companyName: exp.company || "Freelance",
+      companyName: companyDisplayTitle,
       roles: [
         {
           title: exp.role,
