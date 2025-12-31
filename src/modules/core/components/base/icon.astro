@@ -12,7 +12,7 @@ interface Props {
 const { name, size = "w-6 h-6", class: className = "", ariaLabel, ariaHidden = true } = Astro.props;
 
 // Combine size classes with custom classes, add inline-block and flex-shrink for proper sizing
-const combinedClass = `${size} flex-shrink-0 ${className}`.trim();
+const combinedClass = `${size} shrink-0 ${className}`.trim();
 ---
 
 <AstroIcon
