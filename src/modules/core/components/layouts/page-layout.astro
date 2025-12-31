@@ -1,0 +1,48 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { PERSONAL } from "../../constants";
+import "../../styles/global.css";
+import Footer from "./footer.astro";
+import Header from "./header.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+  mainClass?: string;
+}
+
+const {
+  title = "",
+  description = "Surya Darma Putra is an experienced web developer, fullstack developer, and application developer offering modern, high-quality website and app development services. Elevate your business with expert frontend, backend, and full stack solutions for projects that are scalable and ready to compete in the digital era.",
+  currentPath,
+  mainClass,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="cmyk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ? `${title} - ${PERSONAL.NAME}` : PERSONAL.NAME}</title>
+    <ClientRouter />
+  </head>
+  <body class="font-sans">
+    <Header currentPath={currentPath} />
+    <main class={mainClass}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+

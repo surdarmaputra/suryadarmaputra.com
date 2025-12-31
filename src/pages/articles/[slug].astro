@@ -1,0 +1,50 @@
+---
+import ArticleDetailsPage from "../../modules/article/pages/article-details-page.astro";
+import {
+  getArticleDetailAndNavigationBySlug,
+  getNotionArticleDataBySlug,
+} from "../../modules/article/services/article-service";
+
+export async function getStaticPaths() {
+  const { getArticles } = await import("../../modules/article/services/article-service");
+  const articles = await getArticles();
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/articles");
+}
+
+// Get article detail with navigation
+const { article, previousArticle, nextArticle } = await getArticleDetailAndNavigationBySlug(slug);
+
+if (!article) {
+  return Astro.redirect("/articles");
+}
+
+// Get raw Notion data for blocks
+const notionArticleData = await getNotionArticleDataBySlug(slug);
+
+if (!notionArticleData || !notionArticleData.blocks) {
+  return Astro.redirect("/articles");
+}
+
+// Get categories from article
+const categories = article.categories || [];
+---
+
+<ArticleDetailsPage
+  title={article.title}
+  date={article.date}
+  minsRead={article.minsRead}
+  blocks={notionArticleData.blocks}
+  categories={categories}
+  previousArticle={previousArticle ? { title: previousArticle.title, slug: previousArticle.slug } : undefined}
+  nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug } : undefined}
+/>
+

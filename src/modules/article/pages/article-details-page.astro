@@ -1,0 +1,115 @@
+---
+import Badge from "../../core/components/base/badge.astro";
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
+import type { BlockWithChildren } from "../../core/libs/notion/types";
+
+interface ArticleNav {
+  title: string;
+  slug: string;
+}
+
+interface Props {
+  title: string;
+  date: string;
+  minsRead?: number;
+  blocks: BlockWithChildren[];
+  categories: string[];
+  previousArticle?: ArticleNav;
+  nextArticle?: ArticleNav;
+}
+
+const { title, date, minsRead, blocks, categories, previousArticle, nextArticle } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Articles", href: "/articles" },
+  { label: title },
+];
+
+// Format date
+const articleDate = new Date(date);
+const formattedDate = articleDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<PageLayout
+  title={title}
+  description={`${title} article`}
+  currentPath={currentPath}
+  mainClass="page-container"
+>
+  <OrnamentWrapper>
+    <PageHeader
+      title={title}
+      breadcrumbItems={breadcrumbItems}
+      size="default"
+      align="left"
+      animate
+    >
+      <div slot="extra" class="flex items-center gap-4 text-base-content/60 text-sm md:text-base mb-12 md:mb-16">
+        <time datetime={date}>{formattedDate}</time>
+        <span>•</span>
+        <span>{minsRead || 5} min read</span>
+      </div>
+    </PageHeader>
+
+    <!-- Content Sections -->
+    <div class="mb-16">
+      <BlocksRenderer blocks={blocks} imageBasePath="/images/articles" />
+    </div>
+
+    <!-- Categories Section -->
+    {categories.length > 0 && (
+      <div class="my-16">
+        <div class="flex flex-wrap gap-4">
+          {categories.map((category, index) => (
+            <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+              {category}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Previous/Next Navigation -->
+    {(previousArticle || nextArticle) && (
+      <div class="mt-16 flex flex-col md:flex-row justify-between gap-4">
+          {previousArticle ? (
+            <a
+              href={`/articles/${previousArticle.slug}`}
+              class="link link-hover text-left flex-1 group"
+            >
+              <div class="text-sm text-base-content/60 mb-1">← Previous</div>
+              <div class="truncate text-base-content group-hover:text-primary">
+                {previousArticle.title}
+              </div>
+            </a>
+          ) : (
+            <div class="flex-1"></div>
+          )}
+
+          {nextArticle ? (
+            <a
+              href={`/articles/${nextArticle.slug}`}
+              class="link link-hover text-right flex-1 group"
+            >
+              <div class="text-sm text-base-content/60 mb-1">Next →</div>
+              <div class="truncate text-base-content group-hover:text-primary">
+                {nextArticle.title}
+              </div>
+            </a>
+          ) : (
+            <div class="flex-1"></div>
+          )}
+        </div>
+      )}
+  </OrnamentWrapper>
+</PageLayout>
+

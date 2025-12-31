@@ -1,17 +1,11 @@
-# EXAMPLE USAGE:
-#
-#   Refer for explanation to following link:
-#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
-
 pre-commit:
+  parallel: true
   commands:
-    format:
-      glob: '*.{js,ts,tsx,yml}'
-      run: bun format:fix {staged_files} && git add {staged_files}
     lint:
-      glob: '*.{js,ts,tsx}'
-      run: bun lint:fix {staged_files} && git add {staged_files}
+      run: bun run lint:fix
+      stage_fixed: true
+
 commit-msg:
   commands:
-    commit-lint:
-      run: bun commitlint --edit $1
+    commitlint:
+      run: bun run commitlint -- --edit {1}

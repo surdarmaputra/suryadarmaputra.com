@@ -1,0 +1,2 @@
+import{r as m,j as e}from"./chunk-B7RQU5TL-55_CKvuM.js";import{d as x}from"./dayjs.min-BBf2RD_Y.js";function f({className:o="",date:t,readingTime:s}){const a=m.useMemo(()=>t?x(t).format("MMM D, YYYY"):null,[t]);if(!a&&!s)return null;const r=[a,s].filter(Boolean);return e.jsx("small",{className:`container mx-auto block text-xs font-light tracking-tight text-slate-500 dark:text-slate-600 md:text-sm lg:max-w-3xl ${o}`,children:r.map((l,n)=>e.jsx("span",{className:"mr-4 inline-block",children:l},n))})}export{f as P};
+//# sourceMappingURL=PostMetaData-ConSlU12.js.map

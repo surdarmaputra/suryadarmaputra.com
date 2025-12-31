@@ -1,0 +1,32 @@
+---
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import ArticleListSection from "../components/article-list-section.astro";
+import { getArticles } from "../services/article-service";
+
+const articles = await getArticles();
+const currentPath = Astro.url.pathname;
+---
+
+<PageLayout
+  title="Articles"
+  description="Articles and blog posts"
+  currentPath={currentPath}
+  mainClass="page-container"
+>
+  <OrnamentWrapper>
+    <PageHeader title="Articles" size="large" align="center" animate />
+    <ArticleListSection articles={articles} customWrapperClass="!pt-0" />
+  </OrnamentWrapper>
+</PageLayout>
+
+<script>
+  import { initArticleListItemScrollReveal } from "../utils/ui-utils";
+  import { initAfterNavigation } from "../../core/utils/ui-utils";
+  
+  initAfterNavigation(() => {
+    initArticleListItemScrollReveal();
+  });
+</script>
+

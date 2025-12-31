@@ -1,0 +1,114 @@
+---
+import Badge from "../../core/components/base/badge.astro";
+import Button from "../../core/components/base/button.astro";
+import Icon from "../../core/components/base/icon.astro";
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import BlocksRenderer from "../../core/libs/notion/blocks-renderer.astro";
+import type { BlockWithChildren } from "../../core/libs/notion/types";
+import ProjectCarousel from "../components/project-carousel.astro";
+import type { Project } from "../types";
+
+interface Props {
+  title: string;
+  previewLink?: string;
+  blocks: BlockWithChildren[];
+  projectId: string;
+  tags: string[];
+  relatedProjects: Project[];
+  categories?: string[];
+}
+
+const { title, previewLink, blocks, projectId, tags, relatedProjects, categories } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: title },
+];
+---
+
+<PageLayout
+  title={title}
+  description={`${title} project details`}
+  currentPath={currentPath}
+  mainClass="page-container"
+>
+  <OrnamentWrapper>
+    <PageHeader
+      title={title}
+      breadcrumbItems={breadcrumbItems}
+      size="large"
+      align="center"
+      animate
+      breadcrumbAlign="center"
+    >
+      <div slot="extra">
+        {categories && categories.length > 0 && (
+          <div class="flex justify-center flex-wrap gap-2 mt-4 mb-4">
+            {categories.map((category, index) => (
+              <Badge size="lg" variant="neutral" style="outline" itemIndex={index}>
+                {category}
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        {previewLink && (
+          <div class="flex justify-center mb-20 md:mb-28 mt-8">
+            <Button
+              href={previewLink}
+              variant="outline"
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover-scale transition-transform"
+            >
+              <Icon name="heroicons:arrow-top-right-on-square" size="w-5 h-5" class="mr-2" />
+              Preview Project
+            </Button>
+          </div>
+        )}
+
+        {!previewLink && (!categories || categories.length === 0) && (
+          <div class="mb-20 md:mb-28"></div>
+        )}
+      </div>
+    </PageHeader>
+
+    <!-- Content Sections -->
+    <div class="mb-16">
+      <BlocksRenderer blocks={blocks} imageBasePath="/images/projects" />
+    </div>
+
+    <!-- Tags Section -->
+    {tags.length > 0 && (
+      <div class="my-16">
+        <h2 class="heading-medium mb-6 text-base-content">Tags</h2>
+        <div class="flex flex-wrap gap-4">
+          {tags.map((tag, index) => (
+            <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    )}
+
+      <!-- Related Projects Carousel -->
+      {relatedProjects.length > 0 && (
+        <section class="max-w-6xl mx-auto mt-24 md:mt-36" aria-labelledby="related-projects-heading">
+          <h2
+            id="related-projects-heading"
+            class="heading-default mb-4 md:mb-12 text-center text-base-content"
+          >
+            Explore more projects
+          </h2>
+          <ProjectCarousel projects={relatedProjects} />
+        </section>
+      )}
+  </OrnamentWrapper>
+</PageLayout>
+

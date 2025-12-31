@@ -1,0 +1,8 @@
+---
+import ProjectsPage from "../modules/project/pages/projects-page.astro";
+import { getProjects } from "../modules/project/services/project-service";
+
+const projects = await getProjects();
+---
+
+<ProjectsPage projects={projects} />

@@ -9,8 +9,8 @@ jobs:
   rebuild:
     runs-on: ubuntu-latest
     env:
-      NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-      NOTION_PROJECT_DATABASE_ID: ${{ secrets.NOTION_PROJECT_DATABASE_ID }}
+      NOTION_ARTICLES_DATABASE_ID: ${{ secrets.NOTION_ARTICLES_DATABASE_ID }}
+      NOTION_PROJECTS_DATABASE_ID: ${{ secrets.NOTION_PROJECTS_DATABASE_ID }}
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       BASE_URL: ${{ secrets.BASE_URL }}
       NETLIFY_HOOK_URL: ${{ secrets.NETLIFY_HOOK_URL }}

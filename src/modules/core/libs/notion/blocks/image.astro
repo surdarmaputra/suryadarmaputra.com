@@ -1,0 +1,48 @@
+---
+import { getImageAltText, getImageExtension } from "../renderer-utils";
+import type { BlockWithChildren } from "../types";
+import RichText from "./rich-text.astro";
+
+interface Props {
+  block: BlockWithChildren["block"];
+  imageBasePath: string;
+}
+
+const { block, imageBasePath } = Astro.props;
+
+if (!("type" in block) || block.type !== "image") {
+  return null;
+}
+
+// Get image extension
+const extension = getImageExtension(block);
+if (!extension) {
+  return null;
+}
+
+// Build image path using block.id
+// Format: /images/{basePath}/{block.id}.{ext}
+const imagePath = `${imageBasePath}/${block.id}.${extension}`;
+
+const altText = getImageAltText(block);
+
+// Get caption
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const caption = (block.image as any)?.caption || [];
+---
+
+<figure class="my-4 md:my-6 overflow-hidden">
+  <img
+    src={imagePath}
+    alt={altText || "Image"}
+    class="w-full border-4 border-neutral rounded-lg shadow-lg"
+  />
+  {caption.length > 0 && (
+    <figcaption class="p-4 text-center text-sm md:text-base text-base-content/70 italic">
+      {caption.map((richTextBlock: any) => (
+        <RichText block={richTextBlock} />
+      ))}
+    </figcaption>
+  )}
+</figure>
+

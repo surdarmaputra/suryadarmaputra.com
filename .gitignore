@@ -1,13 +1,16 @@
 .DS_Store
 .env
 .netlify/
-.react-router/
+.astro/
 /.cache
-/build
-/extras/**
-/posts/**
-/public/images/posts/**
+/dist
+/src/_generated/**
+/public/images/articles/**
 /public/images/projects/**
 node_modules
+.biome
 
 !**/*.example
+
+.vscode/extensions.json
+.vscode/launch.json

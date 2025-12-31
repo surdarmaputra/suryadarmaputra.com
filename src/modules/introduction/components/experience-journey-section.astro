@@ -1,0 +1,60 @@
+---
+import Badge from "../../core/components/base/badge.astro";
+import Ornament from "../../core/components/base/ornament.astro";
+
+const title = "From Websites to All Things Tech";
+const subtitle = "Having extensive experience developing softwares across diverse technologies";
+const skills = [
+  "Vibe Coding",
+  "AI Agent",
+  "n8n",
+  "JavaScript",
+  "TypeScript",
+  "Java",
+  "Flutter",
+  "Kotlin",
+  "PHP",
+  "React",
+  "Vue",
+  "Astro",
+  "Tailwind",
+  "Node.js",
+  "Docker",
+  "Kubernetes",
+  "GraphQL",
+  "PostgreSQL",
+  "Google Cloud",
+  "Testing Pyramid",
+  "CI/CD",
+];
+---
+
+<section id="experience" class="pt-16 pb-24 md:py-52 relative overflow-hidden" aria-labelledby="experience-heading">
+  <Ornament variant="square" size="md" color="primary" position="top-left" />
+  
+  <div class="container-z">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        id="experience-heading"
+        class="heading-large mb-6 text-accent-content animate-fade-in-up"
+      >
+        {title}
+      </h2>
+      <p class="text-xl md:text-3xl font-semibold text-accent-content/90 mb-4 animate-fade-in-up animate-delay-200">
+        {subtitle}
+      </p>
+      
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+        {skills.map((skill, index) => (
+          <Badge size="lg" colorRandomizer={index} itemIndex={index}>
+            {skill}
+          </Badge>
+        ))}
+      </div>
+      <p class="text-base-content/60 mt-12 px-6">
+        ... and always adapting to new technology updates 💪
+      </p>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,33 @@
+---
+import type { BlockWithChildren } from "../types";
+
+interface Props {
+  block: BlockWithChildren["block"];
+}
+
+const { block } = Astro.props;
+
+if (!("type" in block) || block.type !== "embed") {
+  return null;
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const embedBlock = (block as any).embed;
+const url = embedBlock?.url;
+
+if (!url) {
+  return null;
+}
+---
+
+<div class="my-8 md:my-12 flex justify-center">
+  <div class="w-full md:w-4/5">
+    <iframe
+      src={url}
+      class="w-full h-96 rounded-lg shadow-lg border border-base-content/10"
+      loading="lazy"
+      title="Embedded content"
+    />
+  </div>
+</div>
+

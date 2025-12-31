@@ -1,0 +1,295 @@
+---
+import Icon from "../../components/base/icon.astro";
+import { PERSONAL } from "../../constants";
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/articles", label: "Articles" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
+
+// Helper function to check if a nav item should be active
+// For "/", only exact match. For others, check if path starts with href
+function isNavItemActive(itemHref: string, path: string): boolean {
+  if (itemHref === "/") {
+    return path === "/";
+  }
+  return path.startsWith(itemHref);
+}
+---
+
+<header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-sm">
+  <nav class="container-base py-4" aria-label="Main navigation">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center hover-scale" aria-label="Home">
+        <picture>
+          <img src="/site-logo-bw.png" alt={`${PERSONAL.NAME} Logo`} class="h-10 w-auto" />
+        </picture>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-6" id="desktop-nav">
+        {navItems.map((item, index) => {
+          const isActive = isNavItemActive(item.href, currentPath);
+          return (
+            <a
+              href={item.href}
+              class={`nav-link block px-2 py-1 text-sm font-medium transition-all relative group ${
+                isActive 
+                  ? 'font-bold text-base-content' 
+                  : 'text-base-content/70 hover:text-base-content hover:font-bold'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+              data-nav-index={index}
+            >
+              <span class="relative">
+                {item.label}
+                <span class={`nav-underline absolute bottom-0 left-0 h-0.5 bg-base-content transition-all duration-300 ${
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+      
+      <button
+        class="md:hidden btn btn-ghost btn-sm relative z-60 flex items-center justify-center w-10 h-10"
+        id="mobile-menu-toggle"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+      >
+        <Icon name="heroicons:bars-3" size="w-6 h-6" class="menu-icon-open" />
+        <Icon name="heroicons:x-mark" size="w-6 h-6" class="menu-icon-close hidden" />
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 md:hidden opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+>
+  <nav class="h-full flex flex-col items-center justify-center px-6" aria-label="Mobile navigation">
+    <ul class="flex flex-col gap-8 text-center">
+      {navItems.map((item, index) => {
+        const isActive = isNavItemActive(item.href, currentPath);
+        return (
+          <li class="mobile-menu-item opacity-0 translate-y-4">
+            <a
+              href={item.href}
+              class={`text-2xl transition-colors ${
+                isActive ? 'font-black underline' : ''
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+              data-menu-index={index}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  import { initAfterNavigation } from "../../utils/ui-utils";
+  
+  // Store cleanup functions
+  let cleanupFunctions: (() => void)[] = [];
+  
+  function initHeader() {
+    // Clean up previous listeners
+    cleanupFunctions.forEach((cleanup) => cleanup());
+    cleanupFunctions = [];
+    
+    // Mobile menu overlay toggle with animations
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const menuItems = overlay?.querySelectorAll('.mobile-menu-item');
+    const menuIconOpen = toggle?.querySelector('.menu-icon-open');
+    const menuIconClose = toggle?.querySelector('.menu-icon-close');
+    const body = document.body;
+    
+    if (!toggle || !overlay) return;
+    
+    // Close menu if open (reset state)
+    let isMenuOpen = false;
+    if (overlay.classList.contains('opacity-100')) {
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (menuIconOpen) menuIconOpen.classList.remove('hidden');
+      if (menuIconClose) menuIconClose.classList.add('hidden');
+      body.style.overflow = '';
+    }
+  
+    const openMenu = () => {
+      if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+      
+      isMenuOpen = true;
+      body.style.overflow = 'hidden';
+      toggle.setAttribute('aria-expanded', 'true');
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.remove('pointer-events-none');
+      menuIconOpen.classList.add('hidden');
+      menuIconClose.classList.remove('hidden');
+      
+      // Trigger overlay fade-in
+      requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
+      });
+      
+      // Animate menu items with stagger
+      if (menuItems) {
+        menuItems.forEach((item, index) => {
+          const element = item;
+          setTimeout(() => {
+            element.classList.remove('opacity-0', 'translate-y-4');
+            element.classList.add('opacity-100', 'translate-y-0');
+          }, 100 + index * 50);
+        });
+      }
+    };
+    
+    const closeMenu = () => {
+      if (!overlay || !toggle || !menuIconOpen || !menuIconClose) return;
+      
+      isMenuOpen = false;
+      body.style.overflow = '';
+      toggle.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      menuIconOpen.classList.remove('hidden');
+      menuIconClose.classList.add('hidden');
+      
+      // Animate menu items out
+      if (menuItems) {
+        menuItems.forEach((item) => {
+          const element = item;
+          element.classList.remove('opacity-100', 'translate-y-0');
+          element.classList.add('opacity-0', 'translate-y-4');
+        });
+      }
+      
+      // Fade out overlay
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0');
+      
+      setTimeout(() => {
+        overlay.classList.add('pointer-events-none');
+      }, 300);
+    };
+    
+    // Toggle click handler
+    const toggleHandler = (e: Event) => {
+      e.stopPropagation();
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+    toggle.addEventListener('click', toggleHandler);
+    cleanupFunctions.push(() => toggle.removeEventListener('click', toggleHandler));
+    
+    // Overlay click handler
+    const overlayHandler = (e: Event) => {
+      if (e.target === overlay) {
+        closeMenu();
+      }
+    };
+    overlay.addEventListener('click', overlayHandler);
+    cleanupFunctions.push(() => overlay.removeEventListener('click', overlayHandler));
+    
+    // Menu link click handlers
+    const menuLinks = overlay.querySelectorAll('a');
+    menuLinks.forEach((link) => {
+      const linkHandler = () => closeMenu();
+      link.addEventListener('click', linkHandler);
+      cleanupFunctions.push(() => link.removeEventListener('click', linkHandler));
+    });
+    
+    // Escape key handler
+    const escapeHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    };
+    document.addEventListener('keydown', escapeHandler);
+    cleanupFunctions.push(() => document.removeEventListener('keydown', escapeHandler));
+  
+  
+    // Smooth scroll for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach((anchor) => {
+      const anchorHandler = (e: Event) => {
+        const href = anchor.getAttribute('href');
+        if (href && href !== '#') {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }
+      };
+      anchor.addEventListener('click', anchorHandler);
+      cleanupFunctions.push(() => anchor.removeEventListener('click', anchorHandler));
+    });
+  }
+  
+  // Initialize using utility function
+  initAfterNavigation(initHeader);
+</script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .nav-link {
+    padding: 0;
+  }
+  
+  .mobile-menu-item {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  .mobile-menu-item a {
+    display: inline-block;
+    transition: color 0.2s ease;
+  }
+  
+  .mobile-menu-item a:hover {
+    color: hsl(var(--p));
+  }
+  
+  .menu-icon-open,
+  .menu-icon-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .menu-icon-close.hidden {
+    display: none !important;
+  }
+  
+  .menu-icon-open.hidden {
+    display: none !important;
+  }
+</style>
+

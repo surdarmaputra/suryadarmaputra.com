@@ -1,14 +1,14 @@
-import { GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
+import type { GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
 
-import { getPagesFromDatabase } from '~/libs/notion/index.server';
+import { getPagesFromDatabase } from '../src/modules/core/libs/notion/client';
 
-export function fetchPosts(): Promise<GetPageResponse[]> {
+export function fetchArticles(): Promise<GetPageResponse[]> {
   if (process.env.SHOW_ALL_POSTS) {
-    return getPagesFromDatabase(process.env.NOTION_DATABASE_ID);
+    return getPagesFromDatabase(process.env.NOTION_ARTICLES_DATABASE_ID);
   }
 
   if (process.env.SHOW_UNPUBLISHED) {
-    return getPagesFromDatabase(process.env.NOTION_DATABASE_ID, {
+    return getPagesFromDatabase(process.env.NOTION_ARTICLES_DATABASE_ID, {
       filter: {
         property: 'publish',
         checkbox: {
@@ -18,7 +18,7 @@ export function fetchPosts(): Promise<GetPageResponse[]> {
     });
   }
 
-  return getPagesFromDatabase(process.env.NOTION_DATABASE_ID, {
+  return getPagesFromDatabase(process.env.NOTION_ARTICLES_DATABASE_ID, {
     filter: {
       property: 'publish',
       checkbox: {
@@ -29,7 +29,7 @@ export function fetchPosts(): Promise<GetPageResponse[]> {
 }
 
 export function fetchProjects(): Promise<GetPageResponse[]> {
-  return getPagesFromDatabase(process.env.NOTION_PROJECT_DATABASE_ID, {
+  return getPagesFromDatabase(process.env.NOTION_PROJECTS_DATABASE_ID, {
     filter: {
       property: 'publish',
       checkbox: {
@@ -39,13 +39,3 @@ export function fetchProjects(): Promise<GetPageResponse[]> {
   });
 }
 
-export function fetchCampaigns(): Promise<GetPageResponse[]> {
-  return getPagesFromDatabase(process.env.NOTION_CAMPAIGN_DATABASE_ID, {
-    filter: {
-      property: 'publish',
-      checkbox: {
-        equals: true,
-      },
-    },
-  });
-}

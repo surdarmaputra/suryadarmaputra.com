@@ -1,0 +1,35 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Ornament from "../../core/components/base/ornament.astro";
+import type { Project } from "../types";
+import ProjectCarousel from "./project-carousel.astro";
+
+interface Props {
+  projects: Project[];
+}
+
+const title = "Project & Open Source";
+const { projects } = Astro.props;
+---
+
+<section class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="projects-heading">
+  <Ornament variant="dots" size="md" color="primary" position="top-right" />
+  
+  <div class="container-z">
+    <h2
+      id="projects-heading"
+      class="heading-large mb-20 text-center text-base-content animate-fade-in-up"
+    >
+      {title}
+    </h2>
+    
+    <ProjectCarousel projects={projects} />
+    
+    <div class="flex justify-center mt-8">
+      <Button href="/projects" variant="outline">
+        View all projects
+      </Button>
+    </div>
+  </div>
+</section>
+

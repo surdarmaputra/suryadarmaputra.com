@@ -1,0 +1,55 @@
+---
+import ProjectCarousel from "../../project/components/project-carousel.astro";
+import type { Project } from "../../project/types";
+
+interface WorkExperience {
+  companyName: string;
+  roles: Array<{ title: string; timeRange: string }>;
+  description: string;
+  achievements?: string[];
+  projects?: Project[];
+}
+
+interface Props {
+  experience: WorkExperience;
+}
+
+const { experience } = Astro.props;
+---
+
+<article>
+  <div class="mb-4">
+    <h3 class="text-3xl md:text-4xl font-bold font-serif mb-2 text-accent-content">{experience.companyName}</h3>
+    <div class="flex flex-col gap-2 text-sm text-accent-content/60">
+      {experience.roles.map((role) => (
+        <div>
+          <span class="font-semibold">{role.title}</span>
+          <span class="mx-2">•</span>
+          <span>{role.timeRange}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <div class="space-y-4">
+    <p class="text-accent-content/80 leading-relaxed" set:html={experience.description} />
+    
+    {experience.achievements && experience.achievements.length > 0 && (
+      <div>
+        <h4 class="font-semibold mb-2 text-accent-content">Key Achievements:</h4>
+        <ul class="list-disc list-outside space-y-1 text-accent-content/80">
+          {experience.achievements.map((achievement) => (
+            <li class="ml-5">{achievement}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+    
+    {experience.projects && experience.projects.length > 0 && (
+      <div class="mt-6">
+        <h4 class="font-semibold text-accent-content -mb-2">Projects</h4>
+        <ProjectCarousel projects={experience.projects} />
+      </div>
+    )}
+  </div>
+</article>

@@ -1,0 +1,68 @@
+---
+import ArticleListSection from "../../article/components/article-list-section.astro";
+import { getArticles } from "../../article/services/article-service";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import ProjectCarouselSection from "../../project/components/project-carousel-section.astro";
+import { getProjectsByCompany } from "../../project/services/project-service";
+import ExperienceJourneySection from "../components/experience-journey-section.astro";
+import HeroSection from "../components/hero-section.astro";
+import SocialLinksSection from "../components/social-links-section.astro";
+import WorkExperienceSection from "../components/work-experience-section.astro";
+
+// Fetch personal projects and randomize for landing page
+const personalProjects = await getProjectsByCompany("personal");
+const shuffledProjects = [...personalProjects].sort(() => Math.random() - 0.5);
+const projects = shuffledProjects.slice(0, 6);
+
+// Fetch all articles for landing page
+const articles = await getArticles();
+
+const currentPath = Astro.url.pathname;
+---
+
+<PageLayout title="Home" description="Personal website and blog" currentPath={currentPath}>
+  <HeroSection />
+  
+  <ExperienceJourneySection />
+  
+  <ProjectCarouselSection projects={projects} />
+  
+  <WorkExperienceSection />
+  
+  <ArticleListSection articles={articles} title="Articles" />
+  
+  <SocialLinksSection />
+</PageLayout>
+
+<script>
+  import { initArticleListItemScrollReveal } from "../../article/utils/ui-utils";
+  import { initAfterNavigation } from "../../core/utils/ui-utils";
+  
+  // Smooth scroll for anchor links
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (href && href !== '#') {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth',
+            });
+          }
+        }
+      });
+    });
+  }
+  
+  initAfterNavigation(() => {
+    initArticleListItemScrollReveal();
+    initSmoothScroll();
+  });
+</script>

@@ -1,0 +1,134 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Ornament from "../../core/components/base/ornament.astro";
+import { getProjectsByCompany } from "../../project/services/project-service";
+import type { Project } from "../../project/types";
+import { getCompanyDisplayTitle } from "../../project/utils/project-utils";
+import { formatWorkDuration } from "../utils/date-utils";
+import WorkExperienceItem from "./work-experience-item.astro";
+
+interface WorkExperience {
+  companyName: string;
+  roles: Array<{ title: string; timeRange: string }>;
+  description: string;
+  achievements?: string[];
+  projects?: Project[];
+}
+
+interface Props {
+  isDownloadResumeVisible?: boolean;
+}
+
+const { isDownloadResumeVisible = false } = Astro.props;
+
+const resumePdfUrl = "";
+const title = "Work Experience";
+
+// Experience data adapted from AboutPage.tsx
+// Company values use company keys (e.g., "goto", "kargo") for consistency with project mapping
+const experienceData = [
+  {
+    company: "goto",
+    role: "Frontend Lead",
+    start: "2024-07-01",
+    end: null,
+    descriptions: [
+      "GoTo Financial provides wide range of financial services for consumers and merchants. I build and maintain web apps, mobile app, dashboards and frontend libraries to provide lending products across multiple mobile apps. Here I'm challenged to deal with a <strong>complex system</strong> that serves a <strong>huge traffic</strong>, finding balance between <strong>beating time-to-market</strong>, <strong>code quality</strong> and <strong>comply with regulations</strong>. Every steps we take will impacting a <strong>massive amount of users</strong> and affect company reputation as a publicly traded entity.",
+    ],
+  },
+  {
+    company: "kargo",
+    role: "Senior Frontend Engineer",
+    start: "2021-06-01",
+    end: "2024-07-01",
+    descriptions: [
+      "Kargo provides transportation solutions, especially trucks, for first-mile, mid-mile and last-mile logistic. Here I experienced working at a <strong>fast-growing - early stage</strong> company. I contributed to <strong>core engineering</strong> and <strong>product engineering</strong> team. I initiated frontend testing, maintained NPM packages, optimized CI/CD, built and maintained dashboards, mobile webs, and mobile app, conducted A/B testing, optimized funnels, and integrated AI into our products.",
+    ],
+  },
+  {
+    company: "bukalapak",
+    role: "Frontend Engineer",
+    start: "2018-07-01",
+    end: "2021-06-01",
+    descriptions: [
+      "Bukalapak offers financial solutions to increase customers' buying power and empower shop owners' business. I built <strong>web apps</strong> and <strong>dashboards</strong> to support lending business. This role marked my first venture into building products in a <strong>tech startup</strong> environment, gaining a ton of experiences I never thought before, including cloud infrastructure, architecture migration, being on-call engineer, and learn diverse tech stacks and workflows.",
+    ],
+  },
+  {
+    company: "artcak",
+    role: "Web Developer",
+    start: "2017-02-01",
+    end: "2018-07-01",
+    descriptions: [
+      "Artcak offers mobile and web development services across various industries, including tours and travel, internet providers, and state-owned enterprises. My responsibilities included developing <strong>REST APIs</strong>, <strong>web dashboards</strong>, <strong>project starters</strong>, <strong>API testing</strong>, and <strong>optimizing developer experience</strong>.",
+    ],
+  },
+  {
+    company: null,
+    role: "Freelance Web Developer",
+    start: "2015-11-01",
+    end: "2017-02-01",
+    descriptions: [
+      "This marked <strong>the beginning</strong> of my professional software development journey. During college, I took on <strong>freelance projects</strong> referred by friends and lecturers.",
+    ],
+  },
+];
+
+// Fetch projects for each company and map to WorkExperience interface
+const experiences: WorkExperience[] = await Promise.all(
+  experienceData.map(async (exp) => {
+    // Fetch projects using company key directly
+    const projects = exp.company ? await getProjectsByCompany(exp.company) : [];
+
+    // Get the display title from the mapping, or "Freelance" for null company
+    const companyDisplayTitle = exp.company ? getCompanyDisplayTitle(exp.company) : "Freelance";
+
+    return {
+      companyName: companyDisplayTitle,
+      roles: [
+        {
+          title: exp.role,
+          timeRange: formatWorkDuration(exp.start, exp.end),
+        },
+      ],
+      description: exp.descriptions.join(" "),
+      projects: projects.length > 0 ? projects : undefined,
+    };
+  })
+);
+---
+
+<section class="py-24 md:py-36 relative overflow-hidden bg-base-200/20" aria-labelledby="work-heading">
+  <Ornament variant="square" size="lg" color="accent" position="bottom-left" />
+  
+  <div class="container-z">
+    <h2
+      id="work-heading"
+      class="heading-large mb-20 text-center text-accent-content animate-fade-in-up"
+    >
+      {title}
+    </h2>
+    
+    <div class="flex flex-col gap-16">
+      {experiences.map((experience) => (
+        <WorkExperienceItem experience={experience} />
+      ))}
+      
+      {isDownloadResumeVisible && resumePdfUrl && (
+        <div class="flex justify-center mt-8">
+          <Button
+            href={resumePdfUrl}
+            variant="outline"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover-scale transition-all duration-300"
+          >
+            <Icon name="heroicons:arrow-down-tray" size="w-5 h-5" class="mr-2" />
+            Get the PDF Format
+          </Button>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+

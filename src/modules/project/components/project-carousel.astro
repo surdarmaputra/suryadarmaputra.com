@@ -1,0 +1,275 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Icon from "../../core/components/base/icon.astro";
+import type { Project } from "../types";
+import ProjectCard from "./project-card.astro";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+
+const MAX_PROJECTS_MOBILE = 1;
+const MAX_PROJECTS_DESKTOP = 3;
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="relative">
+  <div
+    id={carouselId}
+    class="carousel carousel-center w-[calc(100%+32px)] gap-4 overflow-x-auto scroll-smooth scrollbar-hide px-4 -ml-4 -mr-4 md:px-6 md:-ml-6 md:-mr-6 py-6"
+    role="region"
+    aria-label="Projects carousel"
+  >
+    {projects.map((project, index) => (
+      <div class="carousel-item w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-8px)] shrink-0" data-index={index}>
+        <ProjectCard {...project} />
+      </div>
+    ))}
+  </div>
+
+  <div
+    id={`nav-${carouselId}`}
+    class="hidden justify-center gap-4 mt-8"
+    aria-hidden="true"
+  >
+    <Button
+      variant="outline"
+      circle={true}
+      class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+      aria-label="Previous project"
+      data-carousel-prev={carouselId}
+      id={`prev-${carouselId}`}
+    >
+      <Icon name="heroicons:chevron-left" size="w-6 h-6" />
+    </Button>
+    <Button
+      variant="outline"
+      circle={true}
+      class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+      aria-label="Next project"
+      data-carousel-next={carouselId}
+      id={`next-${carouselId}`}
+    >
+      <Icon name="heroicons:chevron-right" size="w-6 h-6" />
+    </Button>
+  </div>
+</div>
+
+<script define:vars={{ carouselId, projectCount: projects.length, MAX_PROJECTS_MOBILE, MAX_PROJECTS_DESKTOP }}>
+  const carousel = document.getElementById(carouselId);
+  const navContainer = document.getElementById(`nav-${carouselId}`);
+  const prevButton = document.getElementById(`prev-${carouselId}`);
+  const nextButton = document.getElementById(`next-${carouselId}`);
+  
+  function shouldShowNavigation() {
+    const isMobile = window.innerWidth < 768;
+    const maxProjects = isMobile ? MAX_PROJECTS_MOBILE : MAX_PROJECTS_DESKTOP;
+    return projectCount > maxProjects;
+  }
+  
+  function updateNavigationVisibility() {
+    if (navContainer) {
+      if (shouldShowNavigation()) {
+        navContainer.classList.remove('hidden');
+        navContainer.classList.add('flex');
+        navContainer.setAttribute('aria-hidden', 'false');
+      } else {
+        navContainer.classList.add('hidden');
+        navContainer.classList.remove('flex');
+        navContainer.setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+  
+  // Carousel state and cleanup functions
+  let autoPlayInterval = null;
+  let autoPlayPaused = false;
+  let resumeTimeout = null;
+  let cleanupFunctions = [];
+  const AUTO_PLAY_DELAY = 3000; // 3 seconds between auto-scrolls
+  const RESUME_DELAY = 5000; // Resume auto-play after 5 seconds of no interaction
+  
+  function cleanupCarousel() {
+    // Clear intervals and timeouts
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+    if (resumeTimeout) {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = null;
+    }
+    
+    // Remove event listeners
+    cleanupFunctions.forEach((cleanup) => cleanup());
+    cleanupFunctions = [];
+    
+    autoPlayPaused = false;
+  }
+  
+  function initCarousel() {
+    if (!carousel || !prevButton || !nextButton || !shouldShowNavigation()) {
+      return;
+    }
+    
+    // Cleanup any existing initialization
+    cleanupCarousel();
+    
+    const getScrollAmount = () => {
+      // Get the width of one card plus gap
+      const firstItem = carousel.querySelector('.carousel-item');
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth;
+        const gap = 16; // gap-4 = 1rem = 16px
+        return itemWidth + gap;
+      }
+      return carousel.offsetWidth * 0.5;
+    };
+    
+    const updateButtonStates = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      const isAtStart = scrollLeft <= 0;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1; // -1 for rounding errors
+      
+      prevButton.disabled = isAtStart;
+      nextButton.disabled = isAtEnd;
+      
+      // If at the end, restart from the beginning for auto-play
+      if (isAtEnd && autoPlayInterval && !autoPlayPaused) {
+        // Scroll back to start smoothly
+        setTimeout(() => {
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 500);
+      }
+    };
+    
+    const startAutoPlay = () => {
+      if (autoPlayInterval) return; // Already running
+      
+      autoPlayInterval = setInterval(() => {
+        if (autoPlayPaused) return;
+        
+        const { scrollLeft, scrollWidth, clientWidth } = carousel;
+        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1;
+        
+        if (isAtEnd) {
+          // Reset to start
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll forward
+          const scrollAmount = getScrollAmount();
+          carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+        
+        updateButtonStates();
+      }, AUTO_PLAY_DELAY);
+    };
+    
+    const pauseAutoPlay = () => {
+      autoPlayPaused = true;
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    };
+    
+    const resumeAutoPlay = () => {
+      autoPlayPaused = false;
+      if (!autoPlayInterval) {
+        startAutoPlay();
+      }
+    };
+    
+    const pauseAndResume = () => {
+      pauseAutoPlay();
+      
+      // Clear any existing resume timeout
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+      }
+      
+      // Resume after delay
+      resumeTimeout = setTimeout(() => {
+        resumeAutoPlay();
+      }, RESUME_DELAY);
+    };
+    
+    // Initial state check
+    updateButtonStates();
+    
+    // Start auto-play
+    startAutoPlay();
+    
+    // Update on scroll
+    const scrollHandler = () => updateButtonStates();
+    carousel.addEventListener('scroll', scrollHandler);
+    cleanupFunctions.push(() => carousel.removeEventListener('scroll', scrollHandler));
+    
+    // Pause auto-play on manual navigation
+    const prevClickHandler = () => {
+      if (prevButton.disabled) return;
+      pauseAndResume();
+      const scrollAmount = getScrollAmount();
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    };
+    prevButton.addEventListener('click', prevClickHandler);
+    cleanupFunctions.push(() => prevButton.removeEventListener('click', prevClickHandler));
+    
+    const nextClickHandler = () => {
+      if (nextButton.disabled) return;
+      pauseAndResume();
+      const scrollAmount = getScrollAmount();
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    };
+    nextButton.addEventListener('click', nextClickHandler);
+    cleanupFunctions.push(() => nextButton.removeEventListener('click', nextClickHandler));
+    
+    // Pause auto-play on hover, resume on mouse leave
+    const mouseEnterHandler = () => pauseAutoPlay();
+    const mouseLeaveHandler = () => resumeAutoPlay();
+    carousel.addEventListener('mouseenter', mouseEnterHandler);
+    carousel.addEventListener('mouseleave', mouseLeaveHandler);
+    cleanupFunctions.push(() => {
+      carousel.removeEventListener('mouseenter', mouseEnterHandler);
+      carousel.removeEventListener('mouseleave', mouseLeaveHandler);
+    });
+  }
+  
+  // Initial visibility check and carousel initialization
+  updateNavigationVisibility();
+  initCarousel();
+  
+  // Update on resize - reinitialize carousel when viewport changes
+  let resizeTimeout = undefined;
+  const resizeHandler = () => {
+    if (resizeTimeout !== undefined) {
+      clearTimeout(resizeTimeout);
+    }
+    resizeTimeout = setTimeout(() => {
+      updateNavigationVisibility();
+      // Reinitialize carousel when viewport size changes
+      cleanupCarousel();
+      initCarousel();
+    }, 100);
+  };
+  window.addEventListener('resize', resizeHandler);
+  
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    cleanupCarousel();
+  });
+</script>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+

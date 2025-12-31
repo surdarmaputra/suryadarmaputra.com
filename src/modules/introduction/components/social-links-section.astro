@@ -1,0 +1,56 @@
+---
+import Ornament from "../../core/components/base/ornament.astro";
+import SocialLink from "../../core/components/base/social-link.astro";
+import { SOCIAL_LINKS } from "../../core/constants";
+
+const title = "Let's connect";
+const socialLinks = [
+  {
+    url: SOCIAL_LINKS.LINKEDIN,
+    label: "LinkedIn",
+  },
+  {
+    url: SOCIAL_LINKS.GITHUB,
+    label: "GitHub",
+  },
+  {
+    url: SOCIAL_LINKS.TWITTER,
+    label: "Twitter",
+  },
+];
+---
+
+<section class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="social-heading">
+  <Ornament variant="square" size="md" color="secondary" position="top-right" />
+  <Ornament variant="dots" size="md" color="secondary" position="bottom-left" />
+  
+  <div class="container-z">
+    <h2
+      id="social-heading"
+      class="heading-large mb-20 text-center text-base-content animate-fade-in-up"
+    >
+      {title}
+    </h2>
+    
+    <div class="flex gap-4 md:gap-8 justify-center items-center mx-auto">
+      {socialLinks.map((link, index) => {
+        const delay = index * 150;
+        let delayClass = "animation-delay-0";
+        if (delay === 150) delayClass = "animation-delay-150";
+        else if (delay === 300) delayClass = "animation-delay-300";
+        else if (delay === 450) delayClass = "animation-delay-450";
+        else if (delay === 600) delayClass = "animation-delay-600";
+        else if (delay === 750) delayClass = "animation-delay-750";
+        
+        return (
+          <div
+            class={`animate-fade-in-up ${delayClass}`}
+          >
+            <SocialLink url={link.url} label={link.label} index={index} />
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+

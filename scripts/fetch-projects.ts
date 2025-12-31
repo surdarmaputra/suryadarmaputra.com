@@ -2,23 +2,26 @@ import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import { Image } from 'image-js';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { request } from 'undici';
 
 dotenv.config();
 
 /* eslint-disable import/first */
-import { request } from 'undici';
-
 import {
-  BlockWithChildren,
+  type BlockWithChildren,
   getFileExtensionFromUrl,
   getProperties,
   getTitle,
   regroupListItems,
-} from '~/libs/notion';
-import { getBlockChildren } from '~/libs/notion/index.server';
+} from '../src/modules/core/libs/notion';
+import { getBlockChildren } from '../src/modules/core/libs/notion/client';
 
 import { fetchProjects } from './utils';
 /* eslint-enable import/first */
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 interface ProjectData {
   id: string;
@@ -28,8 +31,8 @@ interface ProjectData {
   blocks: BlockWithChildren[] | [];
 }
 
-const extrasDirectory = path.resolve(__dirname, '../extras');
-const projectDataFile = path.join(extrasDirectory, 'projects.json');
+const siteDataDirectory = path.resolve(__dirname, '../src/_generated/data/site');
+const projectDataFile = path.join(siteDataDirectory, 'projects.json');
 const imagesDirectory = path.resolve(__dirname, '../public/images/projects');
 
 async function fetchImage(url: string, filename: string): Promise<void> {
@@ -94,7 +97,7 @@ export async function run(): Promise<void> {
   const rawProjects = await fetchProjects();
 
   await fs.rm(projectDataFile, { force: true, recursive: true });
-  await fs.mkdir(extrasDirectory, { recursive: true });
+  await fs.mkdir(siteDataDirectory, { recursive: true });
 
   await fs.rm(imagesDirectory, { force: true, recursive: true });
   await fs.mkdir(imagesDirectory, { recursive: true });
@@ -128,3 +131,4 @@ export async function run(): Promise<void> {
 }
 
 run();
+

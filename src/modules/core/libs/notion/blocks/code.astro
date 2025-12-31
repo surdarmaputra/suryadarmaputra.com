@@ -1,0 +1,30 @@
+---
+import { Code as AstroCode } from "astro:components";
+import { concatPlainTexts } from "../renderer-utils";
+import type { BlockWithChildren, RichTextBlock } from "../types";
+
+interface Props {
+  block: BlockWithChildren["block"];
+}
+
+const { block } = Astro.props;
+
+if (!("type" in block) || block.type !== "code") {
+  return null;
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const codeBlock = (block as any).code;
+const language = codeBlock?.language || "";
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const richTexts = (codeBlock?.rich_text || []) as any[];
+const codeText = concatPlainTexts(richTexts);
+---
+
+<AstroCode 
+  lang={language} 
+  code={codeText} 
+  class="my-2 md:my-4 p-2 border-4 border-neutral rounded-lg shadow-lg" 
+  theme="aurora-x"
+/>
+

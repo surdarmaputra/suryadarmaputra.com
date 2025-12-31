@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
+import type { GetPageResponse } from '@notionhq/client/build/src/api-endpoints';
 import dotenv from 'dotenv';
 import { kebabCase } from 'lodash';
 import { request } from 'undici';
@@ -9,9 +9,9 @@ import { parseString } from 'xml2js';
 dotenv.config();
 
 /* eslint-disable import/first */
-import { getProperties, getTitle } from '~/libs/notion';
+import { getProperties, getTitle } from '../src/modules/core/libs/notion';
 
-import { fetchPosts, fetchProjects } from './utils';
+import { fetchArticles, fetchProjects } from './utils';
 /* eslint-enable import/first */
 
 interface FeedItem {
@@ -41,10 +41,10 @@ function normalizeUrl(urlString: string) {
   return new URL(urlString).href;
 }
 
-const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:5173');
-const blogUrl = `${baseUrl}posts/`;
+const baseUrl = normalizeUrl(process.env.BASE_URL || 'http://localhost:4321');
+const blogUrl = `${baseUrl}articles/`;
 const feedUrl = `${blogUrl}feed`;
-const extrasUrl = `${baseUrl}extras.json`;
+const siteDataUrl = `${baseUrl}api/site-data.json`;
 
 async function fetchRSS(): Promise<RSSFeed> {
   console.log(`Fetching RSS feed from ${feedUrl}`);
@@ -62,10 +62,10 @@ async function fetchRSS(): Promise<RSSFeed> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function fetchExtras(): Promise<Record<string, any>> {
-  console.log(`Fetching extras data feed from ${extrasUrl}`);
+async function fetchSiteData(): Promise<Record<string, any>> {
+  console.log(`Fetching site data from ${siteDataUrl}`);
 
-  const { body } = await request(extrasUrl);
+  const { body } = await request(siteDataUrl);
   const json = await body.json();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -74,7 +74,7 @@ async function fetchExtras(): Promise<Record<string, any>> {
 
 function checkMissingOrOutdatedContent(
   feed: RSSFeed,
-  notionPosts: GetPageResponse[],
+  notionArticles: GetPageResponse[],
 ): boolean {
   const feedItems =
     feed.rss?.channel[0]?.item?.map((item) => {
@@ -86,7 +86,7 @@ function checkMissingOrOutdatedContent(
     }) || [];
 
   const notionItems =
-    notionPosts?.map((item) => {
+    notionArticles?.map((item) => {
       const properties = getProperties(item);
       const title = getTitle(item);
       return {
@@ -101,10 +101,10 @@ function checkMissingOrOutdatedContent(
   console.log('--------------------------------');
   console.log('Pages from notion:');
   console.log(notionItems);
-  console.log(`${notionPosts.length} items`);
+  console.log(`${notionArticles.length} items`);
   console.log('--------------------------------');
 
-  if (feedItems.length !== notionPosts.length) {
+  if (feedItems.length !== notionArticles.length) {
     return true;
   }
 
@@ -134,14 +134,14 @@ function checkMissingOrOutdatedContent(
   return hasMissingOrOutdatedPosts;
 }
 
-function checkMissingOrOutdatedExtras(
+function checkMissingOrOutdatedSiteData(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extras: Record<string, any>,
+  siteData: Record<string, any>,
   notionProjects: GetPageResponse[],
 ): boolean {
   const existingProjects =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    extras?.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
+    siteData?.projects?.map(({ id, title, updatedAt }: Record<string, any>) => ({
       id,
       title,
       updatedAt,
@@ -219,23 +219,23 @@ async function triggerDeployment() {
 
 async function run() {
   const feed = await fetchRSS();
-  const extras = await fetchExtras();
+  const siteData = await fetchSiteData();
 
-  const notionPosts = await fetchPosts();
+  const notionArticles = await fetchArticles();
   const notionProjects = await fetchProjects();
 
-  const hasMissingOrOutdatedPosts = checkMissingOrOutdatedContent(
+  const hasMissingOrOutdatedArticles = checkMissingOrOutdatedContent(
     feed,
-    notionPosts,
+    notionArticles,
   );
-  const hasMissingOrOutdatedExtras = checkMissingOrOutdatedExtras(
-    extras,
+  const hasMissingOrOutdatedExtras = checkMissingOrOutdatedSiteData(
+    siteData,
     notionProjects,
   );
   const hasMissingOrOutdatedData =
-    hasMissingOrOutdatedPosts || hasMissingOrOutdatedExtras;
+    hasMissingOrOutdatedArticles || hasMissingOrOutdatedExtras;
 
-  console.log('Has missing or outdated content: ', hasMissingOrOutdatedPosts);
+  console.log('Has missing or outdated content: ', hasMissingOrOutdatedArticles);
   console.log('Has missing or outdated extras: ', hasMissingOrOutdatedExtras);
   console.log('Has missing or outdated data: ', hasMissingOrOutdatedData);
 
@@ -252,3 +252,4 @@ async function run() {
 }
 
 run();
+

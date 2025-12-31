@@ -1,0 +1,217 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Icon from "../../core/components/base/icon.astro";
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
+import { generateRandomElementTiltAngle } from "../../core/utils/ui-utils";
+import ProjectCarousel from "../../project/components/project-carousel.astro";
+import { getProjectsByCompany } from "../../project/services/project-service";
+import WorkExperienceSection from "../components/work-experience-section.astro";
+
+const currentPath = Astro.url.pathname;
+
+// Photo and bio data
+const photoUrl = "/images/me.jpeg";
+const name = PERSONAL.NAME;
+const secondaryTitle = PERSONAL.TITLE;
+const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
+const githubUrl = SOCIAL_LINKS.GITHUB;
+const twitterUrl = SOCIAL_LINKS.TWITTER;
+
+// Generate tilt angles for stacked photos
+const photoTilt1 = generateRandomElementTiltAngle(0, 4);
+const photoTilt2 = generateRandomElementTiltAngle(1, 8);
+const photoTilt3 = generateRandomElementTiltAngle(2, 12);
+
+// Fetch personal projects for carousel
+const personalProjects = await getProjectsByCompany("personal");
+---
+
+<PageLayout
+  title="About Me"
+  description={`About ${PERSONAL.NAME}`}
+  currentPath={currentPath}
+  mainClass="page-padding-z"
+>
+  <OrnamentWrapper>
+    <PageHeader title="About Me" size="large" align="center" animate />
+
+    <!-- 2-Column About Section -->
+    <section class="container-base mb-20" aria-labelledby="about-heading">
+        <div class="flex flex-col-reverse md:flex-row gap-16 items-start">
+          <!-- Left Column: Bio Content -->
+          <div class="space-y-6 animate-fade-in-up animation-delay-150">
+            <div>
+              <h2 id="about-heading" class="heading-medium text-base-content mb-2">
+                {name}
+              </h2>
+              <p class="text-base-content mb-2">
+                {secondaryTitle}
+              </p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center gap-4 mb-12">
+              <Button
+                href={linkedinUrl}
+                variant="outline"
+                circle={true}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+              >
+                <Icon name="simple-icons:linkedin" size="w-6 h-6" />
+              </Button>
+              <Button
+                href={githubUrl}
+                variant="outline"
+                circle={true}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+              >
+                <Icon name="simple-icons:github" size="w-6 h-6" />
+              </Button>
+              <Button
+                href={twitterUrl}
+                variant="outline"
+                circle={true}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter profile"
+              >
+                <Icon name="simple-icons:x" size="w-6 h-6" />
+              </Button>
+            </div>
+
+            <!-- Bio Paragraphs -->
+            <div class="space-y-4">
+              <p class="text-base-content leading-relaxed">
+                Hi, I'm <span class="font-semibold">{name.split(' ')[0]}</span>, a
+                software engineer with expertise in{' '}
+                <span class="font-semibold">website and application development</span>.
+                Currently at{' '}
+                <a
+                  href="https://www.gotocompany.com/en/products/goto-financial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link-hover"
+                >
+                  GoTo Financial
+                </a>
+                , I build products for Lending Team, aiming to provide the best
+                financing solutions for customers and merchants.
+              </p>
+              <p class="text-base-content leading-relaxed">
+                I also publish my own projects and articles in this site. Feel free to check them out!
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Column: Stacked Polaroid Photos -->
+          <div class="flex justify-center items-center relative mt-0 md:mt-12 w-full md:w-fit">
+            <div class="relative w-48 md:w-52 lg:w-64">
+              <!-- Back photo (third layer) -->
+              <div
+                class="badge-tilt bg-base-100 border-4 border-neutral rounded-xl shadow-lg p-3 md:p-4 absolute inset-0 w-full aspect-3/4 transition-opacity duration-300"
+                style={`--badge-tilt: ${photoTilt3}deg;`}
+              >
+                <div class="mt-2 text-center h-full flex items-center justify-center">
+                  <p id="back-photo-quote" class="text-xs text-base-content/50 font-serif italic"></p>
+                </div>
+              </div>
+              
+              <!-- Middle photo (second layer) -->
+              <div
+                class="badge-tilt bg-base-100 border-4 border-neutral rounded-xl shadow-xl p-3 md:p-4 absolute inset-0 w-full aspect-3/4 transition-opacity duration-300 z-10"
+                style={`--badge-tilt: ${photoTilt2}deg;`}
+              >
+                <div class="mt-2 text-center h-full flex items-center justify-center">
+                  <p id="middle-photo-quote" class="text-xs text-base-content/50 font-serif italic"></p>
+                </div>
+              </div>
+              
+              <!-- Front photo (top layer) -->
+              <div
+                id="front-photo"
+                class="badge-tilt bg-base-100 border-4 border-neutral rounded-xl shadow-xl p-3 md:p-4 w-full hover:rotate-3 active:rotate-3 transition-transform duration-300 relative z-20"
+                style={`--badge-tilt: ${photoTilt1}deg;`}
+              >
+                <div class="bg-base-200 aspect-3/4 overflow-hidden rounded">
+                  <img
+                    src={photoUrl}
+                    alt={`${name} photo`}
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="mt-2 text-center">
+                  <p id="front-photo-quote" class="text-xs text-base-content/60 font-serif italic"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <WorkExperienceSection isDownloadResumeVisible={true} />
+
+    <!-- Personal Projects Carousel -->
+    {personalProjects.length > 0 && (
+      <section class="container-base mt-20" aria-label="Personal projects">
+        <p class="text-base-content/80 text-center mb-8 text-lg">
+          Take a look at some of my personal projects
+        </p>
+        <ProjectCarousel projects={personalProjects} />
+      </section>
+    )}
+  </OrnamentWrapper>
+</PageLayout>
+
+<script>
+  const quotes = [
+    "Code is poetry",
+    "Build something great",
+    "Dream big",
+    "Create & inspire",
+    "Make it happen",
+    "Stay curious",
+    "Keep learning",
+    "Think different",
+    "Ship it",
+    "Just build",
+  ];
+
+  const getRandomQuote = () => quotes[Math.floor(Math.random() * quotes.length)];
+
+  // Set initial quotes for all photo layers
+  const frontPhotoQuote = document.getElementById("front-photo-quote");
+  const middlePhotoQuote = document.getElementById("middle-photo-quote");
+  const backPhotoQuote = document.getElementById("back-photo-quote");
+
+  if (frontPhotoQuote) {
+    frontPhotoQuote.textContent = getRandomQuote();
+  }
+  if (middlePhotoQuote) {
+    middlePhotoQuote.textContent = getRandomQuote();
+  }
+  if (backPhotoQuote) {
+    backPhotoQuote.textContent = getRandomQuote();
+  }
+
+  // Handle quote change on mouseleave for front photo
+  const frontPhoto = document.getElementById("front-photo");
+  if (frontPhoto && frontPhotoQuote) {
+    frontPhoto.addEventListener("mouseleave", () => {
+      let newQuote = getRandomQuote();
+      // Ensure the new quote is different from the current one
+      while (newQuote === frontPhotoQuote.textContent && quotes.length > 1) {
+        newQuote = getRandomQuote();
+      }
+      frontPhotoQuote.textContent = newQuote;
+    });
+  }
+</script>
+

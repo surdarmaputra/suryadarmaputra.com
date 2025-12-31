@@ -1,0 +1,51 @@
+---
+import ProjectDetailsPage from "../../modules/project/pages/project-details-page.astro";
+import {
+  getNotionProjectDataBySlug,
+  getProjects,
+} from "../../modules/project/services/project-service";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/projects");
+}
+
+// Get the full Notion project data (including blocks)
+const notionProjectData = await getNotionProjectDataBySlug(slug);
+
+if (!notionProjectData) {
+  return Astro.redirect("/projects");
+}
+
+// Get the transformed project
+const projects = await getProjects();
+const project = projects.find((p) => p.slug === slug);
+
+if (!project) {
+  return Astro.redirect("/projects");
+}
+
+// Get related projects (exclude current project, randomize, limit to 9)
+const filteredProjects = projects.filter((p) => p.slug !== slug);
+const shuffledProjects = [...filteredProjects].sort(() => Math.random() - 0.5);
+const relatedProjects = shuffledProjects.slice(0, 9);
+---
+
+<ProjectDetailsPage
+  title={project.title}
+  previewLink={project.previewLink}
+  blocks={notionProjectData.blocks || []}
+  projectId={notionProjectData.id}
+  tags={project.tags || []}
+  relatedProjects={relatedProjects}
+  categories={project.categories}
+/>

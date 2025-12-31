@@ -1,0 +1,22 @@
+---
+import Ornament from "../base/ornament.astro";
+
+interface Props {
+  wrapperClass?: string;
+}
+
+const { wrapperClass = "relative min-h-screen" } = Astro.props;
+---
+
+<div class={wrapperClass}>
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <Ornament variant="circle" size="md" color="accent" position="top-left" />
+    <Ornament variant="dots" size="md" color="primary" position="top-right" />
+    <Ornament variant="square" size="lg" color="secondary" position="center" />
+  </div>
+
+  <div class="relative z-10">
+    <slot />
+  </div>
+</div>
+

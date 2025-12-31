@@ -1,0 +1,106 @@
+---
+import Code from "./blocks/code.astro";
+import Embed from "./blocks/embed.astro";
+import Heading from "./blocks/heading.astro";
+import Image from "./blocks/image.astro";
+import List from "./blocks/list.astro";
+import ListItem from "./blocks/list-item.astro";
+import Paragraph from "./blocks/paragraph.astro";
+import Quote from "./blocks/quote.astro";
+import BlocksRendererRecursive from "./blocks-renderer.astro";
+import type { BlockWithChildren } from "./types";
+
+interface Props {
+  blocks: BlockWithChildren[];
+  imageBasePath: string;
+}
+
+const { blocks, imageBasePath } = Astro.props;
+---
+
+{blocks.map(({ block, children }, index) => {
+  if (!("type" in block)) {
+    return null;
+  }
+
+  const previousBlockType =
+    index > 0 && "type" in blocks[index - 1].block
+      ? blocks[index - 1].block.type
+      : null;
+
+  switch (block.type) {
+    case "paragraph":
+      return (
+        <Paragraph
+          block={block}
+          children={children || undefined}
+          previousBlockType={previousBlockType}
+          imageBasePath={imageBasePath}
+          renderChildren={BlocksRendererRecursive}
+        />
+      );
+
+    case "heading_1":
+    case "heading_2":
+    case "heading_3":
+      return (
+        <Heading
+          block={block}
+          children={children || undefined}
+          imageBasePath={imageBasePath}
+          renderChildren={BlocksRendererRecursive}
+        />
+      );
+
+    case "bulleted_list":
+    case "numbered_list":
+      return (
+        <List
+          block={block}
+          children={children || undefined}
+          imageBasePath={imageBasePath}
+          renderChildren={BlocksRendererRecursive}
+        />
+      );
+
+    case "bulleted_list_item":
+    case "numbered_list_item":
+      return (
+        <ListItem
+          block={block}
+          children={children || undefined}
+          imageBasePath={imageBasePath}
+          renderChildren={BlocksRendererRecursive}
+        />
+      );
+
+    case "image":
+      return (
+        <Image
+          block={block}
+          imageBasePath={imageBasePath}
+        />
+      );
+
+    case "code":
+      return <Code block={block} />;
+
+    case "quote":
+      return (
+        <Quote
+          block={block}
+          children={children || undefined}
+          imageBasePath={imageBasePath}
+          renderChildren={BlocksRendererRecursive}
+        />
+      );
+
+    case "embed":
+      return <Embed block={block} />;
+
+    default:
+      // Unsupported block types are silently ignored
+      return null;
+  }
+})}
+

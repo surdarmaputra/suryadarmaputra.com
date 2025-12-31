@@ -1,0 +1,61 @@
+---
+import { PERSONAL, SOCIAL_LINKS } from "../../constants";
+import Button from "../base/button.astro";
+import Icon from "../base/icon.astro";
+
+const socialLinks = [
+  {
+    platform: "LinkedIn",
+    url: SOCIAL_LINKS.LINKEDIN,
+    label: "LinkedIn",
+  },
+  {
+    platform: "GitHub",
+    url: SOCIAL_LINKS.GITHUB,
+    label: "GitHub",
+  },
+  {
+    platform: "Twitter",
+    url: SOCIAL_LINKS.TWITTER,
+    label: "Twitter",
+  },
+];
+---
+
+<footer class="py-12">
+  <div class="container-base">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-base-content/70 text-sm">
+          © {new Date().getFullYear()} {PERSONAL.NAME}. All rights reserved.
+        </p>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        {socialLinks.map((link) => (
+          <Button
+            href={link.url}
+            variant="ghost"
+            size="sm"
+            circle={true}
+            class="hover-scale"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+          >
+            {link.platform === "LinkedIn" && (
+              <Icon name="simple-icons:linkedin" size="w-5 h-5" />
+            )}
+            {link.platform === "GitHub" && (
+              <Icon name="simple-icons:github" size="w-5 h-5" />
+            )}
+            {link.platform === "Twitter" && (
+              <Icon name="simple-icons:x" size="w-5 h-5" />
+            )}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+

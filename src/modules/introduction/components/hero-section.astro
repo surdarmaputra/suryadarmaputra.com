@@ -1,0 +1,70 @@
+---
+import Button from "../../core/components/base/button.astro";
+import Icon from "../../core/components/base/icon.astro";
+import Ornament from "../../core/components/base/ornament.astro";
+import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
+
+const skills = PERSONAL.TITLE;
+const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
+const githubUrl = SOCIAL_LINKS.GITHUB;
+---
+
+<section class="hero min-h-screen relative overflow-hidden" aria-label="Hero section">
+  <Ornament variant="circle" size="md" color="accent" position="top-left" />
+  <Ornament variant="dots" size="md" color="primary" position="top-right" />
+  <Ornament variant="square" size="lg" color="secondary" position="center" />
+
+  <div class="hero-content text-center relative z-10">
+    <div class="max-w-4xl animate-fade-in-up">
+      <h1 class="font-bold font-serif mb-6 leading-tight">
+        <span class="block text-3xl md:text-4xl lg:text-5xl">
+          <span class="block md:inline">
+            <span class="inline-block animate-wave">👋</span> Hello there, I'm
+          </span>
+        </span>
+        <span class="block text-6xl md:text-7xl lg:text-8xl mt-2">
+          {PERSONAL.NAME}
+        </span>
+      </h1>
+      <div class="space-y-4 mb-8">
+        <p class="text-lg md:text-2xl text-base-content/80 max-w-2xl mx-auto leading-relaxed px-4">
+          {skills}
+        </p>
+      </div>
+      
+      <div class="flex items-center justify-center gap-6 mb-20">
+        <Button
+          href={linkedinUrl}
+          variant="outline"
+          circle={true}
+          class="hover-scale transition-transform"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+        >
+          <Icon name="simple-icons:linkedin" size="w-6 h-6" />
+        </Button>
+        <Button
+          href={githubUrl}
+          variant="outline"
+          circle={true}
+          class="hover-scale transition-transform"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+        >
+          <Icon name="simple-icons:github" size="w-6 h-6" />
+        </Button>
+      </div>
+      
+      <a
+        href="#experience"
+        class="inline-flex flex-col items-center gap-2 text-base-content/60 hover:text-base-content transition-colors animate-bounce-soft"
+        aria-label="Scroll to experience section"
+      >
+        <span class="text-sm font-medium">Scroll to explore</span>
+        <Icon name="heroicons:arrow-down" size="w-6 h-6" />
+      </a>
+    </div>
+  </div>
+</section>

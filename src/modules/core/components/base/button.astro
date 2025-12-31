@@ -1,0 +1,79 @@
+---
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "neutral"
+  | "ghost"
+  | "link"
+  | "outline"
+  | "dash"
+  | "soft";
+type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  circle?: boolean;
+  class?: string;
+  id?: string;
+  target?: string;
+  rel?: string;
+  [key: `data-${string}`]: string | undefined;
+  [key: `aria-${string}`]: string | undefined;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  type = "button",
+  disabled = false,
+  circle = false,
+  class: className = "",
+  ...restProps
+} = Astro.props;
+
+// Use full class names so Tailwind/DaisyUI JIT compiler can detect them
+const variantClassMap: Record<ButtonVariant, string> = {
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  accent: "btn-accent",
+  neutral: "btn-neutral",
+  ghost: "btn-ghost",
+  link: "btn-link",
+  outline: "btn-outline",
+  dash: "btn-dash",
+  soft: "btn-soft",
+};
+
+const sizeClassMap: Record<ButtonSize, string> = {
+  xs: "btn-xs",
+  sm: "btn-sm",
+  md: "",
+  lg: "btn-lg",
+  xl: "btn-xl",
+};
+
+const variantClass = variantClassMap[variant];
+const sizeClass = sizeClassMap[size];
+const circleClass = circle ? "btn-circle" : "";
+const classParts = ["btn border-2", variantClass, sizeClass, circleClass, className].filter(
+  Boolean
+);
+const classes = classParts.join(" ");
+---
+
+{href ? (
+  <a href={href} class={classes} aria-disabled={disabled ? 'true' : undefined} {...restProps}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} disabled={disabled} {...restProps}>
+    <slot />
+  </button>
+)}
+

@@ -1,0 +1,47 @@
+---
+import OrnamentWrapper from "../../core/components/layouts/ornament-wrapper.astro";
+import PageHeader from "../../core/components/layouts/page-header.astro";
+import PageLayout from "../../core/components/layouts/page-layout.astro";
+import ProjectSection from "../components/project-section.astro";
+import ProjectsSidebar from "../components/projects-sidebar.astro";
+import type { Project } from "../types";
+import { groupProjectByCompany } from "../utils/project-utils";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Group projects by company
+const sections = groupProjectByCompany(projects);
+
+const sidebarSections = sections.map((section) => ({
+  id: section.id,
+  label: section.title,
+}));
+---
+
+<PageLayout
+  title="Projects"
+  description="Projects and work experience"
+  currentPath={currentPath}
+  mainClass="container max-w-7xl mx-auto px-4 page-padding-z"
+>
+  <OrnamentWrapper>
+    <PageHeader title="Projects" size="large" align="center" titleClass="!mb-0" animate />
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <aside class="lg:w-48 lg:shrink-0">
+        <ProjectsSidebar sections={sidebarSections} />
+      </aside>
+
+      <div class="flex-1 flex flex-col gap-20 md:mb-20">
+        {sections.map((section) => (
+          <ProjectSection id={section.id} title={section.title} projects={section.projects} />
+        ))}
+      </div>
+    </div>
+  </OrnamentWrapper>
+</PageLayout>
