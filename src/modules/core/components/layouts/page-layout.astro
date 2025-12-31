@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { PERSONAL } from "../../constants";
 import "../../styles/global.css";
+import GtagScripts from "../../libs/google-analytics/gtag-scripts.astro";
 import Footer from "./footer.astro";
 import Header from "./header.astro";
 
@@ -36,6 +37,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} - ${PERSONAL.NAME}` : PERSONAL.NAME}</title>
     <ClientRouter />
+    <GtagScripts />
   </head>
   <body class="font-sans">
     <Header currentPath={currentPath} />
