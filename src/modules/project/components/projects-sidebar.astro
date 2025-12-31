@@ -34,28 +34,30 @@ const { sections } = Astro.props;
   </ul>
 </nav>
 
-<nav
-  id="projects-sidebar-mobile"
-  class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-base-100/90 backdrop-blur-sm border-t border-base-300 shadow-lg"
-  aria-label="Projects navigation"
->
-  <ul class="flex overflow-x-auto gap-2 px-4 py-3 scrollbar-hide">
-    {sections.map((section) => (
-      <li class="shrink-0">
-        <a
-          href={`#${section.id}`}
-          class="nav-link block px-4 py-2 rounded-md text-sm font-medium text-base-content/70 hover:text-base-content hover:font-bold transition-all relative whitespace-nowrap group"
-          data-section-id={section.id}
-        >
-          <span class="relative">
-            {section.label}
-            <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-base-content transition-all duration-300 group-hover:w-full"></span>
-          </span>
-        </a>
-      </li>
-    ))}
-  </ul>
-</nav>
+<div class="md:hidden fixed bottom-2 left-4 right-4 z-40">
+  <nav
+    id="projects-sidebar-mobile"
+    class="bg-base-100/90 backdrop-blur-sm border border-base-300 rounded-2xl shadow-xl px-2 py-2"
+    aria-label="Projects navigation"
+  >
+    <ul class="flex overflow-x-auto gap-3 scrollbar-hide">
+      {sections.map((section) => (
+        <li class="shrink-0">
+          <a
+            href={`#${section.id}`}
+            class="nav-link block p-2 rounded-md text-sm font-medium text-base-content/70 hover:text-base-content hover:font-bold transition-all relative whitespace-nowrap group"
+            data-section-id={section.id}
+          >
+            <span class="relative">
+              {section.label}
+              <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-base-content transition-all duration-300 group-hover:w-full"></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
 
 <script>
   import { initAfterNavigation } from "../../core/utils/ui-utils";
@@ -101,6 +103,9 @@ const { sections } = Astro.props;
     const mobileLinks = mobileNav ? mobileNav.querySelectorAll<HTMLAnchorElement>('.nav-link') : [];
     const allLinks = [...desktopLinks, ...mobileLinks];
     
+    // Find the active link in mobile nav to scroll it into view if needed
+    let activeMobileLink: HTMLAnchorElement | null = null;
+    
     allLinks.forEach((link) => {
       const linkSectionId = link.getAttribute('data-section-id');
       const underline = link.querySelector<HTMLElement>('.nav-underline');
@@ -111,6 +116,10 @@ const { sections } = Astro.props;
           underline.classList.add('w-full');
           underline.classList.remove('w-0');
         }
+        // Track if this is a mobile link
+        if (mobileNav && mobileNav.contains(link)) {
+          activeMobileLink = link;
+        }
       } else {
         link.classList.remove('font-bold', 'text-base-content');
         link.classList.add('text-base-content/70');
@@ -120,6 +129,44 @@ const { sections } = Astro.props;
         }
       }
     });
+    
+    // Scroll active mobile link into view if it's not visible
+    const isMobile: boolean = window.innerWidth < 768;
+    if (isMobile && activeMobileLink && mobileNav) {
+      // Get the scrollable container (ul element)
+      const scrollContainer = mobileNav.querySelector<HTMLElement>('ul');
+      if (!scrollContainer) return;
+      
+      // Type assertion to help TypeScript understand the types
+      const link: HTMLAnchorElement = activeMobileLink;
+      const linkRect = link.getBoundingClientRect();
+      const containerRect = scrollContainer.getBoundingClientRect();
+      
+      // Calculate visibility with padding for better detection
+      const padding: number = 20; // Padding to ensure link is comfortably visible
+      const linkLeft: number = linkRect.left - containerRect.left;
+      const linkRight: number = linkRect.right - containerRect.left;
+      const containerWidth: number = containerRect.width;
+      
+      // Check if link is partially or completely outside the visible area
+      // More sensitive: check if less than 80% of the link is visible
+      const isPartiallyVisible: boolean = linkLeft >= -padding && linkRight <= containerWidth + padding;
+      const visibleWidth: number = Math.min(linkRight, containerWidth) - Math.max(linkLeft, 0);
+      const linkWidth: number = linkRect.width;
+      const visibilityRatio: number = visibleWidth / linkWidth;
+      
+      // Scroll if link is less than 80% visible or outside viewport
+      if (!isPartiallyVisible || visibilityRatio < 0.8) {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center',
+          });
+        });
+      }
+    }
   }
   
   function initActiveSection(): void {
