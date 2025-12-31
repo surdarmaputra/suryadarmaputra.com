@@ -9,6 +9,8 @@ interface Props {
 
 const { projects } = Astro.props;
 
+const MAX_PROJECTS_MOBILE = 1;
+const MAX_PROJECTS_DESKTOP = 3;
 const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
@@ -26,60 +28,111 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     ))}
   </div>
 
-  {projects.length > 3 && (
-    <div class="flex justify-center gap-4 mt-8">
-      <Button
-        variant="outline"
-        circle={true}
-        class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-        aria-label="Previous project"
-        data-carousel-prev={carouselId}
-        id={`prev-${carouselId}`}
+  <div
+    id={`nav-${carouselId}`}
+    class="hidden justify-center gap-4 mt-8"
+    aria-hidden="true"
+  >
+    <Button
+      variant="outline"
+      circle={true}
+      class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+      aria-label="Previous project"
+      data-carousel-prev={carouselId}
+      id={`prev-${carouselId}`}
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </Button>
-      <Button
-        variant="outline"
-        circle={true}
-        class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-        aria-label="Next project"
-        data-carousel-next={carouselId}
-        id={`next-${carouselId}`}
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </Button>
+    <Button
+      variant="outline"
+      circle={true}
+      class="hover-scale disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+      aria-label="Next project"
+      data-carousel-next={carouselId}
+      id={`next-${carouselId}`}
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </Button>
-    </div>
-  )}
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </Button>
+  </div>
 </div>
 
-<script define:vars={{ carouselId, projectCount: projects.length }}>
+<script define:vars={{ carouselId, projectCount: projects.length, MAX_PROJECTS_MOBILE, MAX_PROJECTS_DESKTOP }}>
   const carousel = document.getElementById(carouselId);
+  const navContainer = document.getElementById(`nav-${carouselId}`);
   const prevButton = document.getElementById(`prev-${carouselId}`);
   const nextButton = document.getElementById(`next-${carouselId}`);
   
-  if (carousel && prevButton && nextButton && projectCount > 3) {
-    let autoPlayInterval = null;
-    let autoPlayPaused = false;
-    const AUTO_PLAY_DELAY = 3000; // 3 seconds between auto-scrolls
-    const RESUME_DELAY = 5000; // Resume auto-play after 5 seconds of no interaction
+  function shouldShowNavigation() {
+    const isMobile = window.innerWidth < 768;
+    const maxProjects = isMobile ? MAX_PROJECTS_MOBILE : MAX_PROJECTS_DESKTOP;
+    return projectCount > maxProjects;
+  }
+  
+  function updateNavigationVisibility() {
+    if (navContainer) {
+      if (shouldShowNavigation()) {
+        navContainer.classList.remove('hidden');
+        navContainer.classList.add('flex');
+        navContainer.setAttribute('aria-hidden', 'false');
+      } else {
+        navContainer.classList.add('hidden');
+        navContainer.classList.remove('flex');
+        navContainer.setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+  
+  // Carousel state and cleanup functions
+  let autoPlayInterval = null;
+  let autoPlayPaused = false;
+  let resumeTimeout = null;
+  let cleanupFunctions = [];
+  const AUTO_PLAY_DELAY = 3000; // 3 seconds between auto-scrolls
+  const RESUME_DELAY = 5000; // Resume auto-play after 5 seconds of no interaction
+  
+  function cleanupCarousel() {
+    // Clear intervals and timeouts
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+    if (resumeTimeout) {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = null;
+    }
+    
+    // Remove event listeners
+    cleanupFunctions.forEach((cleanup) => cleanup());
+    cleanupFunctions = [];
+    
+    autoPlayPaused = false;
+  }
+  
+  function initCarousel() {
+    if (!carousel || !prevButton || !nextButton || !shouldShowNavigation()) {
+      return;
+    }
+    
+    // Cleanup any existing initialization
+    cleanupCarousel();
     
     const getScrollAmount = () => {
       // Get the width of one card plus gap
@@ -146,7 +199,6 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       }
     };
     
-    let resumeTimeout = null;
     const pauseAndResume = () => {
       pauseAutoPlay();
       
@@ -168,44 +220,63 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     startAutoPlay();
     
     // Update on scroll
-    carousel.addEventListener('scroll', updateButtonStates);
-    
-    // Update on resize (items might change size)
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        updateButtonStates();
-        // Restart auto-play after resize
-        pauseAutoPlay();
-        setTimeout(resumeAutoPlay, 1000);
-      }, 100);
-    });
+    const scrollHandler = () => updateButtonStates();
+    carousel.addEventListener('scroll', scrollHandler);
+    cleanupFunctions.push(() => carousel.removeEventListener('scroll', scrollHandler));
     
     // Pause auto-play on manual navigation
-    prevButton.addEventListener('click', () => {
+    const prevClickHandler = () => {
       if (prevButton.disabled) return;
       pauseAndResume();
       const scrollAmount = getScrollAmount();
       carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
+    };
+    prevButton.addEventListener('click', prevClickHandler);
+    cleanupFunctions.push(() => prevButton.removeEventListener('click', prevClickHandler));
     
-    nextButton.addEventListener('click', () => {
+    const nextClickHandler = () => {
       if (nextButton.disabled) return;
       pauseAndResume();
       const scrollAmount = getScrollAmount();
       carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
+    };
+    nextButton.addEventListener('click', nextClickHandler);
+    cleanupFunctions.push(() => nextButton.removeEventListener('click', nextClickHandler));
     
     // Pause auto-play on hover, resume on mouse leave
-    carousel.addEventListener('mouseenter', pauseAutoPlay);
-    carousel.addEventListener('mouseleave', resumeAutoPlay);
-    
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      pauseAutoPlay();
+    const mouseEnterHandler = () => pauseAutoPlay();
+    const mouseLeaveHandler = () => resumeAutoPlay();
+    carousel.addEventListener('mouseenter', mouseEnterHandler);
+    carousel.addEventListener('mouseleave', mouseLeaveHandler);
+    cleanupFunctions.push(() => {
+      carousel.removeEventListener('mouseenter', mouseEnterHandler);
+      carousel.removeEventListener('mouseleave', mouseLeaveHandler);
     });
   }
+  
+  // Initial visibility check and carousel initialization
+  updateNavigationVisibility();
+  initCarousel();
+  
+  // Update on resize - reinitialize carousel when viewport changes
+  let resizeTimeout = undefined;
+  const resizeHandler = () => {
+    if (resizeTimeout !== undefined) {
+      clearTimeout(resizeTimeout);
+    }
+    resizeTimeout = setTimeout(() => {
+      updateNavigationVisibility();
+      // Reinitialize carousel when viewport size changes
+      cleanupCarousel();
+      initCarousel();
+    }, 100);
+  };
+  window.addEventListener('resize', resizeHandler);
+  
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    cleanupCarousel();
+  });
 </script>
 
 <style>
