@@ -16,11 +16,14 @@
     "sync": "bun scripts/sync-with-notion.ts"
   },
   "dependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.64",
     "@notionhq/client": "^2.2.15",
     "@tailwindcss/vite": "^4.1.18",
     "@types/lodash": "^4.17.21",
     "@types/xml2js": "^0.4.14",
     "astro": "^5.16.6",
+    "astro-icon": "^1.1.5",
     "canvas": "^3.0.0-rc3",
     "dotenv": "^16.4.7",
     "image-js": "^0.35.6",

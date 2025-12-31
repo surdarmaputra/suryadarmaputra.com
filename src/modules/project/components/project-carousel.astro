@@ -1,5 +1,6 @@
 ---
 import Button from "../../core/components/base/button.astro";
+import Icon from "../../core/components/base/icon.astro";
 import type { Project } from "../types";
 import ProjectCard from "./project-card.astro";
 
@@ -41,16 +42,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       data-carousel-prev={carouselId}
       id={`prev-${carouselId}`}
     >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
+      <Icon name="heroicons:chevron-left" size="w-6 h-6" />
     </Button>
     <Button
       variant="outline"
@@ -60,16 +52,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       data-carousel-next={carouselId}
       id={`next-${carouselId}`}
     >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
+      <Icon name="heroicons:chevron-right" size="w-6 h-6" />
     </Button>
   </div>
 </div>
