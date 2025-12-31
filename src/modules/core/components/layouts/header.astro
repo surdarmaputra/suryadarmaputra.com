@@ -13,6 +13,15 @@ const navItems = [
   { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
 ];
+
+// Helper function to check if a nav item should be active
+// For "/", only exact match. For others, check if path starts with href
+function isNavItemActive(itemHref: string, path: string): boolean {
+  if (itemHref === "/") {
+    return path === "/";
+  }
+  return path.startsWith(itemHref);
+}
 ---
 
 <header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-sm">
@@ -25,25 +34,28 @@ const navItems = [
       </a>
       
       <div class="hidden md:flex items-center gap-6" id="desktop-nav">
-        {navItems.map((item, index) => (
-          <a
-            href={item.href}
-            class={`nav-link block px-2 py-1 text-sm font-medium transition-all relative group ${
-              currentPath === item.href 
-                ? 'font-bold text-base-content' 
-                : 'text-base-content/70 hover:text-base-content hover:font-bold'
-            }`}
-            aria-current={currentPath === item.href ? 'page' : undefined}
-            data-nav-index={index}
-          >
-            <span class="relative">
-              {item.label}
-              <span class={`nav-underline absolute bottom-0 left-0 h-0.5 bg-base-content transition-all duration-300 ${
-                currentPath === item.href ? 'w-full' : 'w-0 group-hover:w-full'
-              }`}></span>
-            </span>
-          </a>
-        ))}
+        {navItems.map((item, index) => {
+          const isActive = isNavItemActive(item.href, currentPath);
+          return (
+            <a
+              href={item.href}
+              class={`nav-link block px-2 py-1 text-sm font-medium transition-all relative group ${
+                isActive 
+                  ? 'font-bold text-base-content' 
+                  : 'text-base-content/70 hover:text-base-content hover:font-bold'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+              data-nav-index={index}
+            >
+              <span class="relative">
+                {item.label}
+                <span class={`nav-underline absolute bottom-0 left-0 h-0.5 bg-base-content transition-all duration-300 ${
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
+              </span>
+            </a>
+          );
+        })}
       </div>
       
       <button
@@ -85,20 +97,23 @@ const navItems = [
 >
   <nav class="h-full flex flex-col items-center justify-center px-6" aria-label="Mobile navigation">
     <ul class="flex flex-col gap-8 text-center">
-      {navItems.map((item, index) => (
-        <li class="mobile-menu-item opacity-0 translate-y-4">
-          <a
-            href={item.href}
-            class={`text-2xl transition-colors ${
-              currentPath === item.href ? 'font-black underline' : ''
-            }`}
-            aria-current={currentPath === item.href ? 'page' : undefined}
-            data-menu-index={index}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {navItems.map((item, index) => {
+        const isActive = isNavItemActive(item.href, currentPath);
+        return (
+          <li class="mobile-menu-item opacity-0 translate-y-4">
+            <a
+              href={item.href}
+              class={`text-2xl transition-colors ${
+                isActive ? 'font-black underline' : ''
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+              data-menu-index={index}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   </nav>
 </div>
