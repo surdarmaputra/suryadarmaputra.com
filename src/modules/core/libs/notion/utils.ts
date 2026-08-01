@@ -160,12 +160,12 @@ export function regroupListItems(blocks: BlockWithChildren[]): BlockWithChildren
     const groupType = groupTypeMap[block.type];
 
     // push item to group if group type matched with the existing group
-    if (group && group.block && "type" in group.block && group.block.type === groupType) {
+    if (group?.block && "type" in group.block && group.block.type === groupType) {
       group.children?.push(item);
     }
 
     // push existing group if new item is a different type of list
-    if (group && group.block && "type" in group.block && group.block.type !== groupType) {
+    if (group?.block && "type" in group.block && group.block.type !== groupType) {
       newBlocks.push(group);
     }
 

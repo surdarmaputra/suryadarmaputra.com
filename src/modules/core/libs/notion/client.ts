@@ -15,18 +15,27 @@ export async function getPagesFromDatabase(
   databaseId?: string,
   parameters?: Partial<QueryDatabaseParameters>
 ): Promise<GetPageResponse[]> {
-  if (!databaseId) return [];
+  if (!databaseId) {
+    // eslint-disable-next-line no-console
+    console.error("getPagesFromDatabase: databaseId is not set");
+    return [];
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(`getPagesFromDatabase: querying database ${databaseId.slice(0, 8)}...`);
 
   try {
     const { results } = await notion.databases.query({
       database_id: databaseId,
       ...parameters,
     });
+    // eslint-disable-next-line no-console
+    console.log(`getPagesFromDatabase: got ${results.length} results`);
     return results as GetPageResponse[];
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error("getPagesFromDatabase error: ", error);
-    return [];
+    console.error("getPagesFromDatabase error:", JSON.stringify(error, null, 2));
+    throw error;
   }
 }
 

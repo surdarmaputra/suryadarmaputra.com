@@ -46,11 +46,28 @@ const blogUrl = `${baseUrl}articles/`;
 const feedUrl = `${blogUrl}feed`;
 const siteDataUrl = `${baseUrl}api/site-data.json`;
 
+function debugEnv() {
+  console.log('=== Environment ===');
+  console.log('BASE_URL:', process.env.BASE_URL ? '(set)' : '(not set)');
+  console.log('NOTION_TOKEN:', process.env.NOTION_TOKEN ? '(set)' : '(not set)');
+  console.log('NOTION_ARTICLES_DATABASE_ID:', process.env.NOTION_ARTICLES_DATABASE_ID ? '(set)' : '(not set)');
+  console.log('NOTION_PROJECTS_DATABASE_ID:', process.env.NOTION_PROJECTS_DATABASE_ID ? '(set)' : '(not set)');
+  console.log('NETLIFY_HOOK_URL:', process.env.NETLIFY_HOOK_URL ? '(set)' : '(not set)');
+  console.log('Resolved feedUrl:', feedUrl);
+  console.log('Resolved siteDataUrl:', siteDataUrl);
+  console.log('==================');
+}
+
 async function fetchRSS(): Promise<RSSFeed> {
   console.log(`Fetching RSS feed from ${feedUrl}`);
 
-  const { body } = await request(feedUrl);
-  const xmlString = await body.text();
+  const response = await request(feedUrl);
+  console.log('RSS feed HTTP status:', response.statusCode);
+  console.log('RSS feed Content-Type:', response.headers['content-type']);
+
+  const xmlString = await response.body.text();
+  console.log('RSS feed response body (first 500 chars):', xmlString.slice(0, 500));
+
   const xmlJson = await new Promise((resolve, reject) =>
     parseString(xmlString, (error, result) => {
       if (error) reject(error);
@@ -65,11 +82,15 @@ async function fetchRSS(): Promise<RSSFeed> {
 async function fetchSiteData(): Promise<Record<string, any>> {
   console.log(`Fetching site data from ${siteDataUrl}`);
 
-  const { body } = await request(siteDataUrl);
-  const json = await body.json();
+  const response = await request(siteDataUrl);
+  console.log('Site data HTTP status:', response.statusCode);
+  console.log('Site data Content-Type:', response.headers['content-type']);
+
+  const text = await response.body.text();
+  console.log('Site data response body (first 500 chars):', text.slice(0, 500));
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return json as Record<string, any>;
+  return JSON.parse(text) as Record<string, any>;
 }
 
 function checkMissingOrOutdatedContent(
@@ -218,11 +239,18 @@ async function triggerDeployment() {
 }
 
 async function run() {
+  debugEnv();
+
   const feed = await fetchRSS();
   const siteData = await fetchSiteData();
 
+  console.log('Fetching articles from Notion...');
   const notionArticles = await fetchArticles();
+  console.log(`Fetched ${notionArticles.length} articles from Notion`);
+
+  console.log('Fetching projects from Notion...');
   const notionProjects = await fetchProjects();
+  console.log(`Fetched ${notionProjects.length} projects from Notion`);
 
   const hasMissingOrOutdatedArticles = checkMissingOrOutdatedContent(
     feed,
