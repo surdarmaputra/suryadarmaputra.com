@@ -7,6 +7,7 @@ import List from "./blocks/list.astro";
 import ListItem from "./blocks/list-item.astro";
 import Paragraph from "./blocks/paragraph.astro";
 import Quote from "./blocks/quote.astro";
+import Table from "./blocks/table.astro";
 import BlocksRendererRecursive from "./blocks-renderer.astro";
 import type { BlockWithChildren } from "./types";
 
@@ -97,6 +98,14 @@ const { blocks, imageBasePath } = Astro.props;
 
     case "embed":
       return <Embed block={block} />;
+
+    case "table":
+      return (
+        <Table
+          block={block}
+          children={children || undefined}
+        />
+      );
 
     default:
       // Unsupported block types are silently ignored

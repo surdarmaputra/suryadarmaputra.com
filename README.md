@@ -1,43 +1,55 @@
-# Astro Starter Kit: Minimal
+# suryadarmaputra.com
+
+Personal website built with [Astro](https://astro.build), sourcing content from Notion.
+
+## How it works
+
+Content (articles and projects) is pulled from Notion at build time and rendered as a static site.
+
+```
+Netlify build
+  └─ bun run generate   # fetch Notion data → src/_generated/
+  └─ bun run build      # Astro → dist/
+```
+
+The `src/_generated/` directory is never committed — it is created fresh on every build.
+
+## Local development
 
 ```sh
-bun create astro@latest -- --template minimal
+bun install
+cp .env.example .env   # fill in your Notion credentials
+bun run generate       # fetch content from Notion
+bun dev                # start dev server at localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Required environment variables:
 
-## 🚀 Project Structure
+| Variable | Description |
+| --- | --- |
+| `NOTION_TOKEN` | Notion integration token |
+| `NOTION_ARTICLES_DATABASE_ID` | Notion database ID for articles |
+| `NOTION_PROJECTS_DATABASE_ID` | Notion database ID for projects |
+| `BASE_URL` | Public URL of the site (e.g. `https://suryadarmaputra.com/`) |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+| Command | Action |
+| --- | --- |
+| `bun install` | Install dependencies |
+| `bun run generate` | Fetch content from Notion |
+| `bun dev` | Start local dev server |
+| `bun run build` | Build production site to `./dist/` |
+| `bun run preview` | Preview the production build locally |
+| `bun run lint` | Check code with Biome |
+| `bun run lint:fix` | Auto-fix lint issues |
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Rebuilding articles
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Articles and projects are fetched from Notion at build time. To publish new or updated content:
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. Go to the [Netlify dashboard](https://app.netlify.com)
+2. Open the site → **Deploys**
+3. Click **Trigger deploy → Deploy site**
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Netlify will re-run `bun run generate` (fetching the latest Notion content) followed by `bun run build`.

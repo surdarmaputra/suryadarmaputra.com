@@ -1,0 +1,61 @@
+---
+import type { BlockWithChildren, RichTextBlock, TableBlock, TableRowBlock } from "../types";
+import RichText from "./rich-text.astro";
+
+interface Props {
+  block: TableBlock;
+  children?: BlockWithChildren[];
+}
+
+const { block, children } = Astro.props;
+
+const { has_column_header, has_row_header } = block.table;
+
+const rows = (children ?? [])
+  .filter(({ block: b }) => "type" in b && b.type === "table_row")
+  .map(({ block: b }) => (b as TableRowBlock).table_row.cells as RichTextBlock[][]);
+
+const headerRow = has_column_header ? rows[0] : null;
+const bodyRows = has_column_header ? rows.slice(1) : rows;
+---
+
+{rows.length > 0 && (
+  <div class="overflow-x-auto my-6 rounded-lg border border-base-200">
+    <table class="w-full text-sm border-collapse">
+      {headerRow && (
+        <thead>
+          <tr class="border-b border-base-300">
+            {headerRow.map((cell) => (
+              <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-base-content/60">
+                {cell.map((richText) => (
+                  <RichText block={richText} />
+                ))}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      )}
+      <tbody>
+        {bodyRows.map((row, rowIndex) => (
+          <tr class={`border-b border-base-200 last:border-0 ${rowIndex % 2 === 1 ? "bg-base-200/30" : ""}`}>
+            {row.map((cell, colIndex) => (
+              has_row_header && colIndex === 0 ? (
+                <th class="px-4 py-3 text-left font-semibold text-base-content">
+                  {cell.map((richText) => (
+                    <RichText block={richText} />
+                  ))}
+                </th>
+              ) : (
+                <td class="px-4 py-3 text-base-content/80">
+                  {cell.map((richText) => (
+                    <RichText block={richText} />
+                  ))}
+                </td>
+              )
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
