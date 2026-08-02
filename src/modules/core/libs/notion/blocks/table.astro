@@ -1,0 +1,63 @@
+---
+import type { BlockWithChildren, RichTextBlock, TableBlock, TableRowBlock } from "../types";
+import RichText from "./rich-text.astro";
+
+interface Props {
+  block: TableBlock;
+  children?: BlockWithChildren[];
+}
+
+const { block, children } = Astro.props;
+
+const { has_column_header, has_row_header } = block.table;
+
+const rows = (children ?? [])
+  .filter(({ block: b }) => "type" in b && b.type === "table_row")
+  .map(({ block: b }) => (b as TableRowBlock).table_row.cells as RichTextBlock[][]);
+
+const headerRow = has_column_header ? rows[0] : null;
+const bodyRows = has_column_header ? rows.slice(1) : rows;
+---
+
+{rows.length > 0 && (
+  <div class="overflow-x-auto my-6">
+    <table class="table table-zebra w-full text-sm">
+      {headerRow && (
+        <thead>
+          <tr>
+            {headerRow.map((cell, colIndex) => (
+              <th
+                class={`text-base-content font-semibold ${has_row_header && colIndex === 0 ? "text-left" : ""}`}
+              >
+                {cell.map((richText) => (
+                  <RichText block={richText} />
+                ))}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      )}
+      <tbody>
+        {bodyRows.map((row, rowIndex) => (
+          <tr>
+            {row.map((cell, colIndex) => (
+              has_row_header && colIndex === 0 ? (
+                <th class="font-semibold text-base-content">
+                  {cell.map((richText) => (
+                    <RichText block={richText} />
+                  ))}
+                </th>
+              ) : (
+                <td>
+                  {cell.map((richText) => (
+                    <RichText block={richText} />
+                  ))}
+                </td>
+              )
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
