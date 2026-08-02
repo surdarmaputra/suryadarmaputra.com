@@ -20,15 +20,13 @@ const bodyRows = has_column_header ? rows.slice(1) : rows;
 ---
 
 {rows.length > 0 && (
-  <div class="overflow-x-auto my-6">
-    <table class="table table-zebra w-full text-sm">
+  <div class="overflow-x-auto my-6 rounded-lg border border-base-200">
+    <table class="w-full text-sm border-collapse">
       {headerRow && (
         <thead>
-          <tr>
-            {headerRow.map((cell, colIndex) => (
-              <th
-                class={`text-base-content font-semibold ${has_row_header && colIndex === 0 ? "text-left" : ""}`}
-              >
+          <tr class="border-b border-base-300">
+            {headerRow.map((cell) => (
+              <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-base-content/60">
                 {cell.map((richText) => (
                   <RichText block={richText} />
                 ))}
@@ -39,16 +37,16 @@ const bodyRows = has_column_header ? rows.slice(1) : rows;
       )}
       <tbody>
         {bodyRows.map((row, rowIndex) => (
-          <tr>
+          <tr class={`border-b border-base-200 last:border-0 ${rowIndex % 2 === 1 ? "bg-base-200/30" : ""}`}>
             {row.map((cell, colIndex) => (
               has_row_header && colIndex === 0 ? (
-                <th class="font-semibold text-base-content">
+                <th class="px-4 py-3 text-left font-semibold text-base-content">
                   {cell.map((richText) => (
                     <RichText block={richText} />
                   ))}
                 </th>
               ) : (
-                <td>
+                <td class="px-4 py-3 text-base-content/80">
                   {cell.map((richText) => (
                     <RichText block={richText} />
                   ))}
