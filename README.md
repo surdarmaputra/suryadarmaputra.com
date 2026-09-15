@@ -43,6 +43,22 @@ Required environment variables:
 | `bun run preview` | Preview the production build locally |
 | `bun run lint` | Check code with Biome |
 | `bun run lint:fix` | Auto-fix lint issues |
+| `bun run typecheck` | Typecheck with `astro check` |
+| `bun run test` | Component tests then e2e tests |
+| `bun run test:component` | Notion block renderer tests (Vitest) |
+| `bun run test:e2e` | Page tests (Playwright) |
+| `bun run test:screenshots` | Capture one PNG per Notion block |
+| `bun run test:seed` | Write fixture content into `src/_generated/` |
+
+## Testing
+
+Tests never call Notion. `bun run test:seed` writes deterministic fixture
+content into `src/_generated/` and `public/images/`, and the Playwright config
+seeds, builds and previews the site on its own — so `bun run test` works on a
+clean checkout with no credentials.
+
+See [`docs/harness/testing.md`](./docs/harness/testing.md), and
+[`AGENTS.md`](./AGENTS.md) for the guardrail sequence agents must follow.
 
 ## Rebuilding articles
 

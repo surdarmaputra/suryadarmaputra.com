@@ -30,12 +30,12 @@ const classString = annotationClasses.length > 0 ? annotationClasses.join(" ") :
     href={href}
     rel="noreferrer"
     target="_blank"
-    class={`${classString} link link-primary`}
+    class={[classString, "link link-primary"].filter(Boolean).join(" ")}
   >
     {annotations.code ? <code>{plainText}</code> : plainText}
   </a>
 ) : annotations.code ? (
-  <AstroCode code={plainText} inline={true} class={`${classString} py-0.5 px-1 text-sm rounded-md`} />
+  <AstroCode code={plainText} inline={true} class={[classString, "py-0.5 px-1 text-sm rounded-md"].filter(Boolean).join(" ")} />
 ) : hasFormatting ? (
   <span class={classString}>{plainText}</span>
 ) : (

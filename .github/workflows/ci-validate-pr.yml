@@ -40,3 +40,74 @@ jobs:
         with:
           title: 'CI: Validate PR -> Lint'
           webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
+
+  typecheck:
+    name: Typecheck
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Typecheck
+        run: bun run typecheck
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Typecheck'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
+
+  component-tests:
+    name: Component tests
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Run component tests
+        run: bun run test:component
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Component tests'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
+
+  e2e-tests:
+    name: E2E tests
+    needs: component-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
+      - name: Run e2e tests
+        run: bun run test:e2e
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> E2E tests'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
+
+  build:
+    name: Build
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache-dependencies
+      - name: Seed fixture content
+        run: bun run test:seed
+      - name: Build
+        run: bun run build
+      - name: Notify job status
+        uses: './.github/actions/notify-job-status'
+        with:
+          title: 'CI: Validate PR -> Build'
+          webhookUrl: ${{ env.DISCORD_WEBHOOK_URL }}
