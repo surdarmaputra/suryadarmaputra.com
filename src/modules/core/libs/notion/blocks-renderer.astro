@@ -24,10 +24,9 @@ const { blocks, imageBasePath } = Astro.props;
     return null;
   }
 
+  const previousBlock = index > 0 ? blocks[index - 1].block : null;
   const previousBlockType =
-    index > 0 && "type" in blocks[index - 1].block
-      ? blocks[index - 1].block.type
-      : null;
+    previousBlock && "type" in previousBlock ? previousBlock.type : null;
 
   switch (block.type) {
     case "paragraph":

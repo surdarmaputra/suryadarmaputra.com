@@ -1,6 +1,6 @@
 // Article module type definitions
 
-import type { BlockWithChildren } from "../../core/libs/notion/types";
+import type { BlockWithChildren } from "../core/libs/notion/types";
 
 // Raw Notion article data structure from generated JSON files
 export type NotionArticleData = {

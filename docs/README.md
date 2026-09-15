@@ -7,11 +7,21 @@ This directory contains all project documentation.
 ```
 docs/
 ├── README.md           # This file
-└── adr/               # Architecture Decision Records
-    ├── README.md       # ADR index and guidelines
-    ├── template.md     # ADR template
-    └── 001-*.md        # Individual ADRs
+├── adr/               # Architecture Decision Records
+│   ├── README.md       # ADR index and guidelines
+│   ├── template.md     # ADR template
+│   └── 001-*.md        # Individual ADRs
+└── harness/           # Agent harness (loaded by AGENTS.md)
+    ├── architecture.md # Layers, structure, data flow, boundaries
+    ├── conventions.md  # Naming, components, styling, a11y, Notion blocks
+    └── testing.md      # Test stack, fixtures, conventions, adding a block
 ```
+
+## Agent harness
+
+`AGENTS.md` at the repo root is the entry point for coding agents. It maps
+changed file paths to the harness sections that apply and defines the guardrail
+sequence (G1-G7). ADRs override the harness wherever they disagree.
 
 ## Architecture Decision Records (ADR)
 

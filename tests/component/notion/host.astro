@@ -1,0 +1,13 @@
+---
+// Renders the component under test as a child so that block components which
+// `return null` behave exactly as they do inside blocks-renderer.astro.
+interface Props {
+  // biome-ignore lint/suspicious/noExplicitAny: generic test host
+  component: any;
+  props?: Record<string, unknown>;
+}
+
+const { component: Component, props = {} } = Astro.props;
+---
+
+<Component {...props} />
