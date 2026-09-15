@@ -49,14 +49,12 @@ const diagramCode = concatPlainTexts(richTexts);
   </div>
 
   <div data-panel="code" hidden>
-    <div class="p-4">
-      <AstroCode
-        lang="mermaid"
-        code={diagramCode}
-        class="!rounded-lg !border-0 !shadow-none"
-        theme="aurora-x"
-      />
-    </div>
+    <AstroCode
+      lang="mermaid"
+      code={diagramCode}
+      class="!rounded-none !border-0 !shadow-none [&_pre]:p-5"
+      theme="aurora-x"
+    />
   </div>
 </div>
 
