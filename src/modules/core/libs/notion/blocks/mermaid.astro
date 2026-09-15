@@ -48,11 +48,11 @@ const diagramCode = concatPlainTexts(richTexts);
     </div>
   </div>
 
-  <div data-panel="code" hidden>
+  <div class="mermaid-code-panel" data-panel="code" hidden>
     <AstroCode
       lang="mermaid"
       code={diagramCode}
-      class="!rounded-none !border-0 !shadow-none [&_pre]:!p-5"
+      class="!rounded-none !border-0 !shadow-none"
       theme="aurora-x"
     />
   </div>
@@ -199,3 +199,9 @@ const diagramCode = concatPlainTexts(richTexts);
 
   initAfterNavigation(initMermaid);
 </script>
+
+<style>
+  .mermaid-code-panel :global(pre) {
+    padding: 1.25rem !important;
+  }
+</style>
