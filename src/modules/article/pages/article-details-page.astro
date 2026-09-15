@@ -45,6 +45,38 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
   currentPath={currentPath}
   mainClass="page-container"
 >
+  <!-- Reading progress bar -->
+  <div id="reading-progress" class="fixed top-0 left-0 h-0.5 bg-base-content/30 z-[60]" style="width: 0%"></div>
+
+  <script>
+    let _progressCleanup: (() => void) | null = null;
+
+    function initReadingProgress() {
+      if (_progressCleanup) _progressCleanup();
+
+      const bar = document.getElementById("reading-progress");
+      if (!bar) return;
+
+      const update = () => {
+        const el = document.documentElement;
+        const total = el.scrollHeight - el.clientHeight;
+        const pct = total > 0 ? (el.scrollTop / total) * 100 : 0;
+        bar.style.width = `${pct}%`;
+      };
+
+      window.addEventListener("scroll", update, { passive: true });
+      _progressCleanup = () => window.removeEventListener("scroll", update);
+      update();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initReadingProgress);
+    } else {
+      initReadingProgress();
+    }
+    document.addEventListener("astro:after-swap", initReadingProgress);
+  </script>
+
   <OrnamentWrapper>
     <PageHeader
       title={title}
@@ -61,7 +93,7 @@ const formattedDate = articleDate.toLocaleDateString("en-US", {
     </PageHeader>
 
     <!-- Content Sections -->
-    <div class="mb-16">
+    <div class="mb-16 max-w-2xl">
       <BlocksRenderer blocks={blocks} imageBasePath="/images/articles" />
     </div>
 

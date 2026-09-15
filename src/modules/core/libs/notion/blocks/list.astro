@@ -26,14 +26,14 @@ const listTag = block.type === "bulleted_list" ? "ul" : "ol";
 ---
 
 {listTag === "ul" && (
-  <ul class="my-6 space-y-3 ml-6 list-disc list-outside text-base md:text-lg leading-relaxed text-base-content">
+  <ul class="my-6 space-y-3 ml-6 list-disc list-outside text-lg leading-[1.8] text-base-content">
     {children && children.length > 0 && RenderChildren && (
       <RenderChildren blocks={children} imageBasePath={imageBasePath} />
     )}
   </ul>
 )}
 {listTag === "ol" && (
-  <ol class="my-6 space-y-3 ml-6 list-decimal list-outside text-base md:text-lg leading-relaxed text-base-content">
+  <ol class="my-6 space-y-3 ml-6 list-decimal list-outside text-lg leading-[1.8] text-base-content">
     {children && children.length > 0 && RenderChildren && (
       <RenderChildren blocks={children} imageBasePath={imageBasePath} />
     )}
