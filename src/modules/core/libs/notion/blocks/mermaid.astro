@@ -20,8 +20,8 @@ const richTexts = (codeBlock?.rich_text || []) as any[];
 const diagramCode = concatPlainTexts(richTexts);
 ---
 
-<div class="my-2 md:my-4" data-mermaid-wrapper data-code={diagramCode}>
-  <div class="flex gap-1 mb-2 items-center">
+<div class="my-2 md:my-4 rounded-xl border border-base-300 bg-base-200 overflow-hidden" data-mermaid-wrapper data-code={diagramCode}>
+  <div class="flex gap-1 px-3 py-2 items-center border-b border-base-300">
     <button class="btn btn-xs btn-neutral" data-view="diagram" data-active="true">Diagram</button>
     <button class="btn btn-xs btn-ghost" data-view="code">Code</button>
     <button class="btn btn-xs btn-ghost" data-view="both">Both</button>
@@ -30,7 +30,7 @@ const diagramCode = concatPlainTexts(richTexts);
     </button>
   </div>
 
-  <div data-panel="diagram">
+  <div data-panel="diagram" class="p-4">
     <div class="flex justify-center overflow-x-auto">
       <pre class="mermaid">{diagramCode}</pre>
     </div>
@@ -40,7 +40,7 @@ const diagramCode = concatPlainTexts(richTexts);
     <AstroCode
       lang="text"
       code={diagramCode}
-      class="border-4 border-neutral rounded-lg shadow-lg"
+      class="!rounded-none !border-0 !shadow-none"
       theme="aurora-x"
     />
   </div>
