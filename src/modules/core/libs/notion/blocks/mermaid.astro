@@ -1,0 +1,31 @@
+---
+import { concatPlainTexts } from "../renderer-utils";
+import type { BlockWithChildren } from "../types";
+
+interface Props {
+  block: BlockWithChildren["block"];
+}
+
+const { block } = Astro.props;
+
+if (!("type" in block) || block.type !== "code") {
+  return null;
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const codeBlock = (block as any).code;
+// biome-ignore lint/suspicious/noExplicitAny: expected
+const richTexts = (codeBlock?.rich_text || []) as any[];
+const diagramCode = concatPlainTexts(richTexts);
+---
+
+<div class="my-2 md:my-4 flex justify-center">
+  <div class="w-full overflow-x-auto">
+    <pre class="mermaid">{diagramCode}</pre>
+  </div>
+</div>
+
+<script>
+  import mermaid from "mermaid";
+  mermaid.initialize({ startOnLoad: true });
+</script>
