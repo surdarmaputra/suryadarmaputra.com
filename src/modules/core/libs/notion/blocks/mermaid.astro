@@ -1,4 +1,5 @@
 ---
+import { Code as AstroCode } from "astro:components";
 import { concatPlainTexts } from "../renderer-utils";
 import type { BlockWithChildren } from "../types";
 
@@ -19,13 +20,57 @@ const richTexts = (codeBlock?.rich_text || []) as any[];
 const diagramCode = concatPlainTexts(richTexts);
 ---
 
-<div class="my-2 md:my-4 flex justify-center">
-  <div class="w-full overflow-x-auto">
-    <pre class="mermaid">{diagramCode}</pre>
+<div class="my-2 md:my-4" data-mermaid-wrapper>
+  <div class="flex gap-1 mb-2">
+    <button class="btn btn-xs btn-neutral" data-view="diagram" data-active="true">Diagram</button>
+    <button class="btn btn-xs btn-ghost" data-view="code">Code</button>
+    <button class="btn btn-xs btn-ghost" data-view="both">Both</button>
+  </div>
+
+  <div data-panel="diagram">
+    <div class="flex justify-center overflow-x-auto">
+      <pre class="mermaid">{diagramCode}</pre>
+    </div>
+  </div>
+
+  <div data-panel="code" hidden>
+    <AstroCode
+      lang="text"
+      code={diagramCode}
+      class="border-4 border-neutral rounded-lg shadow-lg"
+      theme="aurora-x"
+    />
   </div>
 </div>
 
 <script>
   import mermaid from "mermaid";
-  mermaid.initialize({ startOnLoad: true });
+  import { initAfterNavigation } from "../../../utils/ui-utils";
+
+  function initMermaid() {
+    mermaid.initialize({ startOnLoad: false });
+    mermaid.run({ querySelector: ".mermaid" });
+
+    document.querySelectorAll("[data-mermaid-wrapper]").forEach((wrapper) => {
+      wrapper.querySelectorAll("button[data-view]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const view = (btn as HTMLElement).dataset.view;
+          const diagramPanel = wrapper.querySelector('[data-panel="diagram"]') as HTMLElement | null;
+          const codePanel = wrapper.querySelector('[data-panel="code"]') as HTMLElement | null;
+
+          wrapper.querySelectorAll("button[data-view]").forEach((b) => {
+            (b as HTMLElement).dataset.active = "false";
+            b.classList.replace("btn-neutral", "btn-ghost");
+          });
+          (btn as HTMLElement).dataset.active = "true";
+          btn.classList.replace("btn-ghost", "btn-neutral");
+
+          if (diagramPanel) diagramPanel.hidden = view === "code";
+          if (codePanel) codePanel.hidden = view !== "code" && view !== "both";
+        });
+      });
+    });
+  }
+
+  initAfterNavigation(initMermaid);
 </script>
