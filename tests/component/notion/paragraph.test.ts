@@ -27,20 +27,19 @@ describe("paragraph block", () => {
     expect(html).not.toContain("mt-4");
   });
 
-  test.each([
-    "heading_1",
-    "heading_2",
-    "heading_3",
-  ])("tightens spacing when preceded by %s", async (previousBlockType) => {
-    const html = await renderComponent(Paragraph, {
-      block: paragraphBlock(),
-      previousBlockType,
-      imageBasePath: IMAGE_BASE_PATH,
-    });
+  test.each(["heading_1", "heading_2", "heading_3"])(
+    "tightens spacing when preceded by %s",
+    async (previousBlockType) => {
+      const html = await renderComponent(Paragraph, {
+        block: paragraphBlock(),
+        previousBlockType,
+        imageBasePath: IMAGE_BASE_PATH,
+      });
 
-    expect(html).toContain("mt-4");
-    expect(html).not.toContain("my-6");
-  });
+      expect(html).toContain("mt-4");
+      expect(html).not.toContain("my-6");
+    }
+  );
 
   test("renders nothing when the paragraph has no rich text", async () => {
     const html = await renderComponent(Paragraph, {
