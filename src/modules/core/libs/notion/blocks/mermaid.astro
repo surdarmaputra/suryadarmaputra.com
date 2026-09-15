@@ -20,29 +20,43 @@ const richTexts = (codeBlock?.rich_text || []) as any[];
 const diagramCode = concatPlainTexts(richTexts);
 ---
 
-<div class="my-2 md:my-4 rounded-xl border border-base-300 bg-base-200 overflow-hidden" data-mermaid-wrapper data-code={diagramCode}>
+<div class="my-2 md:my-4 rounded-xl border border-base-300 bg-base-100/60 overflow-hidden" data-mermaid-wrapper data-code={diagramCode}>
   <div class="flex gap-1 px-3 py-2 items-center border-b border-base-300">
     <button class="btn btn-xs btn-neutral" data-view="diagram" data-active="true">Diagram</button>
     <button class="btn btn-xs btn-ghost" data-view="code">Code</button>
     <button class="btn btn-xs btn-ghost" data-view="both">Both</button>
-    <button class="btn btn-xs btn-ghost ml-auto" data-copy title="Copy mermaid syntax">
-      <span data-copy-label>Copy</span>
-    </button>
+    <div class="flex gap-0.5 ml-auto items-center">
+      <button class="btn btn-xs btn-ghost font-mono text-base leading-none" data-zoom-in title="Zoom in">+</button>
+      <button class="btn btn-xs btn-ghost font-mono text-xs" data-zoom-reset title="Reset zoom">⊙</button>
+      <button class="btn btn-xs btn-ghost font-mono text-base leading-none" data-zoom-out title="Zoom out">−</button>
+      <div class="w-px h-4 bg-base-300 mx-1"></div>
+      <button class="btn btn-xs btn-ghost" data-copy title="Copy mermaid syntax">
+        <span data-copy-label>Copy</span>
+      </button>
+    </div>
   </div>
 
   <div data-panel="diagram" class="p-4">
-    <div class="flex justify-center overflow-x-auto">
-      <pre class="mermaid">{diagramCode}</pre>
+    <div
+      class="flex items-center justify-center overflow-hidden cursor-grab select-none"
+      data-zoom-container
+      style="min-height: 180px;"
+    >
+      <div data-zoom-inner style="transform-origin: center center; will-change: transform; display: inline-flex;">
+        <pre class="mermaid">{diagramCode}</pre>
+      </div>
     </div>
   </div>
 
   <div data-panel="code" hidden>
-    <AstroCode
-      lang="text"
-      code={diagramCode}
-      class="!rounded-none !border-0 !shadow-none"
-      theme="aurora-x"
-    />
+    <div class="p-4">
+      <AstroCode
+        lang="mermaid"
+        code={diagramCode}
+        class="!rounded-lg !border-0 !shadow-none"
+        theme="aurora-x"
+      />
+    </div>
   </div>
 </div>
 
@@ -55,6 +69,7 @@ const diagramCode = concatPlainTexts(richTexts);
     mermaid.run({ querySelector: ".mermaid" });
 
     document.querySelectorAll("[data-mermaid-wrapper]").forEach((wrapper) => {
+      // Copy button
       const copyBtn = wrapper.querySelector("button[data-copy]") as HTMLElement | null;
       if (copyBtn) {
         copyBtn.addEventListener("click", async () => {
@@ -68,6 +83,7 @@ const diagramCode = concatPlainTexts(richTexts);
         });
       }
 
+      // View toggle
       wrapper.querySelectorAll("button[data-view]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const view = (btn as HTMLElement).dataset.view;
@@ -84,6 +100,101 @@ const diagramCode = concatPlainTexts(richTexts);
           if (diagramPanel) diagramPanel.hidden = view === "code";
           if (codePanel) codePanel.hidden = view !== "code" && view !== "both";
         });
+      });
+
+      // Zoom & pan
+      const container = wrapper.querySelector("[data-zoom-container]") as HTMLElement | null;
+      const inner = wrapper.querySelector("[data-zoom-inner]") as HTMLElement | null;
+      if (!container || !inner) return;
+
+      let scale = 1;
+      let tx = 0;
+      let ty = 0;
+
+      function applyTransform() {
+        inner!.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      }
+
+      // Wheel zoom toward cursor
+      container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const rect = container.getBoundingClientRect();
+        const mx = e.clientX - rect.left - rect.width / 2;
+        const my = e.clientY - rect.top - rect.height / 2;
+        const factor = e.deltaY < 0 ? 1.12 : 0.89;
+        const newScale = Math.min(Math.max(0.2, scale * factor), 8);
+        tx = mx - (mx - tx) * (newScale / scale);
+        ty = my - (my - ty) * (newScale / scale);
+        scale = newScale;
+        applyTransform();
+      }, { passive: false });
+
+      // Mouse drag pan
+      let dragging = false;
+      let dragX = 0;
+      let dragY = 0;
+      container.addEventListener("mousedown", (e) => {
+        dragging = true;
+        dragX = e.clientX - tx;
+        dragY = e.clientY - ty;
+        container.style.cursor = "grabbing";
+      });
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        tx = e.clientX - dragX;
+        ty = e.clientY - dragY;
+        applyTransform();
+      });
+      window.addEventListener("mouseup", () => {
+        dragging = false;
+        container.style.cursor = "grab";
+      });
+
+      // Touch pinch zoom + drag
+      let lastDist = 0;
+      let lastTx = 0;
+      let lastTy = 0;
+      container.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 2) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          lastDist = Math.hypot(dx, dy);
+        } else if (e.touches.length === 1) {
+          lastTx = e.touches[0].clientX - tx;
+          lastTy = e.touches[0].clientY - ty;
+        }
+      }, { passive: true });
+      container.addEventListener("touchmove", (e) => {
+        e.preventDefault();
+        if (e.touches.length === 2) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const dist = Math.hypot(dx, dy);
+          if (lastDist > 0) {
+            scale = Math.min(Math.max(0.2, scale * (dist / lastDist)), 8);
+            applyTransform();
+          }
+          lastDist = dist;
+        } else if (e.touches.length === 1) {
+          tx = e.touches[0].clientX - lastTx;
+          ty = e.touches[0].clientY - lastTy;
+          applyTransform();
+        }
+      }, { passive: false });
+      container.addEventListener("touchend", () => { lastDist = 0; }, { passive: true });
+
+      // Zoom buttons
+      wrapper.querySelector("[data-zoom-in]")?.addEventListener("click", () => {
+        scale = Math.min(scale * 1.25, 8);
+        applyTransform();
+      });
+      wrapper.querySelector("[data-zoom-out]")?.addEventListener("click", () => {
+        scale = Math.max(scale * 0.8, 0.2);
+        applyTransform();
+      });
+      wrapper.querySelector("[data-zoom-reset]")?.addEventListener("click", () => {
+        scale = 1; tx = 0; ty = 0;
+        applyTransform();
       });
     });
   }
