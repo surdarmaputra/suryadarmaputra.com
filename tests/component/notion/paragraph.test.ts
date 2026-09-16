@@ -13,7 +13,7 @@ describe("paragraph block", () => {
 
     expect(html).toContain("<p");
     expect(html).toContain("Body copy.");
-    expect(html).toContain("text-base md:text-lg leading-relaxed text-base-content");
+    expect(html).toContain("text-lg leading-[1.8] text-base-content");
   });
 
   test("uses default vertical spacing when not preceded by a heading", async () => {
@@ -27,6 +27,7 @@ describe("paragraph block", () => {
     expect(html).not.toContain("mt-4");
   });
 
+  // biome-ignore format: local biome version differs from CI
   test.each([
     "heading_1",
     "heading_2",
