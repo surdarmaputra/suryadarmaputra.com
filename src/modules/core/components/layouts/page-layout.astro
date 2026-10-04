@@ -15,7 +15,7 @@ interface Props {
 
 const {
   title = "",
-  description = "Surya Darma Putra is an experienced web developer, fullstack developer, and application developer offering modern, high-quality website and app development services. Elevate your business with expert frontend, backend, and full stack solutions for projects that are scalable and ready to compete in the digital era.",
+  description = "Surya Darma Putra is a fullstack software engineer with 10+ years of experience building web products, dashboards, libraries and AI-assisted tooling.",
   currentPath,
   mainClass,
 } = Astro.props;
@@ -46,6 +46,7 @@ const {
     <title>{title ? `${title} - ${PERSONAL.NAME}` : PERSONAL.NAME}</title>
     <ClientRouter />
     <GtagScripts />
+    <slot name="head" />
   </head>
   <body class="font-sans">
     <Header currentPath={currentPath} />
@@ -55,4 +56,14 @@ const {
     <Footer />
   </body>
 </html>
+
+<script>
+  import { initAmbientOrbs, initHoverOrbs } from "../../utils/orb-utils";
+  import { initAfterNavigation } from "../../utils/ui-utils";
+
+  initAfterNavigation(() => {
+    initHoverOrbs();
+    initAmbientOrbs();
+  });
+</script>
 

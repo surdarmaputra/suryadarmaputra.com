@@ -1,43 +1,54 @@
 ---
+import Badge from "../../core/components/base/badge.astro";
 import Button from "../../core/components/base/button.astro";
 import Icon from "../../core/components/base/icon.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
+import HeroFlask from "./hero-flask.astro";
 
 const skills = PERSONAL.TITLE;
 const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
 const githubUrl = SOCIAL_LINKS.GITHUB;
+const trustItems = ["10+ years shipping", "GoTo Financial", "Kargo", "Bukalapak", "GMT+7"];
 ---
 
-<section class="hero min-h-screen relative overflow-hidden" aria-label="Hero section">
+<section
+  class="relative overflow-hidden pt-12 pb-20 md:pt-20 lg:min-h-[calc(100vh-72px)] lg:flex lg:items-center"
+  aria-label="Hero section"
+>
   <Ornament variant="circle" size="md" color="accent" position="top-left" />
-  <Ornament variant="dots" size="md" color="primary" position="top-right" />
-  <Ornament variant="square" size="lg" color="secondary" position="center" />
+  <Ornament variant="dots" size="md" color="primary" position="bottom-right" />
 
-  <div class="hero-content text-center relative z-10">
-    <div class="max-w-4xl animate-fade-in-up">
+  <div
+    class="container max-w-6xl mx-auto px-4 relative z-10 grid items-center gap-12 lg:gap-8 lg:grid-cols-[1.15fr_1fr]"
+  >
+    <div class="text-center lg:text-left">
       <h1 class="font-bold font-serif mb-6 leading-tight">
         <span class="block text-3xl md:text-4xl lg:text-5xl">
-          <span class="block md:inline">
-            <span class="inline-block animate-wave">👋</span> Hello there, I'm
-          </span>
+          <span class="inline-block animate-wave">👋</span> Hello there, I'm
         </span>
-        <span class="block text-6xl md:text-7xl lg:text-8xl mt-2">
+        <span class="block text-6xl md:text-7xl xl:text-8xl mt-2">
           {PERSONAL.NAME}
         </span>
       </h1>
-      <div class="space-y-4 mb-8">
-        <p class="text-lg md:text-2xl text-base-content/80 max-w-2xl mx-auto leading-relaxed px-4">
-          {skills}
-        </p>
-      </div>
-      
-      <div class="flex items-center justify-center gap-6 mb-20">
+      <p
+        class="text-lg md:text-2xl text-base-content/80 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 animate-fade-in-up"
+      >
+        {skills}
+      </p>
+
+      <div
+        class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-in-up animate-delay-200"
+      >
+        <Button href="#projects" variant="neutral" class="hover-scale px-6">
+          View my work
+          <Icon name="heroicons:arrow-down" size="w-5 h-5" />
+        </Button>
         <Button
           href={linkedinUrl}
           variant="outline"
           circle={true}
-          class="hover-scale transition-transform"
+          class="hover-scale"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
@@ -48,7 +59,7 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
           href={githubUrl}
           variant="outline"
           circle={true}
-          class="hover-scale transition-transform"
+          class="hover-scale"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub profile"
@@ -56,15 +67,61 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
           <Icon name="simple-icons:github" size="w-6 h-6" />
         </Button>
       </div>
-      
-      <a
-        href="#experience"
-        class="inline-flex flex-col items-center gap-2 text-base-content/60 hover:text-base-content transition-colors animate-bounce-soft"
-        aria-label="Scroll to experience section"
+
+      <ul
+        class="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1 text-sm text-base-content/60"
+        aria-label="Background"
       >
-        <span class="text-sm font-medium">Scroll to explore</span>
-        <Icon name="heroicons:arrow-down" size="w-6 h-6" />
-      </a>
+        {trustItems.map((item, index) => (
+          <li class="flex items-center gap-3">
+            {index > 0 && <span class="w-1 h-1 rounded-full bg-base-content/40" aria-hidden="true"></span>}
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-[400px] aspect-[4/5]">
+      <HeroFlask />
+      <div class="hero-chip absolute top-[18%] -left-4 md:-left-10" aria-hidden="true">
+        <Badge size="lg" variant="primary" itemIndex={0}>TypeScript</Badge>
+      </div>
+      <div class="hero-chip hero-chip-delay-1 absolute top-[42%] -right-4 md:-right-8" aria-hidden="true">
+        <Badge size="lg" variant="secondary" itemIndex={1}>Fullstack</Badge>
+      </div>
+      <div class="hero-chip hero-chip-delay-2 absolute bottom-[10%] -left-2 md:-left-6" aria-hidden="true">
+        <Badge size="lg" variant="accent" itemIndex={2}>AI agents</Badge>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-chip {
+    animation: hero-chip-float 6s ease-in-out infinite;
+  }
+
+  .hero-chip-delay-1 {
+    animation-delay: -2s;
+  }
+
+  .hero-chip-delay-2 {
+    animation-delay: -4s;
+  }
+
+  @keyframes hero-chip-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-chip {
+      animation: none;
+    }
+  }
+</style>

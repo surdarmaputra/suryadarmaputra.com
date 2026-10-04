@@ -1,0 +1,171 @@
+---
+// Decorative lab flask: liquid sways, bubbles rise, orbs escape the neck and dissolve.
+const flaskPath =
+  "M164 140 L164 250 L62 452 Q50 494 92 498 L308 498 Q350 494 338 452 L236 250 L236 140 Z";
+
+const bubbles = [
+  { cx: 120, r: 7, duration: "3.2s", delay: "0s" },
+  { cx: 200, r: 5, duration: "2.6s", delay: "-1.1s" },
+  { cx: 260, r: 9, duration: "3.8s", delay: "-2.3s" },
+  { cx: 165, r: 4, duration: "2.4s", delay: "-0.6s" },
+  { cx: 290, r: 5, duration: "3s", delay: "-1.7s" },
+];
+
+const orbs = [
+  { cx: 192, r: 14, color: "var(--color-accent-lavender)", duration: "4.2s", delay: "0s" },
+  { cx: 212, r: 10, color: "var(--color-accent-mint)", duration: "3.6s", delay: "-1.4s" },
+  { cx: 200, r: 18, color: "var(--color-accent-peach)", duration: "4.8s", delay: "-2.6s" },
+  { cx: 184, r: 9, color: "var(--color-accent-mint)", duration: "3.9s", delay: "-3.3s" },
+];
+---
+
+<svg
+  class="hero-flask w-full h-full text-neutral"
+  viewBox="0 0 400 520"
+  role="img"
+  aria-label="Illustration of a glass flask with colorful orbs rising out of it"
+>
+  <defs>
+    <clipPath id="hero-flask-clip">
+      <path d={flaskPath}></path>
+    </clipPath>
+    <linearGradient id="hero-flask-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--color-accent-lavender)"></stop>
+      <stop offset="100%" stop-color="var(--color-accent-mint)"></stop>
+    </linearGradient>
+    <radialGradient id="hero-flask-orb" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff"></stop>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="200" cy="506" rx="150" ry="10" class="fill-current opacity-10"></ellipse>
+
+  <g clip-path="url(#hero-flask-clip)">
+    <rect x="0" y="0" width="400" height="520" fill="#fff" fill-opacity="0.6"></rect>
+    <path
+      class="hero-flask-wave hero-flask-wave-back"
+      d="M0 352 Q50 336 100 352 T200 352 T300 352 T400 352 T500 352 T600 352 T700 352 T800 352 L800 520 L0 520 Z"
+      fill="var(--color-accent-peach)"
+      fill-opacity="0.7"
+    ></path>
+    <path
+      class="hero-flask-wave"
+      d="M0 362 Q50 348 100 362 T200 362 T300 362 T400 362 T500 362 T600 362 T700 362 T800 362 L800 520 L0 520 Z"
+      fill="url(#hero-flask-liquid)"
+    ></path>
+    {bubbles.map((bubble) => (
+      <circle
+        class="hero-flask-bubble"
+        cx={bubble.cx}
+        cy="490"
+        r={bubble.r}
+        fill="#fff"
+        fill-opacity="0.75"
+        style={`--duration: ${bubble.duration}; --delay: ${bubble.delay};`}
+      ></circle>
+    ))}
+  </g>
+
+  {orbs.map((orb) => (
+    <g
+      class="hero-flask-orb"
+      style={`--duration: ${orb.duration}; --delay: ${orb.delay};`}
+    >
+      <circle cx={orb.cx} cy="300" r={orb.r} fill={orb.color}></circle>
+      <circle cx={orb.cx} cy="300" r={orb.r} fill="url(#hero-flask-orb)"></circle>
+    </g>
+  ))}
+
+  <path
+    d={flaskPath}
+    fill="none"
+    stroke="currentColor"
+    stroke-width="8"
+    stroke-linejoin="round"
+  ></path>
+  <rect x="148" y="122" width="104" height="22" rx="8" fill="#fff" stroke="currentColor" stroke-width="8"></rect>
+  <path
+    d="M186 168 L186 248 L104 418"
+    fill="none"
+    stroke="#fff"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-opacity="0.9"
+  ></path>
+  <path d="M236 300 L262 300 M248 340 L276 340 M260 380 L292 380" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity="0.35"></path>
+</svg>
+
+<style>
+  .hero-flask-wave {
+    animation: hero-flask-sway 6s linear infinite;
+  }
+
+  .hero-flask-wave-back {
+    animation-duration: 9s;
+    animation-direction: reverse;
+  }
+
+  .hero-flask-bubble {
+    animation: hero-flask-bubble var(--duration) ease-in var(--delay) infinite;
+  }
+
+  .hero-flask-orb {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-flask-orb var(--duration) ease-out var(--delay) infinite;
+  }
+
+  @keyframes hero-flask-sway {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-200px);
+    }
+  }
+
+  @keyframes hero-flask-bubble {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-140px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-flask-orb {
+    0% {
+      transform: translate(0, 0) scale(0.5);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.95;
+    }
+    70% {
+      transform: translate(8px, -210px) scale(1);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translate(-10px, -300px) scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-flask-wave,
+    .hero-flask-bubble,
+    .hero-flask-orb {
+      animation: none;
+    }
+  }
+</style>

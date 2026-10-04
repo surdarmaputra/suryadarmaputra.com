@@ -1,13 +1,15 @@
 ---
+import Button from "../../core/components/base/button.astro";
 import type { Article } from "../types";
 
 interface Props {
   articles: Article[];
   title?: string;
   customWrapperClass?: string;
+  showViewAll?: boolean;
 }
 
-const { articles, title, customWrapperClass } = Astro.props;
+const { articles, title, customWrapperClass, showViewAll = false } = Astro.props;
 ---
 
 <section
@@ -60,6 +62,13 @@ const { articles, title, customWrapperClass } = Astro.props;
         );
       })}
     </div>
+    {showViewAll && (
+      <div class="flex justify-center mt-16">
+        <Button href="/articles" variant="outline">
+          View all articles
+        </Button>
+      </div>
+    )}
   </div>
 </section>
 

@@ -88,6 +88,7 @@ const tilt = generateRandomElementTiltAngle(itemIndex ?? 0);
 // Build class string
 const classParts = [
   "badge",
+  "orb-host",
   variantClass,
   styleClass,
   sizeClass,
@@ -101,7 +102,7 @@ const classParts = [
 const classes = classParts.join(" ");
 ---
 
-<span class={classes} style={`--badge-tilt: ${tilt}deg;`}>
+<span class={classes} data-orbs style={`--badge-tilt: ${tilt}deg;`}>
   <slot />
 </span>
 
