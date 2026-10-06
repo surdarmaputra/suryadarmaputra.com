@@ -1,60 +1,70 @@
 ---
-// Decorative layered cards: interface, data and deploy, the layers of a fullstack product.
-const bars = [
-  { height: "h-[45%]", delay: "0s" },
-  { height: "h-[70%]", delay: "-0.8s" },
-  { height: "h-[55%]", delay: "-1.6s" },
-  { height: "h-[85%]", delay: "-2.4s" },
-  { height: "h-[65%]", delay: "-3.2s" },
-];
+// Decorative layered cards telling one deploy story on a loop:
+// push code (infra) -> API answers (data) -> invoice turns paid (interface).
 ---
 
 <div class="hero-stack relative w-full h-full" aria-hidden="true">
-  <!-- Deploy: terminal -->
+  <!-- Infra: terminal -->
   <div
-    class="hero-stack-card absolute top-[4%] left-0 w-[72%] rounded-box border-4 border-neutral bg-neutral text-neutral-content p-4 md:p-5 font-mono text-[11px] md:text-xs leading-relaxed shadow-[6px_6px_0_var(--color-accent-lavender)] -rotate-6"
+    class="hero-stack-card absolute top-[6%] left-0 w-[64%] rounded-box border-4 border-neutral bg-neutral text-neutral-content px-4 py-3 font-mono text-[10px] md:text-[11px] leading-relaxed shadow-[5px_5px_0_var(--color-accent-lavender)] -rotate-3"
     style="--float-delay: 0s;"
   >
-    <p><span class="text-accent-peach">$</span> bun run build</p>
-    <p class="opacity-70">→ 8 pages built</p>
-    <p class="text-accent-mint">✓ deployed <span class="hero-stack-cursor">▍</span></p>
+    <p><span class="text-accent-peach">$</span> git push</p>
+    <p class="hero-stack-step hero-stack-step-1 text-accent-mint">✓ tests passed</p>
+    <p class="hero-stack-step hero-stack-step-2 text-accent-mint">✓ deployed</p>
   </div>
 
-  <!-- Data: chart -->
+  <!-- Data: API response -->
   <div
-    class="hero-stack-card absolute top-[22%] right-0 w-[60%] aspect-[4/3] rounded-box border-4 border-neutral bg-accent-mint p-4 shadow-[6px_6px_0_var(--color-neutral)] rotate-3"
+    class="hero-stack-card absolute top-[38%] right-0 w-[62%] rounded-box border-4 border-neutral bg-accent-mint px-4 py-3 font-mono text-[10px] md:text-[11px] leading-relaxed shadow-[5px_5px_0_var(--color-neutral)] rotate-2"
     style="--float-delay: -2.5s;"
   >
-    <div class="flex items-end gap-2 h-full">
-      {bars.map((bar) => (
-        <span
-          class={`hero-stack-bar flex-1 rounded-t-md bg-neutral/80 ${bar.height}`}
-          style={`--bar-delay: ${bar.delay};`}
-        ></span>
-      ))}
+    <p class="font-bold">GET /invoices/42</p>
+    <p class="hero-stack-step hero-stack-step-3">
+      200 OK {"{ status: \"paid\" }"}
+    </p>
+  </div>
+
+  <!-- Interface: invoice -->
+  <div
+    class="hero-stack-card absolute bottom-[4%] left-[4%] w-[60%] rounded-box border-4 border-neutral bg-base-100 px-4 py-3 shadow-[5px_5px_0_var(--color-neutral)] -rotate-1"
+    style="--float-delay: -5s;"
+  >
+    <p class="text-[10px] md:text-xs text-base-content/60">Invoice #042</p>
+    <p class="font-display font-bold text-base md:text-lg leading-tight">$1,240.00</p>
+    <div class="relative mt-2 h-6">
+      <span
+        class="hero-stack-pending absolute inset-y-0 left-0 inline-flex items-center rounded-full border-2 border-neutral bg-accent-peach px-2.5 text-[10px] md:text-xs font-semibold"
+        >Pending</span
+      >
+      <span
+        class="hero-stack-step hero-stack-step-4 absolute inset-y-0 left-0 inline-flex items-center rounded-full border-2 border-neutral bg-accent-mint px-2.5 text-[10px] md:text-xs font-semibold"
+        >Paid ✓</span
+      >
     </div>
   </div>
 
-  <!-- Interface: UI window -->
-  <div
-    class="hero-stack-card absolute bottom-[4%] left-[6%] w-[70%] rounded-box border-4 border-neutral bg-base-100 shadow-[6px_6px_0_var(--color-neutral)] -rotate-2"
-    style="--float-delay: -5s;"
-  >
-    <div class="flex items-center gap-1.5 border-b-4 border-neutral px-3 py-2">
-      <span class="w-2.5 h-2.5 rounded-full bg-accent-peach border-2 border-neutral"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-accent-mint border-2 border-neutral"></span>
-      <span class="w-2.5 h-2.5 rounded-full bg-accent-lavender border-2 border-neutral"></span>
-    </div>
-    <div class="p-4 space-y-2.5">
-      <div class="h-3 w-3/4 rounded-full bg-neutral"></div>
-      <div class="h-2 w-full rounded-full bg-neutral/20"></div>
-      <div class="h-2 w-5/6 rounded-full bg-neutral/20"></div>
-      <div class="flex gap-2 pt-1.5">
-        <div class="h-6 w-16 rounded-full bg-accent-lavender border-2 border-neutral"></div>
-        <div class="h-6 w-12 rounded-full border-2 border-neutral"></div>
-      </div>
-    </div>
-  </div>
+  <!-- Handwritten labels -->
+  <p class="hero-stack-note absolute top-0 right-0 font-hand text-lg md:text-xl rotate-3">
+    infra &amp; CI/CD
+  </p>
+  <svg class="hero-stack-arrow absolute top-[9%] right-[24%] w-12 h-8" viewBox="0 0 48 32" fill="none">
+    <path d="M44 6 C 32 4, 18 10, 8 22 M8 22 L 9 12 M8 22 L 18 20"></path>
+  </svg>
+
+  <p class="hero-stack-note absolute top-[64%] right-[2%] font-hand text-lg md:text-xl -rotate-2">
+    APIs &amp; data
+  </p>
+  <svg class="hero-stack-arrow absolute top-[56%] right-[10%] w-10 h-8" viewBox="0 0 40 32" fill="none">
+    <path d="M20 28 C 24 20, 22 12, 16 6 M16 6 L 26 8 M16 6 L 15 16"></path>
+  </svg>
+
+  <p class="hero-stack-note absolute bottom-[10%] right-[4%] font-hand text-lg md:text-xl rotate-2">
+    interface
+  </p>
+  <svg class="hero-stack-arrow absolute bottom-[16%] right-[24%] w-10 h-8" viewBox="0 0 40 32" fill="none">
+    <path d="M36 10 C 28 6, 16 10, 6 18 M6 18 L 8 9 M6 18 L 15 19"></path>
+  </svg>
 </div>
 
 <style>
@@ -62,13 +72,40 @@ const bars = [
     animation: hero-stack-float 7.5s ease-in-out var(--float-delay) infinite;
   }
 
-  .hero-stack-bar {
-    transform-origin: bottom;
-    animation: hero-stack-bar 4s ease-in-out var(--bar-delay) infinite;
+  .hero-stack-arrow {
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.7;
   }
 
-  .hero-stack-cursor {
-    animation: hero-stack-blink 1.1s steps(1) infinite;
+  .hero-stack-arrow path {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: hero-stack-draw 0.9s ease-out 0.6s forwards;
+  }
+
+  /* One 8s deploy story: tests pass, deploy, API answers, invoice turns paid */
+  .hero-stack-step {
+    opacity: 0;
+    animation: hero-stack-step 8s ease-in-out infinite;
+  }
+
+  .hero-stack-step-2 {
+    animation-name: hero-stack-step-2;
+  }
+
+  .hero-stack-step-3 {
+    animation-name: hero-stack-step-3;
+  }
+
+  .hero-stack-step-4 {
+    animation-name: hero-stack-step-4;
+  }
+
+  .hero-stack-pending {
+    animation: hero-stack-pending 8s ease-in-out infinite;
   }
 
   @keyframes hero-stack-float {
@@ -77,31 +114,106 @@ const bars = [
       translate: 0 0;
     }
     50% {
-      translate: 0 -12px;
+      translate: 0 -10px;
     }
   }
 
-  @keyframes hero-stack-bar {
+  @keyframes hero-stack-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes hero-stack-step {
     0%,
-    100% {
-      transform: scaleY(1);
+    10% {
+      opacity: 0;
     }
-    50% {
-      transform: scaleY(0.6);
+    15%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 
-  @keyframes hero-stack-blink {
-    50% {
+  @keyframes hero-stack-step-2 {
+    0%,
+    24% {
       opacity: 0;
+    }
+    29%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-step-3 {
+    0%,
+    40% {
+      opacity: 0;
+    }
+    45%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-step-4 {
+    0%,
+    56% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    61%,
+    92% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-pending {
+    0%,
+    56% {
+      opacity: 1;
+    }
+    60%,
+    95% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-stack-card,
-    .hero-stack-bar,
-    .hero-stack-cursor {
+    .hero-stack-arrow path,
+    .hero-stack-step,
+    .hero-stack-pending {
       animation: none;
+    }
+
+    .hero-stack-arrow path {
+      stroke-dashoffset: 0;
+    }
+
+    .hero-stack-step {
+      opacity: 1;
+    }
+
+    .hero-stack-pending {
+      opacity: 0;
     }
   }
 </style>

@@ -8,7 +8,6 @@ import HeroStack from "./hero-stack.astro";
 const skills = PERSONAL.TITLE;
 const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
 const githubUrl = SOCIAL_LINKS.GITHUB;
-const trustItems = ["10+ years shipping", "GoTo Financial", "Kargo", "Bukalapak", "GMT+7"];
 ---
 
 <section
@@ -19,29 +18,31 @@ const trustItems = ["10+ years shipping", "GoTo Financial", "Kargo", "Bukalapak"
   <Ornament variant="dots" size="md" color="primary" position="bottom-right" />
 
   <div
-    class="container max-w-6xl mx-auto px-4 relative z-10 grid items-center gap-12 lg:gap-8 lg:grid-cols-[1.15fr_1fr]"
+    class="container-z grid items-center gap-12 lg:gap-6 lg:grid-cols-[1.25fr_1fr]"
   >
     <div class="text-center lg:text-left">
-      <h1 class="font-bold font-serif mb-6 leading-tight">
-        <span class="block text-3xl md:text-4xl lg:text-5xl">
+      <h1 class="font-bold font-display mb-5 leading-tight">
+        <span class="block text-lg md:text-2xl text-base-content/70">
           <span class="inline-block animate-wave">👋</span> Hello there, I'm
         </span>
-        <span class="block text-6xl md:text-7xl xl:text-8xl mt-2">
+        <span class="block whitespace-nowrap tracking-tight text-[2rem] sm:text-5xl md:text-6xl lg:text-5xl mt-1">
           {PERSONAL.NAME}
         </span>
       </h1>
       <p
-        class="text-lg md:text-2xl text-base-content/80 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 animate-fade-in-up"
+        class="text-lg md:text-xl text-base-content/80 max-w-xl mx-auto lg:mx-0 leading-snug mb-10 animate-fade-in-up"
       >
         {skills}
       </p>
 
       <div
-        class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-in-up animate-delay-200"
+        class="flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-fade-in-up animate-delay-200"
       >
         <Button href="#projects" variant="neutral" class="hover-scale px-6">
           View my work
-          <Icon name="heroicons:arrow-down" size="w-5 h-5" />
+          <span class="hero-cta-icon inline-flex overflow-hidden" aria-hidden="true">
+            <Icon name="heroicons:arrow-down" size="w-5 h-5" />
+          </span>
         </Button>
         <Button
           href={linkedinUrl}
@@ -66,23 +67,43 @@ const trustItems = ["10+ years shipping", "GoTo Financial", "Kargo", "Bukalapak"
           <Icon name="simple-icons:github" size="w-6 h-6" />
         </Button>
       </div>
-
-      <ul
-        class="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1 text-sm text-base-content/60"
-        aria-label="Background"
-      >
-        {trustItems.map((item, index) => (
-          <li class="flex items-center gap-3">
-            {index > 0 && <span class="w-1 h-1 rounded-full bg-base-content/40" aria-hidden="true"></span>}
-            {item}
-          </li>
-        ))}
-      </ul>
     </div>
 
-    <div class="relative mx-auto w-full max-w-[300px] md:max-w-[360px] lg:max-w-[420px] aspect-square">
+    <div class="relative mx-auto w-full max-w-[340px] md:max-w-[380px] aspect-square">
       <HeroStack />
     </div>
   </div>
 </section>
 
+
+<style>
+  .hero-cta-icon :global(svg) {
+    animation: hero-cta-arrow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes hero-cta-arrow {
+    0%,
+    55% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    75% {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+    75.01% {
+      transform: translateY(-110%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cta-icon :global(svg) {
+      animation: none;
+    }
+  }
+</style>
