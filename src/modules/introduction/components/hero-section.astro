@@ -6,6 +6,7 @@ import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
 import HeroStack from "./hero-stack.astro";
 
 const skills = PERSONAL.TITLE;
+const [nickname, ...restOfName] = PERSONAL.NAME.split(" ");
 const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
 const githubUrl = SOCIAL_LINKS.GITHUB;
 ---
@@ -18,15 +19,28 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
   <Ornament variant="dots" size="md" color="primary" position="bottom-right" />
 
   <div
-    class="container-z grid items-center gap-16 lg:gap-10 lg:grid-cols-[1.5fr_1fr]"
+    class="container-z grid items-center gap-24 lg:gap-10 lg:grid-cols-[1.5fr_1fr]"
   >
     <div class="text-center lg:text-left">
       <h1 class="font-bold font-display mb-5 leading-tight">
-        <span class="block text-lg md:text-2xl text-base-content/70">
+        <span class="block font-hand font-semibold text-2xl md:text-3xl">
           <span class="inline-block animate-wave">👋</span> Hello there, I'm
         </span>
         <span class="block whitespace-nowrap tracking-tight text-[2rem] sm:text-5xl md:text-6xl lg:text-5xl mt-1">
-          {PERSONAL.NAME}
+          <span class="relative inline-block">
+            {nickname}
+            <svg
+              class="hero-underline absolute left-0 -bottom-[0.18em] w-full h-[0.3em] text-primary"
+              viewBox="0 0 200 24"
+              preserveAspectRatio="none"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M4 15 C 50 7, 120 5, 196 11"></path>
+              <path d="M14 20 C 70 14, 130 13, 186 17"></path>
+            </svg>
+          </span>
+          {restOfName.join(" ")}
         </span>
       </h1>
       <p
@@ -69,7 +83,7 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-[270px] md:max-w-[320px] lg:max-w-none aspect-square lg:aspect-[6/5]">
+    <div class="relative mx-auto w-full max-w-[250px] md:max-w-[320px] lg:max-w-none aspect-square lg:aspect-[6/5]">
       <HeroStack />
     </div>
   </div>
@@ -77,6 +91,29 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
 
 
 <style>
+  .hero-underline path {
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: hero-underline-draw 0.7s ease-out 0.4s forwards;
+  }
+
+  .hero-underline path:first-child {
+    stroke-width: 6;
+  }
+
+  .hero-underline path:last-child {
+    stroke-width: 3.5;
+    animation-delay: 0.75s;
+  }
+
+  @keyframes hero-underline-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
   .hero-cta-icon :global(svg) {
     animation: hero-cta-arrow 2.4s ease-in-out infinite;
   }
@@ -104,6 +141,11 @@ const githubUrl = SOCIAL_LINKS.GITHUB;
   @media (prefers-reduced-motion: reduce) {
     .hero-cta-icon :global(svg) {
       animation: none;
+    }
+
+    .hero-underline path {
+      animation: none;
+      stroke-dashoffset: 0;
     }
   }
 </style>
