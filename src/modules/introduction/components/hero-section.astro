@@ -1,10 +1,9 @@
 ---
-import Badge from "../../core/components/base/badge.astro";
 import Button from "../../core/components/base/button.astro";
 import Icon from "../../core/components/base/icon.astro";
 import Ornament from "../../core/components/base/ornament.astro";
 import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
-import HeroFlask from "./hero-flask.astro";
+import HeroStack from "./hero-stack.astro";
 
 const skills = PERSONAL.TITLE;
 const linkedinUrl = SOCIAL_LINKS.LINKEDIN;
@@ -81,47 +80,9 @@ const trustItems = ["10+ years shipping", "GoTo Financial", "Kargo", "Bukalapak"
       </ul>
     </div>
 
-    <div class="relative mx-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-[400px] aspect-[4/5]">
-      <HeroFlask />
-      <div class="hero-chip absolute top-[18%] -left-4 md:-left-10" aria-hidden="true">
-        <Badge size="lg" variant="primary" itemIndex={0}>TypeScript</Badge>
-      </div>
-      <div class="hero-chip hero-chip-delay-1 absolute top-[42%] -right-4 md:-right-8" aria-hidden="true">
-        <Badge size="lg" variant="secondary" itemIndex={1}>Fullstack</Badge>
-      </div>
-      <div class="hero-chip hero-chip-delay-2 absolute bottom-[10%] -left-2 md:-left-6" aria-hidden="true">
-        <Badge size="lg" variant="accent" itemIndex={2}>AI agents</Badge>
-      </div>
+    <div class="relative mx-auto w-full max-w-[300px] md:max-w-[360px] lg:max-w-[420px] aspect-square">
+      <HeroStack />
     </div>
   </div>
 </section>
 
-<style>
-  .hero-chip {
-    animation: hero-chip-float 6s ease-in-out infinite;
-  }
-
-  .hero-chip-delay-1 {
-    animation-delay: -2s;
-  }
-
-  .hero-chip-delay-2 {
-    animation-delay: -4s;
-  }
-
-  @keyframes hero-chip-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-chip {
-      animation: none;
-    }
-  }
-</style>

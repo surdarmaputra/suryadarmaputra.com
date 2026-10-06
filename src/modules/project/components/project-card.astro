@@ -10,11 +10,9 @@ interface Props {
   learnMoreLink?: string;
   previewLink?: string;
   categories?: string[];
-  highlighted?: boolean;
 }
 
-const { thumbnail, title, description, learnMoreLink, previewLink, categories, highlighted } =
-  Astro.props;
+const { thumbnail, title, description, learnMoreLink, previewLink, categories } = Astro.props;
 ---
 
 <Card
@@ -23,7 +21,6 @@ const { thumbnail, title, description, learnMoreLink, previewLink, categories, h
   class="hover-lift h-full flex flex-col group/project-card transition-all duration-300"
   bodyClass="flex-grow flex flex-col min-h-0"
   titleClass="font-serif text-2xl"
-  orbsAmbient={highlighted}
 >
   {thumbnail && (
     <figure slot="header" class="aspect-video overflow-hidden rounded-none">

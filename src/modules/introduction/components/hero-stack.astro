@@ -1,0 +1,107 @@
+---
+// Decorative layered cards: interface, data and deploy, the layers of a fullstack product.
+const bars = [
+  { height: "h-[45%]", delay: "0s" },
+  { height: "h-[70%]", delay: "-0.8s" },
+  { height: "h-[55%]", delay: "-1.6s" },
+  { height: "h-[85%]", delay: "-2.4s" },
+  { height: "h-[65%]", delay: "-3.2s" },
+];
+---
+
+<div class="hero-stack relative w-full h-full" aria-hidden="true">
+  <!-- Deploy: terminal -->
+  <div
+    class="hero-stack-card absolute top-[4%] left-0 w-[72%] rounded-box border-4 border-neutral bg-neutral text-neutral-content p-4 md:p-5 font-mono text-[11px] md:text-xs leading-relaxed shadow-[6px_6px_0_var(--color-accent-lavender)] -rotate-6"
+    style="--float-delay: 0s;"
+  >
+    <p><span class="text-accent-peach">$</span> bun run build</p>
+    <p class="opacity-70">→ 8 pages built</p>
+    <p class="text-accent-mint">✓ deployed <span class="hero-stack-cursor">▍</span></p>
+  </div>
+
+  <!-- Data: chart -->
+  <div
+    class="hero-stack-card absolute top-[22%] right-0 w-[60%] aspect-[4/3] rounded-box border-4 border-neutral bg-accent-mint p-4 shadow-[6px_6px_0_var(--color-neutral)] rotate-3"
+    style="--float-delay: -2.5s;"
+  >
+    <div class="flex items-end gap-2 h-full">
+      {bars.map((bar) => (
+        <span
+          class={`hero-stack-bar flex-1 rounded-t-md bg-neutral/80 ${bar.height}`}
+          style={`--bar-delay: ${bar.delay};`}
+        ></span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Interface: UI window -->
+  <div
+    class="hero-stack-card absolute bottom-[4%] left-[6%] w-[70%] rounded-box border-4 border-neutral bg-base-100 shadow-[6px_6px_0_var(--color-neutral)] -rotate-2"
+    style="--float-delay: -5s;"
+  >
+    <div class="flex items-center gap-1.5 border-b-4 border-neutral px-3 py-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-accent-peach border-2 border-neutral"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-accent-mint border-2 border-neutral"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-accent-lavender border-2 border-neutral"></span>
+    </div>
+    <div class="p-4 space-y-2.5">
+      <div class="h-3 w-3/4 rounded-full bg-neutral"></div>
+      <div class="h-2 w-full rounded-full bg-neutral/20"></div>
+      <div class="h-2 w-5/6 rounded-full bg-neutral/20"></div>
+      <div class="flex gap-2 pt-1.5">
+        <div class="h-6 w-16 rounded-full bg-accent-lavender border-2 border-neutral"></div>
+        <div class="h-6 w-12 rounded-full border-2 border-neutral"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-stack-card {
+    animation: hero-stack-float 7.5s ease-in-out var(--float-delay) infinite;
+  }
+
+  .hero-stack-bar {
+    transform-origin: bottom;
+    animation: hero-stack-bar 4s ease-in-out var(--bar-delay) infinite;
+  }
+
+  .hero-stack-cursor {
+    animation: hero-stack-blink 1.1s steps(1) infinite;
+  }
+
+  @keyframes hero-stack-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -12px;
+    }
+  }
+
+  @keyframes hero-stack-bar {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.6);
+    }
+  }
+
+  @keyframes hero-stack-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-stack-card,
+    .hero-stack-bar,
+    .hero-stack-cursor {
+      animation: none;
+    }
+  }
+</style>

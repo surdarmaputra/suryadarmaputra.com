@@ -61,22 +61,18 @@ const sizeClassMap: Record<ButtonSize, string> = {
 const variantClass = variantClassMap[variant];
 const sizeClass = sizeClassMap[size];
 const circleClass = circle ? "btn-circle" : "";
-const classParts = [
-  "btn border-2 orb-host",
-  variantClass,
-  sizeClass,
-  circleClass,
-  className,
-].filter(Boolean);
+const classParts = ["btn border-2", variantClass, sizeClass, circleClass, className].filter(
+  Boolean
+);
 const classes = classParts.join(" ");
 ---
 
 {href ? (
-  <a href={href} class={classes} data-orbs aria-disabled={disabled ? 'true' : undefined} {...restProps}>
+  <a href={href} class={classes} aria-disabled={disabled ? 'true' : undefined} {...restProps}>
     <slot />
   </a>
 ) : (
-  <button type={type} class={classes} data-orbs disabled={disabled} {...restProps}>
+  <button type={type} class={classes} disabled={disabled} {...restProps}>
     <slot />
   </button>
 )}
