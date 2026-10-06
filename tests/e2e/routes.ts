@@ -1,6 +1,6 @@
 /** Every page route the site serves with the seeded fixture content. */
 export const PAGE_ROUTES = [
-  { path: "/", title: "Home", heading: "Surya Darma Putra" },
+  { path: "/", title: "Fullstack Software Engineer", heading: "Surya Darma Putra" },
   { path: "/about", title: "About Me", heading: "About Me" },
   { path: "/articles", title: "Articles", heading: "Articles" },
   {

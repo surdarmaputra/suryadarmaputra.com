@@ -5,9 +5,9 @@ import { renderComponent } from "./render";
 
 describe("heading block", () => {
   test.each([
-    [1, "h1", "text-2xl md:text-3xl font-bold font-serif"],
-    [2, "h2", "text-xl md:text-2xl font-bold font-serif"],
-    [3, "h3", "text-lg md:text-xl font-semibold font-serif"],
+    [1, "h1", "text-2xl md:text-3xl font-bold font-display"],
+    [2, "h2", "text-xl md:text-2xl font-bold font-display"],
+    [3, "h3", "text-lg md:text-xl font-semibold font-display"],
   ] as const)("renders heading_%i as <%s>", async (level, tag, expectedClasses) => {
     const html = await renderComponent(Heading, {
       block: headingBlock(level),

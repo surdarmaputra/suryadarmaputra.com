@@ -2,7 +2,8 @@
 
 export const PERSONAL = {
   NAME: "Surya Darma Putra",
-  TITLE: "Software engineer building modern websites and applications",
+  TITLE:
+    "Fullstack software engineer building web products end to end, from interface to infrastructure",
 } as const;
 
 export const SOCIAL_LINKS = {

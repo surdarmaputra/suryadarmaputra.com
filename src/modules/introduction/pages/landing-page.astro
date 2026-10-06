@@ -2,35 +2,59 @@
 import ArticleListSection from "../../article/components/article-list-section.astro";
 import { getArticles } from "../../article/services/article-service";
 import PageLayout from "../../core/components/layouts/page-layout.astro";
+import { PERSONAL, SOCIAL_LINKS } from "../../core/constants";
 import ProjectCarouselSection from "../../project/components/project-carousel-section.astro";
 import { getProjectsByCompany } from "../../project/services/project-service";
+import { sortProjectsForShowcase } from "../../project/utils/project-utils";
 import ExperienceJourneySection from "../components/experience-journey-section.astro";
 import HeroSection from "../components/hero-section.astro";
 import SocialLinksSection from "../components/social-links-section.astro";
 import WorkExperienceSection from "../components/work-experience-section.astro";
 
-// Fetch personal projects and randomize for landing page
+// Personal projects: highlighted first, then newest
 const personalProjects = await getProjectsByCompany("personal");
-const shuffledProjects = [...personalProjects].sort(() => Math.random() - 0.5);
-const projects = shuffledProjects.slice(0, 6);
+const projects = sortProjectsForShowcase(personalProjects).slice(0, 6);
 
-// Fetch all articles for landing page
-const articles = await getArticles();
+// Latest articles only; the full list lives on /articles
+const articles = (await getArticles()).slice(0, 3);
 
 const currentPath = Astro.url.pathname;
+
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: PERSONAL.NAME,
+  jobTitle: "Fullstack Software Engineer",
+  description: PERSONAL.TITLE,
+  url: "https://suryadarmaputra.com",
+  sameAs: Object.values(SOCIAL_LINKS),
+});
 ---
 
-<PageLayout title="Home" description="Personal website and blog" currentPath={currentPath}>
+<PageLayout
+  title="Fullstack Software Engineer"
+  description="Surya Darma Putra, fullstack software engineer. Projects, open source work and writing about building web products."
+  currentPath={currentPath}
+>
+  <script type="application/ld+json" slot="head" set:html={personJsonLd} />
+  <!-- Handwritten font for the hero greeting, subset to the glyphs used -->
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&text=%20%27%2CHIehlmort&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  />
   <HeroSection />
-  
-  <ExperienceJourneySection />
-  
+
   <ProjectCarouselSection projects={projects} />
-  
+
+  <ArticleListSection articles={articles} title="Latest Writing" showViewAll={true} />
+
+  <ExperienceJourneySection />
+
   <WorkExperienceSection />
-  
-  <ArticleListSection articles={articles} title="Articles" />
-  
+
   <SocialLinksSection />
 </PageLayout>
 
