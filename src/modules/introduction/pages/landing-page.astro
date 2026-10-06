@@ -37,14 +37,6 @@ const personJsonLd = JSON.stringify({
   currentPath={currentPath}
 >
   <script type="application/ld+json" slot="head" set:html={personJsonLd} />
-  <!-- Handwritten font for the hero illustration labels, subset to the glyphs used -->
-  <link
-    slot="head"
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&text=%20%26/ACDIPacdefinrst&display=swap"
-    rel="stylesheet"
-    media="print"
-    onload="this.media='all'"
-  />
   <HeroSection />
 
   <div class="section-reveal">
