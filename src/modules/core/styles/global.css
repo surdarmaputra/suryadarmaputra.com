@@ -216,27 +216,3 @@
   background-color: var(--color-accent-lavender);
   color: #1a1a1a;
 }
-
-/* Section reveal: CSS scroll-driven, no JS; unsupported browsers show content as-is */
-@keyframes section-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(48px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@layer utilities {
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .section-reveal {
-        animation: section-reveal linear both;
-        animation-timeline: view();
-        animation-range: entry 0% entry 35%;
-      }
-    }
-  }
-}
