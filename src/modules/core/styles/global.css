@@ -5,9 +5,10 @@
 
 @theme {
   --font-sans:
-    "DM Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "DM Serif Text", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
 
   /* Accent colors for ornaments (more saturated but still soft) */
   --color-accent-lavender: #c4a5e8;
@@ -199,15 +200,15 @@
 
 /* Typography utilities */
 @utility heading-large {
-  @apply text-6xl md:text-7xl lg:text-8xl font-bold font-serif;
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight;
 }
 
 @utility heading-default {
-  @apply text-4xl md:text-5xl font-bold font-serif;
+  @apply text-4xl md:text-5xl font-bold font-display;
 }
 
 @utility heading-medium {
-  @apply text-2xl md:text-3xl font-bold font-serif;
+  @apply text-2xl md:text-3xl font-bold font-display;
 }
 
 /* Elegant text selection */

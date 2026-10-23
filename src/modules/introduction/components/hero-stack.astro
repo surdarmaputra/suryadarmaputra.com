@@ -1,0 +1,172 @@
+---
+// Decorative layered cards telling one deploy story on a loop:
+// push code (infra) -> API answers (data) -> invoice turns paid (interface).
+---
+
+<div class="hero-stack relative w-full h-full" aria-hidden="true">
+  <!-- Infra: terminal -->
+  <div
+    class="hero-stack-card absolute top-[2%] left-0 w-[72%] rounded-box border-4 border-neutral bg-neutral text-neutral-content px-4 py-3 font-mono text-[10px] md:text-[11px] leading-relaxed shadow-[5px_5px_0_var(--color-accent-lavender)] -rotate-3"
+    style="--float-delay: 0s;"
+  >
+    <p><span class="text-accent-peach">$</span> git push</p>
+    <p class="hero-stack-step hero-stack-step-1 text-accent-mint">✓ tests passed</p>
+    <p class="hero-stack-step hero-stack-step-2 text-accent-mint">✓ deployed</p>
+  </div>
+
+  <!-- Data: API response -->
+  <div
+    class="hero-stack-card absolute top-[34%] right-0 w-[70%] rounded-box border-4 border-neutral bg-accent-mint px-4 py-3 font-mono text-[10px] md:text-[11px] leading-relaxed shadow-[5px_5px_0_var(--color-neutral)] rotate-2"
+    style="--float-delay: -2.5s;"
+  >
+    <p class="font-bold">GET /invoices/42</p>
+    <p class="hero-stack-step hero-stack-step-3">
+      200 OK · status: paid
+    </p>
+  </div>
+
+  <!-- Interface: invoice -->
+  <div
+    class="hero-stack-card absolute bottom-[2%] left-[6%] w-[64%] rounded-box border-4 border-neutral bg-base-100 px-4 py-3 shadow-[5px_5px_0_var(--color-neutral)] -rotate-1"
+    style="--float-delay: -5s;"
+  >
+    <p class="text-[10px] md:text-xs text-base-content/60">Invoice #042</p>
+    <p class="font-display font-bold text-base md:text-lg leading-tight">$1,240.00</p>
+    <div class="relative mt-2 h-6">
+      <span
+        class="hero-stack-pending absolute inset-y-0 left-0 inline-flex items-center rounded-full border-2 border-neutral bg-accent-peach px-2.5 text-[10px] md:text-xs font-semibold"
+        >Pending</span
+      >
+      <span
+        class="hero-stack-step hero-stack-step-4 absolute inset-y-0 left-0 inline-flex items-center rounded-full border-2 border-neutral bg-accent-mint px-2.5 text-[10px] md:text-xs font-semibold"
+        >Paid ✓</span
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-stack-card {
+    animation: hero-stack-float 7.5s ease-in-out var(--float-delay) infinite;
+  }
+
+  /* One 8s deploy story: tests pass, deploy, API answers, invoice turns paid */
+  .hero-stack-step {
+    opacity: 0;
+    animation: hero-stack-step 8s ease-in-out infinite;
+  }
+
+  .hero-stack-step-2 {
+    animation-name: hero-stack-step-2;
+  }
+
+  .hero-stack-step-3 {
+    animation-name: hero-stack-step-3;
+  }
+
+  .hero-stack-step-4 {
+    animation-name: hero-stack-step-4;
+  }
+
+  .hero-stack-pending {
+    animation: hero-stack-pending 8s ease-in-out infinite;
+  }
+
+  @keyframes hero-stack-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+
+  @keyframes hero-stack-step {
+    0%,
+    10% {
+      opacity: 0;
+    }
+    15%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-step-2 {
+    0%,
+    24% {
+      opacity: 0;
+    }
+    29%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-step-3 {
+    0%,
+    40% {
+      opacity: 0;
+    }
+    45%,
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-step-4 {
+    0%,
+    56% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    61%,
+    92% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-stack-pending {
+    0%,
+    56% {
+      opacity: 1;
+    }
+    60%,
+    95% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-stack-card,
+    .hero-stack-step,
+    .hero-stack-pending {
+      animation: none;
+    }
+
+    .hero-stack-step {
+      opacity: 1;
+    }
+
+    .hero-stack-pending {
+      opacity: 0;
+    }
+  }
+</style>

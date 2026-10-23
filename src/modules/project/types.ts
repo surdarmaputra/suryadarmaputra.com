@@ -18,6 +18,8 @@ export type Project = {
   slug: string;
   tags?: string[];
   categories?: string[];
+  highlighted?: boolean;
+  createdAt?: string;
 };
 
 export type ProjectGroup = {

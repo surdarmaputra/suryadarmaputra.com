@@ -10,7 +10,7 @@ interface Props {
 
 const { projects } = Astro.props;
 
-const MAX_PROJECTS_MOBILE = 1;
+const MAX_PROJECTS_MOBILE = 2;
 const MAX_PROJECTS_DESKTOP = 3;
 const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 ---
@@ -23,7 +23,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     aria-label="Projects carousel"
   >
     {projects.map((project, index) => (
-      <div class="carousel-item w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-8px)] shrink-0" data-index={index}>
+      <div class="carousel-item w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] shrink-0" data-index={index}>
         <ProjectCard {...project} />
       </div>
     ))}
@@ -64,7 +64,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
   const nextButton = document.getElementById(`next-${carouselId}`);
   
   function shouldShowNavigation() {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 1024;
     const maxProjects = isMobile ? MAX_PROJECTS_MOBILE : MAX_PROJECTS_DESKTOP;
     return projectCount > maxProjects;
   }

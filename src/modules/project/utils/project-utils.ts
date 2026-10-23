@@ -126,7 +126,19 @@ export function transformNotionDataToProject(notionData: NotionProjectData): Pro
     slug,
     tags,
     categories,
+    highlighted: properties.highlighted === true,
+    createdAt: properties.created_at || undefined,
   };
+}
+
+/**
+ * Highlighted projects first, then newest first.
+ */
+export function sortProjectsForShowcase(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => {
+    if (a.highlighted !== b.highlighted) return a.highlighted ? -1 : 1;
+    return (b.createdAt || "").localeCompare(a.createdAt || "");
+  });
 }
 
 export function groupProjectByCompany(projects: Project[]): ProjectGroup[] {

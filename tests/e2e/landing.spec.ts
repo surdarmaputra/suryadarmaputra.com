@@ -9,6 +9,23 @@ test.describe("landing page", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Surya Darma Putra");
   });
 
+  test("links the hero to the projects section", async ({ page }) => {
+    await expect(page.getByRole("link", { name: "View my work" })).toHaveAttribute(
+      "href",
+      "#projects"
+    );
+    await expect(page.locator("section#projects")).toHaveCount(1);
+  });
+
+  test("links the latest writing to the full article list", async ({ page }) => {
+    const articlesSection = page.locator('section[aria-labelledby="articles-heading"]');
+
+    await expect(articlesSection.getByRole("link", { name: "View all articles" })).toHaveAttribute(
+      "href",
+      "/articles"
+    );
+  });
+
   test("lists the seeded articles with links to their detail pages", async ({ page }) => {
     const articlesSection = page.locator('section[aria-labelledby="articles-heading"]');
 

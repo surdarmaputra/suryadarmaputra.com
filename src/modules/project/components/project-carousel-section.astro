@@ -12,13 +12,17 @@ const title = "Project & Open Source";
 const { projects } = Astro.props;
 ---
 
-<section class="py-24 md:py-52 relative overflow-hidden" aria-labelledby="projects-heading">
+<section
+  id="projects"
+  class="py-24 md:py-40 relative overflow-hidden"
+  aria-labelledby="projects-heading"
+>
   <Ornament variant="dots" size="md" color="primary" position="top-right" />
   
   <div class="container-z">
     <h2
       id="projects-heading"
-      class="heading-large mb-20 text-center text-base-content animate-fade-in-up"
+      class="heading-large mb-12 md:mb-16 text-center text-base-content animate-fade-in-up"
     >
       {title}
     </h2>

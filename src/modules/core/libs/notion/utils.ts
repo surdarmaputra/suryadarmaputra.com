@@ -198,6 +198,14 @@ export function getFileExtensionFromUrl(url: string = "") {
   if (url?.includes(".png")) {
     return "png";
   }
+
+  if (url?.includes(".jpeg")) {
+    return "jpeg";
+  }
+
+  if (url?.includes(".jpg")) {
+    return "jpg";
+  }
 }
 
 export function calculateReadingTime(blocks: BlockWithChildren[]): string {
